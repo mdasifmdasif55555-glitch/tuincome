@@ -1549,20 +1549,72 @@ async function logout(){
 ========================= */
 
 async function submitDeposit(){
+  if(!profile) return;
+  
+  const amount = Number(document.getElementById("depAmount")?.value);
+  const txn = document.getElementById("txn")?.value.trim();
+  const successBox = document.getElementById("success");
 
-  alert(
-    "Deposit UI প্রস্তুত আছে. Database-এ request save করার জন্য deposits table/RLS এখনো যুক্ত করতে হবে."
-  );
+  if(!amount || amount <= 0 || !txn){
+    alert("সঠিক পরিমাণ এবং Transaction ID প্রদান করুন।");
+    return;
+  }
 
+  const { error } = await supabase
+    .from("deposits")
+    .insert([{
+      user_id: profile.id,
+      amount: amount,
+      transaction_id: txn
+    }]);
+
+  if(error){
+    alert("ডিপোজিট রিকোয়েস্ট ব্যর্থ হয়েছে: " + error.message);
+    return;
+  }
+
+  if(successBox){
+    successBox.textContent = "Deposit request সফলভাবে জমা হয়েছে।";
+    successBox.style.display = "block";
+  }
 }
 
-
 async function submitWithdrawal(){
+  if(!profile) return;
 
-  alert(
-    "Withdrawal UI প্রস্তুত আছে. Database-এ request save করার জন্য withdrawals table/RLS এখনো যুক্ত করতে হবে."
-  );
+  const amount = Number(document.getElementById("wdAmount")?.value);
+  const method = document.getElementById("wdMethod")?.value;
+  const phone = document.getElementById("wdNumber")?.value.trim();
+  const successBox = document.getElementById("success");
 
+  if(!amount || amount < 500){
+    alert("সর্বনিম্ন উইথড্রয়াল পরিমাণ ৳৫০০।");
+    return;
+  }
+
+  if(!/^(01)\d{9}$/.test(phone)){
+    alert("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।");
+    return;
+  }
+
+  const { error } = await supabase
+    .from("withdrawals")
+    .insert([{
+      user_id: profile.id,
+      amount: amount,
+      method: method,
+      phone_number: phone
+    }]);
+
+  if(error){
+    alert("Withdrawal request ব্যর্থ হয়েছে: " + error.message);
+    return;
+  }
+
+  if(successBox){
+    successBox.textContent = "Withdrawal request সফলভাবে জমা হয়েছে।";
+    successBox.style.display = "block";
+  }
 }
 
 
