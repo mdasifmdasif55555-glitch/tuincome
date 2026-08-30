@@ -586,7 +586,7 @@ button{
   <div class="small">বর্তমান ব্যালেন্স</div>
   <div class="balance">৳ <span>0.00</span></div>
   <button class="wallet" onclick="openSheet('wallet')">
-    💼　ওয়ালেট　›
+    💼 ওয়ালেট ›
   </button>
 </section>
 
@@ -613,7 +613,7 @@ button{
 </section>
 
 <div class="notice card">
-  🔔　🎉 TUINCOME প্ল্যাটফর্মে স্বাগতম!
+  🔔 🎉 TUINCOME প্ল্যাটফর্মে স্বাগতম!
 </div>
 
 <section class="banner">
@@ -1998,52 +1998,11 @@ function escapeHtml(value){
    INITIALIZE
 ========================= */
 
-async function initializeApp(){
-
+window.addEventListener("DOMContentLoaded", async () => {
   await loadCurrentProfile();
-
+  await loadDatabaseBalance();
   await loadTasks();
-
-  if(profile){
-
-    await loadDatabaseBalance();
-
-  }
-
-}
-
-
-/* =========================
-   AUTH STATE LISTENER
-========================= */
-
-supabase.auth.onAuthStateChange(
-  async (event,session)=>{
-
-    if(session?.user){
-
-      if(event==="SIGNED_IN"){
-
-        await loadCurrentProfile();
-
-        await loadDatabaseBalance();
-
-      }
-
-    }else{
-
-      profile=null;
-
-      updateUserUI();
-
-    }
-
-  }
-);
-
-initializeApp();
-
+});
 </script>
-
 </body>
 </html>
