@@ -376,14 +376,14 @@ header{
   </div>
 </div>
 
-<!-- Supabase CDN JS -->
+<!-- Supabase JS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 window.addEventListener('load', function() {
   
   var SUPABASE_URL = "https://vtaojjjaekjijfziocay.supabase.co";
-  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzIiwicmVmIjoidnRhb2pqamFrZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
 
   var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   var userProfile = null;
@@ -452,7 +452,6 @@ window.addEventListener('load', function() {
     document.getElementById("sheetBody").innerHTML = html;
     document.getElementById("modal").style.display = "flex";
 
-    // Dynamic Event Bindings inside modal
     var subDep = document.getElementById("subDepositBtn");
     if(subDep) subDep.onclick = handleDepositSubmit;
 
@@ -658,7 +657,7 @@ window.addEventListener('load', function() {
     });
   };
 
-  // Static Button Event Listeners
+  // Button Listeners
   document.getElementById("closeSheetBtn").onclick = closeSheet;
   document.getElementById("walletBtn").onclick = function(){ openSheet('wallet'); };
   document.getElementById("btnDeposit").onclick = function(){ openSheet('deposit'); };
@@ -673,7 +672,7 @@ window.addEventListener('load', function() {
   document.getElementById("navTeam").onclick = function(){ openSheet('team'); };
   document.getElementById("navProfile").onclick = function(){ openSheet('profile'); };
 
-  // Init App
+  // Init
   initUser();
   fetchTasks();
 });
