@@ -2,11 +2,11 @@
 <html lang="bn">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>TUINCOME v7</title>
 
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 
 :root{
   --bg:#050b09;
@@ -19,28 +19,23 @@
   --text:#ecfff4;
   --muted:#8ca99a;
   --border:#183b2a;
-  --danger:#ff6262;
 }
 
 body{
   margin:0;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:
-    radial-gradient(circle at 50% -10%,#123d27 0,#07120d 35%,#050b09 70%);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:radial-gradient(circle at 50% -10%,#123d27 0,#07120d 35%,#050b09 70%);
   color:var(--text);
   padding-bottom:95px;
   min-height:100vh;
 }
 
-button,input,select{
-  font-family:inherit;
-}
+button,input,select{font-family:inherit}
 
 header{
   height:76px;
   padding:16px 20px;
-  background:
-    linear-gradient(135deg,#06140d,#0b2b1b);
+  background:linear-gradient(135deg,#06140d,#0b2b1b);
   color:var(--text);
   display:flex;
   justify-content:space-between;
@@ -65,9 +60,7 @@ header{
 }
 
 .hero{
-  background:
-    radial-gradient(circle at 85% 20%,#1d9c52 0,#0c4a2b 25%,transparent 55%),
-    linear-gradient(135deg,#06140d,#0a2b1a);
+  background:radial-gradient(circle at 85% 20%,#1d9c52 0,#0c4a2b 25%,transparent 55%),linear-gradient(135deg,#06140d,#0a2b1a);
   color:#fff;
   padding:22px 20px 28px;
   border-radius:0 0 34px 34px;
@@ -75,10 +68,7 @@ header{
   box-shadow:0 12px 35px #00ff6a15;
 }
 
-.small{
-  color:#a6c7b4;
-  opacity:.9;
-}
+.small{color:#a6c7b4;opacity:.9}
 
 .balance{
   font-size:42px;
@@ -96,17 +86,13 @@ header{
   background:#ffffff0c;
   color:#dffff0;
   font-size:16px;
-  box-shadow:inset 0 0 15px #39ff8808;
 }
 
 .card{
-  background:
-    linear-gradient(145deg,#0d1c15,#09140f);
+  background:linear-gradient(145deg,#0d1c15,#09140f);
   border-radius:24px;
   border:1px solid var(--border);
-  box-shadow:
-    0 8px 25px #00000050,
-    0 0 18px #00ff6a08;
+  box-shadow:0 8px 25px #00000050,0 0 18px #00ff6a08;
 }
 
 .quick{
@@ -121,6 +107,7 @@ header{
   border:0;
   background:none;
   color:var(--text);
+  cursor:pointer;
 }
 
 .qicon{
@@ -133,7 +120,6 @@ header{
   display:grid;
   place-items:center;
   font-size:23px;
-  box-shadow:0 0 15px #39ff8812;
 }
 
 .quick label{
@@ -144,78 +130,36 @@ header{
   color:#bdebd0;
 }
 
-.notice{
-  margin:0 10px 14px;
-  padding:16px;
-  color:#b6d5c2;
-}
+.notice{margin:0 10px 14px;padding:16px;color:#b6d5c2}
 
 .banner{
   margin:0 10px 14px;
   padding:27px;
   min-height:210px;
   border-radius:26px;
-  background:
-    radial-gradient(circle at 90% 20%,#42ff9630,transparent 35%),
-    linear-gradient(135deg,#08291a,#0d4d2d);
+  background:radial-gradient(circle at 90% 20%,#42ff9630,transparent 35%),linear-gradient(135deg,#08291a,#0d4d2d);
   color:#fff;
   border:1px solid #39ff8845;
-  box-shadow:0 0 28px #00ff6a12;
 }
 
-.banner small{
-  color:var(--green);
-  font-weight:800;
-}
+.banner small{color:var(--green);font-weight:800}
+.banner h1{font-size:28px;margin:9px 0}
+.banner p{line-height:1.5;color:#b8d8c5}
 
-.banner h1{
-  font-size:28px;
-  margin:9px 0;
-}
-
-.banner p{
-  line-height:1.5;
-  color:#b8d8c5;
-}
-
-.banner button,
-.primary{
+.banner button, .primary{
   border:1px solid #8affbd55;
-  background:
-    linear-gradient(135deg,#21e875,#00a957);
+  background:linear-gradient(135deg,#21e875,#00a957);
   color:#031008;
   border-radius:22px;
   padding:12px 20px;
   font-weight:900;
-  box-shadow:0 0 18px #39ff8830;
+  cursor:pointer;
 }
 
-.banner button:active,
-.primary:active,
-.task-btn:active{
-  transform:scale(.97);
-}
-
-.tiles{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin:0 10px;
-}
-
-.tile{
-  padding:17px;
-}
-
-.tile b,
-.tile small{
-  display:block;
-}
-
-.tile small{
-  margin-top:5px;
-  color:#7f9d8c;
-}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 10px}
+.tile{padding:17px;cursor:pointer}
+.tile b, .tile small{display:block}
+.tile small{margin-top:5px;color:#7f9d8c}
 
 .nav{
   position:fixed;
@@ -224,49 +168,28 @@ header{
   transform:translateX(-50%);
   width:min(720px,100%);
   height:78px;
-  background:
-    linear-gradient(180deg,#0d1d15,#07100c);
+  background:linear-gradient(180deg,#0d1d15,#07100c);
   border:1px solid #1b422d;
   border-bottom:0;
   border-radius:27px 27px 0 0;
-  box-shadow:
-    0 -8px 30px #00000080,
-    0 0 25px #00ff6a10;
   display:flex;
   align-items:center;
   justify-content:space-around;
   z-index:5;
 }
 
-.nav button{
-  border:0;
-  background:none;
-  color:#668072;
-  font-size:20px;
-}
-
-.nav button span{
-  display:block;
-  font-size:11px;
-}
-
-.nav .active{
-  color:var(--green);
-  text-shadow:0 0 10px #39ff8860;
-}
+.nav button{border:0;background:none;color:#668072;font-size:20px;cursor:pointer}
+.nav button span{display:block;font-size:11px}
+.nav .active{color:var(--green)}
 
 .nav .go{
   width:62px;
   height:62px;
   border-radius:50%;
-  background:
-    radial-gradient(circle,#48ff9a,#00b95a);
+  background:radial-gradient(circle,#48ff9a,#00b95a);
   color:#031008;
   border:5px solid #07130d;
   margin-top:-32px;
-  box-shadow:
-    0 0 0 1px #39ff8860,
-    0 0 25px #39ff8860;
 }
 
 .modal{
@@ -281,8 +204,7 @@ header{
 }
 
 .sheet{
-  background:
-    linear-gradient(145deg,#0d1d15,#07100c);
+  background:linear-gradient(145deg,#0d1d15,#07100c);
   color:var(--text);
   width:min(720px,100%);
   max-height:90vh;
@@ -290,7 +212,6 @@ header{
   border-radius:28px 28px 0 0;
   padding:24px;
   border:1px solid #1b4a30;
-  box-shadow:0 -10px 45px #000;
 }
 
 .close{
@@ -301,21 +222,12 @@ header{
   border-radius:50%;
   width:34px;
   height:34px;
+  cursor:pointer;
 }
 
-.form-group{
-  margin:14px 0;
-}
-
-.form-group label{
-  display:block;
-  font-weight:700;
-  margin-bottom:7px;
-  color:#c9edda;
-}
-
-.form-group input,
-.form-group select{
+.form-group{margin:14px 0}
+.form-group label{display:block;font-weight:700;margin-bottom:7px;color:#c9edda}
+.form-group input, .form-group select{
   width:100%;
   padding:13px;
   border:1px solid #245039;
@@ -326,16 +238,6 @@ header{
   outline:none;
 }
 
-.form-group input:focus,
-.form-group select:focus{
-  border-color:var(--green);
-  box-shadow:0 0 12px #39ff8820;
-}
-
-.form-group input::placeholder{
-  color:#587264;
-}
-
 .number{
   background:#0b2115;
   border:1px solid #19452c;
@@ -344,233 +246,31 @@ header{
   padding:13px;
   margin:10px 0;
 }
+.number b{display:block;margin-bottom:5px;color:var(--green)}
+.hint{color:var(--muted);font-size:13px;line-height:1.5}
+.success{display:none;background:#082b18;border:1px solid #1e7544;color:#6dffa5;padding:12px;border-radius:12px;margin-top:12px}
+.error{display:none;background:#301010;border:1px solid #753030;color:#ff8b8b;padding:12px;border-radius:12px;margin-top:12px}
 
-.number b{
-  display:block;
-  margin-bottom:5px;
-  color:var(--green);
-}
+.task-grid{display:grid;gap:12px;margin:0 10px 16px}
+.task-card{padding:16px;border:1px solid #193d2a;display:flex;align-items:center;gap:13px}
+.task-icon{width:52px;height:52px;flex:0 0 52px;border-radius:16px;background:#0c2a1a;border:1px solid #39ff8830;display:grid;place-items:center;font-size:23px}
+.task-info{flex:1}
+.task-info b{display:block;margin-bottom:5px;color:#e6fff0}
+.task-info small{color:#789686}
+.task-reward{font-weight:900;color:var(--green);white-space:nowrap}
+.task-btn{border:1px solid #8affbd40;background:linear-gradient(135deg,#21e875,#00a957);color:#031008;border-radius:14px;padding:9px 12px;font-weight:900;margin-top:8px;cursor:pointer}
+.task-btn:disabled{background:#24332b;border-color:#34463c;color:#738479}
 
-.hint{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
-}
+.task-modal{display:none;position:fixed;inset:0;background:#000000d9;z-index:20;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(7px)}
+.task-box{background:radial-gradient(circle at 50% 0,#124d2d,#0b1811 60%);color:var(--text);width:min(440px,100%);border-radius:26px;padding:24px;text-align:center;border:1px solid #2a6b43}
+.task-progress{height:10px;background:#16251d;border-radius:10px;overflow:hidden;margin:18px 0}
+.task-progress>div{height:100%;width:0;background:linear-gradient(90deg,#00c967,#65ff9e);transition:width 1s linear}
+.countdown{font-size:46px;font-weight:900;color:var(--green);margin:12px 0}
 
-.success{
-  display:none;
-  background:#082b18;
-  border:1px solid #1e7544;
-  color:#6dffa5;
-  padding:12px;
-  border-radius:12px;
-  margin-top:12px;
-}
-
-.error{
-  display:none;
-  background:#301010;
-  border:1px solid #753030;
-  color:#ff8b8b;
-  padding:12px;
-  border-radius:12px;
-  margin-top:12px;
-}
-
-.profile{
-  display:flex;
-  gap:14px;
-  align-items:center;
-  padding:14px;
-  background:#0b2115;
-  border:1px solid #19452c;
-  border-radius:18px;
-  margin:12px 0;
-}
-
-.avatar{
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:#0d3820;
-  border:1px solid #39ff8850;
-  font-size:30px;
-  box-shadow:0 0 18px #39ff8815;
-}
-
-.task-grid{
-  display:grid;
-  gap:12px;
-  margin:0 10px 16px;
-}
-
-.task-card{
-  padding:16px;
-  border:1px solid #193d2a;
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
-
-.task-icon{
-  width:52px;
-  height:52px;
-  flex:0 0 52px;
-  border-radius:16px;
-  background:#0c2a1a;
-  border:1px solid #39ff8830;
-  display:grid;
-  place-items:center;
-  font-size:23px;
-}
-
-.task-info{
-  flex:1;
-}
-
-.task-info b{
-  display:block;
-  margin-bottom:5px;
-  color:#e6fff0;
-}
-
-.task-info small{
-  color:#789686;
-}
-
-.task-reward{
-  font-weight:900;
-  color:var(--green);
-  white-space:nowrap;
-  text-shadow:0 0 10px #39ff8840;
-}
-
-.task-btn{
-  border:1px solid #8affbd40;
-  background:linear-gradient(135deg,#21e875,#00a957);
-  color:#031008;
-  border-radius:14px;
-  padding:9px 12px;
-  font-weight:900;
-  margin-top:8px;
-}
-
-.task-btn:disabled{
-  background:#24332b;
-  border-color:#34463c;
-  color:#738479;
-}
-
-.task-modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:#000000d9;
-  z-index:20;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  backdrop-filter:blur(7px);
-}
-
-.task-box{
-  background:
-    radial-gradient(circle at 50% 0,#124d2d,#0b1811 60%);
-  color:var(--text);
-  width:min(440px,100%);
-  border-radius:26px;
-  padding:24px;
-  text-align:center;
-  border:1px solid #2a6b43;
-  box-shadow:0 0 40px #00ff6a18;
-}
-
-.task-progress{
-  height:10px;
-  background:#16251d;
-  border-radius:10px;
-  overflow:hidden;
-  margin:18px 0;
-}
-
-.task-progress>div{
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,#00c967,#65ff9e);
-  transition:width 1s linear;
-  box-shadow:0 0 12px #39ff88;
-}
-
-.countdown{
-  font-size:46px;
-  font-weight:900;
-  color:var(--green);
-  margin:12px 0;
-  text-shadow:0 0 20px #39ff8870;
-}
-
-.auth-tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-  margin:15px 0;
-}
-
-.auth-tab{
-  padding:11px;
-  border:1px solid #214832;
-  border-radius:13px;
-  background:#0d1e15;
-  color:#8ba998;
-  font-weight:800;
-}
-
-.auth-tab.active{
-  background:linear-gradient(135deg,#21e875,#00a957);
-  color:#031008;
-  border-color:#55ff9a;
-}
-
-.logout{
-  background:#1b2921!important;
-  color:#c2d2c8!important;
-  border-color:#304238!important;
-  margin-left:8px;
-}
-
-h2,h3{
-  color:#eafff2;
-}
-
-small{
-  color:#819d8c;
-}
-
-button{
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-}
-
-@media(max-width:380px){
-  .balance{
-    font-size:36px;
-  }
-
-  .qicon{
-    width:46px;
-    height:46px;
-  }
-
-  .quick label{
-    font-size:11px;
-  }
-
-  .banner h1{
-    font-size:24px;
-  }
-}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}
+.auth-tab{padding:11px;border:1px solid #214832;border-radius:13px;background:#0d1e15;color:#8ba998;font-weight:800;cursor:pointer}
+.auth-tab.active{background:linear-gradient(135deg,#21e875,#00a957);color:#031008;border-color:#55ff9a}
+.logout{background:#1b2921!important;color:#c2d2c8!important;border-color:#304238!important;margin-left:8px}
 </style>
 </head>
 
@@ -578,35 +278,30 @@ button{
 
 <header>
   <div class="logo">▣ TUINCOME</div>
-  <button class="lang" id="lang">🌐 EN</button>
+  <button class="lang" id="langBtn">🌐 EN</button>
 </header>
 
 <section class="hero">
   <div id="welcome">স্বাগতম!</div>
   <div class="small">বর্তমান ব্যালেন্স</div>
-  <div class="balance">৳ <span>0.00</span></div>
-  <button class="wallet" onclick="openSheet('wallet')">
-    💼 ওয়ালেট ›
-  </button>
+  <div class="balance">৳ <span id="balanceText">0.00</span></div>
+  <button class="wallet" id="walletBtn">💼 ওয়ালেট ›</button>
 </section>
 
 <section class="quick card">
-  <button onclick="openSheet('deposit')">
+  <button id="btnDeposit">
     <div class="qicon">💵</div>
     <label>ডিপোজিট</label>
   </button>
-
-  <button onclick="openSheet('withdraw')">
+  <button id="btnWithdraw">
     <div class="qicon">🏦</div>
     <label>উত্তোলন</label>
   </button>
-
-  <button onclick="openSheet('refer')">
+  <button id="btnRefer">
     <div class="qicon">👤+</div>
     <label>রেফার</label>
   </button>
-
-  <button onclick="openSheet('history')">
+  <button id="btnHistory">
     <div class="qicon">↶</div>
     <label>হিস্ট্রি</label>
   </button>
@@ -619,820 +314,369 @@ button{
 <section class="banner">
   <small>TUINCOME</small>
   <h1>শিখুন • কাজ করুন • উপার্জন করুন</h1>
-  <p>
-    আপনার অ্যাকাউন্ট পরিচালনা ও অনুরোধ জমা দেওয়ার জন্য তৈরি।
-  </p>
-  <button onclick="openSheet('auth')">
-    Login / Register
-  </button>
+  <p>আপনার অ্যাকাউন্ট পরিচালনা ও অনুরোধ জমা দেওয়ার জন্য তৈরি।</p>
+  <button id="bannerAuthBtn">Login / Register</button>
 </section>
 
 <section style="margin-top:8px">
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:0 14px 10px
-  ">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin:0 14px 10px">
     <h3 style="margin:0">⚡ ছোট টাস্ক</h3>
     <small>৩ সেকেন্ডের টাস্ক</small>
   </div>
-
   <div class="task-grid" id="taskGrid">
     <div class="number">
       <b>Task loading...</b>
-      <small>Supabase থেকে task load হচ্ছে</small>
     </div>
   </div>
 </section>
 
 <section class="tiles">
-
   <div class="tile card">
-    💼
-    <b>কোম্পানি প্রোফাইল</b>
+    <b>💼 কোম্পানি প্রোফাইল</b>
     <small>আমাদের সম্পর্কে</small>
   </div>
-
   <div class="tile card">
-    🛡️
-    <b>উত্তোলনের নিয়ম</b>
+    <b>🛡️ উত্তোলনের নিয়ম</b>
     <small>উত্তোলনের নিয়ম</small>
   </div>
-
   <div class="tile card">
-    📈
-    <b>আয়ের সুযোগ</b>
+    <b>📈 আয়ের সুযোগ</b>
     <small>আয়ের সুযোগ</small>
   </div>
-
-  <div class="tile card" onclick="openSheet('profile')">
-    👤
-    <b>প্রোফাইল</b>
+  <div class="tile card" id="tileProfile">
+    <b>👤 প্রোফাইল</b>
     <small>Account</small>
   </div>
-
 </section>
 
 <nav class="nav">
-
-  <button class="active">
-    ⌂
-    <span>হোম</span>
-  </button>
-
-  <button onclick="openSheet('wallet')">
-    ▭
-    <span>ওয়ালেট</span>
-  </button>
-
-  <button class="go" onclick="openSheet('auth')">
-    ⚡
-    <span>শুরু</span>
-  </button>
-
-  <button onclick="openSheet('team')">
-    👥
-    <span>টিম</span>
-  </button>
-
-  <button onclick="openSheet('profile')">
-    ●
-    <span>প্রোফাইল</span>
-  </button>
-
+  <button class="active">⌂<span>হোম</span></button>
+  <button id="navWallet">▭<span>ওয়ালেট</span></button>
+  <button class="go" id="navStart">⚡<span>শুরু</span></button>
+  <button id="navTeam">👥<span>টিম</span></button>
+  <button id="navProfile">●<span>প্রোফাইল</span></button>
 </nav>
 
 <div class="task-modal" id="taskModal">
-
   <div class="task-box">
-
     <div style="font-size:34px">⚡</div>
-
     <h2 id="taskTitle">টাস্ক চলছে</h2>
-
-    <p class="hint">
-      ৩ সেকেন্ড এই পেজে থাকুন।
-    </p>
-
-    <div class="countdown" id="taskCountdown">
-      3
-    </div>
-
-    <div class="task-progress">
-      <div id="taskProgress"></div>
-    </div>
-
-    <button
-      class="primary"
-      id="taskClose"
-      style="display:none"
-      onclick="finishTask()">
-      ৳ Reward নিন
-    </button>
-
+    <p class="hint">৩ সেকেন্ড এই পেজে থাকুন।</p>
+    <div class="countdown" id="taskCountdown">3</div>
+    <div class="task-progress"><div id="taskProgress"></div></div>
+    <button class="primary" id="taskClose" style="display:none">৳ Reward নিন</button>
   </div>
-
 </div>
 
 <div class="modal" id="modal">
-
   <div class="sheet">
-
-    <button class="close" onclick="closeSheet()">✕</button>
-
+    <button class="close" id="closeSheetBtn">✕</button>
     <h2 id="sheetTitle">TUINCOME</h2>
-
     <div id="sheetBody"></div>
-
   </div>
-
 </div>
 
+<!-- Supabase CDN JS -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
+window.addEventListener('load', function() {
+  
+  var SUPABASE_URL = "https://vtaojjjaekjijfziocay.supabase.co";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzIiwicmVmIjoidnRhb2pqamFrZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
 
-/* =========================
-   UTILITIES
-========================= */
-function escapeHtml(str) {
-  if (!str) return "";
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+  var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  var userProfile = null;
+  var currentTaskData = null;
+  var taskTimerId = null;
 
-function copyNum(text) {
-  navigator.clipboard.writeText(text);
-  alert("Link Copied!");
-}
-
-/* =========================
-   SUPABASE
-========================= */
-
-const SUPABASE_URL = "https://vtaojjjaekjijfziocay.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzIiwicmVmIjoidnRhb2pqamFrZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
-
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-let profile = null;
-let currentTask = null;
-let taskTimer = null;
-
-// Page initialization
-window.addEventListener("DOMContentLoaded", async () => {
-  await loadCurrentProfile();
-  await loadDatabaseBalance();
-  await loadTasks();
-});
-
-/* =========================
-   AUTH UI
-========================= */
-
-function openAuth(mode="login"){
-
-  document.getElementById("sheetTitle").textContent =
-    mode === "register" ? "রেজিস্ট্রেশন" : "Login";
-
-  document.getElementById("sheetBody").innerHTML = `
-
-    <div class="auth-tabs">
-
-      <button
-        class="auth-tab ${mode==="login" ? "active":""}"
-        onclick="openAuth('login')">
-        Login
-      </button>
-
-      <button
-        class="auth-tab ${mode==="register" ? "active":""}"
-        onclick="openAuth('register')">
-        Register
-      </button>
-
-    </div>
-
-    ${
-      mode === "register"
-      ? `
-        <div class="form-group">
-          <label>আপনার নাম</label>
-          <input id="authName" placeholder="পুরো নাম">
-        </div>
-
-        <div class="form-group">
-          <label>মোবাইল নম্বর</label>
-
-          <input
-            id="authPhone"
-            maxlength="11"
-            inputmode="numeric"
-            placeholder="01XXXXXXXXX">
-
-        </div>
-      `
-      : ""
-    }
-
-    <div class="form-group">
-
-      <label>Email</label>
-
-      <input
-        id="authEmail"
-        type="email"
-        autocomplete="email"
-        placeholder="example@gmail.com">
-
-    </div>
-
-    <div class="form-group">
-
-      <label>Password</label>
-
-      <input
-        id="authPassword"
-        type="password"
-        autocomplete="${mode==="register" ? "new-password":"current-password"}"
-        placeholder="কমপক্ষে ৬ অক্ষর">
-
-    </div>
-
-    <button
-      class="primary"
-      onclick="handleAuth('${mode}')">
-
-      ${mode === "register" ? "Register" : "Login"}
-
-    </button>
-
-    <div class="success" id="authSuccess"></div>
-
-    <div class="error" id="authError"></div>
-
-    ${
-      mode === "login"
-      ? `
-        <button
-          style="
-            border:0;
-            background:none;
-            margin-top:15px;
-            color:#39ff88
-          "
-          onclick="resetPassword()">
-
-          Password ভুলে গেছেন?
-
-        </button>
-      `
-      : ""
-    }
-
-  `;
-
-  document.getElementById("modal").style.display="flex";
-}
-
-
-async function handleAuth(mode){
-
-  const email = document.getElementById("authEmail").value.trim();
-  const password = document.getElementById("authPassword").value;
-  const errorBox = document.getElementById("authError");
-  const successBox = document.getElementById("authSuccess");
-
-  errorBox.style.display="none";
-  successBox.style.display="none";
-
-  if(!email || !password){
-    errorBox.textContent = "Email এবং Password দিন.";
-    errorBox.style.display="block";
-    return;
+  function safeText(str) {
+    if (!str) return "";
+    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
-  if(password.length < 6){
-    errorBox.textContent = "Password কমপক্ষে ৬ অক্ষরের হতে হবে.";
-    errorBox.style.display="block";
-    return;
-  }
-
-  try{
-
-    if(mode === "register"){
-
-      const name = document.getElementById("authName").value.trim();
-      const phone = document.getElementById("authPhone").value.trim();
-
-      if(!name){
-        throw new Error("আপনার নাম দিন.");
-      }
-
-      if(!/^(01)\d{9}$/.test(phone)){
-        throw new Error("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন.");
-      }
-
-      const {data,error} = await supabase.auth.signUp({
-        email,
-        password,
-        options:{
-          data:{
-            full_name:name,
-            phone:phone
-          }
-        }
-      });
-
-      if(error) throw error;
-
-      successBox.textContent = data.session
-        ? "Registration সফল হয়েছে."
-        : "Registration সফল. আপনার Email verify করে Login করুন.";
-
-      successBox.style.display="block";
-
-    }else{
-
-      const {data,error} = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if(error) throw error;
-
-      await loadCurrentProfile();
-      await loadDatabaseBalance();
-      await loadTasks();
-
-      closeSheet();
-
-      alert("Login সফল হয়েছে.");
-    }
-
-  }catch(err){
-    console.error(err);
-    errorBox.textContent = translateAuthError(err.message);
-    errorBox.style.display="block";
-  }
-}
-
-
-function translateAuthError(message){
-  if(!message) return "কিছু সমস্যা হয়েছে.";
-  const m=message.toLowerCase();
-  if(m.includes("invalid login credentials")) return "Email অথবা Password ভুল.";
-  if(m.includes("email not confirmed")) return "আগে আপনার Email verify করুন.";
-  if(m.includes("user already registered")) return "এই Email দিয়ে আগে থেকেই account আছে.";
-  if(m.includes("password")) return "Password সংক্রান্ত সমস্যা হয়েছে.";
-  return message;
-}
-
-
-async function resetPassword(){
-  const email = document.getElementById("authEmail")?.value.trim();
-  if(!email){
-    alert("আগে আপনার Email লিখুন.");
-    return;
-  }
-
-  const {error} = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo:window.location.origin
-  });
-
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  alert("Password reset করার জন্য আপনার Email দেখুন.");
-}
-
-
-/* =========================
-   AUTH STATE & BALANCE
-========================= */
-
-async function loadCurrentProfile(){
-  const { data:{user}, error } = await supabase.auth.getUser();
-
-  if(error || !user){
-    profile=null;
-    updateUserUI();
-    return null;
-  }
-
-  const {data,error:profileError} = await supabase
-    .from("profiles")
-    .select(`id, full_name, phone, avatar_url, referral_code, referred_by, role, status, created_at`)
-    .eq("id",user.id)
-    .maybeSingle();
-
-  if(profileError){
-    console.error(profileError);
-    profile=null;
-    updateUserUI();
-    return null;
-  }
-
-  profile={ ...data, email:user.email };
-  updateUserUI();
-  return profile;
-}
-
-async function loadDatabaseBalance(){
-  if(!profile) return;
-  const { data, error } = await supabase
-    .from("profiles")
-    .select("balance")
-    .eq("id", profile.id)
-    .single();
-
-  if(!error && data){
-    document.querySelector(".balance span").textContent = Number(data.balance || 0).toFixed(2);
-  }
-}
-
-function updateUserUI(){
-  const welcome = document.getElementById("welcome");
-  if(!profile){
-    welcome.textContent="স্বাগতম!";
-    return;
-  }
-  welcome.textContent = "স্বাগতম, " + (profile.full_name || "ব্যবহারকারী") + "!";
-}
-
-
-/* =========================
-   SHEETS
-========================= */
-
-function openSheet(type){
-
-  if(type==="auth"){
-    openAuth("login");
-    return;
-  }
-
-  if(["deposit","withdraw","refer","history","wallet","team"].includes(type) && !profile){
-    openAuth("login");
-    return;
-  }
-
-  let title={
-    deposit:"ডিপোজিট",
-    withdraw:"উত্তোলন",
-    register:"রেজিস্ট্রেশন",
-    profile:"প্রোফাইল",
-    wallet:"ওয়ালেট",
-    refer:"রেফারেল",
-    history:"লেনদেনের ইতিহাস",
-    team:"টিম"
-  }[type] || "TUINCOME";
-
-  document.getElementById("sheetTitle").textContent=title;
-  let b="";
-
-  if(type==="deposit"){
-    b=`
-      <p class="hint">Payment করার পর Transaction ID দিয়ে request জমা দিন।</p>
-      <div class="number"><b>bKash</b>01726270731</div>
-      <div class="number"><b>Nagad</b>01921145861</div>
-      <div class="form-group"><label>ডিপোজিটের পরিমাণ</label><input id="depAmount" type="number" min="1"></div>
-      <div class="form-group"><label>Transaction ID</label><input id="txn" placeholder="Transaction ID"></div>
-      <button class="primary" onclick="submitDeposit()">Deposit Request Submit</button>
-      <div class="success" id="success">Request saved.</div>
-    `;
-  }
-  else if(type==="withdraw"){
-    b=`
-      <div class="number"><b>Minimum Withdrawal: ৳500</b> ৫০০ টাকার কম হলে withdrawal request গ্রহণ করা হবে না।</div>
-      <div class="form-group"><label>উত্তোলনের পরিমাণ</label><input id="wdAmount" type="number" min="500"></div>
-      <div class="form-group">
-        <label>পেমেন্ট মাধ্যম</label>
-        <select id="wdMethod"><option>bKash</option><option>Nagad</option></select>
-      </div>
-      <div class="form-group"><label>আপনার মোবাইল নম্বর</label><input id="wdNumber" inputmode="numeric" maxlength="11"></div>
-      <button class="primary" onclick="submitWithdrawal()">Withdrawal Request Submit</button>
-      <div class="success" id="success">Withdrawal request saved.</div>
-    `;
-  }
-  else if(type==="profile"){
-    b=`
-      <div class="profile">
-        <div class="avatar">👤</div>
-        <div>
-          <b>${escapeHtml(profile?.full_name || "ব্যবহারকারী")}</b>
-          <small style="display:block">${escapeHtml(profile?.email || "")}</small>
-          <small style="display:block">${escapeHtml(profile?.phone || "")}</small>
-        </div>
-      </div>
-      <div class="form-group"><label>আপনার নাম</label><input id="pname" value="${escapeHtml(profile?.full_name || "")}"></div>
-      <div class="form-group"><label>মোবাইল নম্বর</label><input id="pphone" value="${escapeHtml(profile?.phone || "")}" maxlength="11" inputmode="numeric"></div>
-      <button class="primary" onclick="saveProfile()">Profile Save</button>
-      <button class="primary logout" onclick="logout()">Logout</button>
-    `;
-  }
-  else if(type==="wallet"){
-    b=`
-      <div class="number">
-        <b>বর্তমান Balance</b>
-        ৳${Number(document.querySelector(".balance span").textContent || 0).toFixed(2)}
-      </div>
-      <p class="hint">Wallet balance database থেকে দেখানো হচ্ছে।</p>
-    `;
-  }
-  else if(type==="refer"){
-    const code = profile?.referral_code || "PENDING";
-    const link = window.location.origin + "/?ref=" + encodeURIComponent(code);
-    b=`
-      <p>আপনার Referral Code:</p>
-      <div class="number"><b>${escapeHtml(code)}</b></div>
-      <input style="width:100%;padding:13px;border:1px solid #245039;border-radius:13px;background:#08130e;color:#eafff2" readonly value="${escapeHtml(link)}">
-      <button class="primary" style="margin-top:10px" onclick="copyNum('${escapeHtml(link)}')">Copy Referral Link</button>
-    `;
-  }
-  else if(type==="history"){
-    b=`<p class="hint">Transaction history table এখনো frontend-এ যুক্ত করা হয়নি।</p><div class="number">আপনার transaction history এখানে দেখানো হবে।</div>`;
-  }
-  else if(type==="team"){
-    b=`<div class="number"><b>Team / Referral</b><p style="color:#789686">Referral members database-এর সাথে যুক্ত করার পর এখানে team information দেখানো যাবে।</p></div>`;
-  }
-
-  document.getElementById("sheetBody").innerHTML=b;
-  document.getElementById("modal").style.display="flex";
-}
-
-function closeSheet(){
-  document.getElementById("modal").style.display="none";
-}
-
-/* =========================
-   PROFILE UPDATE
-========================= */
-
-async function saveProfile(){
-  if(!profile) return;
-  const n = document.getElementById("pname").value.trim();
-  const p = document.getElementById("pphone").value.trim();
-
-  if(!n || !/^(01)\d{9}$/.test(p)){
-    alert("সঠিক নাম ও ১১ সংখ্যার মোবাইল নম্বর দিন.");
-    return;
-  }
-
-  const {error} = await supabase
-    .from("profiles")
-    .update({ full_name:n, phone:p, updated_at:new Date().toISOString() })
-    .eq("id",profile.id);
-
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  await loadCurrentProfile();
-  alert("Profile updated successfully.");
-  closeSheet();
-}
-
-/* =========================
-   LOGOUT
-========================= */
-
-async function logout(){
-  const {error} = await supabase.auth.signOut();
-  if(error){
-    alert(error.message);
-    return;
-  }
-  profile=null;
-  document.querySelector(".balance span").textContent="0.00";
-  updateUserUI();
-  closeSheet();
-  alert("Logout হয়েছে.");
-}
-
-/* =========================
-   DEPOSIT / WITHDRAWAL
-========================= */
-
-async function submitDeposit(){
-  if(!profile) return;
-  const amount = Number(document.getElementById("depAmount")?.value);
-  const txn = document.getElementById("txn")?.value.trim();
-  const successBox = document.getElementById("success");
-
-  if(!amount || amount <= 0 || !txn){
-    alert("সঠিক পরিমাণ এবং Transaction ID প্রদান করুন।");
-    return;
-  }
-
-  const { error } = await supabase
-    .from("deposits")
-    .insert([{ user_id: profile.id, amount: amount, transaction_id: txn }]);
-
-  if(error){
-    alert("ডিপোজিট রিকোয়েস্ট ব্যর্থ হয়েছে: " + error.message);
-    return;
-  }
-
-  if(successBox){
-    successBox.textContent = "Deposit request সফলভাবে জমা হয়েছে।";
-    successBox.style.display = "block";
-  }
-}
-
-async function submitWithdrawal(){
-  if(!profile) return;
-
-  const amount = Number(document.getElementById("wdAmount")?.value);
-  const method = document.getElementById("wdMethod")?.value;
-  const phone = document.getElementById("wdNumber")?.value.trim();
-  const successBox = document.getElementById("success");
-
-  if(!amount || amount < 500){
-    alert("সর্বনিম্ন উইথড্রয়াল পরিমাণ ৳৫০০।");
-    return;
-  }
-
-  if(!/^(01)\d{9}$/.test(phone)){
-    alert("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।");
-    return;
-  }
-
-  const { error } = await supabase
-    .from("withdrawals")
-    .insert([{ user_id: profile.id, amount: amount, method: method, phone_number: phone }]);
-
-  if(error){
-    alert("Withdrawal request ব্যর্থ হয়েছে: " + error.message);
-    return;
-  }
-
-  if(successBox){
-    successBox.textContent = "Withdrawal request সফলভাবে জমা হয়েছে।";
-    successBox.style.display = "block";
-  }
-}
-
-/* =========================
-   TASK SYSTEM
-========================= */
-
-async function loadTasks(){
-  const grid = document.getElementById("taskGrid");
-
-  const {data,error} = await supabase
-    .from("tasks")
-    .select("id,title,description,reward,active,max_completions")
-    .eq("active",true)
-    .order("title");
-
-  if(error){
-    console.error(error);
-    grid.innerHTML=`<div class="number"><b>Task load করা যায়নি</b><small>${escapeHtml(error.message)}</small></div>`;
-    return;
-  }
-
-  if(!data || data.length===0){
-    grid.innerHTML=`<div class="number"><b>এখন কোনো active task নেই।</b></div>`;
-    return;
-  }
-
-  const icons=["📋","🔔","⭐","📚","💡","🎯","📖","🔎","🚀","📝","🏆","🌟"];
-
-  grid.innerHTML=data.map((task,index)=>{
-    const icon = icons[index % icons.length];
-    return `
-      <div class="task-card card">
-        <div class="task-icon">${icon}</div>
-        <div class="task-info">
-          <b>${escapeHtml(task.title || "Task")}</b>
-          <small>${escapeHtml(task.description || "মাত্র ৩ সেকেন্ড")}</small><br>
-          <button class="task-btn" data-task-id="${task.id}" data-reward="${Number(task.reward || 0)}" onclick="startTask(this)">
-            শুরু করুন
-          </button>
-        </div>
-        <div class="task-reward">৳${Number(task.reward || 0).toLocaleString()}</div>
-      </div>
-    `;
-  }).join("");
-
-  await markAlreadyCompleted();
-}
-
-async function markAlreadyCompleted(){
-  const { data:{user} } = await supabase.auth.getUser();
-  if(!user) return;
-
-  const {data,error} = await supabase
-    .from("task_completions")
-    .select("task_id")
-    .eq("user_id",user.id);
-
-  if(error){
-    console.error(error);
-    return;
-  }
-
-  const completed = new Set((data || []).map(x=>x.task_id));
-
-  document.querySelectorAll(".task-btn").forEach(btn=>{
-    if(completed.has(btn.dataset.taskId)){
-      btn.disabled=true;
-      btn.textContent="সম্পন্ন";
-    }
-  });
-}
-
-function startTask(btn){
-  if(taskTimer) return;
-  if(!profile){
-    openAuth("login");
-    return;
-  }
-
-  const taskId = btn.dataset.taskId;
-  const reward = Number(btn.dataset.reward || 0);
-
-  if(!taskId){
-    alert("Task ID পাওয়া যায়নি.");
-    return;
-  }
-
-  currentTask={ id:taskId, reward:reward, button:btn };
-
-  document.getElementById("taskModal").style.display="flex";
-  document.getElementById("taskCountdown").textContent="3";
-  document.getElementById("taskProgress").style.width="0%";
-  document.getElementById("taskClose").style.display="none";
-  document.getElementById("taskTitle").textContent="টাস্ক চলছে";
-
-  let left=3;
-
-  taskTimer=setInterval(()=>{
-    left--;
-    document.getElementById("taskCountdown").textContent=left;
-    document.getElementById("taskProgress").style.width = ((3-left)/3*100)+"%";
-
-    if(left<=0){
-      clearInterval(taskTimer);
-      taskTimer=null;
-      document.getElementById("taskCountdown").textContent="✓";
-      document.getElementById("taskTitle").textContent="টাস্ক সম্পন্ন";
-      document.getElementById("taskClose").style.display="inline-block";
-    }
-  },1000);
-}
-
-async function finishTask(){
-  if(!currentTask) return;
-  const btn=currentTask.button;
-  const taskId=currentTask.id;
-
-  btn.disabled=true;
-  btn.textContent="Processing...";
-
-  try{
-    const { data:{user}, error:userError } = await supabase.auth.getUser();
-
-    if(userError) throw userError;
-
-    if(!user){
-      btn.disabled=false;
-      btn.textContent="শুরু করুন";
-      alert("প্রথমে Login করতে হবে.");
-      currentTask=null;
+  function openSheet(type) {
+    if (type === "auth") {
+      renderAuthForm("login");
       return;
     }
 
-    const {data,error} = await supabase.rpc("complete_task", { p_task_id:taskId });
+    if (["deposit", "withdraw", "refer", "history", "wallet", "team"].indexOf(type) !== -1 && !userProfile) {
+      renderAuthForm("login");
+      return;
+    }
 
-    if(error) throw error;
+    var titles = {
+      deposit: "ডিপোজিট",
+      withdraw: "উত্তোলন",
+      profile: "প্রোফাইল",
+      wallet: "ওয়ালেট",
+      refer: "রেফারেল",
+      history: "লেনদেনের ইতিহাস",
+      team: "টিম"
+    };
 
-    document.getElementById("taskModal").style.display="none";
-    btn.disabled=true;
-    btn.textContent="সম্পন্ন";
-    currentTask=null;
+    document.getElementById("sheetTitle").textContent = titles[type] || "TUINCOME";
+    var html = "";
 
-    await loadDatabaseBalance();
-    alert(data || "Task সম্পন্ন হয়েছে.");
+    if (type === "deposit") {
+      html = '<p class="hint">Payment করার পর Transaction ID দিয়ে request জমা দিন।</p>' +
+        '<div class="number"><b>bKash</b>01726270731</div>' +
+        '<div class="number"><b>Nagad</b>01921145861</div>' +
+        '<div class="form-group"><label>ডিপোজিটের পরিমাণ</label><input id="depAmount" type="number" min="1"></div>' +
+        '<div class="form-group"><label>Transaction ID</label><input id="txn" placeholder="Transaction ID"></div>' +
+        '<button class="primary" id="subDepositBtn">Deposit Request Submit</button>' +
+        '<div class="success" id="sheetSuccess"></div>';
+    } else if (type === "withdraw") {
+      html = '<div class="number"><b>Minimum Withdrawal: ৳500</b> ৫০০ টাকার কম হলে গ্রহণ করা হবে না।</div>' +
+        '<div class="form-group"><label>উত্তোলনের পরিমাণ</label><input id="wdAmount" type="number" min="500"></div>' +
+        '<div class="form-group"><label>পেমেন্ট মাধ্যম</label><select id="wdMethod"><option>bKash</option><option>Nagad</option></select></div>' +
+        '<div class="form-group"><label>আপনার মোবাইল নম্বর</label><input id="wdNumber" type="tel" maxlength="11"></div>' +
+        '<button class="primary" id="subWithdrawBtn">Withdrawal Request Submit</button>' +
+        '<div class="success" id="sheetSuccess"></div>';
+    } else if (type === "profile") {
+      html = '<div class="number"><b>' + safeText(userProfile ? userProfile.full_name : 'ব্যবহারকারী') + '</b>' +
+        '<small>' + safeText(userProfile ? userProfile.email : '') + '</small></div>' +
+        '<button class="primary logout" id="logoutBtn">Logout</button>';
+    } else if (type === "wallet") {
+      html = '<div class="number"><b>বর্তমান Balance</b> ৳' + (document.getElementById("balanceText").textContent || "0.00") + '</div>';
+    } else if (type === "refer") {
+      var code = userProfile ? (userProfile.referral_code || "PENDING") : "PENDING";
+      html = '<p>আপনার Referral Code:</p><div class="number"><b>' + safeText(code) + '</b></div>';
+    } else if (type === "history") {
+      html = '<div class="number">Transaction history শীঘ্রই আসবে।</div>';
+    } else if (type === "team") {
+      html = '<div class="number">Team information শীঘ্রই আসবে।</div>';
+    }
 
-  } catch(err){
-    console.error(err);
-    btn.disabled=false;
-    btn.textContent="শুরু করুন";
-    alert("সমস্যা হয়েছে: " + err.message);
-    currentTask=null;
+    document.getElementById("sheetBody").innerHTML = html;
+    document.getElementById("modal").style.display = "flex";
+
+    // Dynamic Event Bindings inside modal
+    var subDep = document.getElementById("subDepositBtn");
+    if(subDep) subDep.onclick = handleDepositSubmit;
+
+    var subWd = document.getElementById("subWithdrawBtn");
+    if(subWd) subWd.onclick = handleWithdrawSubmit;
+
+    var lgBtn = document.getElementById("logoutBtn");
+    if(lgBtn) lgBtn.onclick = handleLogout;
   }
-}
 
+  function closeSheet() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  function renderAuthForm(mode) {
+    document.getElementById("sheetTitle").textContent = mode === "register" ? "রেজিস্ট্রেশন" : "Login";
+    var html = '<div class="auth-tabs">' +
+      '<button class="auth-tab ' + (mode==="login"?"active":"") + '" id="tabLogin">Login</button>' +
+      '<button class="auth-tab ' + (mode==="register"?"active":"") + '" id="tabReg">Register</button>' +
+      '</div>';
+
+    if (mode === "register") {
+      html += '<div class="form-group"><label>আপনার নাম</label><input id="authName" placeholder="পুরো নাম"></div>' +
+        '<div class="form-group"><label>মোবাইল নম্বর</label><input id="authPhone" type="tel" maxlength="11" placeholder="01XXXXXXXXX"></div>';
+    }
+
+    html += '<div class="form-group"><label>Email</label><input id="authEmail" type="email" placeholder="example@gmail.com"></div>' +
+      '<div class="form-group"><label>Password</label><input id="authPassword" type="password" placeholder="কমপক্ষে ৬ অক্ষর"></div>' +
+      '<button class="primary" id="authSubmitBtn">' + (mode === "register" ? "Register" : "Login") + '</button>' +
+      '<div class="error" id="authError"></div><div class="success" id="authSuccess"></div>';
+
+    document.getElementById("sheetBody").innerHTML = html;
+    document.getElementById("modal").style.display = "flex";
+
+    document.getElementById("tabLogin").onclick = function(){ renderAuthForm("login"); };
+    document.getElementById("tabReg").onclick = function(){ renderAuthForm("register"); };
+    document.getElementById("authSubmitBtn").onclick = function(){ processAuth(mode); };
+  }
+
+  function processAuth(mode) {
+    var email = document.getElementById("authEmail").value.trim();
+    var password = document.getElementById("authPassword").value;
+    var errBox = document.getElementById("authError");
+    errBox.style.display = "none";
+
+    if (!email || !password) {
+      errBox.textContent = "Email এবং Password দিন।";
+      errBox.style.display = "block";
+      return;
+    }
+
+    if (mode === "register") {
+      var name = document.getElementById("authName").value.trim();
+      var phone = document.getElementById("authPhone").value.trim();
+      supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: { data: { full_name: name, phone: phone } }
+      }).then(function(res) {
+        if (res.error) throw res.error;
+        alert("Registration সফল হয়েছে।");
+        closeSheet();
+      }).catch(function(err) {
+        errBox.textContent = err.message;
+        errBox.style.display = "block";
+      });
+    } else {
+      supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      }).then(function(res) {
+        if (res.error) throw res.error;
+        initUser();
+        closeSheet();
+      }).catch(function(err) {
+        errBox.textContent = "Email অথবা Password ভুল।";
+        errBox.style.display = "block";
+      });
+    }
+  }
+
+  function handleDepositSubmit() {
+    if (!userProfile) return;
+    var amount = Number(document.getElementById("depAmount").value);
+    var txn = document.getElementById("txn").value.trim();
+    if (!amount || !txn) {
+      alert("সঠিক তথ্য দিন");
+      return;
+    }
+    supabaseClient.from("deposits").insert([{ user_id: userProfile.id, amount: amount, transaction_id: txn }])
+      .then(function(res) {
+        if (res.error) alert(res.error.message);
+        else {
+          alert("Deposit request জমা হয়েছে।");
+          closeSheet();
+        }
+      });
+  }
+
+  function handleWithdrawSubmit() {
+    if (!userProfile) return;
+    var amount = Number(document.getElementById("wdAmount").value);
+    var method = document.getElementById("wdMethod").value;
+    var phone = document.getElementById("wdNumber").value.trim();
+    if (amount < 500 || !phone) {
+      alert("সর্বনিম্ন ৫০০ টাকা ও সঠিক মোবাইল নম্বর প্রয়োজন।");
+      return;
+    }
+    supabaseClient.from("withdrawals").insert([{ user_id: userProfile.id, amount: amount, method: method, phone_number: phone }])
+      .then(function(res) {
+        if (res.error) alert(res.error.message);
+        else {
+          alert("Withdrawal request জমা হয়েছে।");
+          closeSheet();
+        }
+      });
+  }
+
+  function handleLogout() {
+    supabaseClient.auth.signOut().then(function() {
+      userProfile = null;
+      document.getElementById("balanceText").textContent = "0.00";
+      document.getElementById("welcome").textContent = "স্বাগতম!";
+      closeSheet();
+      alert("Logout সফল হয়েছে।");
+    });
+  }
+
+  function initUser() {
+    supabaseClient.auth.getUser().then(function(res) {
+      if (res.data && res.data.user) {
+        var u = res.data.user;
+        supabaseClient.from("profiles").select("*").eq("id", u.id).single().then(function(pRes) {
+          if (pRes.data) {
+            userProfile = pRes.data;
+            document.getElementById("welcome").textContent = "স্বাগতম, " + (userProfile.full_name || "ব্যবহারকারী") + "!";
+            document.getElementById("balanceText").textContent = Number(userProfile.balance || 0).toFixed(2);
+          }
+        });
+      }
+    });
+  }
+
+  function fetchTasks() {
+    supabaseClient.from("tasks").select("*").eq("active", true).then(function(res) {
+      var grid = document.getElementById("taskGrid");
+      if (res.error || !res.data || res.data.length === 0) {
+        grid.innerHTML = '<div class="number">কোনো Active Task পাওয়া যায়নি।</div>';
+        return;
+      }
+      grid.innerHTML = res.data.map(function(t) {
+        return '<div class="task-card card">' +
+          '<div class="task-icon">⚡</div>' +
+          '<div class="task-info"><b>' + safeText(t.title) + '</b><small>৩ সেকেন্ডের কাজ</small><br>' +
+          '<button class="task-btn" data-id="' + t.id + '">শুরু করুন</button></div>' +
+          '<div class="task-reward">৳' + Number(t.reward || 0) + '</div></div>';
+      }).join("");
+
+      var btns = grid.querySelectorAll(".task-btn");
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].onclick = function() {
+          var tid = this.getAttribute("data-id");
+          startTaskProcess(tid, this);
+        };
+      }
+    });
+  }
+
+  function startTaskProcess(taskId, btnElem) {
+    if (!userProfile) {
+      renderAuthForm("login");
+      return;
+    }
+    currentTaskData = { id: taskId, btn: btnElem };
+    document.getElementById("taskModal").style.display = "flex";
+    document.getElementById("taskCountdown").textContent = "3";
+    document.getElementById("taskProgress").style.width = "0%";
+    document.getElementById("taskClose").style.display = "none";
+
+    var left = 3;
+    taskTimerId = setInterval(function() {
+      left--;
+      document.getElementById("taskCountdown").textContent = left;
+      document.getElementById("taskProgress").style.width = ((3 - left) / 3 * 100) + "%";
+      if (left <= 0) {
+        clearInterval(taskTimerId);
+        document.getElementById("taskCountdown").textContent = "✓";
+        document.getElementById("taskClose").style.display = "inline-block";
+      }
+    }, 1000);
+  }
+
+  document.getElementById("taskClose").onclick = function() {
+    if (!currentTaskData) return;
+    supabaseClient.rpc("complete_task", { p_task_id: currentTaskData.id }).then(function(res) {
+      document.getElementById("taskModal").style.display = "none";
+      if (res.error) {
+        alert(res.error.message);
+      } else {
+        alert("টাস্ক সফলভাবে সম্পন্ন হয়েছে!");
+        initUser();
+      }
+    });
+  };
+
+  // Static Button Event Listeners
+  document.getElementById("closeSheetBtn").onclick = closeSheet;
+  document.getElementById("walletBtn").onclick = function(){ openSheet('wallet'); };
+  document.getElementById("btnDeposit").onclick = function(){ openSheet('deposit'); };
+  document.getElementById("btnWithdraw").onclick = function(){ openSheet('withdraw'); };
+  document.getElementById("btnRefer").onclick = function(){ openSheet('refer'); };
+  document.getElementById("btnHistory").onclick = function(){ openSheet('history'); };
+  document.getElementById("bannerAuthBtn").onclick = function(){ openSheet('auth'); };
+  document.getElementById("tileProfile").onclick = function(){ openSheet('profile'); };
+
+  document.getElementById("navWallet").onclick = function(){ openSheet('wallet'); };
+  document.getElementById("navStart").onclick = function(){ openSheet('auth'); };
+  document.getElementById("navTeam").onclick = function(){ openSheet('team'); };
+  document.getElementById("navProfile").onclick = function(){ openSheet('profile'); };
+
+  // Init App
+  initUser();
+  fetchTasks();
+});
 </script>
 </body>
 </html>
