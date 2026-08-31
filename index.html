@@ -517,8 +517,7 @@ header{
 window.addEventListener('load', function() {
   
   var SUPABASE_URL = "https://vtaojjjaekjijfziocay.supabase.co";
-  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInRefiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
-";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
 
   var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   var userProfile = null;
@@ -916,11 +915,10 @@ window.addEventListener('load', function() {
   document.getElementById("tileProfile").onclick = function(){ openSheet('profile'); };
 
   document.getElementById("navWallet").onclick = function(){ openSheet('wallet'); };
-  document.getElementById("navStart").onclick = function(){ fetchTasks(); };
   document.getElementById("navTeam").onclick = function(){ openSheet('team'); };
   document.getElementById("navProfile").onclick = function(){ openSheet('profile'); };
+  document.getElementById("navStart").onclick = function(){ fetchTasks(); };
 
-  setAuthMode("login");
   checkUserSession();
 });
 </script>
