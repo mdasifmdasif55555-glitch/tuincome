@@ -363,44 +363,90 @@ header{
   border: 2px solid #07100c;
 }
 
-/* VIP Card Styling */
+/* Base Glassmorphic VIP Card Styling */
 .vip-card {
-  border: 1px solid #ffd70066;
-  background: linear-gradient(145deg, #1f1a05, #0a0e0b);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 20px;
-  padding: 16px;
-  margin-bottom: 15px;
+  padding: 18px;
+  margin-bottom: 16px;
   position: relative;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: transform 0.2s ease;
 }
 .vip-title {
-  color: var(--gold);
   font-size: 18px;
   font-weight: 800;
   margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .vip-price {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 900;
-  color: var(--green);
+  color: #ffffff;
   margin-bottom: 12px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 .vip-detail {
-  font-size: 13px;
-  color: #d1dfd7;
-  margin-bottom: 5px;
+  font-size: 13.5px;
+  color: #e2f2e9;
+  margin-bottom: 6px;
 }
 .vip-buy-btn {
   width: 100%;
-  background: linear-gradient(135deg, #ffd700, #d4af37);
-  color: #000;
   border: none;
   font-weight: 900;
   border-radius: 12px;
-  padding: 10px;
-  margin-top: 10px;
+  padding: 12px;
+  margin-top: 12px;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
+
+/* Dynamic Glass Themes for VIP Tier Names */
+.vip-card-bronze {
+  background: rgba(205, 127, 50, 0.15);
+  border: 1px solid rgba(205, 127, 50, 0.4);
+}
+.vip-card-bronze .vip-title { color: #cd7f32; }
+.vip-card-bronze .vip-buy-btn { background: linear-gradient(135deg, #cd7f32, #8c531d); color: #fff; }
+
+.vip-card-silver {
+  background: rgba(192, 192, 192, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.vip-card-silver .vip-title { color: #e0e0e0; }
+.vip-card-silver .vip-buy-btn { background: linear-gradient(135deg, #e0e0e0, #9e9e9e); color: #111; }
+
+.vip-card-gold {
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+}
+.vip-card-gold .vip-title { color: #ffd700; }
+.vip-card-gold .vip-buy-btn { background: linear-gradient(135deg, #ffd700, #d4af37); color: #000; }
+
+.vip-card-platinum {
+  background: rgba(229, 228, 226, 0.15);
+  border: 1px solid rgba(229, 228, 226, 0.5);
+}
+.vip-card-platinum .vip-title { color: #e5e4e2; }
+.vip-card-platinum .vip-buy-btn { background: linear-gradient(135deg, #ffffff, #b0b0b0); color: #000; }
+
+.vip-card-diamond {
+  background: rgba(185, 242, 255, 0.18);
+  border: 1px solid rgba(185, 242, 255, 0.5);
+}
+.vip-card-diamond .vip-title { color: #b9f2ff; }
+.vip-card-diamond .vip-buy-btn { background: linear-gradient(135deg, #b9f2ff, #38bdf8); color: #000; }
+
+.vip-card-crown {
+  background: rgba(147, 51, 234, 0.2);
+  border: 1px solid rgba(192, 132, 252, 0.5);
+}
+.vip-card-crown .vip-title { color: #c084fc; }
+.vip-card-crown .vip-buy-btn { background: linear-gradient(135deg, #c084fc, #9333ea); color: #fff; }
 </style>
 </head>
 
@@ -798,7 +844,17 @@ window.addEventListener('load', function() {
         }
 
         var vipHtml = res.data.map(function(pkg) {
-          return '<div class="vip-card">' +
+          var nameUpper = (pkg.name || '').toUpperCase();
+          var cardThemeClass = 'vip-card-gold'; // Default Fallback
+
+          if (nameUpper.includes('BRONZE')) cardThemeClass = 'vip-card-bronze';
+          else if (nameUpper.includes('SILVER')) cardThemeClass = 'vip-card-silver';
+          else if (nameUpper.includes('GOLD')) cardThemeClass = 'vip-card-gold';
+          else if (nameUpper.includes('PLATINUM')) cardThemeClass = 'vip-card-platinum';
+          else if (nameUpper.includes('DIAMOND')) cardThemeClass = 'vip-card-diamond';
+          else if (nameUpper.includes('CROWN')) cardThemeClass = 'vip-card-crown';
+
+          return '<div class="vip-card ' + cardThemeClass + '">' +
             '<div class="vip-title"><i class="fa-solid fa-crown"></i> ' + safeText(pkg.name) + '</div>' +
             '<div class="vip-price">৳ ' + Number(pkg.price).toFixed(2) + '</div>' +
             '<div class="vip-detail">⚡ দৈনিক টাস্ক: <b>' + pkg.daily_tasks + ' টি</b></div>' +
@@ -939,79 +995,95 @@ window.addEventListener('load', function() {
       var tasks = res.data;
 
       supabaseClient.from("completed_tasks").select("task_id").eq("user_id", userProfile.id).then(function(cRes) {
-        var completedSet = new Set();
-        if (cRes.data) {
-          cRes.data.forEach(function(item) { completedSet.add(item.task_id); });
-        }
+        var completedIds = (cRes.data || []).map(function(item) { return item.task_id; });
+        var html = "";
 
-        grid.innerHTML = tasks.map(function(t) {
-          var isDone = completedSet.has(t.id);
-          var btnText = isDone ? "সম্পন্ন হয়েছে" : "শুরু করুন";
-          var disabledAttr = isDone ? "disabled" : "";
-
-          return '<div class="task-card card">' +
+        tasks.forEach(function(task) {
+          var isDone = completedIds.indexOf(task.id) !== -1;
+          html += '<div class="task-card card">' +
             '<div class="task-icon"><i class="fa-solid fa-bolt"></i></div>' +
-            '<div class="task-info"><b>' + safeText(t.title) + '</b><small>৩ সেকেন্ডের কাজ</small><br>' +
-            '<button class="task-btn" data-id="' + t.id + '" ' + disabledAttr + '>' + btnText + '</button></div>' +
-            '<div class="task-reward">৳' + Number(t.reward || 0) + '</div></div>';
-        }).join("");
+            '<div class="task-info">' +
+              '<b>' + safeText(task.title) + '</b>' +
+              '<small>৩ সেকেন্ডের সহজ টাস্ক</small>' +
+            '</div>' +
+            '<div style="text-align:right">' +
+              '<div class="task-reward">৳' + Number(task.reward).toFixed(2) + '</div>' +
+              '<button class="task-btn" ' + (isDone ? 'disabled' : '') + ' data-id="' + task.id + '" data-title="' + safeText(task.title) + '" data-reward="' + task.reward + '">' + (isDone ? 'সম্পন্ন' : 'শুরু করুন') + '</button>' +
+            '</div>' +
+          '</div>';
+        });
+
+        grid.innerHTML = html;
 
         var btns = grid.querySelectorAll(".task-btn:not([disabled])");
         for (var i = 0; i < btns.length; i++) {
           btns[i].onclick = function() {
-            var tid = this.getAttribute("data-id");
-            startTaskProcess(tid, this);
+            var id = this.getAttribute("data-id");
+            var title = this.getAttribute("data-title");
+            var reward = Number(this.getAttribute("data-reward"));
+            startTask({ id: id, title: title, reward: reward });
           };
         }
       });
     });
   }
 
-  function startTaskProcess(taskId, btnElem) {
-    currentTaskData = { id: taskId, btn: btnElem };
-    document.getElementById("taskModal").style.display = "flex";
+  function startTask(task) {
+    currentTaskData = task;
+    document.getElementById("taskTitle").textContent = task.title;
     document.getElementById("taskCountdown").textContent = "3";
     document.getElementById("taskProgress").style.width = "0%";
     document.getElementById("taskClose").style.display = "none";
+    document.getElementById("taskModal").style.display = "flex";
 
-    var left = 3;
+    var count = 3;
+    if (taskTimerId) clearInterval(taskTimerId);
+
     taskTimerId = setInterval(function() {
-      left--;
-      document.getElementById("taskCountdown").textContent = left;
-      document.getElementById("taskProgress").style.width = ((3 - left) / 3 * 100) + "%";
-      if (left <= 0) {
+      count--;
+      document.getElementById("taskCountdown").textContent = count;
+      document.getElementById("taskProgress").style.width = ((3 - count) / 3 * 100) + "%";
+
+      if (count <= 0) {
         clearInterval(taskTimerId);
-        document.getElementById("taskCountdown").textContent = "✓";
         document.getElementById("taskClose").style.display = "inline-block";
       }
     }, 1000);
   }
 
   document.getElementById("taskClose").onclick = function() {
-    if (!currentTaskData) return;
-    supabaseClient.rpc("complete_task", { p_task_id: currentTaskData.id }).then(function(res) {
-      document.getElementById("taskModal").style.display = "none";
+    if (!currentTaskData || !userProfile) return;
+
+    supabaseClient.from("completed_tasks").insert([{ user_id: userProfile.id, task_id: currentTaskData.id }]).then(function(res) {
       if (res.error) {
-        alert(res.error.message);
+        alert("টাস্ক সাবমিট করতে ব্যর্থ: " + res.error.message);
+        document.getElementById("taskModal").style.display = "none";
       } else {
-        alert("টাস্ক সফলভাবে সম্পন্ন হয়েছে!");
-        checkUserSession();
+        var newBal = Number(userProfile.balance || 0) + Number(currentTaskData.reward);
+        supabaseClient.from("profiles").update({ balance: newBal }).eq("id", userProfile.id).then(function() {
+          userProfile.balance = newBal;
+          document.getElementById("balanceText").textContent = newBal.toFixed(2);
+          document.getElementById("taskModal").style.display = "none";
+          alert("অভিনন্দন! আপনি ৳" + currentTaskData.reward.toFixed(2) + " রিওয়ার্ড পেয়েছেন।");
+          fetchTasks();
+        });
       }
     });
   };
 
   document.getElementById("closeSheetBtn").onclick = closeSheet;
-  document.getElementById("walletBtn").onclick = function(){ openSheet('wallet'); };
-  document.getElementById("btnDeposit").onclick = function(){ openSheet('deposit'); };
-  document.getElementById("btnWithdraw").onclick = function(){ openSheet('withdraw'); };
-  document.getElementById("btnRefer").onclick = function(){ openSheet('refer'); };
-  document.getElementById("btnHistory").onclick = function(){ openSheet('history'); };
-  document.getElementById("tileProfile").onclick = function(){ openSheet('profile'); };
-
-  document.getElementById("navWallet").onclick = function(){ openSheet('wallet'); };
-  document.getElementById("navTeam").onclick = function(){ openSheet('team'); };
-  document.getElementById("navProfile").onclick = function(){ openSheet('profile'); };
-  document.getElementById("navStart").onclick = function(){ fetchTasks(); };
+  document.getElementById("btnDeposit").onclick = function() { openSheet("deposit"); };
+  document.getElementById("btnWithdraw").onclick = function() { openSheet("withdraw"); };
+  document.getElementById("btnRefer").onclick = function() { openSheet("refer"); };
+  document.getElementById("btnHistory").onclick = function() { openSheet("history"); };
+  document.getElementById("walletBtn").onclick = function() { openSheet("wallet"); };
+  document.getElementById("tileProfile").onclick = function() { openSheet("profile"); };
+  document.getElementById("navWallet").onclick = function() { openSheet("wallet"); };
+  document.getElementById("navTeam").onclick = function() { openSheet("team"); };
+  document.getElementById("navProfile").onclick = function() { openSheet("profile"); };
+  document.getElementById("navStart").onclick = function() {
+    window.scrollTo({ top: 350, behavior: 'smooth' });
+  };
 
   checkUserSession();
 });
