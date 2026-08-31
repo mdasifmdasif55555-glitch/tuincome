@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>TUINCOME v7</title>
 
+<!-- FontAwesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
@@ -329,7 +330,7 @@ header{
 .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}
 .auth-tab{padding:11px;border:1px solid #214832;border-radius:13px;background:#0d1e15;color:#8ba998;font-weight:800;cursor:pointer}
 .auth-tab.active{background:linear-gradient(135deg,#21e875,#00a957);color:#031008;border-color:#55ff9a}
-.logout{background:#1b2921!important;color:#c2d2c8!important;border-color:#304238!important;margin-left:8px}
+.logout{background:#1b2921!important;color:#c2d2c8!important;border-color:#304238!important;margin-left:0px}
 </style>
 </head>
 
@@ -340,6 +341,7 @@ header{
   <button class="lang" id="langBtn">🌐 EN</button>
 </header>
 
+<!-- FIRST SCREEN: AUTH LANDING -->
 <div class="auth-landing" id="authLanding">
   <div class="auth-card">
     <h2 id="mainAuthTitle">লগইন করুন</h2>
@@ -349,6 +351,7 @@ header{
       <button class="auth-tab" id="mainTabReg">Register</button>
     </div>
 
+    <!-- Social Login Buttons -->
     <button class="social-btn btn-google" id="btnGoogleLogin">
       <i class="fa-brands fa-google"></i> Continue with Google
     </button>
@@ -359,13 +362,15 @@ header{
     <div class="divider">অথবা</div>
 
     <div id="mainAuthFields">
-      </div>
+      <!-- Fields injected dynamically -->
+    </div>
 
     <button class="primary" id="mainAuthSubmit" style="width:100%;margin-top:10px">Login</button>
     <div class="error" id="mainAuthError"></div>
   </div>
 </div>
 
+<!-- MAIN DASHBOARD (HIDDEN UNTIL LOGGED IN) -->
 <div id="mainDashboard">
   <section class="hero">
     <div id="welcome">স্বাগতম!</div>
@@ -443,6 +448,7 @@ header{
   </nav>
 </div>
 
+<!-- MODALS -->
 <div class="task-modal" id="taskModal">
   <div class="task-box">
     <div style="font-size:34px">⚡</div>
@@ -462,13 +468,14 @@ header{
   </div>
 </div>
 
+<!-- Supabase JS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 window.addEventListener('load', function() {
   
   var SUPABASE_URL = "https://vtaojjjaekjijfziocay.supabase.co";
-  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
+  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInRefiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
 
   var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   var userProfile = null;
@@ -580,7 +587,7 @@ window.addEventListener('load', function() {
     var titles = {
       deposit: "ডিপোজিট",
       withdraw: "উত্তোলন",
-      profile: "প্রোফাইল",
+      profile: "মাই প্রোফাইল",
       wallet: "ওয়ালেট",
       refer: "রেফারেল",
       history: "লেনদেনের ইতিহাস",
@@ -589,6 +596,82 @@ window.addEventListener('load', function() {
 
     document.getElementById("sheetTitle").textContent = titles[type] || "TUINCOME";
     var html = "";
+
+    if (type === "profile") {
+      document.getElementById("sheetBody").innerHTML = '<div class="number">প্রোফাইল তথ্য লোড হচ্ছে...</div>';
+      document.getElementById("modal").style.display = "flex";
+
+      if (!userProfile) {
+        document.getElementById("sheetBody").innerHTML = '<div class="number">ব্যবহারকারীর তথ্য পাওয়া যায়নি।</div>';
+        return;
+      }
+
+      // ডিপোজিট, উইথড্র এবং কমপ্লিট হওয়া টাস্কের ডেটা নিয়ে আসা
+      Promise.all([
+        supabaseClient.from("deposits").select("amount, status").eq("user_id", userProfile.id),
+        supabaseClient.from("withdrawals").select("amount, status").eq("user_id", userProfile.id),
+        supabaseClient.from("completed_tasks").select("id", { count: 'exact' }).eq("user_id", userProfile.id)
+      ]).then(function(results) {
+        var deposits = results[0].data || [];
+        var withdrawals = results[1].data || [];
+        var completedCount = results[2].count || 0;
+
+        // মোট ডিপোজিট হিসাব
+        var totalDeposit = deposits.reduce(function(acc, item) {
+          return acc + (Number(item.amount) || 0);
+        }, 0);
+
+        // মোট উইথড্র হিসাব
+        var totalWithdraw = withdrawals.reduce(function(acc, item) {
+          return acc + (Number(item.amount) || 0);
+        }, 0);
+
+        // প্রফেশনাল প্রোফাইল UI
+        var profileHtml = 
+          '<div style="text-align:center; padding: 10px 0 20px;">' +
+            '<div style="width:70px; height:70px; border-radius:50%; background:#0d2a1a; border:2px solid var(--green); display:grid; place-items:center; margin:0 auto 12px; font-size:30px; color:var(--green);">' +
+              '<i class="fa-solid fa-user-check"></i>' +
+            '</div>' +
+            '<h3 style="margin:0 0 5px; color:#fff; font-size:20px;">' + safeText(userProfile.full_name || 'ব্যবহারকারী') + '</h3>' +
+            '<span style="background:#143825; color:var(--green); padding:4px 12px; border-radius:12px; font-size:12px; font-weight:bold;">Active Member</span>' +
+          '</div>' +
+
+          '<!-- অ্যাকাউন্ট ইনফরমেশন -->' +
+          '<div class="card" style="padding:15px; margin-bottom:15px; background:#08140e;">' +
+            '<div style="margin-bottom:8px; font-size:14px; color:#b0d1c0;"><i class="fa-solid fa-envelope" style="color:var(--green); width:20px;"></i> <b>ইমেইল:</b> ' + safeText(userProfile.email || 'নাই') + '</div>' +
+            '<div style="font-size:14px; color:#b0d1c0;"><i class="fa-solid fa-phone" style="color:var(--green); width:20px;"></i> <b>ফোন:</b> ' + safeText(userProfile.phone || 'যুক্ত করা হয়নি') + '</div>' +
+          '</div>' +
+
+          '<!-- আয়ের হিসাব ও সামারি গ্রিড -->' +
+          '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:15px;">' +
+            '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
+              '<small style="color:#8ca99a; font-size:11px;">মোট ডিপোজিট</small>' +
+              '<div style="color:var(--green); font-size:18px; font-weight:bold; margin-top:4px;">৳ ' + totalDeposit.toFixed(2) + '</div>' +
+            '</div>' +
+            '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
+              '<small style="color:#8ca99a; font-size:11px;">মোট উত্তোলন (Withdraw)</small>' +
+              '<div style="color:#ff6b6b; font-size:18px; font-weight:bold; margin-top:4px;">৳ ' + totalWithdraw.toFixed(2) + '</div>' +
+            '</div>' +
+            '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
+              '<small style="color:#8ca99a; font-size:11px;">বর্তমান ব্যালেন্স</small>' +
+              '<div style="color:var(--green3); font-size:18px; font-weight:bold; margin-top:4px;">৳ ' + Number(userProfile.balance || 0).toFixed(2) + '</div>' +
+            '</div>' +
+            '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
+              '<small style="color:#8ca99a; font-size:11px;">সম্পন্নকৃত টাস্ক</small>' +
+              '<div style="color:#7bdaff; font-size:18px; font-weight:bold; margin-top:4px;">' + completedCount + ' টি</div>' +
+            '</div>' +
+          '</div>' +
+
+          '<button class="primary logout" id="logoutBtn" style="width:100%; padding:14px; font-weight:bold;">লগ আউট করুন</button>';
+
+        document.getElementById("sheetBody").innerHTML = profileHtml;
+        document.getElementById("logoutBtn").onclick = handleLogout;
+      }).catch(function(err) {
+        document.getElementById("sheetBody").innerHTML = '<div class="number">ডেটা লোড করতে সমস্যা হয়েছে: ' + err.message + '</div>';
+      });
+
+      return;
+    }
 
     if (type === "deposit") {
       html = '<p class="hint">Payment করার পর Transaction ID দিয়ে request জমা দিন।</p>' +
@@ -603,10 +686,6 @@ window.addEventListener('load', function() {
         '<div class="form-group"><label>পেমেন্ট মাধ্যম</label><select id="wdMethod"><option>bKash</option><option>Nagad</option></select></div>' +
         '<div class="form-group"><label>আপনার মোবাইল নম্বর</label><input id="wdNumber" type="tel" maxlength="11"></div>' +
         '<button class="primary" id="subWithdrawBtn">Withdrawal Request Submit</button>';
-    } else if (type === "profile") {
-      html = '<div class="number"><b>' + safeText(userProfile ? userProfile.full_name : 'ব্যবহারকারী') + '</b>' +
-        '<small>' + safeText(userProfile ? userProfile.email : '') + '</small></div>' +
-        '<button class="primary logout" id="logoutBtn">Logout</button>';
     } else if (type === "wallet") {
       html = '<div class="number"><b>বর্তমান Balance</b> ৳' + (document.getElementById("balanceText").textContent || "0.00") + '</div>';
     } else if (type === "refer") {
@@ -626,9 +705,6 @@ window.addEventListener('load', function() {
 
     var subWd = document.getElementById("subWithdrawBtn");
     if(subWd) subWd.onclick = handleWithdrawSubmit;
-
-    var lgBtn = document.getElementById("logoutBtn");
-    if(lgBtn) lgBtn.onclick = handleLogout;
   }
 
   function closeSheet() {
@@ -684,7 +760,6 @@ window.addEventListener('load', function() {
   function fetchTasks() {
     if (!userProfile) return;
     
-    // ১. একটিভ টাস্ক পাওয়া
     supabaseClient.from("tasks").select("*").eq("active", true).then(function(res) {
       var grid = document.getElementById("taskGrid");
       if (res.error || !res.data || res.data.length === 0) {
@@ -693,14 +768,12 @@ window.addEventListener('load', function() {
       }
       var tasks = res.data;
 
-      // ২. ইউজারের কমপ্লিট করা টাস্ক তালিকা পাওয়া
       supabaseClient.from("completed_tasks").select("task_id").eq("user_id", userProfile.id).then(function(cRes) {
         var completedSet = new Set();
         if (cRes.data) {
           cRes.data.forEach(function(item) { completedSet.add(item.task_id); });
         }
 
-        // ৩. বাটন হ্যান্ডেল করা
         grid.innerHTML = tasks.map(function(t) {
           var isDone = completedSet.has(t.id);
           var btnText = isDone ? "সম্পন্ন হয়েছে" : "শুরু করুন";
