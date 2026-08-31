@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>TUINCOME v7</title>
 
-<!-- FontAwesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
@@ -62,7 +61,7 @@ header{
   padding:10px 15px;
 }
 
-/* Auth Container (Initially Visible) */
+/* Auth Container */
 .auth-landing{
   display:flex;
   flex-direction:column;
@@ -113,7 +112,6 @@ header{
 }
 .divider::before, .divider::after{content:"";flex:1;height:1px;background:#183b2a}
 
-/* Main Dashboard UI (Hidden by default) */
 #mainDashboard{
   display:none;
 }
@@ -308,8 +306,7 @@ header{
 }
 .number b{display:block;margin-bottom:5px;color:var(--green)}
 .hint{color:var(--muted);font-size:13px;line-height:1.5}
-.success{display:none;background:#082b18;border:1px solid #1e7544;color:#6dffa5;padding:12px;border-radius:12px;margin-top:12px}
-.error{display:none;background:#301010;border:1px solid #753030;color:#ff8b8b;padding:12px;border-radius:12px;margin-top:12px}
+.error{display:none;background:#301010;border:1px solid #753030;color:#ff8b8b;padding:12px;border-radius:12px;margin-top:12px;font-size:13px;}
 
 .task-grid{display:grid;gap:12px;margin:0 10px 16px}
 .task-card{padding:16px;border:1px solid #193d2a;display:flex;align-items:center;gap:13px}
@@ -330,7 +327,7 @@ header{
 .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}
 .auth-tab{padding:11px;border:1px solid #214832;border-radius:13px;background:#0d1e15;color:#8ba998;font-weight:800;cursor:pointer}
 .auth-tab.active{background:linear-gradient(135deg,#21e875,#00a957);color:#031008;border-color:#55ff9a}
-.logout{background:#1b2921!important;color:#c2d2c8!important;border-color:#304238!important;margin-left:0px}
+.logout{background:#1b2921!important;color:#c2d2c8!important;border-color:#304238!important;}
 </style>
 </head>
 
@@ -341,7 +338,6 @@ header{
   <button class="lang" id="langBtn">🌐 EN</button>
 </header>
 
-<!-- FIRST SCREEN: AUTH LANDING -->
 <div class="auth-landing" id="authLanding">
   <div class="auth-card">
     <h2 id="mainAuthTitle">লগইন করুন</h2>
@@ -351,7 +347,6 @@ header{
       <button class="auth-tab" id="mainTabReg">Register</button>
     </div>
 
-    <!-- Social Login Buttons -->
     <button class="social-btn btn-google" id="btnGoogleLogin">
       <i class="fa-brands fa-google"></i> Continue with Google
     </button>
@@ -361,16 +356,13 @@ header{
 
     <div class="divider">অথবা</div>
 
-    <div id="mainAuthFields">
-      <!-- Fields injected dynamically -->
-    </div>
+    <div id="mainAuthFields"></div>
 
     <button class="primary" id="mainAuthSubmit" style="width:100%;margin-top:10px">Login</button>
     <div class="error" id="mainAuthError"></div>
   </div>
 </div>
 
-<!-- MAIN DASHBOARD (HIDDEN UNTIL LOGGED IN) -->
 <div id="mainDashboard">
   <section class="hero">
     <div id="welcome">স্বাগতম!</div>
@@ -414,9 +406,7 @@ header{
       <small>৩ সেকেন্ডের টাস্ক</small>
     </div>
     <div class="task-grid" id="taskGrid">
-      <div class="number">
-        <b>Task loading...</b>
-      </div>
+      <div class="number"><b>Task loading...</b></div>
     </div>
   </section>
 
@@ -448,7 +438,6 @@ header{
   </nav>
 </div>
 
-<!-- MODALS -->
 <div class="task-modal" id="taskModal">
   <div class="task-box">
     <div style="font-size:34px">⚡</div>
@@ -468,11 +457,10 @@ header{
   </div>
 </div>
 
-<!-- Supabase JS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-window.addEventListener('load', function() {
+window.addEventListener('DOMContentLoaded', function() {
   
   var SUPABASE_URL = "https://vtaojjjaekjijfziocay.supabase.co";
   var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInRefiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
@@ -488,7 +476,6 @@ window.addEventListener('load', function() {
     return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
-  // Handle Initial Landing Auth Interface
   function renderMainAuth(mode) {
     currentAuthMode = mode;
     document.getElementById("mainAuthTitle").textContent = mode === "register" ? "রেজিস্ট্রেশন" : "লগইন করুন";
@@ -499,7 +486,7 @@ window.addEventListener('load', function() {
     var html = "";
     if (mode === "register") {
       html += '<div class="form-group"><label>আপনার নাম</label><input id="mainName" placeholder="পুরো নাম"></div>' +
-        '<div class="form-group"><label>মোবাইল নম্বর / জিমেইল</label><input id="mainPhone" type="text" placeholder="01XXXXXXXXX বা Email"></div>';
+        '<div class="form-group"><label>মোবাইল নম্বর</label><input id="mainPhone" type="text" placeholder="01XXXXXXXXX"></div>';
     }
 
     html += '<div class="form-group"><label>Email</label><input id="mainEmail" type="email" placeholder="example@gmail.com"></div>' +
@@ -515,6 +502,8 @@ window.addEventListener('load', function() {
     var email = document.getElementById("mainEmail").value.trim();
     var password = document.getElementById("mainPassword").value;
     var errBox = document.getElementById("mainAuthError");
+    var submitBtn = document.getElementById("mainAuthSubmit");
+    
     errBox.style.display = "none";
 
     if (!email || !password) {
@@ -523,18 +512,26 @@ window.addEventListener('load', function() {
       return;
     }
 
+    submitBtn.disabled = true;
+    submitBtn.textContent = "অপেক্ষা করুন...";
+
     if (currentAuthMode === "register") {
-      var name = document.getElementById("mainName").value.trim();
-      var phone = document.getElementById("mainPhone").value.trim();
+      var name = document.getElementById("mainName") ? document.getElementById("mainName").value.trim() : "";
+      var phone = document.getElementById("mainPhone") ? document.getElementById("mainPhone").value.trim() : "";
+      
       supabaseClient.auth.signUp({
         email: email,
         password: password,
         options: { data: { full_name: name, phone: phone } }
       }).then(function(res) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Register";
         if (res.error) throw res.error;
         alert("Registration সফল হয়েছে।");
         checkUserSession();
       }).catch(function(err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Register";
         errBox.textContent = err.message;
         errBox.style.display = "block";
       });
@@ -543,9 +540,13 @@ window.addEventListener('load', function() {
         email: email,
         password: password
       }).then(function(res) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Login";
         if (res.error) throw res.error;
         checkUserSession();
       }).catch(function(err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Login";
         errBox.textContent = "Email অথবা Password ভুল।";
         errBox.style.display = "block";
       });
@@ -554,24 +555,32 @@ window.addEventListener('load', function() {
 
   // Social Auth Handlers
   document.getElementById("btnGoogleLogin").onclick = function() {
-    supabaseClient.auth.signInWithOAuth({ provider: 'google' });
+    supabaseClient.auth.signInWithOAuth({ 
+      provider: 'google',
+      options: { redirectTo: window.location.href }
+    });
   };
 
   document.getElementById("btnFbLogin").onclick = function() {
-    supabaseClient.auth.signInWithOAuth({ provider: 'facebook' });
+    supabaseClient.auth.signInWithOAuth({ 
+      provider: 'facebook',
+      options: { redirectTo: window.location.href }
+    });
   };
 
   function checkUserSession() {
-    supabaseClient.auth.getUser().then(function(res) {
-      if (res.data && res.data.user) {
-        var u = res.data.user;
+    supabaseClient.auth.getSession().then(function(res) {
+      if (res.data && res.data.session) {
+        var u = res.data.session.user;
         supabaseClient.from("profiles").select("*").eq("id", u.id).single().then(function(pRes) {
           if (pRes.data) {
             userProfile = pRes.data;
-            document.getElementById("welcome").textContent = "স্বাগতম, " + (userProfile.full_name || "ব্যবহারকারী") + "!";
-            document.getElementById("balanceText").textContent = Number(userProfile.balance || 0).toFixed(2);
+          } else {
+            userProfile = { id: u.id, full_name: u.user_metadata.full_name || 'ইউজার', email: u.email, phone: u.user_metadata.phone || '', balance: 0 };
           }
-          // Show Dashboard, Hide Auth
+          document.getElementById("welcome").textContent = "স্বাগতম, " + safeText(userProfile.full_name) + "!";
+          document.getElementById("balanceText").textContent = Number(userProfile.balance || 0).toFixed(2);
+          
           document.getElementById("authLanding").style.display = "none";
           document.getElementById("mainDashboard").style.display = "block";
           fetchTasks();
@@ -582,6 +591,17 @@ window.addEventListener('load', function() {
       }
     });
   }
+
+  // Auth State Listener
+  supabaseClient.auth.onAuthStateChange(function(event, session) {
+    if (event === 'SIGNED_IN') {
+      checkUserSession();
+    } else if (event === 'SIGNED_OUT') {
+      userProfile = null;
+      document.getElementById("authLanding").style.display = "flex";
+      document.getElementById("mainDashboard").style.display = "none";
+    }
+  });
 
   function openSheet(type) {
     var titles = {
@@ -606,7 +626,6 @@ window.addEventListener('load', function() {
         return;
       }
 
-      // ডিপোজিট, উইথড্র এবং কমপ্লিট হওয়া টাস্কের ডেটা নিয়ে আসা
       Promise.all([
         supabaseClient.from("deposits").select("amount, status").eq("user_id", userProfile.id),
         supabaseClient.from("withdrawals").select("amount, status").eq("user_id", userProfile.id),
@@ -616,17 +635,9 @@ window.addEventListener('load', function() {
         var withdrawals = results[1].data || [];
         var completedCount = results[2].count || 0;
 
-        // মোট ডিপোজিট হিসাব
-        var totalDeposit = deposits.reduce(function(acc, item) {
-          return acc + (Number(item.amount) || 0);
-        }, 0);
+        var totalDeposit = deposits.reduce(function(acc, item) { return acc + (Number(item.amount) || 0); }, 0);
+        var totalWithdraw = withdrawals.reduce(function(acc, item) { return acc + (Number(item.amount) || 0); }, 0);
 
-        // মোট উইথড্র হিসাব
-        var totalWithdraw = withdrawals.reduce(function(acc, item) {
-          return acc + (Number(item.amount) || 0);
-        }, 0);
-
-        // প্রফেশনাল প্রোফাইল UI
         var profileHtml = 
           '<div style="text-align:center; padding: 10px 0 20px;">' +
             '<div style="width:70px; height:70px; border-radius:50%; background:#0d2a1a; border:2px solid var(--green); display:grid; place-items:center; margin:0 auto 12px; font-size:30px; color:var(--green);">' +
@@ -636,13 +647,11 @@ window.addEventListener('load', function() {
             '<span style="background:#143825; color:var(--green); padding:4px 12px; border-radius:12px; font-size:12px; font-weight:bold;">Active Member</span>' +
           '</div>' +
 
-          '<!-- অ্যাকাউন্ট ইনফরমেশন -->' +
           '<div class="card" style="padding:15px; margin-bottom:15px; background:#08140e;">' +
             '<div style="margin-bottom:8px; font-size:14px; color:#b0d1c0;"><i class="fa-solid fa-envelope" style="color:var(--green); width:20px;"></i> <b>ইমেইল:</b> ' + safeText(userProfile.email || 'নাই') + '</div>' +
             '<div style="font-size:14px; color:#b0d1c0;"><i class="fa-solid fa-phone" style="color:var(--green); width:20px;"></i> <b>ফোন:</b> ' + safeText(userProfile.phone || 'যুক্ত করা হয়নি') + '</div>' +
           '</div>' +
 
-          '<!-- আয়ের হিসাব ও সামারি গ্রিড -->' +
           '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:15px;">' +
             '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
               '<small style="color:#8ca99a; font-size:11px;">মোট ডিপোজিট</small>' +
@@ -752,7 +761,6 @@ window.addEventListener('load', function() {
     supabaseClient.auth.signOut().then(function() {
       userProfile = null;
       closeSheet();
-      checkUserSession();
       alert("Logout সফল হয়েছে।");
     });
   }
@@ -760,94 +768,4 @@ window.addEventListener('load', function() {
   function fetchTasks() {
     if (!userProfile) return;
     
-    supabaseClient.from("tasks").select("*").eq("active", true).then(function(res) {
-      var grid = document.getElementById("taskGrid");
-      if (res.error || !res.data || res.data.length === 0) {
-        grid.innerHTML = '<div class="number">কোনো Active Task পাওয়া যায়নি।</div>';
-        return;
-      }
-      var tasks = res.data;
-
-      supabaseClient.from("completed_tasks").select("task_id").eq("user_id", userProfile.id).then(function(cRes) {
-        var completedSet = new Set();
-        if (cRes.data) {
-          cRes.data.forEach(function(item) { completedSet.add(item.task_id); });
-        }
-
-        grid.innerHTML = tasks.map(function(t) {
-          var isDone = completedSet.has(t.id);
-          var btnText = isDone ? "সম্পন্ন হয়েছে" : "শুরু করুন";
-          var disabledAttr = isDone ? "disabled" : "";
-
-          return '<div class="task-card card">' +
-            '<div class="task-icon"><i class="fa-solid fa-bolt"></i></div>' +
-            '<div class="task-info"><b>' + safeText(t.title) + '</b><small>৩ সেকেন্ডের কাজ</small><br>' +
-            '<button class="task-btn" data-id="' + t.id + '" ' + disabledAttr + '>' + btnText + '</button></div>' +
-            '<div class="task-reward">৳' + Number(t.reward || 0) + '</div></div>';
-        }).join("");
-
-        var btns = grid.querySelectorAll(".task-btn:not([disabled])");
-        for (var i = 0; i < btns.length; i++) {
-          btns[i].onclick = function() {
-            var tid = this.getAttribute("data-id");
-            startTaskProcess(tid, this);
-          };
-        }
-      });
-    });
-  }
-
-  function startTaskProcess(taskId, btnElem) {
-    currentTaskData = { id: taskId, btn: btnElem };
-    document.getElementById("taskModal").style.display = "flex";
-    document.getElementById("taskCountdown").textContent = "3";
-    document.getElementById("taskProgress").style.width = "0%";
-    document.getElementById("taskClose").style.display = "none";
-
-    var left = 3;
-    taskTimerId = setInterval(function() {
-      left--;
-      document.getElementById("taskCountdown").textContent = left;
-      document.getElementById("taskProgress").style.width = ((3 - left) / 3 * 100) + "%";
-      if (left <= 0) {
-        clearInterval(taskTimerId);
-        document.getElementById("taskCountdown").textContent = "✓";
-        document.getElementById("taskClose").style.display = "inline-block";
-      }
-    }, 1000);
-  }
-
-  document.getElementById("taskClose").onclick = function() {
-    if (!currentTaskData) return;
-    supabaseClient.rpc("complete_task", { p_task_id: currentTaskData.id }).then(function(res) {
-      document.getElementById("taskModal").style.display = "none";
-      if (res.error) {
-        alert(res.error.message);
-      } else {
-        alert("টাস্ক সফলভাবে সম্পন্ন হয়েছে!");
-        checkUserSession();
-      }
-    });
-  };
-
-  // Button Listeners
-  document.getElementById("closeSheetBtn").onclick = closeSheet;
-  document.getElementById("walletBtn").onclick = function(){ openSheet('wallet'); };
-  document.getElementById("btnDeposit").onclick = function(){ openSheet('deposit'); };
-  document.getElementById("btnWithdraw").onclick = function(){ openSheet('withdraw'); };
-  document.getElementById("btnRefer").onclick = function(){ openSheet('refer'); };
-  document.getElementById("btnHistory").onclick = function(){ openSheet('history'); };
-  document.getElementById("tileProfile").onclick = function(){ openSheet('profile'); };
-
-  document.getElementById("navWallet").onclick = function(){ openSheet('wallet'); };
-  document.getElementById("navStart").onclick = function(){ fetchTasks(); };
-  document.getElementById("navTeam").onclick = function(){ openSheet('team'); };
-  document.getElementById("navProfile").onclick = function(){ openSheet('profile'); };
-
-  // Init
-  renderMainAuth("login");
-  checkUserSession();
-});
-</script>
-</body>
-</html>
+    supabaseClient.from("tasks").select("*").eq("
