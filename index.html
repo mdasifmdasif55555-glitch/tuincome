@@ -21,6 +21,7 @@
   --text:#ecfff4;
   --muted:#8ca99a;
   --border:#183b2a;
+  --gold:#ffd700;
 }
 
 body{
@@ -361,6 +362,45 @@ header{
   cursor: pointer;
   border: 2px solid #07100c;
 }
+
+/* VIP Card Styling */
+.vip-card {
+  border: 1px solid #ffd70066;
+  background: linear-gradient(145deg, #1f1a05, #0a0e0b);
+  border-radius: 20px;
+  padding: 16px;
+  margin-bottom: 15px;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+}
+.vip-title {
+  color: var(--gold);
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.vip-price {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+.vip-detail {
+  font-size: 13px;
+  color: #d1dfd7;
+  margin-bottom: 5px;
+}
+.vip-buy-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #ffd700, #d4af37);
+  color: #000;
+  border: none;
+  font-weight: 900;
+  border-radius: 12px;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -487,7 +527,7 @@ header{
     <button class="active"><i class="fa-solid fa-house"></i><span>হোম</span></button>
     <button id="navWallet"><i class="fa-solid fa-wallet"></i><span>ওয়ালেট</span></button>
     <button class="go" id="navStart"><i class="fa-solid fa-bolt"></i><span>শুরু</span></button>
-    <button id="navTeam"><i class="fa-solid fa-users"></i><span>টিম</span></button>
+    <button id="navTeam"><i class="fa-solid fa-crown" style="color:var(--gold)"></i><span>VIP টিম</span></button>
     <button id="navProfile"><i class="fa-solid fa-user"></i><span>প্রোফাইল</span></button>
   </nav>
 </div>
@@ -627,7 +667,6 @@ window.addEventListener('load', function() {
     });
   }
 
-  // Handle Avatar Upload Function
   function handleAvatarUpload(file) {
     if (!file || !userProfile) return;
     var fileExt = file.name.split('.').pop();
@@ -662,7 +701,7 @@ window.addEventListener('load', function() {
       wallet: "ওয়ালেট",
       refer: "রেফারেল",
       history: "লেনদেনের ইতিহাস",
-      team: "টিম"
+      team: "VIP প্যাকেজসমূহ"
     };
 
     document.getElementById("sheetTitle").textContent = titles[type] || "TUINCOME";
@@ -733,7 +772,6 @@ window.addEventListener('load', function() {
         document.getElementById("sheetBody").innerHTML = profileHtml;
         document.getElementById("logoutBtn").onclick = handleLogout;
 
-        // Dynamic Avatar Event Listener
         var avatarInput = document.getElementById("avatarInput");
         if(avatarInput) {
           avatarInput.onchange = function(e) {
@@ -746,6 +784,41 @@ window.addEventListener('load', function() {
         document.getElementById("sheetBody").innerHTML = '<div class="number">ডেটা লোড করতে সমস্যা হয়েছে: ' + err.message + '</div>';
       });
 
+      return;
+    }
+
+    if (type === "team") {
+      document.getElementById("sheetBody").innerHTML = '<div class="number">VIP প্যাকেজসমূহ লোড হচ্ছে...</div>';
+      document.getElementById("modal").style.display = "flex";
+
+      supabaseClient.from("vip_packages").select("*").order("price", { ascending: true }).then(function(res) {
+        if (res.error || !res.data || res.data.length === 0) {
+          document.getElementById("sheetBody").innerHTML = '<div class="number">কোনো VIP প্যাকেজ পাওয়া যায়নি।</div>';
+          return;
+        }
+
+        var vipHtml = res.data.map(function(pkg) {
+          return '<div class="vip-card">' +
+            '<div class="vip-title"><i class="fa-solid fa-crown"></i> ' + safeText(pkg.name) + '</div>' +
+            '<div class="vip-price">৳ ' + Number(pkg.price).toFixed(2) + '</div>' +
+            '<div class="vip-detail">⚡ দৈনিক টাস্ক: <b>' + pkg.daily_tasks + ' টি</b></div>' +
+            '<div class="vip-detail">💰 দৈনিক আয়: <b>৳ ' + Number(pkg.daily_income).toFixed(2) + '</b></div>' +
+            '<div class="vip-detail">📅 মেয়াদ: <b>' + pkg.validity_days + ' দিন</b></div>' +
+            '<button class="vip-buy-btn" data-id="' + pkg.id + '" data-price="' + pkg.price + '">প্যাকেজটি অ্যাক্টিভ করুন</button>' +
+          '</div>';
+        }).join("");
+
+        document.getElementById("sheetBody").innerHTML = vipHtml;
+
+        var buyBtns = document.getElementById("sheetBody").querySelectorAll(".vip-buy-btn");
+        for (var i = 0; i < buyBtns.length; i++) {
+          buyBtns[i].onclick = function() {
+            var pkgId = this.getAttribute("data-id");
+            var pkgPrice = Number(this.getAttribute("data-price"));
+            handleVipPurchase(pkgId, pkgPrice);
+          };
+        }
+      });
       return;
     }
 
@@ -769,8 +842,6 @@ window.addEventListener('load', function() {
       html = '<p>আপনার Referral Code:</p><div class="number"><b>' + safeText(code) + '</b></div>';
     } else if (type === "history") {
       html = '<div class="number">Transaction history শীঘ্রই আসবে।</div>';
-    } else if (type === "team") {
-      html = '<div class="number">Team information শীঘ্রই আসবে।</div>';
     }
 
     document.getElementById("sheetBody").innerHTML = html;
@@ -781,6 +852,29 @@ window.addEventListener('load', function() {
 
     var subWd = document.getElementById("subWithdrawBtn");
     if(subWd) subWd.onclick = handleWithdrawSubmit;
+  }
+
+  function handleVipPurchase(pkgId, pkgPrice) {
+    if (!userProfile) return;
+    if (userProfile.balance < pkgPrice) {
+      alert("আপনার পর্যাপ্ত ব্যালেন্স নেই। অনুগ্রহ করে প্রথমে ডিপোজিট করুন।");
+      return;
+    }
+
+    if (confirm("আপনি কি নিশ্চিত যে ৳" + pkgPrice + " দিয়ে এই VIP প্যাকেজটি কিনতে চান?")) {
+      supabaseClient.from("vip_purchases").insert([{
+        user_id: userProfile.id,
+        package_id: pkgId,
+        amount: pkgPrice,
+        status: 'pending'
+      }]).then(function(res) {
+        if (res.error) alert(res.error.message);
+        else {
+          alert("আপনার VIP প্যাকেজ কেনার অনুরোধটি সফলভাবে জমা হয়েছে। অ্যাডমিন এপ্রুভ করার পর এটি সক্রিয় হবে।");
+          closeSheet();
+        }
+      });
+    }
   }
 
   function closeSheet() {
