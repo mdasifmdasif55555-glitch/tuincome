@@ -1,1112 +1,650 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TUINCOME - Dashboard</title>
-  
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    :root {
-      --bg: #040d08;
-      --card-bg: #0a1f14;
-      --green: #00ff88;
-      --green2: #00cc6a;
-      --green3: #008844;
-      --muted: #8ca99a;
-      --text: #ffffff;
-      --gold: #ffd700;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TUINCOME v7</title>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-    .app-container {
-      width: 100%;
-      max-width: 480px;
-      background-color: #06140c;
-      min-height: 100vh;
-      position: relative;
-      padding-bottom: 70px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.8);
-    }
-
-    /* Auth Styling */
-    .auth-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-
-    .auth-card {
-      width: 100%;
-      background: var(--card-bg);
-      padding: 25px;
-      border-radius: 16px;
-      border: 1px solid #143825;
-    }
-
-    .auth-tabs {
-      display: flex;
-      margin-bottom: 20px;
-      background: #040d08;
-      border-radius: 8px;
-      padding: 4px;
-    }
-
-    .auth-tab {
-      flex: 1;
-      padding: 10px;
-      text-align: center;
-      cursor: pointer;
-      border-radius: 6px;
-      color: var(--muted);
-      font-weight: bold;
-    }
-
-    .auth-tab.active {
-      background: var(--green);
-      color: #000;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
-
-    .form-group input, .form-group select {
-      width: 100%;
-      padding: 12px;
-      background: #040d08;
-      border: 1px solid #143825;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 14px;
-    }
-
-    button.primary {
-      width: 100%;
-      padding: 12px;
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      border: none;
-      border-radius: 8px;
-      color: #000;
-      font-weight: bold;
-      font-size: 15px;
-      cursor: pointer;
-    }
-
-    button.primary.logout {
-      background: #ff4d4d;
-      color: #fff;
-    }
-
-    .social-auth {
-      margin-top: 15px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .social-btn {
-      flex: 1;
-      padding: 10px;
-      background: #040d08;
-      border: 1px solid #143825;
-      border-radius: 8px;
-      color: #fff;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    /* Dashboard Header & Cards */
-    .header {
-      padding: 20px;
-      background: linear-gradient(180deg, #0a1f14 0%, #06140c 100%);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #143825;
-    }
-
-    .balance-card {
-      margin: 15px 20px;
-      padding: 20px;
-      background: linear-gradient(135deg, #0a291a, #05170e);
-      border-radius: 16px;
-      border: 1px solid var(--green3);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .action-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      padding: 0 20px;
-      margin-bottom: 20px;
-    }
-
-    .action-item {
-      background: var(--card-bg);
-      padding: 12px 5px;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
-      border: 1px solid #143825;
-    }
-
-    .action-item i {
-      font-size: 18px;
-      color: var(--green);
-      margin-bottom: 5px;
-    }
-
-    .action-item span {
-      display: block;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    /* Task Grid & Status */
-    .task-section {
-      padding: 0 20px;
-    }
-
-    .task-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 12px 15px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 1px solid #143825;
-      transition: all 0.3s ease;
-    }
-
-    .task-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(0, 255, 136, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--green);
-      margin-right: 12px;
-    }
-
-    .task-info {
-      flex: 1;
-    }
-
-    .task-info b {
-      display: block;
-      font-size: 14px;
-    }
-
-    .task-info small {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .task-reward {
-      color: var(--green);
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
-
-    .task-btn {
-      padding: 6px 14px;
-      background: var(--green);
-      border: none;
-      border-radius: 20px;
-      color: #000;
-      font-weight: bold;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    /* 🔴 ধূসর এবং লকড টাস্কের বিশেষ CSS */
-    .task-card.disabled {
-      opacity: 0.45;
-      filter: grayscale(100%);
-      pointer-events: none;
-      border-color: #1a2920;
-    }
-
-    .task-card.disabled .task-btn {
-      background: #24332b !important;
-      border-color: #34463c !important;
-      color: #738479 !important;
-      cursor: not-allowed;
-    }
-
-    /* Bottom Nav */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      max-width: 480px;
-      background: #040d08;
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      border-top: 1px solid #143825;
-    }
-
-    .nav-item {
-      text-align: center;
-      color: var(--muted);
-      font-size: 11px;
-      cursor: pointer;
-    }
-
-    .nav-item i {
-      font-size: 18px;
-      display: block;
-      margin-bottom: 2px;
-    }
-
-    .nav-item.active {
-      color: var(--green);
-    }
-
-    /* Modals & Bottom Sheets */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      justify-content: center;
-      align-items: flex-end;
-      z-index: 999;
-    }
-
-    .sheet {
-      background: #081a10;
-      width: 100%;
-      max-width: 480px;
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      padding: 20px;
-      max-height: 80vh;
-      overflow-y: auto;
-      border-top: 1px solid var(--green3);
-    }
-
-    .sheet-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .number {
-      background: #040d08;
-      padding: 10px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      border: 1px solid #143825;
-      font-size: 13px;
-    }
-
-    /* VIP Cards */
-    .vip-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 12px;
-      border: 1px solid #143825;
-    }
-    .vip-card-gold { border-color: var(--gold); }
-    .vip-title { color: var(--gold); font-weight: bold; font-size: 16px; margin-bottom: 5px; }
-    .vip-price { font-size: 18px; font-weight: bold; color: var(--green); margin-bottom: 8px; }
-    .vip-detail { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-    .vip-buy-btn {
-      width: 100%;
-      padding: 8px;
-      margin-top: 10px;
-      background: var(--green);
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    /* Profile Avatar */
-    .profile-avatar-wrapper {
-      position: relative;
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 10px;
-    }
-    .profile-avatar-img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--green);
-      background: #040d08;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      color: var(--muted);
-    }
-    .avatar-edit-icon {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      background: var(--green);
-      color: #000;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      cursor: pointer;
-    }
-
-    /* Progress bar for tasks */
-    .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: #040d08;
-      border-radius: 4px;
-      overflow: hidden;
-      margin: 15px 0;
-    }
-    .progress-fill {
-      height: 100%;
-      background: var(--green);
-      width: 0%;
-      transition: width 1s linear;
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;background:#f5f7f9;color:#172033;padding-bottom:95px}
+header{height:76px;padding:16px 20px;background:linear-gradient(135deg,#ff6500,#ff8b00);color:#fff;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:900}
+.lang{border:1px solid #fff6;background:#fff2;color:#fff;border-radius:24px;padding:10px 15px}
+.hero{background:linear-gradient(135deg,#ff6500,#ff5210);color:#fff;padding:22px 20px 28px;border-radius:0 0 34px 34px}
+.small{opacity:.9}
+.balance{font-size:42px;font-weight:900;margin:5px 0 18px}
+.wallet{width:100%;border:0;border-radius:28px;padding:14px;background:#ffffff26;color:#fff;font-size:16px}
+.card{background:#fff;border-radius:24px;box-shadow:0 8px 25px #1422380d}
+.quick{margin:16px 10px;padding:15px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.quick button{border:0;background:none}
+.qicon{width:52px;height:52px;margin:auto;background:#fff2eb;border-radius:17px;display:grid;place-items:center;font-size:23px}
+.quick label{display:block;margin-top:7px;font-weight:700;font-size:12px}
+.notice{margin:0 10px 14px;padding:16px;color:#657080}
+.banner{margin:0 10px 14px;padding:27px;min-height:210px;border-radius:26px;background:linear-gradient(135deg,#ff4800,#ff8a00);color:#fff}
+.banner h1{font-size:28px;margin:9px 0}
+.banner p{line-height:1.5}
+.banner button,.primary{border:0;background:#ff6500;color:#fff;border-radius:22px;padding:12px 20px;font-weight:800}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 10px}
+.tile{padding:17px}
+.tile b,.tile small{display:block}
+.tile small{margin-top:5px;color:#788290}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(720px,100%);height:78px;background:#fff;border-radius:27px 27px 0 0;box-shadow:0 -8px 25px #14223816;display:flex;align-items:center;justify-content:space-around;z-index:5}
+.nav button{border:0;background:none;color:#9299a5;font-size:20px}
+.nav button span{display:block;font-size:11px}
+.nav .active{color:#ff6500}
+.nav .go{width:62px;height:62px;border-radius:50%;background:#ff6500;color:#fff;border:5px solid #fff;margin-top:-32px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:10;align-items:flex-end;justify-content:center}
+.sheet{background:#fff;width:min(720px,100%);max-height:90vh;overflow:auto;border-radius:28px 28px 0 0;padding:24px}
+.close{float:right;border:0;background:#eee;border-radius:50%;width:34px;height:34px}
+.form-group{margin:14px 0}
+.form-group label{display:block;font-weight:700;margin-bottom:7px}
+.form-group input,.form-group select{width:100%;padding:13px;border:1px solid #ddd;border-radius:13px;font-size:15px;background:#fff}
+.methods{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.method{padding:13px;border:2px solid #eee;border-radius:15px;text-align:center;cursor:pointer}
+.method.selected{border-color:#ff6500;background:#fff5ef}
+.number{background:#fff7f1;border-radius:14px;padding:13px;margin:10px 0}
+.number b{display:block;margin-bottom:5px}
+.copy{float:right;border:0;border-radius:12px;padding:6px 10px}
+.hint{color:#707988;font-size:13px;line-height:1.5}
+.success{display:none;background:#eaf8ef;color:#1c713c;padding:12px;border-radius:12px;margin-top:12px}
+.profile{display:flex;gap:14px;align-items:center;padding:14px;background:#fff7f1;border-radius:18px;margin:12px 0}
+.avatar{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#ffe3d4;font-size:30px}
+.task-grid{display:grid;gap:12px;margin:0 10px 16px}
+.task-card{padding:16px;border:1px solid #f0e4dc;display:flex;align-items:center;gap:13px}
+.task-icon{width:52px;height:52px;flex:0 0 52px;border-radius:16px;background:#fff1e8;display:grid;place-items:center;font-size:23px}
+.task-info{flex:1}
+.task-info b{display:block;margin-bottom:5px}
+.task-info small{color:#7a8290}
+.task-reward{font-weight:900;color:#ff6500;white-space:nowrap}
+.task-btn{border:0;background:#ff6500;color:#fff;border-radius:14px;padding:9px 12px;font-weight:800;margin-top:8px}
+.task-btn:disabled{background:#b9bec7}
+.task-modal{display:none;position:fixed;inset:0;background:#0009;z-index:20;align-items:center;justify-content:center;padding:18px}
+.task-box{background:#fff;width:min(440px,100%);border-radius:26px;padding:24px;text-align:center}
+.task-progress{height:10px;background:#eee;border-radius:10px;overflow:hidden;margin:18px 0}
+.task-progress>div{height:100%;width:0;background:#ff6500;transition:width 1s linear}
+.countdown{font-size:46px;font-weight:900;color:#ff6500;margin:12px 0}
+</style>
 </head>
+
 <body>
 
-  <div class="app-container">
-    
-    <!-- 1. AUTH LANDING (LOGIN / REGISTER) -->
-    <div id="authLanding" class="auth-container">
-      <div class="auth-card">
-        <h2 id="mainAuthTitle" style="text-align: center; margin-bottom: 15px; color: var(--green);">লগইন করুন</h2>
-        
-        <div class="auth-tabs">
-          <div id="mainTabLogin" class="auth-tab active">Login</div>
-          <div id="mainTabReg" class="auth-tab">Register</div>
-        </div>
+<header>
+  <div class="logo">▣ TUINCOME</div>
+  <button class="lang" id="lang">🌐 EN</button>
+</header>
 
-        <div id="mainAuthError" style="color: #ff4d4d; font-size: 12px; margin-bottom: 10px; display: none;"></div>
+<section class="hero">
+  <div id="welcome">স্বাগতম!</div>
+  <div class="small">বর্তমান ব্যালেন্স</div>
+  <div class="balance">৳ <span>0.00</span></div>
+  <button class="wallet" onclick="openSheet('withdraw')">💼　ওয়ালেট　›</button>
+</section>
 
-        <div id="regExtraFields" style="display: none;">
-          <div class="form-group">
-            <label>আপনার নাম</label>
-            <input type="text" id="mainName" placeholder="পূর্ণ নাম লিখুন">
-          </div>
-          <div class="form-group">
-            <label>ফোন নম্বর</label>
-            <input type="tel" id="mainPhone" placeholder="017XXXXXXXX">
-          </div>
-        </div>
+<section class="quick card">
+  <button onclick="openSheet('deposit')"><div class="qicon">💵</div><label>ডিপোজিট</label></button>
+  <button onclick="openSheet('withdraw')"><div class="qicon">🏦</div><label>উত্তোলন</label></button>
+  <button onclick="openSheet('refer')"><div class="qicon">👤+</div><label>রেফার</label></button>
+  <button onclick="openSheet('history')"><div class="qicon">↶</div><label>হিস্ট্রি</label></button>
+</section>
 
-        <div class="form-group">
-          <label>ইমেইল</label>
-          <input type="email" id="mainEmail" placeholder="example@mail.com">
-        </div>
+<div class="notice card">🔔　🎉 TUINCOME প্ল্যাটফর্মে স্বাগতম!</div>
 
-        <div class="form-group">
-          <label>পাসওয়ার্ড</label>
-          <input type="password" id="mainPassword" placeholder="******">
-        </div>
+<section class="banner">
+  <small>TUINCOME</small>
+  <h1>শিখুন • কাজ করুন • উপার্জন করুন</h1>
+  <p>আপনার অ্যাকাউন্ট পরিচালনা ও অনুরোধ জমা দেওয়ার জন্য তৈরি।</p>
+  <button onclick="openSheet('register')">রেজিস্টার</button>
+</section>
 
-        <button id="mainAuthSubmit" class="primary">Login</button>
-
-        <div class="social-auth">
-          <button id="btnGoogleLogin" class="social-btn"><i class="fa-brands fa-google"></i> Google</button>
-          <button id="btnFbLogin" class="social-btn"><i class="fa-brands fa-facebook"></i> Facebook</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2. MAIN DASHBOARD -->
-    <div id="mainDashboard" style="display: none;">
-      
-      <!-- Top Header -->
-      <div class="header">
-        <div>
-          <h3 id="welcome" style="font-size: 16px;">স্বাগতম!</h3>
-          <small style="color: var(--muted); font-size: 11px;">TUINCOME Dashboard</small>
-        </div>
-        <div id="tileProfile" style="cursor: pointer;">
-          <i class="fa-solid fa-circle-user" style="font-size: 24px; color: var(--green);"></i>
-        </div>
-      </div>
-
-      <!-- Balance Card -->
-      <div class="balance-card">
-        <div>
-          <small style="color: var(--muted); font-size: 12px;">বর্তমান ব্যালেন্স</small>
-          <h2 style="font-size: 24px; color: var(--green);">৳ <span id="balanceText">0.00</span></h2>
-        </div>
-        <button id="walletBtn" style="padding: 8px 15px; background: var(--green); border: none; border-radius: 20px; font-weight: bold; cursor: pointer;">ওয়ালেট</button>
-      </div>
-
-      <!-- Action Grid -->
-      <div class="action-grid">
-        <div class="action-item" id="btnDeposit">
-          <i class="fa-solid fa-wallet"></i>
-          <span>ডিপোজিট</span>
-        </div>
-        <div class="action-item" id="btnWithdraw">
-          <i class="fa-solid fa-money-bill-transfer"></i>
-          <span>উত্তোলন</span>
-        </div>
-        <div class="action-item" id="btnRefer">
-          <i class="fa-solid fa-user-plus"></i>
-          <span>রেফার</span>
-        </div>
-        <div class="action-item" id="btnHistory">
-          <i class="fa-solid fa-clock-rotate-left"></i>
-          <span>ইতিহাস</span>
-        </div>
-      </div>
-
-      <!-- Task Section -->
-      <div class="task-section">
-        <h4 style="margin-bottom: 12px; font-size: 14px; color: #fff;">দৈনিক উপার্জন টাস্ক</h4>
-        <div id="taskGrid">
-          <!-- Tasks will load dynamically here -->
-          <div class="number">টাস্ক লোড হচ্ছে...</div>
-        </div>
-      </div>
-
-      <!-- Bottom Navigation -->
-      <div class="bottom-nav">
-        <div class="nav-item active" id="navStart">
-          <i class="fa-solid fa-house"></i>
-          <span>হোম</span>
-        </div>
-        <div class="nav-item" id="navTeam">
-          <i class="fa-solid fa-crown"></i>
-          <span>VIP প্যাক</span>
-        </div>
-        <div class="nav-item" id="navWallet">
-          <i class="fa-solid fa-wallet"></i>
-          <span>ওয়ালেট</span>
-        </div>
-        <div class="nav-item" id="navProfile">
-          <i class="fa-solid fa-user"></i>
-          <span>প্রোফাইল</span>
-        </div>
-      </div>
-
-    </div>
-
+<section style="margin-top:8px">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin:0 14px 10px">
+    <h3 style="margin:0">⚡ ছোট টাস্ক</h3>
+    <small style="color:#777">৩ সেকেন্ডের টাস্ক</small>
   </div>
 
-  <!-- GENERAL MODAL SHEET -->
-  <div id="modal" class="modal-overlay">
-    <div class="sheet">
-      <div class="sheet-header">
-        <h3 id="sheetTitle">TUINCOME</h3>
-        <i id="closeSheetBtn" class="fa-solid fa-xmark" style="cursor: pointer; font-size: 20px;"></i>
-      </div>
-      <div id="sheetBody"></div>
+  <div class="task-grid" id="taskGrid">
+    <div class="number">
+      <b>Task loading...</b>
+      <small>Supabase থেকে task load হচ্ছে</small>
     </div>
   </div>
+</section>
 
-  <!-- TASK EXECUTION MODAL -->
-  <div id="taskModal" class="modal-overlay">
-    <div class="sheet" style="text-align: center;">
-      <h3 id="taskTitle" style="color: var(--green); margin-bottom: 10px;">টাস্ক চলছে...</h3>
-      <p style="font-size: 13px; color: var(--muted);">অনুগ্রহ করে অপেক্ষা করুন</p>
-      
-      <div style="font-size: 36px; font-weight: bold; margin: 15px 0; color: #fff;" id="taskCountdown">3</div>
-      
-      <div class="progress-bar">
-        <div id="taskProgress" class="progress-fill"></div>
-      </div>
+<section class="tiles">
+  <div class="tile card">💼 <b>কোম্পানি প্রোফাইল</b><small>আমাদের সম্পর্কে</small></div>
+  <div class="tile card">🛡️ <b>উত্তোলনের নিয়ম</b><small>উত্তোলনের নিয়ম</small></div>
+  <div class="tile card">📈 <b>আয়ের সুযোগ</b><small>আয়ের সুযোগ</small></div>
+  <div class="tile card" onclick="openSheet('profile')">👤 <b>প্রোফাইল</b><small>Account</small></div>
+</section>
 
-      <button id="taskClose" class="primary" style="display: none; margin-top: 10px;">টাস্ক সম্পন্ন করুন</button>
+<nav class="nav">
+  <button class="active">⌂<span>হোম</span></button>
+  <button onclick="openSheet('wallet')">▭<span>ওয়ালেট</span></button>
+  <button class="go" onclick="openSheet('register')">⚡<span>শুরু</span></button>
+  <button onclick="openSheet('team')">👥<span>টিম</span></button>
+  <button onclick="openSheet('profile')">●<span>প্রোফাইল</span></button>
+</nav>
+
+<div class="task-modal" id="taskModal">
+  <div class="task-box">
+    <div style="font-size:34px">⚡</div>
+    <h2 id="taskTitle">টাস্ক চলছে</h2>
+    <p class="hint">৩ সেকেন্ড এই পেজে থাকুন।</p>
+    <div class="countdown" id="taskCountdown">3</div>
+    <div class="task-progress">
+      <div id="taskProgress"></div>
     </div>
+    <button class="primary" id="taskClose" style="display:none" onclick="finishTask()">৳ Reward নিন</button>
   </div>
+</div>
 
-  <!-- SUPABASE & APPLICATION SCRIPT -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<div class="modal" id="modal">
+  <div class="sheet">
+    <button class="close" onclick="closeSheet()">✕</button>
+    <h2 id="sheetTitle">TUINCOME</h2>
+    <div id="sheetBody"></div>
+  </div>
+</div>
 
-  <script>
-  window.addEventListener('load', function() {
-    
-    var SUPABASE_URL = "https://vtaojjjaekjijfziocay.supabase.co";
-    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    var userProfile = null;
-    var userActiveVip = null;
-    var currentTaskData = null;
-    var taskTimerId = null;
-    var currentAuthMode = "login";
+<script>
+/*
+ IMPORTANT:
+ নিচের SUPABASE_ANON_KEY-এ তোমার নিজের ANON/PUBLISHABLE KEY বসাবে।
+ SERVICE_ROLE/SECRET KEY এখানে কখনো বসাবে না।
+*/
 
-    function safeText(str) {
-      if (!str) return "";
-      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const SUPABASE_URL = "https://vtaojjjaekjijfziocay.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
+
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+let profile = JSON.parse(localStorage.getItem("tu_profile") || "null");
+
+let currentTask = null;
+let taskTimer = null;
+
+function openSheet(type){
+  let title={
+    deposit:"ডিপোজিট",
+    withdraw:"উত্তোলন",
+    register:"রেজিস্ট্রেশন",
+    profile:"প্রোফাইল",
+    wallet:"ওয়ালেট",
+    refer:"রেফারেল",
+    history:"লেনদেনের ইতিহাস",
+    team:"টিম"
+  }[type] || "TUINCOME";
+
+  document.getElementById("sheetTitle").textContent=title;
+
+  let b="";
+
+  if(type==="deposit"){
+    b=`
+    <p class="hint">Payment করার পর Transaction ID দিয়ে request জমা দিন।</p>
+    <div class="number"><b>bKash</b>01726270731</div>
+    <div class="number"><b>Nagad</b>01921145861</div>
+    <div class="form-group">
+      <label>ডিপোজিটের পরিমাণ</label>
+      <input id="depAmount" type="number" min="1" placeholder="যেমন: 500">
+    </div>
+    <div class="form-group">
+      <label>Transaction ID</label>
+      <input id="txn" placeholder="যেমন: TXN123456">
+    </div>
+    <button class="primary" onclick="submit('deposit')">
+      Deposit Request Submit
+    </button>
+    <div class="success" id="success">Request saved.</div>`;
+  }
+
+  else if(type==="withdraw"){
+    b=`
+    <div class="number">
+      <b>Minimum Withdrawal: ৳500</b>
+      ৫০০ টাকার কম হলে withdrawal request গ্রহণ করা হবে না।
+    </div>
+
+    <div class="form-group">
+      <label>উত্তোলনের পরিমাণ</label>
+      <input id="wdAmount" type="number" min="500" placeholder="যেমন: 500">
+    </div>
+
+    <div class="form-group">
+      <label>পেমেন্ট মাধ্যম</label>
+      <select id="wdMethod">
+        <option>bKash</option>
+        <option>Nagad</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>আপনার মোবাইল নম্বর</label>
+      <input id="wdNumber" inputmode="numeric" maxlength="11" placeholder="01XXXXXXXXX">
+    </div>
+
+    <button class="primary" onclick="submit('withdraw')">
+      Withdrawal Request Submit
+    </button>
+
+    <div class="success" id="success">Withdrawal request saved.</div>`;
+  }
+
+  else if(type==="register" || type==="profile"){
+    b=`
+    <div class="profile">
+      <div class="avatar">👤</div>
+      <div>
+        <b>${profile?.name || "নতুন ব্যবহারকারী"}</b>
+        <small style="display:block;color:#777">
+          ${profile?.phone || "এখনো রেজিস্টার করা হয়নি"}
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>আপনার নাম</label>
+      <input id="pname" value="${profile?.name || ""}" placeholder="পুরো নাম">
+    </div>
+
+    <div class="form-group">
+      <label>মোবাইল নম্বর</label>
+      <input id="pphone" value="${profile?.phone || ""}" maxlength="11" placeholder="01XXXXXXXXX">
+    </div>
+
+    <button class="primary" onclick="saveProfile()">Profile Save</button>`;
+  }
+
+  else if(type==="refer"){
+    b=`
+    <p>আপনার referral link:</p>
+    <input style="width:100%;padding:13px;border:1px solid #ddd;border-radius:13px"
+      readonly value="https://tuincome-demo.example/ref/DEMOUSER">
+    <button class="primary"
+      onclick="copyNum('https://tuincome-demo.example/ref/DEMOUSER')">
+      Copy Referral Link
+    </button>`;
+  }
+
+  else if(type==="history"){
+    b=`
+    <p class="hint">Transaction history database-এর সাথে পরে যুক্ত করা যাবে।</p>
+    <div class="number">কোনো transaction এখনো দেখানো হয়নি।</div>`;
+  }
+
+  else if(type==="team"){
+    b=`
+    <div class="number">
+      <b>VIP প্যাকেজ</b>
+      <p style="color:#666">
+        এগুলো প্রদর্শিত/পরিকল্পিত তথ্য। কোনো পেমেন্ট বা বিনিয়োগ করার আগে শর্ত যাচাই করুন।
+      </p>
+    </div>`;
+  }
+
+  else{
+    b=`<p class="hint">এই section এখনো চালু করা হয়নি।</p>`;
+  }
+
+  document.getElementById("sheetBody").innerHTML=b;
+  document.getElementById("modal").style.display="flex";
+}
+
+function selectMethod(el){
+  document.querySelectorAll(".method").forEach(x=>x.classList.remove("selected"));
+  el.classList.add("selected");
+}
+
+function copyNum(n){
+  navigator.clipboard?.writeText(n);
+  alert("কপি হয়েছে");
+}
+
+function saveProfile(){
+  let n=document.getElementById("pname").value.trim();
+  let p=document.getElementById("pphone").value.trim();
+
+  if(!n || !/^(01)\d{9}$/.test(p)){
+    return alert("সঠিক নাম ও ১১ সংখ্যার মোবাইল নম্বর দিন");
+  }
+
+  profile={name:n,phone:p};
+  localStorage.setItem("tu_profile",JSON.stringify(profile));
+
+  alert("Profile saved");
+  closeSheet();
+}
+
+function submit(type){
+  let ok;
+
+  if(type==="deposit"){
+    ok=
+      document.getElementById("depAmount").value &&
+      document.getElementById("txn").value.trim();
+  }else{
+    ok=
+      Number(document.getElementById("wdAmount").value)>=500 &&
+      /^(01)\d{9}$/.test(
+        document.getElementById("wdNumber").value.trim()
+      );
+  }
+
+  if(!ok){
+    return alert(
+      type==="deposit"
+      ?"Amount ও Transaction ID দিন"
+      :"কমপক্ষে ৫০০ টাকা এবং সঠিক নম্বর দিন"
+    );
+  }
+
+  localStorage.setItem(
+    "tu_last_request",
+    JSON.stringify({
+      type,
+      at:new Date().toISOString()
+    })
+  );
+
+  document.getElementById("success").style.display="block";
+}
+
+function closeSheet(){
+  document.getElementById("modal").style.display="none";
+}
+
+
+/* =========================
+   TASK SYSTEM
+========================= */
+
+async function loadTasks(){
+
+  const grid=document.getElementById("taskGrid");
+
+  const {data,error}=await supabase
+    .from("tasks")
+    .select("id,title,description,reward,active,max_completions")
+    .eq("active",true)
+    .order("title");
+
+  if(error){
+    console.error(error);
+    grid.innerHTML=`
+      <div class="number">
+        <b>Task load করা যায়নি</b>
+        <small>${escapeHtml(error.message)}</small>
+      </div>`;
+    return;
+  }
+
+  if(!data || data.length===0){
+    grid.innerHTML=`
+      <div class="number">
+        <b>এখন কোনো active task নেই।</b>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML=data.map((task,index)=>{
+
+    const icons=["📋","🔔","⭐","📚","💡","🎯","📖","🔎","🚀","📝","🏆","🌟","📣","🎁"];
+    const icon=icons[index % icons.length];
+
+    return `
+      <div class="task-card card">
+
+        <div class="task-icon">${icon}</div>
+
+        <div class="task-info">
+          <b>${escapeHtml(task.title || "Task")}</b>
+
+          <small>
+            ${escapeHtml(task.description || "মাত্র ৩ সেকেন্ড")}
+          </small>
+
+          <br>
+
+          <button
+            class="task-btn"
+            data-task-id="${task.id}"
+            data-reward="${Number(task.reward || 0)}"
+            onclick="startTask(this)">
+            শুরু করুন
+          </button>
+        </div>
+
+        <div class="task-reward">
+          ৳${Number(task.reward || 0).toLocaleString()}
+        </div>
+
+      </div>`;
+  }).join("");
+
+  await markAlreadyCompleted();
+}
+
+async function markAlreadyCompleted(){
+
+  const {
+    data:{user}
+  } = await supabase.auth.getUser();
+
+  if(!user) return;
+
+  const {data,error}=await supabase
+    .from("task_completions")
+    .select("task_id")
+    .eq("user_id",user.id);
+
+  if(error){
+    console.error(error);
+    return;
+  }
+
+  const completed=new Set(
+    (data || []).map(x=>x.task_id)
+  );
+
+  document.querySelectorAll(".task-btn").forEach(btn=>{
+    if(completed.has(btn.dataset.taskId)){
+      btn.disabled=true;
+      btn.textContent="সম্পন্ন";
     }
-
-    function setAuthMode(mode) {
-      currentAuthMode = mode;
-      var errBox = document.getElementById("mainAuthError");
-      errBox.style.display = "none";
-
-      if(mode === "register") {
-        document.getElementById("mainAuthTitle").textContent = "রেজিস্ট্রেশন";
-        document.getElementById("mainTabLogin").classList.remove("active");
-        document.getElementById("mainTabReg").classList.add("active");
-        document.getElementById("mainAuthSubmit").textContent = "Register";
-        document.getElementById("regExtraFields").style.display = "block";
-      } else {
-        document.getElementById("mainAuthTitle").textContent = "লগইন করুন";
-        document.getElementById("mainTabReg").classList.remove("active");
-        document.getElementById("mainTabLogin").classList.add("active");
-        document.getElementById("mainAuthSubmit").textContent = "Login";
-        document.getElementById("regExtraFields").style.display = "none";
-      }
-    }
-
-    document.getElementById("mainTabLogin").onclick = function() { setAuthMode("login"); };
-    document.getElementById("mainTabReg").onclick = function() { setAuthMode("register"); };
-
-    document.getElementById("mainAuthSubmit").onclick = function() {
-      var email = document.getElementById("mainEmail").value.trim();
-      var password = document.getElementById("mainPassword").value;
-      var errBox = document.getElementById("mainAuthError");
-      errBox.style.display = "none";
-
-      if (!email || !password) {
-        errBox.textContent = "Email এবং Password প্রবেশ করান।";
-        errBox.style.display = "block";
-        return;
-      }
-
-      if (currentAuthMode === "register") {
-        var name = document.getElementById("mainName").value.trim();
-        var phone = document.getElementById("mainPhone").value.trim();
-        
-        supabaseClient.auth.signUp({
-          email: email,
-          password: password,
-          options: { data: { full_name: name, phone: phone } }
-        }).then(function(res) {
-          if (res.error) throw res.error;
-          alert("Registration সফল হয়েছে।");
-          checkUserSession();
-        }).catch(function(err) {
-          errBox.textContent = err.message;
-          errBox.style.display = "block";
-        });
-      } else {
-        supabaseClient.auth.signInWithPassword({
-          email: email,
-          password: password
-        }).then(function(res) {
-          if (res.error) throw res.error;
-          checkUserSession();
-        }).catch(function(err) {
-          errBox.textContent = "Email অথবা Password ভুল।";
-          errBox.style.display = "block";
-        });
-      }
-    };
-
-    document.getElementById("btnGoogleLogin").onclick = function() {
-      supabaseClient.auth.signInWithOAuth({ provider: 'google' });
-    };
-
-    document.getElementById("btnFbLogin").onclick = function() {
-      supabaseClient.auth.signInWithOAuth({ provider: 'facebook' });
-    };
-
-    function checkUserSession() {
-      supabaseClient.auth.getSession().then(function(res) {
-        if (res.data && res.data.session && res.data.session.user) {
-          var u = res.data.session.user;
-          supabaseClient.from("profiles").select("*").eq("id", u.id).single().then(function(pRes) {
-            if (pRes.data) {
-              userProfile = pRes.data;
-            } else {
-              userProfile = { id: u.id, full_name: u.user_metadata.full_name || 'ইউজার', email: u.email, phone: u.user_metadata.phone || '', balance: 0, avatar_url: '' };
-            }
-            document.getElementById("welcome").textContent = "স্বাগতম, " + (userProfile.full_name || "ব্যবহারকারী") + "!";
-            document.getElementById("balanceText").textContent = Number(userProfile.balance || 0).toFixed(2);
-
-            document.getElementById("authLanding").style.display = "none";
-            document.getElementById("mainDashboard").style.display = "block";
-
-            fetchUserVipAndTasks();
-          });
-        } else {
-          document.getElementById("authLanding").style.display = "flex";
-          document.getElementById("mainDashboard").style.display = "none";
-        }
-      });
-    }
-
-    function fetchUserVipAndTasks() {
-      if (!userProfile) return;
-
-      supabaseClient.from("vip_purchases")
-        .select("*, vip_packages(*)")
-        .eq("user_id", userProfile.id)
-        .in("status", ["active", "approved"])
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .then(function(vRes) {
-          if (vRes.data && vRes.data.length > 0 && vRes.data[0].vip_packages) {
-            userActiveVip = vRes.data[0].vip_packages;
-          } else {
-            userActiveVip = null;
-          }
-
-          fetchTasks();
-        }).catch(function() {
-          userActiveVip = null;
-          fetchTasks();
-        });
-    }
-
-    function handleAvatarUpload(file) {
-      if (!file || !userProfile) return;
-      var fileExt = file.name.split('.').pop();
-      var fileName = userProfile.id + '-' + Math.random() + '.' + fileExt;
-      var filePath = fileName;
-
-      alert("ছবি আপলোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...");
-
-      supabaseClient.storage.from('avatars').upload(filePath, file)
-        .then(function(res) {
-          if (res.error) throw res.error;
-
-          var publicUrlData = supabaseClient.storage.from('avatars').getPublicUrl(filePath);
-          var avatarUrl = publicUrlData.data.publicUrl;
-
-          return supabaseClient.from('profiles').update({ avatar_url: avatarUrl }).eq('id', userProfile.id).then(function(uRes) {
-            if (uRes.error) throw uRes.error;
-            userProfile.avatar_url = avatarUrl;
-            alert("প্রোফাইল ছবি সফলভাবে আপডেট হয়েছে!");
-            openSheet('profile');
-          });
-        }).catch(function(err) {
-          alert("ছবি আপলোড ব্যর্থ হয়েছে: " + err.message);
-        });
-    }
-
-    function openSheet(type) {
-      var titles = {
-        deposit: "ডিপোজিট",
-        withdraw: "উত্তোলন",
-        profile: "মাই প্রোফাইল",
-        wallet: "ওয়ালেট",
-        refer: "রেফারেল",
-        history: "লেনদেনের ইতিহাস",
-        team: "VIP প্যাকেজসমূহ"
-      };
-
-      document.getElementById("sheetTitle").textContent = titles[type] || "TUINCOME";
-      var html = "";
-
-      if (type === "profile") {
-        document.getElementById("sheetBody").innerHTML = '<div class="number">প্রোফাইল তথ্য লোড হচ্ছে...</div>';
-        document.getElementById("modal").style.display = "flex";
-
-        if (!userProfile) {
-          document.getElementById("sheetBody").innerHTML = '<div class="number">ব্যবহারকারীর তথ্য পাওয়া যায়নি।</div>';
-          return;
-        }
-
-        Promise.all([
-          supabaseClient.from("deposits").select("amount, status").eq("user_id", userProfile.id),
-          supabaseClient.from("withdrawals").select("amount, status").eq("user_id", userProfile.id),
-          supabaseClient.from("completed_tasks").select("id", { count: 'exact' }).eq("user_id", userProfile.id)
-        ]).then(function(results) {
-          var deposits = results[0].data || [];
-          var withdrawals = results[1].data || [];
-          var completedCount = results[2].count || 0;
-
-          var totalDeposit = deposits.reduce(function(acc, item) { return acc + (Number(item.amount) || 0); }, 0);
-          var totalWithdraw = withdrawals.reduce(function(acc, item) { return acc + (Number(item.amount) || 0); }, 0);
-
-          var avatarElement = userProfile.avatar_url ? 
-            '<img src="' + safeText(userProfile.avatar_url) + '" class="profile-avatar-img" />' : 
-            '<div class="profile-avatar-img"><i class="fa-solid fa-user"></i></div>';
-
-          var vipBadge = userActiveVip ? 
-            '<span style="background:linear-gradient(135deg,#ffd700,#d4af37); color:#000; padding:4px 12px; border-radius:12px; font-size:12px; font-weight:bold;"><i class="fa-solid fa-crown"></i> VIP: ' + safeText(userActiveVip.name) + '</span>' :
-            '<span style="background:#143825; color:var(--green); padding:4px 12px; border-radius:12px; font-size:12px; font-weight:bold;">Free Member</span>';
-
-          var profileHtml = 
-            '<div style="text-align:center; padding: 10px 0 20px;">' +
-              '<div class="profile-avatar-wrapper">' +
-                avatarElement +
-                '<label for="avatarInput" class="avatar-edit-icon"><i class="fa-solid fa-camera"></i></label>' +
-                '<input type="file" id="avatarInput" accept="image/*" style="display:none;" />' +
-              '</div>' +
-              '<h3 style="margin:0 0 5px; color:#fff; font-size:20px;">' + safeText(userProfile.full_name || 'ব্যবহারকারী') + '</h3>' +
-              vipBadge +
-            '</div>' +
-
-            '<div class="card" style="padding:15px; margin-bottom:15px; background:#08140e;">' +
-              '<div style="margin-bottom:8px; font-size:14px; color:#b0d1c0;"><i class="fa-solid fa-envelope" style="color:var(--green); width:20px;"></i> <b>ইমেইল:</b> ' + safeText(userProfile.email || 'নাই') + '</div>' +
-              '<div style="font-size:14px; color:#b0d1c0;"><i class="fa-solid fa-phone" style="color:var(--green); width:20px;"></i> <b>ফোন:</b> ' + safeText(userProfile.phone || 'যুক্ত করা হয়নি') + '</div>' +
-            '</div>' +
-
-            '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:15px;">' +
-              '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
-                '<small style="color:#8ca99a; font-size:11px;">মোট ডিপোজিট</small>' +
-                '<div style="color:var(--green); font-size:18px; font-weight:bold; margin-top:4px;">৳ ' + totalDeposit.toFixed(2) + '</div>' +
-              '</div>' +
-              '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
-                '<small style="color:#8ca99a; font-size:11px;">মোট উত্তোলন (Withdraw)</small>' +
-                '<div style="color:#ff6b6b; font-size:18px; font-weight:bold; margin-top:4px;">৳ ' + totalWithdraw.toFixed(2) + '</div>' +
-              '</div>' +
-              '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
-                '<small style="color:#8ca99a; font-size:11px;">বর্তমান ব্যালেন্স</small>' +
-                '<div style="color:var(--green3); font-size:18px; font-weight:bold; margin-top:4px;">৳ ' + Number(userProfile.balance || 0).toFixed(2) + '</div>' +
-              '</div>' +
-              '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
-                '<small style="color:#8ca99a; font-size:11px;">সম্পন্নকৃত টাস্ক</small>' +
-                '<div style="color:#7bdaff; font-size:18px; font-weight:bold; margin-top:4px;">' + completedCount + ' টি</div>' +
-              '</div>' +
-            '</div>' +
-
-            '<button class="primary logout" id="logoutBtn" style="width:100%; padding:14px; font-weight:bold;">লগ আউট করুন</button>';
-
-          document.getElementById("sheetBody").innerHTML = profileHtml;
-          document.getElementById("logoutBtn").onclick = handleLogout;
-
-          var avatarInput = document.getElementById("avatarInput");
-          if(avatarInput) {
-            avatarInput.onchange = function(e) {
-              if (e.target.files && e.target.files[0]) {
-                handleAvatarUpload(e.target.files[0]);
-              }
-            };
-          }
-        }).catch(function(err) {
-          document.getElementById("sheetBody").innerHTML = '<div class="number">ডেটা লোড করতে সমস্যা হয়েছে: ' + err.message + '</div>';
-        });
-
-        return;
-      }
-
-      if (type === "team") {
-        document.getElementById("sheetBody").innerHTML = '<div class="number">VIP প্যাকেজসমূহ লোড হচ্ছে...</div>';
-        document.getElementById("modal").style.display = "flex";
-
-        supabaseClient.from("vip_packages").select("*").order("price", { ascending: true }).then(function(res) {
-          if (res.error || !res.data || res.data.length === 0) {
-            document.getElementById("sheetBody").innerHTML = '<div class="number">কোনো VIP প্যাকেজ পাওয়া যায়নি।</div>';
-            return;
-          }
-
-          var vipHtml = res.data.map(function(pkg) {
-            var nameUpper = (pkg.name || '').toUpperCase();
-            var cardThemeClass = 'vip-card-gold';
-
-            if (nameUpper.includes('BRONZE')) cardThemeClass = 'vip-card-bronze';
-            else if (nameUpper.includes('SILVER')) cardThemeClass = 'vip-card-silver';
-            else if (nameUpper.includes('GOLD')) cardThemeClass = 'vip-card-gold';
-            else if (nameUpper.includes('PLATINUM')) cardThemeClass = 'vip-card-platinum';
-            else if (nameUpper.includes('DIAMOND')) cardThemeClass = 'vip-card-diamond';
-            else if (nameUpper.includes('CROWN')) cardThemeClass = 'vip-card-crown';
-
-            return '<div class="vip-card ' + cardThemeClass + '">' +
-              '<div class="vip-title"><i class="fa-solid fa-crown"></i> ' + safeText(pkg.name) + '</div>' +
-              '<div class="vip-price">৳ ' + Number(pkg.price).toFixed(2) + '</div>' +
-              '<div class="vip-detail">⚡ দৈনিক টাস্ক: <b>' + pkg.daily_tasks + ' টি</b></div>' +
-              '<div class="vip-detail">💰 দৈনিক আয়: <b>৳ ' + Number(pkg.daily_income).toFixed(2) + '</b></div>' +
-              '<div class="vip-detail">📅 মেয়াদ: <b>' + pkg.validity_days + ' দিন</b></div>' +
-              '<button class="vip-buy-btn" data-id="' + pkg.id + '" data-price="' + pkg.price + '">প্যাকেজটি অ্যাক্টিভ করুন</button>' +
-            '</div>';
-          }).join("");
-
-          document.getElementById("sheetBody").innerHTML = vipHtml;
-
-          var buyBtns = document.getElementById("sheetBody").querySelectorAll(".vip-buy-btn");
-          for (var i = 0; i < buyBtns.length; i++) {
-            buyBtns[i].onclick = function() {
-              var pkgId = this.getAttribute("data-id");
-              var pkgPrice = Number(this.getAttribute("data-price"));
-              handleVipPurchase(pkgId, pkgPrice);
-            };
-          }
-        });
-        return;
-      }
-
-      if (type === "deposit") {
-        html = '<p class="hint" style="margin-bottom:10px; font-size:12px; color:var(--muted);">Payment করার পর Transaction ID দিয়ে request জমা দিন।</p>' +
-          '<div class="number"><b>bKash</b> 01726270731</div>' +
-          '<div class="number"><b>Nagad</b> 01921145861</div>' +
-          '<div class="form-group"><label>ডিপোজিটের পরিমাণ</label><input id="depAmount" type="number" min="1"></div>' +
-          '<div class="form-group"><label>Transaction ID</label><input id="txn" placeholder="Transaction ID"></div>' +
-          '<button class="primary" id="subDepositBtn">Deposit Request Submit</button>';
-      } else if (type === "withdraw") {
-        html = '<div class="number"><b>Minimum Withdrawal: ৳500</b> ৫০০ টাকার কম হলে গ্রহণ করা হবে না।</div>' +
-          '<div class="form-group"><label>উত্তোলনের পরিমাণ</label><input id="wdAmount" type="number" min="500"></div>' +
-          '<div class="form-group"><label>পেমেন্ট মাধ্যম</label><select id="wdMethod"><option>bKash</option><option>Nagad</option></select></div>' +
-          '<div class="form-group"><label>আপনার মোবাইল নম্বর</label><input id="wdNumber" type="tel" maxlength="11"></div>' +
-          '<button class="primary" id="subWithdrawBtn">Withdrawal Request Submit</button>';
-      } else if (type === "wallet") {
-        html = '<div class="number"><b>বর্তমান Balance</b> ৳' + (document.getElementById("balanceText").textContent || "0.00") + '</div>';
-      } else if (type === "refer") {
-        var code = userProfile ? (userProfile.referral_code || "PENDING") : "PENDING";
-        html = '<p style="margin-bottom:10px;">আপনার Referral Code:</p><div class="number"><b>' + safeText(code) + '</b></div>';
-      } else if (type === "history") {
-        html = '<div class="number">Transaction history শীঘ্রই আসবে।</div>';
-      }
-
-      document.getElementById("sheetBody").innerHTML = html;
-      document.getElementById("modal").style.display = "flex";
-
-      var subDep = document.getElementById("subDepositBtn");
-      if(subDep) subDep.onclick = handleDepositSubmit;
-
-      var subWd = document.getElementById("subWithdrawBtn");
-      if(subWd) subWd.onclick = handleWithdrawSubmit;
-    }
-
-    function handleVipPurchase(pkgId, pkgPrice) {
-      if (!userProfile) return;
-      if (userProfile.balance < pkgPrice) {
-        alert("আপনার পর্যাপ্ত ব্যালেন্স নেই। অনুগ্রহ করে প্রথমে ডিপোজিট করুন।");
-        return;
-      }
-
-      if (confirm("আপনি কি নিশ্চিত যে ৳" + pkgPrice + " দিয়ে এই VIP প্যাকেজটি কিনতে চান?")) {
-        supabaseClient.from("vip_purchases").insert([{
-          user_id: userProfile.id,
-          package_id: pkgId,
-          amount: pkgPrice,
-          status: 'pending'
-        }]).then(function(res) {
-          if (res.error) alert(res.error.message);
-          else {
-            alert("আপনার VIP প্যাকেজ কেনার অনুরোধটি সফলভাবে জমা হয়েছে। অ্যাডমিন এপ্রুভ করার পর এটি সক্রিয় হবে।");
-            closeSheet();
-            fetchUserVipAndTasks();
-          }
-        });
-      }
-    }
-
-    function closeSheet() {
-      document.getElementById("modal").style.display = "none";
-    }
-
-    function handleDepositSubmit() {
-      if (!userProfile) return;
-      var amount = Number(document.getElementById("depAmount").value);
-      var txn = document.getElementById("txn").value.trim();
-      if (!amount || !txn) {
-        alert("সঠিক তথ্য দিন");
-        return;
-      }
-      supabaseClient.from("deposits").insert([{ user_id: userProfile.id, amount: amount, transaction_id: txn }])
-        .then(function(res) {
-          if (res.error) alert(res.error.message);
-          else {
-            alert("Deposit request জমা হয়েছে।");
-            closeSheet();
-          }
-        });
-    }
-
-    function handleWithdrawSubmit() {
-      if (!userProfile) return;
-      var amount = Number(document.getElementById("wdAmount").value);
-      var method = document.getElementById("wdMethod").value;
-      var phone = document.getElementById("wdNumber").value.trim();
-      if (amount < 500 || !phone) {
-        alert("সর্বনিম্ন ৫০০ টাকা ও সঠিক মোবাইল নম্বর প্রয়োজন।");
-        return;
-      }
-      supabaseClient.from("withdrawals").insert([{ user_id: userProfile.id, amount: amount, method: method, phone_number: phone }])
-        .then(function(res) {
-          if (res.error) alert(res.error.message);
-          else {
-            alert("Withdrawal request জমা হয়েছে।");
-            closeSheet();
-          }
-        });
-    }
-
-    function handleLogout() {
-      supabaseClient.auth.signOut().then(function() {
-        userProfile = null;
-        userActiveVip = null;
-        closeSheet();
-        checkUserSession();
-        alert("Logout সফল হয়েছে।");
-      });
-    }
-
-    // ২৪ ঘন্টা পর পর টাস্ক পাওয়া ও VIP লিমিট চেক করার মূল লজিক
-    function fetchTasks() {
-      if (!userProfile) return;
-      var grid = document.getElementById("taskGrid");
-
-      // VIP প্যাকেজ থাকলে সেই প্যাকেজের টাস্ক লিমিট, না থাকলে ফ্রি ইউজার হিসেবে ৩টি
-      var dailyTaskLimit = userActiveVip ? Number(userActiveVip.daily_tasks) : 3;
-
-      // গত ২৪ ঘণ্টার টাইমস্ট্যাম্প বের করা
-      var twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-
-      supabaseClient.from("completed_tasks")
-        .select("task_id, created_at")
-        .eq("user_id", userProfile.id)
-        .gte("created_at", twentyFourHoursAgo)
-        .then(function(cRes) {
-          var last24hDone = cRes.data || [];
-          var doneCount = last24hDone.length;
-          var completedIds = last24hDone.map(function(item) { return item.task_id; });
-
-          supabaseClient.from("tasks").select("*").eq("active", true).then(function(res) {
-            if (res.error || !res.data || res.data.length === 0) {
-              grid.innerHTML = '<div class="number">কোনো Active Task পাওয়া যায়নি।</div>';
-              return;
-            }
-
-            var allTasks = res.data;
-            var isLimitReached = doneCount >= dailyTaskLimit;
-
-            var html = '<div style="margin-bottom:8px; font-size:12px; color:var(--muted);">' +
-              '২৪ ঘণ্টার লিমিট: <b>' + doneCount + '/' + dailyTaskLimit + '</b> টি টাস্ক সম্পন্ন' +
-            '</div>';
-
-            var displayTasks = allTasks.slice(0, dailyTaskLimit);
-
-            displayTasks.forEach(function(task) {
-              var isTaskDone = completedIds.indexOf(task.id) !== -1;
-              var isDisabled = isTaskDone || isLimitReached;
-
-              html += '<div class="task-card ' + (isDisabled ? 'disabled' : '') + '">' +
-                '<div class="task-icon"><i class="fa-solid fa-bolt"></i></div>' +
-                '<div class="task-info">' +
-                  '<b>' + safeText(task.title) + '</b>' +
-                  '<small>' + (isDisabled ? (isTaskDone ? 'সম্পন্ন হয়েছে' : '২৪ ঘন্টা পর আসবে') : '৩ সেকেন্ডের সহজ টাস্ক') + '</small>' +
-                '</div>' +
-                '<div style="text-align:right">' +
-                  '<div class="task-reward">৳' + Number(task.reward).toFixed(2) + '</div>' +
-                  '<button class="task-btn" ' + (isDisabled ? 'disabled' : '') + ' data-id="' + task.id + '" data-title="' + safeText(task.title) + '" data-reward="' + task.reward + '">' + (isTaskDone ? 'সম্পন্ন' : (isLimitReached ? 'লকড' : 'শুরু করুন')) + '</button>' +
-                '</div>' +
-              '</div>';
-            });
-
-            grid.innerHTML = html;
-
-            var btns = grid.querySelectorAll(".task-btn:not([disabled])");
-            for (var i = 0; i < btns.length; i++) {
-              btns[i].onclick = function() {
-                var id = this.getAttribute("data-id");
-                var title = this.getAttribute("data-title");
-                var reward = Number(this.getAttribute("data-reward"));
-                startTask({ id: id, title: title, reward: reward });
-              };
-            }
-          });
-        });
-    }
-
-    function startTask(task) {
-      currentTaskData = task;
-      document.getElementById("taskTitle").textContent = task.title;
-      document.getElementById("taskCountdown").textContent = "3";
-      document.getElementById("taskProgress").style.width = "0%";
-      document.getElementById("taskClose").style.display = "none";
-      document.getElementById("taskModal").style.display = "flex";
-
-      var count = 3;
-      if (taskTimerId) clearInterval(taskTimerId);
-
-      taskTimerId = setInterval(function() {
-        count--;
-        document.getElementById("taskCountdown").textContent = count;
-        document.getElementById("taskProgress").style.width = ((3 - count) / 3 * 100) + "%";
-
-        if (count <= 0) {
-          clearInterval(taskTimerId);
-          document.getElementById("taskClose").style.display = "inline-block";
-        }
-      }, 1000);
-    }
-
-    document.getElementById("taskClose").onclick = function() {
-      if (!currentTaskData || !userProfile) return;
-
-      supabaseClient.from("completed_tasks").insert([{ user_id: userProfile.id, task_id: currentTaskData.id }]).then(function(res) {
-        if (res.error) {
-          alert("টাস্ক সাবমিট করতে ব্যর্থ: " + res.error.message);
-          document.getElementById("taskModal").style.display = "none";
-        } else {
-          var newBal = Number(userProfile.balance || 0) + Number(currentTaskData.reward);
-          supabaseClient.from("profiles").update({ balance: newBal }).eq("id", userProfile.id).then(function() {
-            userProfile.balance = newBal;
-            document.getElementById("balanceText").textContent = newBal.toFixed(2);
-            document.getElementById("taskModal").style.display = "none";
-            alert("অভিনন্দন! আপনি ৳" + currentTaskData.reward.toFixed(2) + " রিওয়ার্ড পেয়েছেন।");
-            fetchTasks();
-          });
-        }
-      });
-    };
-
-    document.getElementById("closeSheetBtn").onclick = closeSheet;
-    document.getElementById("btnDeposit").onclick = function() { openSheet("deposit"); };
-    document.getElementById("btnWithdraw").onclick = function() { openSheet("withdraw"); };
-    document.getElementById("btnRefer").onclick = function() { openSheet("refer"); };
-    document.getElementById("btnHistory").onclick = function() { openSheet("history"); };
-    document.getElementById("walletBtn").onclick = function() { openSheet("wallet"); };
-    document.getElementById("tileProfile").onclick = function() { openSheet("profile"); };
-    document.getElementById("navWallet").onclick = function() { openSheet("wallet"); };
-    document.getElementById("navTeam").onclick = function() { openSheet("team"); };
-    document.getElementById("navProfile").onclick = function() { openSheet("profile"); };
-    document.getElementById("navStart").onclick = function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    checkUserSession();
   });
-  </script>
+}
+
+function startTask(btn){
+
+  if(taskTimer) return;
+
+  const taskId=btn.dataset.taskId;
+  const reward=Number(btn.dataset.reward || 0);
+
+  if(!taskId){
+    alert("Task ID পাওয়া যায়নি।");
+    return;
+  }
+
+  currentTask={
+    id:taskId,
+    reward:reward,
+    button:btn
+  };
+
+  document.getElementById("taskModal").style.display="flex";
+  document.getElementById("taskCountdown").textContent="3";
+  document.getElementById("taskProgress").style.width="0%";
+  document.getElementById("taskClose").style.display="none";
+  document.getElementById("taskTitle").textContent="টাস্ক চলছে";
+
+  let left=3;
+
+  taskTimer=setInterval(()=>{
+
+    left--;
+
+    document.getElementById("taskCountdown").textContent=left;
+
+    document.getElementById("taskProgress").style.width=
+      ((3-left)/3*100)+"%";
+
+    if(left<=0){
+
+      clearInterval(taskTimer);
+      taskTimer=null;
+
+      document.getElementById("taskCountdown").textContent="✓";
+      document.getElementById("taskTitle").textContent="টাস্ক সম্পন্ন";
+      document.getElementById("taskClose").style.display="inline-block";
+    }
+
+  },1000);
+}
+
+
+async function finishTask(){
+
+  if(!currentTask) return;
+
+  const btn=currentTask.button;
+  const taskId=currentTask.id;
+
+  btn.disabled=true;
+  btn.textContent="Processing...";
+
+  try{
+
+    const {
+      data:{user},
+      error:userError
+    }=await supabase.auth.getUser();
+
+    if(userError){
+      throw userError;
+    }
+
+    if(!user){
+      btn.disabled=false;
+      btn.textContent="শুরু করুন";
+      alert("প্রথমে Login/Register করতে হবে।");
+      return;
+    }
+
+    const {data,error}=await supabase.rpc(
+      "complete_task",
+      {
+        p_task_id:taskId
+      }
+    );
+
+    if(error){
+      console.error(error);
+
+      btn.disabled=false;
+      btn.textContent="শুরু করুন";
+
+      alert(error.message);
+      return;
+    }
+
+    document.getElementById("taskModal").style.display="none";
+
+    btn.disabled=true;
+    btn.textContent="সম্পন্ন";
+
+    currentTask=null;
+
+    await loadDatabaseBalance();
+
+    alert(
+      data ||
+      "Task সম্পন্ন হয়েছে এবং reward যোগ হয়েছে।"
+    );
+
+  }catch(err){
+
+    console.error(err);
+
+    btn.disabled=false;
+    btn.textContent="শুরু করুন";
+
+    alert("Task complete করতে সমস্যা হয়েছে।");
+  }
+}
+
+
+/* =========================
+   DATABASE BALANCE
+========================= */
+
+async function loadDatabaseBalance(){
+
+  const {
+    data:{user}
+  }=await supabase.auth.getUser();
+
+  if(!user) return;
+
+  const {data,error}=await supabase
+    .from("wallets")
+    .select("balance")
+    .eq("user_id",user.id)
+    .maybeSingle();
+
+  if(error){
+    console.error(error);
+    return;
+  }
+
+  if(data){
+    document.querySelector(".balance span").textContent=
+      Number(data.balance || 0).toFixed(2);
+
+    localStorage.setItem(
+      "tu_balance",
+      Number(data.balance || 0).toFixed(2)
+    );
+  }
+}
+
+
+/* =========================
+   SECURITY / HTML ESCAPE
+========================= */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* =========================
+   START
+========================= */
+
+async function initializeApp(){
+
+  await loadTasks();
+  await loadDatabaseBalance();
+
+}
+
+initializeApp();
+
+</script>
+
 </body>
 </html>
