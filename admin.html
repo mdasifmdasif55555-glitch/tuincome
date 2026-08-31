@@ -96,7 +96,7 @@
       </div>
       <div class="grid-form">
         <div>
-          <label style="font-size:12px; color:var(--muted);">ইউজার ID বা Email</label>
+          <label style="font-size:12px; color:var(--muted);">ইউজার ID (TU-xxxxx / UUID) বা Email</label>
           <input type="text" id="targetUser" placeholder="User ID অথবা Email দিন">
         </div>
         <div>
@@ -195,7 +195,7 @@
 
     var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    // 1. MANUALLY UPDATE USER BALANCE
+    // 1. MANUALLY UPDATE USER BALANCE (Supports Custom ID, UUID & Email)
     document.getElementById("btnUpdateBalance").onclick = function() {
       var target = document.getElementById("targetUser").value.trim();
       var amount = Number(document.getElementById("balanceAmount").value);
@@ -206,10 +206,14 @@
         return;
       }
 
-      // Find user
       var query = supabaseClient.from("profiles").select("*");
-      if (target.includes("@")) query = query.eq("email", target);
-      else query = query.eq("id", target);
+      if (target.includes("@")) {
+        query = query.eq("email", target);
+      } else if (target.startsWith("TU-")) {
+        query = query.eq("user_custom_id", target);
+      } else {
+        query = query.eq("id", target);
+      }
 
       query.single().then(function(res) {
         if (res.error || !res.data) {
@@ -228,12 +232,12 @@
       });
     };
 
-    // 2. LOAD & HANDLE DEPOSITS
+    // 2. LOAD & HANDLE DEPOSITS (JOIN WITH PROFILES FOR CUSTOM ID)
     function loadDeposits() {
       var tbody = document.getElementById("depositTableBody");
       tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">লোড হচ্ছে...</td></tr>';
 
-      supabaseClient.from("deposits").select("*").order("created_at", { ascending: false }).then(function(res) {
+      supabaseClient.from("deposits").select("*, profiles(user_custom_id)").order("created_at", { ascending: false }).then(function(res) {
         if (res.error || !res.data || res.data.length === 0) {
           tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">কোনো ডিপোজিট রেকর্ড নেই।</td></tr>';
           return;
@@ -242,8 +246,10 @@
         var html = "";
         res.data.forEach(function(item) {
           var isPending = item.status === "pending";
+          var customId = (item.profiles && item.profiles.user_custom_id) ? item.profiles.user_custom_id : item.user_id;
+
           html += '<tr>' +
-            '<td><small>' + item.user_id + '</small></td>' +
+            '<td><small><b>' + customId + '</b></small></td>' +
             '<td><b>৳' + item.amount + '</b></td>' +
             '<td>' + (item.transaction_id || 'N/A') + '</td>' +
             '<td><span class="badge badge-' + (item.status || 'pending') + '">' + (item.status || 'pending') + '</span></td>' +
@@ -286,12 +292,12 @@
       });
     };
 
-    // 3. LOAD & HANDLE WITHDRAWALS
+    // 3. LOAD & HANDLE WITHDRAWALS (JOIN WITH PROFILES FOR CUSTOM ID)
     function loadWithdrawals() {
       var tbody = document.getElementById("withdrawTableBody");
       tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">লোড হচ্ছে...</td></tr>';
 
-      supabaseClient.from("withdrawals").select("*").order("created_at", { ascending: false }).then(function(res) {
+      supabaseClient.from("withdrawals").select("*, profiles(user_custom_id)").order("created_at", { ascending: false }).then(function(res) {
         if (res.error || !res.data || res.data.length === 0) {
           tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">কোনো উইথড্র রেকর্ড নেই।</td></tr>';
           return;
@@ -300,8 +306,10 @@
         var html = "";
         res.data.forEach(function(item) {
           var isPending = item.status === "pending";
+          var customId = (item.profiles && item.profiles.user_custom_id) ? item.profiles.user_custom_id : item.user_id;
+
           html += '<tr>' +
-            '<td><small>' + item.user_id + '</small></td>' +
+            '<td><small><b>' + customId + '</b></small></td>' +
             '<td><b>৳' + item.amount + '</b></td>' +
             '<td>' + item.method + ' (' + item.phone_number + ')</td>' +
             '<td><span class="badge badge-' + (item.status || 'pending') + '">' + (item.status || 'pending') + '</span></td>' +
@@ -342,12 +350,12 @@
       });
     };
 
-    // 4. LOAD & HANDLE VIP PURCHASES
+    // 4. LOAD & HANDLE VIP PURCHASES (JOIN WITH PROFILES FOR CUSTOM ID)
     function loadVipPurchases() {
       var tbody = document.getElementById("vipTableBody");
       tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">লোড হচ্ছে...</td></tr>';
 
-      supabaseClient.from("vip_purchases").select("*").order("created_at", { ascending: false }).then(function(res) {
+      supabaseClient.from("vip_purchases").select("*, profiles(user_custom_id)").order("created_at", { ascending: false }).then(function(res) {
         if (res.error || !res.data || res.data.length === 0) {
           tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">কোনো VIP কেনাকাটার রেকর্ড নেই।</td></tr>';
           return;
@@ -356,8 +364,10 @@
         var html = "";
         res.data.forEach(function(item) {
           var isPending = item.status === "pending";
+          var customId = (item.profiles && item.profiles.user_custom_id) ? item.profiles.user_custom_id : item.user_id;
+
           html += '<tr>' +
-            '<td><small>' + item.user_id + '</small></td>' +
+            '<td><small><b>' + customId + '</b></small></td>' +
             '<td><small>' + item.package_id + '</small></td>' +
             '<td><b>৳' + item.amount + '</b></td>' +
             '<td><span class="badge badge-' + (item.status || 'pending') + '">' + (item.status || 'pending') + '</span></td>' +
@@ -402,228 +412,6 @@
     loadDeposits();
     loadWithdrawals();
     loadVipPurchases();
-  </script>window.addEventListener('load', function() {
-  var SUPABASE_URL = "https://vtaojjjaekjijfziocay.supabase.co";
-  var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
-
-  var supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  var userProfile = null;
-  var currentAuthMode = "login";
-
-  function safeText(str) {
-    if (!str) return "";
-    return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-  }
-
-  // কাস্টম ইউজার আইডি জেনারেট করার ফাংশন
-  function generateCustomUserId() {
-    var randomNum = Math.floor(10000 + Math.random() * 90000);
-    return 'TU-' + randomNum; // উদাহরণ: TU-58392
-  }
-
-  function setAuthMode(mode) {
-    currentAuthMode = mode;
-    var errBox = document.getElementById("mainAuthError");
-    errBox.style.display = "none";
-
-    if(mode === "register") {
-      document.getElementById("mainAuthTitle").textContent = "রেজিস্ট্রেশন";
-      document.getElementById("mainTabLogin").classList.remove("active");
-      document.getElementById("mainTabReg").classList.add("active");
-      document.getElementById("mainAuthSubmit").textContent = "Register";
-      document.getElementById("regExtraFields").style.display = "block";
-    } else {
-      document.getElementById("mainAuthTitle").textContent = "লগইন করুন";
-      document.getElementById("mainTabReg").classList.remove("active");
-      document.getElementById("mainTabLogin").classList.add("active");
-      document.getElementById("mainAuthSubmit").textContent = "Login";
-      document.getElementById("regExtraFields").style.display = "none";
-    }
-  }
-
-  document.getElementById("mainTabLogin").onclick = function() { setAuthMode("login"); };
-  document.getElementById("mainTabReg").onclick = function() { setAuthMode("register"); };
-
-  document.getElementById("mainAuthSubmit").onclick = function() {
-    var email = document.getElementById("mainEmail").value.trim();
-    var password = document.getElementById("mainPassword").value;
-    var errBox = document.getElementById("mainAuthError");
-    errBox.style.display = "none";
-
-    if (!email || !password) {
-      errBox.textContent = "Email এবং Password প্রবেশ করান।";
-      errBox.style.display = "block";
-      return;
-    }
-
-    if (currentAuthMode === "register") {
-      var name = document.getElementById("mainName").value.trim();
-      var phone = document.getElementById("mainPhone").value.trim();
-      var customId = generateCustomUserId(); // ইউনিক আইডি তৈরি
-      
-      supabaseClient.auth.signUp({
-        email: email,
-        password: password,
-        options: { 
-          data: { 
-            full_name: name, 
-            phone: phone,
-            user_custom_id: customId 
-          } 
-        }
-      }).then(function(res) {
-        if (res.error) throw res.error;
-        alert("Registration সফল হয়েছে।");
-        checkUserSession();
-      }).catch(function(err) {
-        errBox.textContent = err.message;
-        errBox.style.display = "block";
-      });
-    } else {
-      supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-      }).then(function(res) {
-        if (res.error) throw res.error;
-        checkUserSession();
-      }).catch(function(err) {
-        errBox.textContent = "Email অথবা Password ভুল।";
-        errBox.style.display = "block";
-      });
-    }
-  };
-
-  function checkUserSession() {
-    supabaseClient.auth.getSession().then(function(res) {
-      if (res.data && res.data.session && res.data.session.user) {
-        var u = res.data.session.user;
-        supabaseClient.from("profiles").select("*").eq("id", u.id).single().then(function(pRes) {
-          if (pRes.data) {
-            userProfile = pRes.data;
-          } else {
-            userProfile = { 
-              id: u.id, 
-              user_custom_id: u.user_metadata.user_custom_id || ('TU-' + u.id.substring(0, 5).toUpperCase()),
-              full_name: u.user_metadata.full_name || 'ইউজার', 
-              email: u.email, 
-              phone: u.user_metadata.phone || '', 
-              balance: 0, 
-              avatar_url: '' 
-            };
-          }
-          document.getElementById("welcome").textContent = "স্বাগতম, " + (userProfile.full_name || "ব্যবহারকারী") + "!";
-          document.getElementById("balanceText").textContent = Number(userProfile.balance || 0).toFixed(2);
-
-          document.getElementById("authLanding").style.display = "none";
-          document.getElementById("mainDashboard").style.display = "block";
-        });
-      } else {
-        document.getElementById("authLanding").style.display = "flex";
-        document.getElementById("mainDashboard").style.display = "none";
-      }
-    });
-  }
-
-  function openSheet(type) {
-    document.getElementById("sheetTitle").textContent = type === "profile" ? "মাই প্রোফাইল" : "TUINCOME";
-    
-    if (type === "profile") {
-      document.getElementById("sheetBody").innerHTML = '<div class="number">প্রোফাইল তথ্য লোড হচ্ছে...</div>';
-      document.getElementById("modal").style.display = "flex";
-
-      if (!userProfile) {
-        document.getElementById("sheetBody").innerHTML = '<div class="number">ব্যবহারকারীর তথ্য পাওয়া যায়নি।</div>';
-        return;
-      }
-
-      Promise.all([
-        supabaseClient.from("deposits").select("amount, status").eq("user_id", userProfile.id),
-        supabaseClient.from("withdrawals").select("amount, status").eq("user_id", userProfile.id),
-        supabaseClient.from("completed_tasks").select("id", { count: 'exact' }).eq("user_id", userProfile.id)
-      ]).then(function(results) {
-        var deposits = results[0].data || [];
-        var withdrawals = results[1].data || [];
-        var completedCount = results[2].count || 0;
-
-        var totalDeposit = deposits.reduce(function(acc, item) { return acc + (Number(item.amount) || 0); }, 0);
-        var totalWithdraw = withdrawals.reduce(function(acc, item) { return acc + (Number(item.amount) || 0); }, 0);
-
-        var avatarElement = userProfile.avatar_url ? 
-          '<img src="' + safeText(userProfile.avatar_url) + '" class="profile-avatar-img" />' : 
-          '<div class="profile-avatar-img"><i class="fa-solid fa-user"></i></div>';
-
-        // ইউজার আইডি সহ প্রোফাইল UI
-        var displayId = userProfile.user_custom_id || ('TU-' + userProfile.id.substring(0, 5).toUpperCase());
-
-        var profileHtml = 
-          '<div style="text-align:center; padding: 10px 0 20px;">' +
-            '<div class="profile-avatar-wrapper">' +
-              avatarElement +
-              '<label for="avatarInput" class="avatar-edit-icon"><i class="fa-solid fa-camera"></i></label>' +
-              '<input type="file" id="avatarInput" accept="image/*" style="display:none;" />' +
-            '</div>' +
-            '<h3 style="margin:0 0 5px; color:#fff; font-size:20px;">' + safeText(userProfile.full_name || 'ব্যবহারকারী') + '</h3>' +
-            '<span style="background:#143825; color:var(--green); padding:4px 12px; border-radius:12px; font-size:12px; font-weight:bold;">Active Member</span>' +
-          '</div>' +
-
-          '<div class="card" style="padding:15px; margin-bottom:15px; background:#08140e;">' +
-            '<div style="margin-bottom:8px; font-size:14px; color:#b0d1c0;"><i class="fa-solid fa-id-badge" style="color:var(--green); width:20px;"></i> <b>ইউজার আইডি:</b> <span style="color:var(--green); font-weight:bold;">' + safeText(displayId) + '</span></div>' +
-            '<div style="margin-bottom:8px; font-size:14px; color:#b0d1c0;"><i class="fa-solid fa-envelope" style="color:var(--green); width:20px;"></i> <b>ইমেইল:</b> ' + safeText(userProfile.email || 'নাই') + '</div>' +
-            '<div style="font-size:14px; color:#b0d1c0;"><i class="fa-solid fa-phone" style="color:var(--green); width:20px;"></i> <b>ফোন:</b> ' + safeText(userProfile.phone || 'যুক্ত করা হয়নি') + '</div>' +
-          '</div>' +
-
-          '<div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:15px;">' +
-            '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
-              '<small style="color:#8ca99a; font-size:11px;">মোট ডিপোজিট</small>' +
-              '<div style="color:var(--green); font-size:18px; font-weight:bold; margin-top:4px;">৳ ' + totalDeposit.toFixed(2) + '</div>' +
-            '</div>' +
-            '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
-              '<small style="color:#8ca99a; font-size:11px;">মোট উত্তোলন (Withdraw)</small>' +
-              '<div style="color:#ff6b6b; font-size:18px; font-weight:bold; margin-top:4px;">৳ ' + totalWithdraw.toFixed(2) + '</div>' +
-            '</div>' +
-            '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
-              '<small style="color:#8ca99a; font-size:11px;">বর্তমান ব্যালেন্স</small>' +
-              '<div style="color:var(--green3); font-size:18px; font-weight:bold; margin-top:4px;">৳ ' + Number(userProfile.balance || 0).toFixed(2) + '</div>' +
-            '</div>' +
-            '<div class="card" style="padding:12px; text-align:center; background:#0a1f14;">' +
-              '<small style="color:#8ca99a; font-size:11px;">সম্পন্নকৃত টাস্ক</small>' +
-              '<div style="color:#7bdaff; font-size:18px; font-weight:bold; margin-top:4px;">' + completedCount + ' টি</div>' +
-            '</div>' +
-          '</div>' +
-
-          '<button class="primary logout" id="logoutBtn" style="width:100%; padding:14px; font-weight:bold;">লগ আউট করুন</button>';
-
-        document.getElementById("sheetBody").innerHTML = profileHtml;
-      });
-    }
-  }
-
-  // VIP কেনার অপূর্ণ অংশ শেষ করা হয়েছে
-  function handleVipPurchase(pkgId, pkgPrice) {
-    if (!userProfile) return;
-    if (userProfile.balance < pkgPrice) {
-      alert("আপনার পর্যাপ্ত ব্যালেন্স নেই। অনুগ্রহ করে প্রথমে ডিপোজিট করুন।");
-      return;
-    }
-
-    if (confirm("আপনি কি নিশ্চিত যে ৳" + pkgPrice + " দিয়ে এই VIP প্যাকেজটি কিনতে চান?")) {
-      supabaseClient.from("vip_purchases").insert([{
-        user_id: userProfile.id,
-        package_id: pkgId,
-        amount: pkgPrice
-      }]).then(function(res) {
-        if (res.error) alert("প্যাকেজ কিনতে ব্যর্থ হয়েছে: " + res.error.message);
-        else alert("VIP প্যাকেজ সফলভাবে অ্যাক্টিভ হয়েছে!");
-      });
-    }
-  }
-
-  document.getElementById("navProfile").onclick = function() { openSheet("profile"); };
-  document.getElementById("tileProfile").onclick = function() { openSheet("profile"); };
-  document.getElementById("closeSheetBtn").onclick = function() { document.getElementById("modal").style.display = "none"; };
-
-  checkUserSession();
-});
-</script>
+  </script>
 </body>
 </html>
