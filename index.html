@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>TUINCOME v7</title>
 
-<!-- FontAwesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
@@ -319,7 +318,7 @@ header{
 .task-info small{color:#789686}
 .task-reward{font-weight:900;color:var(--green);white-space:nowrap}
 .task-btn{border:1px solid #8affbd40;background:linear-gradient(135deg,#21e875,#00a957);color:#031008;border-radius:14px;padding:9px 12px;font-weight:900;margin-top:8px;cursor:pointer}
-.task-btn:disabled{background:#24332b;border-color:#34463c;color:#738479}
+.task-btn:disabled{background:#24332b;border-color:#34463c;color:#738479;cursor:not-allowed}
 
 .task-modal{display:none;position:fixed;inset:0;background:#000000d9;z-index:20;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(7px)}
 .task-box{background:radial-gradient(circle at 50% 0,#124d2d,#0b1811 60%);color:var(--text);width:min(440px,100%);border-radius:26px;padding:24px;text-align:center;border:1px solid #2a6b43}
@@ -341,7 +340,6 @@ header{
   <button class="lang" id="langBtn">🌐 EN</button>
 </header>
 
-<!-- FIRST SCREEN: AUTH LANDING -->
 <div class="auth-landing" id="authLanding">
   <div class="auth-card">
     <h2 id="mainAuthTitle">লগইন করুন</h2>
@@ -351,7 +349,6 @@ header{
       <button class="auth-tab" id="mainTabReg">Register</button>
     </div>
 
-    <!-- Social Login Buttons -->
     <button class="social-btn btn-google" id="btnGoogleLogin">
       <i class="fa-brands fa-google"></i> Continue with Google
     </button>
@@ -362,15 +359,13 @@ header{
     <div class="divider">অথবা</div>
 
     <div id="mainAuthFields">
-      <!-- Fields injected dynamically -->
-    </div>
+      </div>
 
     <button class="primary" id="mainAuthSubmit" style="width:100%;margin-top:10px">Login</button>
     <div class="error" id="mainAuthError"></div>
   </div>
 </div>
 
-<!-- MAIN DASHBOARD (HIDDEN UNTIL LOGGED IN) -->
 <div id="mainDashboard">
   <section class="hero">
     <div id="welcome">স্বাগতম!</div>
@@ -448,7 +443,6 @@ header{
   </nav>
 </div>
 
-<!-- MODALS -->
 <div class="task-modal" id="taskModal">
   <div class="task-box">
     <div style="font-size:34px">⚡</div>
@@ -468,7 +462,6 @@ header{
   </div>
 </div>
 
-<!-- Supabase JS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -689,27 +682,45 @@ window.addEventListener('load', function() {
   }
 
   function fetchTasks() {
+    if (!userProfile) return;
+    
+    // ১. একটিভ টাস্ক পাওয়া
     supabaseClient.from("tasks").select("*").eq("active", true).then(function(res) {
       var grid = document.getElementById("taskGrid");
       if (res.error || !res.data || res.data.length === 0) {
         grid.innerHTML = '<div class="number">কোনো Active Task পাওয়া যায়নি।</div>';
         return;
       }
-      grid.innerHTML = res.data.map(function(t) {
-        return '<div class="task-card card">' +
-          '<div class="task-icon"><i class="fa-solid fa-bolt"></i></div>' +
-          '<div class="task-info"><b>' + safeText(t.title) + '</b><small>৩ সেকেন্ডের কাজ</small><br>' +
-          '<button class="task-btn" data-id="' + t.id + '">শুরু করুন</button></div>' +
-          '<div class="task-reward">৳' + Number(t.reward || 0) + '</div></div>';
-      }).join("");
+      var tasks = res.data;
 
-      var btns = grid.querySelectorAll(".task-btn");
-      for (var i = 0; i < btns.length; i++) {
-        btns[i].onclick = function() {
-          var tid = this.getAttribute("data-id");
-          startTaskProcess(tid, this);
-        };
-      }
+      // ২. ইউজারের কমপ্লিট করা টাস্ক তালিকা পাওয়া
+      supabaseClient.from("completed_tasks").select("task_id").eq("user_id", userProfile.id).then(function(cRes) {
+        var completedSet = new Set();
+        if (cRes.data) {
+          cRes.data.forEach(function(item) { completedSet.add(item.task_id); });
+        }
+
+        // ৩. বাটন হ্যান্ডেল করা
+        grid.innerHTML = tasks.map(function(t) {
+          var isDone = completedSet.has(t.id);
+          var btnText = isDone ? "সম্পন্ন হয়েছে" : "শুরু করুন";
+          var disabledAttr = isDone ? "disabled" : "";
+
+          return '<div class="task-card card">' +
+            '<div class="task-icon"><i class="fa-solid fa-bolt"></i></div>' +
+            '<div class="task-info"><b>' + safeText(t.title) + '</b><small>৩ সেকেন্ডের কাজ</small><br>' +
+            '<button class="task-btn" data-id="' + t.id + '" ' + disabledAttr + '>' + btnText + '</button></div>' +
+            '<div class="task-reward">৳' + Number(t.reward || 0) + '</div></div>';
+        }).join("");
+
+        var btns = grid.querySelectorAll(".task-btn:not([disabled])");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].onclick = function() {
+            var tid = this.getAttribute("data-id");
+            startTaskProcess(tid, this);
+          };
+        }
+      });
     });
   }
 
