@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>TUINCOME v7</title>
 
-<!-- FontAwesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
@@ -62,7 +61,6 @@ header{
   padding:10px 15px;
 }
 
-/* Auth Container */
 .auth-landing{
   display:flex;
   flex-direction:column;
@@ -113,7 +111,6 @@ header{
 }
 .divider::before, .divider::after{content:"";flex:1;height:1px;background:#183b2a}
 
-/* Main Dashboard UI */
 #mainDashboard{
   display:none;
 }
@@ -329,6 +326,41 @@ header{
 .auth-tab{padding:11px;border:1px solid #214832;border-radius:13px;background:#0d1e15;color:#8ba998;font-weight:800;cursor:pointer}
 .auth-tab.active{background:linear-gradient(135deg,#21e875,#00a957);color:#031008;border-color:#55ff9a}
 .logout{background:#1b2921!important;color:#c2d2c8!important;border-color:#304238!important;margin-left:0px}
+
+/* Profile Avatar Upload Styling */
+.profile-avatar-wrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 12px;
+}
+.profile-avatar-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--green);
+  background: #0d2a1a;
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  color: var(--green);
+}
+.avatar-edit-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--green2);
+  color: #031008;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  cursor: pointer;
+  border: 2px solid #07100c;
+}
 </style>
 </head>
 
@@ -339,7 +371,6 @@ header{
   <button class="lang" id="langBtn">🌐 EN</button>
 </header>
 
-<!-- FIRST SCREEN: AUTH LANDING -->
 <div class="auth-landing" id="authLanding">
   <div class="auth-card">
     <h2 id="mainAuthTitle">লগইন করুন</h2>
@@ -349,7 +380,6 @@ header{
       <button class="auth-tab" id="mainTabReg">Register</button>
     </div>
 
-    <!-- Social Login Buttons -->
     <button class="social-btn btn-google" id="btnGoogleLogin">
       <i class="fa-brands fa-google"></i> Continue with Google
     </button>
@@ -359,7 +389,6 @@ header{
 
     <div class="divider">অথবা</div>
 
-    <!-- Static Auth Fields (Ensures Inputs are ALWAYS visible) -->
     <div id="regExtraFields" style="display:none;">
       <div class="form-group">
         <label>আপনার নাম</label>
@@ -386,7 +415,6 @@ header{
   </div>
 </div>
 
-<!-- MAIN DASHBOARD -->
 <div id="mainDashboard">
   <section class="hero">
     <div id="welcome">স্বাগতম!</div>
@@ -464,7 +492,6 @@ header{
   </nav>
 </div>
 
-<!-- MODALS -->
 <div class="task-modal" id="taskModal">
   <div class="task-box">
     <div style="font-size:34px">⚡</div>
@@ -484,7 +511,6 @@ header{
   </div>
 </div>
 
-<!-- Supabase JS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -504,7 +530,6 @@ window.addEventListener('load', function() {
     return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
-  // Auth Mode Switcher
   function setAuthMode(mode) {
     currentAuthMode = mode;
     var errBox = document.getElementById("mainAuthError");
@@ -570,7 +595,6 @@ window.addEventListener('load', function() {
     }
   };
 
-  // Social Auth Handlers
   document.getElementById("btnGoogleLogin").onclick = function() {
     supabaseClient.auth.signInWithOAuth({ provider: 'google' });
   };
@@ -587,12 +611,11 @@ window.addEventListener('load', function() {
           if (pRes.data) {
             userProfile = pRes.data;
           } else {
-            userProfile = { id: u.id, full_name: u.user_metadata.full_name || 'ইউজার', email: u.email, phone: u.user_metadata.phone || '', balance: 0 };
+            userProfile = { id: u.id, full_name: u.user_metadata.full_name || 'ইউজার', email: u.email, phone: u.user_metadata.phone || '', balance: 0, avatar_url: '' };
           }
           document.getElementById("welcome").textContent = "স্বাগতম, " + (userProfile.full_name || "ব্যবহারকারী") + "!";
           document.getElementById("balanceText").textContent = Number(userProfile.balance || 0).toFixed(2);
 
-          // Show Dashboard, Hide Auth
           document.getElementById("authLanding").style.display = "none";
           document.getElementById("mainDashboard").style.display = "block";
           fetchTasks();
@@ -602,6 +625,33 @@ window.addEventListener('load', function() {
         document.getElementById("mainDashboard").style.display = "none";
       }
     });
+  }
+
+  // Handle Avatar Upload Function
+  function handleAvatarUpload(file) {
+    if (!file || !userProfile) return;
+    var fileExt = file.name.split('.').pop();
+    var fileName = userProfile.id + '-' + Math.random() + '.' + fileExt;
+    var filePath = fileName;
+
+    alert("ছবি আপলোড হচ্ছে, অনুগ্রহ করে অপেক্ষা করুন...");
+
+    supabaseClient.storage.from('avatars').upload(filePath, file)
+      .then(function(res) {
+        if (res.error) throw res.error;
+
+        var publicUrlData = supabaseClient.storage.from('avatars').getPublicUrl(filePath);
+        var avatarUrl = publicUrlData.data.publicUrl;
+
+        return supabaseClient.from('profiles').update({ avatar_url: avatarUrl }).eq('id', userProfile.id).then(function(uRes) {
+          if (uRes.error) throw uRes.error;
+          userProfile.avatar_url = avatarUrl;
+          alert("প্রোফাইল ছবি সফলভাবে আপডেট হয়েছে!");
+          openSheet('profile');
+        });
+      }).catch(function(err) {
+        alert("ছবি আপলোড ব্যর্থ হয়েছে: " + err.message);
+      });
   }
 
   function openSheet(type) {
@@ -636,18 +686,19 @@ window.addEventListener('load', function() {
         var withdrawals = results[1].data || [];
         var completedCount = results[2].count || 0;
 
-        var totalDeposit = deposits.reduce(function(acc, item) {
-          return acc + (Number(item.amount) || 0);
-        }, 0);
+        var totalDeposit = deposits.reduce(function(acc, item) { return acc + (Number(item.amount) || 0); }, 0);
+        var totalWithdraw = withdrawals.reduce(function(acc, item) { return acc + (Number(item.amount) || 0); }, 0);
 
-        var totalWithdraw = withdrawals.reduce(function(acc, item) {
-          return acc + (Number(item.amount) || 0);
-        }, 0);
+        var avatarElement = userProfile.avatar_url ? 
+          '<img src="' + safeText(userProfile.avatar_url) + '" class="profile-avatar-img" />' : 
+          '<div class="profile-avatar-img"><i class="fa-solid fa-user"></i></div>';
 
         var profileHtml = 
           '<div style="text-align:center; padding: 10px 0 20px;">' +
-            '<div style="width:70px; height:70px; border-radius:50%; background:#0d2a1a; border:2px solid var(--green); display:grid; place-items:center; margin:0 auto 12px; font-size:30px; color:var(--green);">' +
-              '<i class="fa-solid fa-user-check"></i>' +
+            '<div class="profile-avatar-wrapper">' +
+              avatarElement +
+              '<label for="avatarInput" class="avatar-edit-icon"><i class="fa-solid fa-camera"></i></label>' +
+              '<input type="file" id="avatarInput" accept="image/*" style="display:none;" />' +
             '</div>' +
             '<h3 style="margin:0 0 5px; color:#fff; font-size:20px;">' + safeText(userProfile.full_name || 'ব্যবহারকারী') + '</h3>' +
             '<span style="background:#143825; color:var(--green); padding:4px 12px; border-radius:12px; font-size:12px; font-weight:bold;">Active Member</span>' +
@@ -681,6 +732,16 @@ window.addEventListener('load', function() {
 
         document.getElementById("sheetBody").innerHTML = profileHtml;
         document.getElementById("logoutBtn").onclick = handleLogout;
+
+        // Dynamic Avatar Event Listener
+        var avatarInput = document.getElementById("avatarInput");
+        if(avatarInput) {
+          avatarInput.onchange = function(e) {
+            if (e.target.files && e.target.files[0]) {
+              handleAvatarUpload(e.target.files[0]);
+            }
+          };
+        }
       }).catch(function(err) {
         document.getElementById("sheetBody").innerHTML = '<div class="number">ডেটা লোড করতে সমস্যা হয়েছে: ' + err.message + '</div>';
       });
@@ -845,7 +906,6 @@ window.addEventListener('load', function() {
     });
   };
 
-  // Button Listeners
   document.getElementById("closeSheetBtn").onclick = closeSheet;
   document.getElementById("walletBtn").onclick = function(){ openSheet('wallet'); };
   document.getElementById("btnDeposit").onclick = function(){ openSheet('deposit'); };
@@ -859,7 +919,6 @@ window.addEventListener('load', function() {
   document.getElementById("navTeam").onclick = function(){ openSheet('team'); };
   document.getElementById("navProfile").onclick = function(){ openSheet('profile'); };
 
-  // Init
   setAuthMode("login");
   checkUserSession();
 });
