@@ -139,8 +139,8 @@
     <h3>💰 ইউজার ব্যালেন্স কন্ট্রোল</h3>
 
     <div class="form-group">
-      <label>User UID / Email / Phone:</label>
-      <input type="text" id="adminTargetUID" placeholder="যেমন: TU-5322 অথবা Email/Phone">
+      <label>User UID / Email:</label>
+      <input type="text" id="adminTargetUID" placeholder="যেমন: TU-0002 অথবা Email">
     </div>
 
     <button type="button" class="btn btn-search" id="btnSearchUser"><i class="fa-solid fa-magnifying-glass"></i> 🔍 ইউজার চেক করুন</button>
@@ -202,7 +202,7 @@ window.addEventListener('load', function() {
     historyContainer.insertBefore(item, historyContainer.firstChild);
   }
 
-  // এডভান্সড স্মার্ট সার্চ লজিক
+  // সার্চ করার অ্যাডভান্সড ফাংশন
   async function searchUser() {
     var inputVal = document.getElementById("adminTargetUID").value.trim();
     var uidInputUpper = inputVal.toUpperCase();
@@ -210,21 +210,21 @@ window.addEventListener('load', function() {
     document.getElementById("statusMessage").style.display = "none";
 
     if (!inputVal) {
-      showStatus("অনুগ্রহ করে একটি UID, Email বা Phone প্রবেশ করান!", true);
+      showStatus("অনুগ্রহ করে একটি UID বা Email টাইপ করুন!", true);
       infoBox.style.display = "none";
       currentFoundUser = null;
       return;
     }
 
     try {
-      // ১. custom_uid দিয়ে খোজা
+      // ১. custom_uid ফিল্ডে খোজা
       let { data: user } = await supabaseClient
         .from('profiles')
         .select('*')
         .ilike('custom_uid', uidInputUpper)
         .maybeSingle();
 
-      // ২. Email দিয়ে খোজা
+      // ২. ইমেইল দিয়ে খোজা (যদি ইমেইল টাইপ করা হয়)
       if (!user && inputVal.includes('@')) {
         let { data: userByEmail } = await supabaseClient
           .from('profiles')
@@ -234,24 +234,14 @@ window.addEventListener('load', function() {
         user = userByEmail;
       }
 
-      // ৩. Phone দিয়ে খোজা
-      if (!user && /^\d+$/.test(inputVal)) {
-        let { data: userByPhone } = await supabaseClient
-          .from('profiles')
-          .select('*')
-          .eq('phone', inputVal)
-          .maybeSingle();
-        user = userByPhone;
-      }
-
-      // ৪. শুধু ডিজিট (যেমন: 5322) দিয়ে serial_id সার্চ করা
+      // ৩. যদি শুধু নম্বর দিয়ে খোজা হয় (যেমন 0002 বা 2)
       if (!user) {
-        var numericOnly = inputVal.replace(/\D/g, '');
-        if (numericOnly) {
+        var numOnly = parseInt(inputVal.replace(/\D/g, ''), 10);
+        if (!isNaN(numOnly)) {
           let { data: userBySerial } = await supabaseClient
             .from('profiles')
             .select('*')
-            .eq('serial_id', parseInt(numericOnly))
+            .eq('serial_id', numOnly)
             .maybeSingle();
           user = userBySerial;
         }
@@ -265,8 +255,8 @@ window.addEventListener('load', function() {
       }
 
       currentFoundUser = user;
-      document.getElementById("infoName").textContent = user.full_name || "নাম পাওয়া যায়নি";
-      document.getElementById("infoEmail").textContent = user.email || "ইমেইল পাওয়া যায়নি";
+      document.getElementById("infoName").textContent = user.full_name || "নাম নেই";
+      document.getElementById("infoEmail").textContent = user.email || "ইমেইল নেই";
       document.getElementById("infoUID").textContent = user.custom_uid || ("TU-" + String(user.serial_id || 0).padStart(4, '0'));
       document.getElementById("infoBalance").textContent = "৳ " + Number(user.balance || 0).toFixed(2);
       infoBox.style.display = "block";
@@ -276,6 +266,7 @@ window.addEventListener('load', function() {
     }
   }
 
+  // ব্যালেন্স আপডেট ফাংশন
   async function updateBalanceByUID(actionType) {
     var amountVal = parseFloat(document.getElementById("adminAmount").value);
 
@@ -295,7 +286,7 @@ window.addEventListener('load', function() {
       var newBalance = actionType === 'add' ? (currentBalance + amountVal) : (currentBalance - amountVal);
 
       if (actionType === 'subtract' && currentBalance < amountVal) {
-        if (!confirm('ইউজারের ব্যালেন্স (৳' + currentBalance.toFixed(2) + ') মাইনাস হয়ে যাবে! নিশ্চিত?')) {
+        if (!confirm('ইউজারের বর্তমান ব্যালেন্স (৳' + currentBalance.toFixed(2) + ') কমানোর পরিমাণ অপেক্ষা কম! আপনি কি মাইনাস করতে চান?')) {
           return;
         }
       }
@@ -312,7 +303,7 @@ window.addEventListener('load', function() {
       document.getElementById("adminAmount").value = "";
 
       var actionText = actionType === 'add' ? 'যোগ' : 'কমানো';
-      var userDisplayId = currentFoundUser.custom_uid || document.getElementById("adminTargetUID").value;
+      var userDisplayId = currentFoundUser.custom_uid || ("TU-" + String(currentFoundUser.serial_id || 0).padStart(4, '0'));
       
       showStatus('সফল! ব্যালেন্স ৳' + newBalance.toFixed(2) + ' এ আপডেট করা হয়েছে।', false);
       
