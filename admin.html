@@ -142,10 +142,10 @@
 
     <div class="form-group">
       <label>User UID:</label>
-      <input type="text" id="adminTargetUID" placeholder="যেমন: TU-0015">
+      <input type="text" id="adminTargetUID" placeholder="যেমন: TU-1442">
     </div>
 
-    <button type="button" class="btn btn-search" id="btnSearchUser"><i class="fa-solid fa-magnifying-glass"></i> ইউজার চেক করুন</button>
+    <button type="button" class="btn btn-search" id="btnSearchUser"><i class="fa-solid fa-magnifying-glass"></i> 🔍 ইউজার চেক করুন</button>
 
     <!-- খুঁজে পাওয়া ইউজারের ডিটেইলস -->
     <div class="user-info-box" id="userInfoBox">
@@ -167,9 +167,9 @@
     <div id="statusMessage" class="status-msg"></div>
   </div>
 
-  <!-- সাম্প্রতিক পরিবর্তন লগে-->
+  <!-- সাম্প্রতিক পরিবর্তন লগ -->
   <div class="card">
-    <h3 style="font-size: 15px; color:#8ca99a;">📋 সাম্প্রতিক ব্যালেন্স আপডেট লগে</h3>
+    <h3 style="font-size: 15px; color:#8ca99a;">📋 সাম্প্রতিক ব্যালেন্স আপডেট লগ</h3>
     <div class="history-list" id="actionHistory">
       <div style="text-align:center; color:#567565; padding: 10px;">এখনো কোনো অ্যাকশন নেওয়া হয়নি।</div>
     </div>
@@ -202,11 +202,11 @@ window.addEventListener('load', function() {
     var item = document.createElement("div");
     item.className = "history-item";
     var color = isAdd ? "#21e875" : "#ff4d4d";
-    item.innerHTML = `<span>${text}</span><b style="color:${color}">${amountText}</b>`;
+    item.innerHTML = '<span>' + text + '</span><b style="color:' + color + '">' + amountText + '</b>';
     historyContainer.insertBefore(item, historyContainer.firstChild);
   }
 
-  // ১. ইউজার সার্চ করার লজিক
+  // ১. ইউজার সার্চ করার লজিক (স্মার্ট ফিল্টার)
   async function searchUser() {
     var uidInput = document.getElementById("adminTargetUID").value.trim().toUpperCase();
     var infoBox = document.getElementById("userInfoBox");
@@ -220,14 +220,29 @@ window.addEventListener('load', function() {
     }
 
     try {
-      const { data: user, error } = await supabaseClient
+      // প্রথমে custom_uid দিয়ে খোজা
+      let { data: user } = await supabaseClient
         .from('profiles')
-        .select('id, full_name, email, balance, custom_uid')
+        .select('*')
         .eq('custom_uid', uidInput)
-        .single();
+        .maybeSingle();
 
-      if (error || !user) {
-        showStatus("এই UID ( " + uidInput + " ) এর কোনো ইউজার পাওয়া যায়নি!", true);
+      // যদি custom_uid এ না পায় তবে শুধু নম্বর (যেমন 1442) দিয়ে অনুসন্ধান
+      if (!user) {
+        var numericId = uidInput.replace(/\D/g, '');
+        if (numericId) {
+          let { data: userBySerial } = await supabaseClient
+            .from('profiles')
+            .select('*')
+            .or('serial_id.eq.' + numericId + ',id.eq.' + uidInput)
+            .maybeSingle();
+            
+          user = userBySerial;
+        }
+      }
+
+      if (!user) {
+        showStatus("এই UID ( " + uidInput + " ) এর কোনো ইউজার ডাটাবেসে পাওয়া যায়নি!", true);
         infoBox.style.display = "none";
         currentFoundUser = null;
         return;
@@ -240,11 +255,11 @@ window.addEventListener('load', function() {
       infoBox.style.display = "block";
 
     } catch (err) {
-      showStatus("সার্চ ব্যর্থ হয়েছে: " + err.message, true);
+      showStatus("সার্চ করতে সমস্যা হয়েছে: " + err.message, true);
     }
   }
 
-  // ২. ব্যালেন্স যোগ/কমানোর মূল ফাংশন
+  // ২. ব্যালেন্স আপডেট করার ফাংশন
   async function updateBalanceByUID(actionType) {
     var uidInput = document.getElementById("adminTargetUID").value.trim().toUpperCase();
     var amountVal = parseFloat(document.getElementById("adminAmount").value);
@@ -258,71 +273,47 @@ window.addEventListener('load', function() {
       return;
     }
 
-    try {
-      // যদি আগে সার্চ না করা থাকে, তবে ডাটাবেসে ইউজার খুঁজে বের করা
-      var user = currentFoundUser;
-      if (!user || user.custom_uid !== uidInput) {
-        const { data: fetchedUser, error: fetchErr } = await supabaseClient
-          .from('profiles')
-          .select('id, full_name, balance, custom_uid')
-          .eq('custom_uid', uidInput)
-          .single();
+    if (!currentFoundUser) {
+      await searchUser();
+    }
 
-        if (fetchErr || !fetchedUser) {
-          showStatus("ইউজার পাওয়া যায়নি! UID পুনরায় চেক করুন।", true);
+    if (!currentFoundUser) return;
+
+    try {
+      var currentBalance = parseFloat(currentFoundUser.balance || 0);
+      var newBalance = actionType === 'add' ? (currentBalance + amountVal) : (currentBalance - amountVal);
+
+      if (actionType === 'subtract' && currentBalance < amountVal) {
+        if (!confirm('ইউজারের বর্তমান ব্যালেন্স (৳' + currentBalance.toFixed(2) + ') কমানোর পরিমাণ অপেক্ষা কম! আপনি কি মাইনাস করতে চান?')) {
           return;
         }
-        user = fetchedUser;
-      }
-
-      var currentBalance = parseFloat(user.balance || 0);
-      var newBalance = 0;
-
-      if (actionType === 'add') {
-        newBalance = currentBalance + amountVal;
-      } else if (actionType === 'subtract') {
-        if (currentBalance < amountVal) {
-          if (!confirm(`ইউজারের ব্যালেন্স (৳${currentBalance.toFixed(2)}) কমানোর পরিমাণ (৳${amountVal}) অপেক্ষা কম! মাইনাস করতে চান?`)) {
-            return;
-          }
-        }
-        newBalance = currentBalance - amountVal;
       }
 
       // ডাটাবেসে নতুন ব্যালেন্স আপডেট
       const { error: updateErr } = await supabaseClient
         .from('profiles')
         .update({ balance: newBalance })
-        .eq('id', user.id);
+        .eq('id', currentFoundUser.id);
 
       if (updateErr) throw updateErr;
 
-      // লোকাল স্টেট ও স্ক্রিন আপডেট
-      user.balance = newBalance;
-      currentFoundUser = user;
+      currentFoundUser.balance = newBalance;
       document.getElementById("infoBalance").textContent = "৳ " + newBalance.toFixed(2);
       document.getElementById("adminAmount").value = "";
 
       var actionText = actionType === 'add' ? 'যোগ' : 'কমানো';
-      showStatus(`সফল! ${user.full_name || uidInput} এর ব্যালেন্স ৳${newBalance.toFixed(2)} এ আপডেট হয়েছে।`, false);
+      showStatus('সফল! ব্যালেন্স ৳' + newBalance.toFixed(2) + ' এ আপডেট করা হয়েছে।', false);
       
-      addHistoryLog(`${uidInput} (${actionText})`, `${actionType === 'add' ? '+' : '-'}৳${amountVal}`, actionType === 'add');
+      addHistoryLog(uidInput + ' (' + actionText + ')', (actionType === 'add' ? '+' : '-') + '৳' + amountVal, actionType === 'add');
 
     } catch (err) {
-      showStatus("ব্যালেন্স আপডেট করতে সমস্যা হয়েছে: " + err.message, true);
+      showStatus("ব্যালেন্স আপডেট করতে ব্যর্থ: " + err.message, true);
     }
   }
 
-  // ইভেন্ট লিসেনার
   document.getElementById("btnSearchUser").onclick = searchUser;
-
-  document.getElementById("btnAdminAdd").onclick = function() {
-    updateBalanceByUID('add');
-  };
-
-  document.getElementById("btnAdminSub").onclick = function() {
-    updateBalanceByUID('subtract');
-  };
+  document.getElementById("btnAdminAdd").onclick = function() { updateBalanceByUID('add'); };
+  document.getElementById("btnAdminSub").onclick = function() { updateBalanceByUID('subtract'); };
 
 });
 </script>
