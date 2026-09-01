@@ -412,6 +412,43 @@
     loadDeposits();
     loadWithdrawals();
     loadVipPurchases();
-  </script>
+  </<!-- অ্যাডমিন প্যানেল ব্যালেন্স ম্যানেজমেন্ট সেকশন -->
+<div class="card" style="padding: 20px; max-width: 450px; margin: 20px auto; background: #0c1a13; border: 1px solid #1c4d32; border-radius: 16px;">
+  <h3 style="color: #39ff88; margin-top: 0; text-align: center;">💰 ইউজার ব্যালেন্স কন্ট্রোল</h3>
+
+  <div class="form-group">
+    <label style="color: #c9edda; display: block; margin-bottom: 5px;">User UID:</label>
+    <input type="text" id="adminTargetUID" placeholder="যেমন: TU-0015" style="width: 100%; padding: 12px; background: #050b09; border: 1px solid #245039; color: #fff; border-radius: 10px;">
+  </div>
+
+  <div class="form-group" style="margin-top: 15px;">
+    <label style="color: #c9edda; display: block; margin-bottom: 5px;">টাকার পরিমাণ (৳):</label>
+    <input type="number" id="adminAmount" placeholder="যেমন: 500" style="width: 100%; padding: 12px; background: #050b09; border: 1px solid #245039; color: #fff; border-radius: 10px;">
+  </div>
+
+  <div style="display: flex; gap: 10px; margin-top: 20px;">
+    <button id="btnAdminAdd" style="flex: 1; padding: 12px; background: #21e875; color: #000; font-weight: bold; border: none; border-radius: 10px; cursor: pointer;">
+      ➕ ব্যালেন্স যোগ করুন
+    </button>
+    <button id="btnAdminSub" style="flex: 1; padding: 12px; background: #ff4d4d; color: #fff; font-weight: bold; border: none; border-radius: 10px; cursor: pointer;">
+      ➖ ব্যালেন্স কমান
+    </button>
+  </div>
+</div>
+
+<script>
+  // বাটনে ক্লিক করার ইভেন্ট
+  document.getElementById("btnAdminAdd").onclick = function() {
+    var uid = document.getElementById("adminTargetUID").value;
+    var amount = document.getElementById("adminAmount").value;
+    updateBalanceByUID(uid, amount, 'add');
+  };
+
+  document.getElementById("btnAdminSub").onclick = function() {
+    var uid = document.getElementById("adminTargetUID").value;
+    var amount = document.getElementById("adminAmount").value;
+    updateBalanceByUID(uid, amount, 'subtract');
+  };
+</script>>
 </body>
 </html>
