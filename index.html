@@ -363,6 +363,24 @@ header{
   border: 2px solid #07100c;
 }
 
+/* Custom UID Styling */
+.uid-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0d2a1a;
+  border: 1px solid var(--green2);
+  color: var(--green);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 13px;
+  margin-top: 6px;
+}
+.uid-badge i {
+  cursor: pointer;
+}
+
 /* Base Glassmorphic VIP Card Styling */
 .vip-card {
   backdrop-filter: blur(12px);
@@ -611,6 +629,15 @@ window.addEventListener('load', function() {
   var taskTimerId = null;
   var currentAuthMode = "login";
 
+  // Helper Function for Custom UID Generation
+  function generateFormattedUID(num) {
+    if(!num) {
+      // If no sequence numeric ID exists, generate a 4 digit random number as fallback
+      num = Math.floor(1000 + Math.random() * 9000);
+    }
+    return "TU-" + String(num).padStart(4, '0');
+  }
+
   function safeText(str) {
     if (!str) return "";
     return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -699,6 +726,14 @@ window.addEventListener('load', function() {
           } else {
             userProfile = { id: u.id, full_name: u.user_metadata.full_name || 'ইউজার', email: u.email, phone: u.user_metadata.phone || '', balance: 0, avatar_url: '' };
           }
+
+          // Ensure custom_uid exists
+          if (!userProfile.custom_uid) {
+            var generatedUID = generateFormattedUID(userProfile.serial_id || Math.floor(1000 + Math.random() * 9000));
+            userProfile.custom_uid = generatedUID;
+            supabaseClient.from("profiles").update({ custom_uid: generatedUID }).eq("id", u.id).then(function(){});
+          }
+
           document.getElementById("welcome").textContent = "স্বাগতম, " + (userProfile.full_name || "ব্যবহারকারী") + "!";
           document.getElementById("balanceText").textContent = Number(userProfile.balance || 0).toFixed(2);
 
@@ -812,44 +847,11 @@ window.addEventListener('load', function() {
       });
   }
 
-  function handleDepositSubmit() {
-    var amt = document.getElementById("depAmount").value;
-    var txn = document.getElementById("txn").value.trim();
-    if (!amt || !txn) {
-      alert("পরিমাণ এবং Transaction ID প্রদান করুন।");
-      return;
-    }
-    supabaseClient.from("deposits").insert([{ user_id: userProfile.id, amount: Number(amt), transaction_id: txn, status: "pending" }])
-      .then(function(res) {
-        if (res.error) alert(res.error.message);
-        else {
-          alert("ডিপোজিট অনুরোধ জমা হয়েছে।");
-          document.getElementById("modal").style.display = "none";
-        }
-      });
-  }
-
-  function handleWithdrawSubmit() {
-    var amt = document.getElementById("wdAmount").value;
-    var method = document.getElementById("wdMethod").value;
-    var num = document.getElementById("wdNumber").value.trim();
-    if (!amt || amt < 500 || !num) {
-      alert("সঠিক তথ্য দিন। সর্বনিম্ন উত্তোলন ৳৫০০।");
-      return;
-    }
-    if (userProfile.balance < Number(amt)) {
-      alert("পর্যাপ্ত ব্যালেন্স নেই।");
-      return;
-    }
-    supabaseClient.from("withdrawals").insert([{ user_id: userProfile.id, amount: Number(amt), method: method, phone: num, status: "pending" }])
-      .then(function(res) {
-        if (res.error) alert(res.error.message);
-        else {
-          alert("উত্তোলনের অনুরোধ জমা হয়েছে।");
-          document.getElementById("modal").style.display = "none";
-        }
-      });
-  }
+  window.copyUID = function(uidText) {
+    navigator.clipboard.writeText(uidText).then(function() {
+      alert("UID কপি করা হয়েছে: " + uidText);
+    });
+  };
 
   function openSheet(type) {
     var titles = {
@@ -863,7 +865,6 @@ window.addEventListener('load', function() {
     };
 
     document.getElementById("sheetTitle").textContent = titles[type] || "TUINCOME";
-    var html = "";
 
     if (type === "profile") {
       document.getElementById("sheetBody").innerHTML = '<div class="number">প্রোফাইল তথ্য লোড হচ্ছে...</div>';
@@ -890,6 +891,8 @@ window.addEventListener('load', function() {
           '<img src="' + safeText(userProfile.avatar_url) + '" class="profile-avatar-img" />' : 
           '<div class="profile-avatar-img"><i class="fa-solid fa-user"></i></div>';
 
+        var displayUID = userProfile.custom_uid || generateFormattedUID();
+
         var profileHtml = 
           '<div style="text-align:center; padding: 10px 0 20px;">' +
             '<div class="profile-avatar-wrapper">' +
@@ -898,6 +901,7 @@ window.addEventListener('load', function() {
               '<input type="file" id="avatarInput" accept="image/*" style="display:none;" />' +
             '</div>' +
             '<h3 style="margin:0 0 5px; color:#fff; font-size:20px;">' + safeText(userProfile.full_name || 'ব্যবহারকারী') + '</h3>' +
+            '<div class="uid-badge"><span>UID: ' + safeText(displayUID) + '</span> <i class="fa-solid fa-copy" onclick="copyUID(\'' + safeText(displayUID) + '\')"></i></div><br><br>' +
             '<span style="background:#143825; color:var(--green); padding:4px 12px; border-radius:12px; font-size:12px; font-weight:bold;">Active Member</span>' +
           '</div>' +
 
@@ -957,116 +961,39 @@ window.addEventListener('load', function() {
 
         var vipHtml = res.data.map(function(pkg) {
           var nameUpper = (pkg.name || '').toUpperCase();
-          var cardThemeClass = 'vip-card-gold';
+          var cardThemeClass = "vip-card-bronze";
 
-          if (nameUpper.includes('BRONZE')) cardThemeClass = 'vip-card-bronze';
-          else if (nameUpper.includes('SILVER')) cardThemeClass = 'vip-card-silver';
-          else if (nameUpper.includes('GOLD')) cardThemeClass = 'vip-card-gold';
-          else if (nameUpper.includes('PLATINUM')) cardThemeClass = 'vip-card-platinum';
-          else if (nameUpper.includes('DIAMOND')) cardThemeClass = 'vip-card-diamond';
-          else if (nameUpper.includes('CROWN')) cardThemeClass = 'vip-card-crown';
+          if (nameUpper.includes("SILVER")) cardThemeClass = "vip-card-silver";
+          else if (nameUpper.includes("GOLD")) cardThemeClass = "vip-card-gold";
+          else if (nameUpper.includes("PLATINUM")) cardThemeClass = "vip-card-platinum";
+          else if (nameUpper.includes("DIAMOND")) cardThemeClass = "vip-card-diamond";
+          else if (nameUpper.includes("CROWN")) cardThemeClass = "vip-card-crown";
 
           return '<div class="vip-card ' + cardThemeClass + '">' +
             '<div class="vip-title"><i class="fa-solid fa-crown"></i> ' + safeText(pkg.name) + '</div>' +
-            '<div class="vip-price">৳ ' + Number(pkg.price).toFixed(2) + '</div>' +
-            '<div class="vip-detail">⚡ দৈনিক টাস্ক: <b>' + pkg.daily_tasks + ' টি</b></div>' +
-            '<div class="vip-detail">💰 দৈনিক আয়: <b>৳ ' + Number(pkg.daily_income).toFixed(2) + '</b></div>' +
-            '<div class="vip-detail">📅 মেয়াদ: <b>' + pkg.validity_days + ' দিন</b></div>' +
-            '<button class="vip-buy-btn" data-id="' + pkg.id + '" data-price="' + pkg.price + '">প্যাকেজটি অ্যাক্টিভ করুন</button>' +
+            '<div class="vip-price">৳ ' + Number(pkg.price || 0).toFixed(2) + '</div>' +
+            '<div class="vip-detail"><b>দৈনিক আয়:</b> ৳ ' + Number(pkg.daily_income || 0).toFixed(2) + '</div>' +
+            '<div class="vip-detail"><b>মেয়াদ:</b> ' + safeText(pkg.validity_days || 30) + ' দিন</div>' +
+            '<button class="vip-buy-btn">প্যাকেজ ক্রয় করুন</button>' +
           '</div>';
-        }).join("");
+        }).join('');
 
         document.getElementById("sheetBody").innerHTML = vipHtml;
-
-        var buyBtns = document.getElementById("sheetBody").querySelectorAll(".vip-buy-btn");
-        for (var i = 0; i < buyBtns.length; i++) {
-          buyBtns[i].onclick = function() {
-            var pkgId = this.getAttribute("data-id");
-            var pkgPrice = Number(this.getAttribute("data-price"));
-            handleVipPurchase(pkgId, pkgPrice);
-          };
-        }
       });
       return;
     }
-
-    if (type === "deposit") {
-      html = '<p class="hint">Payment করার পর Transaction ID দিয়ে request জমা দিন।</p>' +
-        '<div class="number"><b>bKash</b>01726270731</div>' +
-        '<div class="number"><b>Nagad</b>01921145861</div>' +
-        '<div class="form-group"><label>ডিপোজিটের পরিমাণ</label><input id="depAmount" type="number" min="1"></div>' +
-        '<div class="form-group"><label>Transaction ID</label><input id="txn" placeholder="Transaction ID"></div>' +
-        '<button class="primary" id="subDepositBtn">Deposit Request Submit</button>';
-    } else if (type === "withdraw") {
-      html = '<div class="number"><b>Minimum Withdrawal: ৳500</b> ৫০০ টাকার কম হলে গ্রহণ করা হবে না।</div>' +
-        '<div class="form-group"><label>উত্তোলনের পরিমাণ</label><input id="wdAmount" type="number" min="500"></div>' +
-        '<div class="form-group"><label>পেমেন্ট মাধ্যম</label><select id="wdMethod"><option>bKash</option><option>Nagad</option></select></div>' +
-        '<div class="form-group"><label>আপনার মোবাইল নম্বর</label><input id="wdNumber" type="tel" maxlength="11"></div>' +
-        '<button class="primary" id="subWithdrawBtn">Withdrawal Request Submit</button>';
-    } else if (type === "wallet") {
-      html = '<div class="number"><b>বর্তমান Balance</b> ৳' + (document.getElementById("balanceText").textContent || "0.00") + '</div>';
-    } else if (type === "refer") {
-      var code = userProfile ? (userProfile.referral_code || "PENDING") : "PENDING";
-      html = '<p>আপনার Referral Code:</p><div class="number"><b>' + safeText(code) + '</b></div>';
-    } else if (type === "history") {
-      html = '<div class="number">Transaction history শীঘ্রই আসবে।</div>';
-    }
-
-    document.getElementById("sheetBody").innerHTML = html;
-    document.getElementById("modal").style.display = "flex";
-
-    var subDep = document.getElementById("subDepositBtn");
-    if(subDep) subDep.onclick = handleDepositSubmit;
-
-    var subWd = document.getElementById("subWithdrawBtn");
-    if(subWd) subWd.onclick = handleWithdrawSubmit;
   }
 
-  function handleVipPurchase(pkgId, pkgPrice) {
-    if (!userProfile) return;
-    if (userProfile.balance < pkgPrice) {
-      alert("আপনার পর্যাপ্ত ব্যালেন্স নেই। অনুগ্রহ করে প্রথমে ডিপোজিট করুন।");
-      return;
-    }
-
-    if (confirm("আপনি কি নিশ্চিত যে ৳" + pkgPrice + " দিয়ে এই VIP প্যাকেজটি কিনতে চান?")) {
-      supabaseClient.from("vip_purchases").insert([{
-        user_id: userProfile.id,
-        package_id: pkgId,
-        price: pkgPrice
-      }]).then(function(res) {
-        if (res.error) {
-          alert("প্যাকেজ ক্রয় ব্যর্থ হয়েছে: " + res.error.message);
-        } else {
-          var updatedBalance = Number(userProfile.balance) - pkgPrice;
-          supabaseClient.from("profiles").update({ balance: updatedBalance }).eq("id", userProfile.id).then(function() {
-            userProfile.balance = updatedBalance;
-            document.getElementById("balanceText").textContent = updatedBalance.toFixed(2);
-            alert("VIP প্যাকেজ সফলভাবে অ্যাক্টিভ করা হয়েছে!");
-            document.getElementById("modal").style.display = "none";
-          });
-        }
-      });
-    }
-  }
-
-  document.getElementById("btnDeposit").onclick = function() { openSheet("deposit"); };
-  document.getElementById("btnWithdraw").onclick = function() { openSheet("withdraw"); };
-  document.getElementById("btnRefer").onclick = function() { openSheet("refer"); };
-  document.getElementById("btnHistory").onclick = function() { openSheet("history"); };
-  document.getElementById("walletBtn").onclick = function() { openSheet("wallet"); };
+  // Navigation Click Handlers
   document.getElementById("tileProfile").onclick = function() { openSheet("profile"); };
-
-  document.getElementById("navWallet").onclick = function() { openSheet("wallet"); };
-  document.getElementById("navTeam").onclick = function() { openSheet("team"); };
   document.getElementById("navProfile").onclick = function() { openSheet("profile"); };
+  document.getElementById("navTeam").onclick = function() { openSheet("team"); };
+  document.getElementById("closeSheetBtn").onclick = function() { document.getElementById("modal").style.display = "none"; };
 
-  document.getElementById("closeSheetBtn").onclick = function() {
-    document.getElementById("modal").style.display = "none";
-  };
-
+  // Initial Session Check
   checkUserSession();
 });
 </script>
+
 </body>
 </html>
