@@ -12,7 +12,7 @@
 
 <link rel="stylesheet"
 
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
@@ -20,7 +20,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
   box-sizing:border-box;
 
-  -webkit-tap-highlight-color:transparent;
+  -webkit-tap-highlight-color:transparent
 
 }
 
@@ -30,25 +30,23 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 
   --bg2:#08130f;
 
-  --card:#0b1712;
+  --card:#0d1c15;
 
-  --card2:#0f1e17;
+  --card2:#102319;
 
   --green:#39ff88;
 
   --green2:#00d66b;
 
-  --green3:#7affb0;
-
   --text:#ecfff4;
 
   --muted:#8ca99a;
 
-  --border:#183b2a;
+  --border:#1b412e;
+
+  --red:#ff5b6e;
 
   --gold:#ffd700;
-
-  --red:#ff6868;
 
 }
 
@@ -60,121 +58,119 @@ html,body{
 
   min-height:100%;
 
+  background:var(--bg);
+
+  color:var(--text);
+
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
+
 }
 
 body{
 
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-
-  background:
-
-    radial-gradient(circle at 50% -10%,#123d27 0,#07120d 35%,#050b09 70%);
-
-  color:var(--text);
-
-  padding-bottom:95px;
+  padding-bottom:90px
 
 }
 
 button,input,select{
 
-  font-family:inherit;
+  font:inherit
 
 }
 
 button{
 
-  -webkit-appearance:none;
+  cursor:pointer
 
 }
 
 header{
 
-  height:76px;
+  height:72px;
 
-  padding:16px 20px;
-
-  background:linear-gradient(135deg,#06140d,#0b2b1b);
+  padding:15px 18px;
 
   display:flex;
 
-  justify-content:space-between;
-
   align-items:center;
 
-  border-bottom:1px solid #1c4d32;
+  justify-content:space-between;
 
-  box-shadow:0 0 25px #00ff6a18;
+  background:#07150e;
+
+  border-bottom:1px solid var(--border);
+
+  position:sticky;
+
+  top:0;
+
+  z-index:10
 
 }
 
 .logo{
 
-  font-size:23px;
+  color:var(--green);
+
+  font-size:22px;
 
   font-weight:900;
 
-  color:var(--green);
-
-  text-shadow:0 0 12px #39ff8870;
+  text-shadow:0 0 12px #39ff8870
 
 }
 
 .lang{
 
-  border:1px solid #39ff8855;
+  border:1px solid #39ff8850;
 
-  background:#0d2619;
+  background:#0c2116;
 
-  color:var(--green3);
+  color:var(--green);
 
-  border-radius:24px;
+  border-radius:20px;
 
-  padding:10px 15px;
+  padding:8px 14px
 
 }
 
-/* AUTH */
-
 .auth-landing{
 
-  display:flex;
+  min-height:calc(100vh - 72px);
 
-  flex-direction:column;
+  display:flex;
 
   align-items:center;
 
   justify-content:center;
 
-  padding:20px;
-
-  min-height:calc(100vh - 76px);
+  padding:18px
 
 }
 
 .auth-card{
 
-  width:min(420px,100%);
-
-  background:linear-gradient(145deg,#0d1c15,#09140f);
-
-  border-radius:24px;
-
-  border:1px solid var(--border);
+  width:min(430px,100%);
 
   padding:24px;
 
-  box-shadow:0 8px 25px #00000050;
+  border-radius:24px;
 
-  text-align:center;
+  background:linear-gradient(145deg,#0e2017,#07110c);
+
+  border:1px solid var(--border);
+
+  box-shadow:0 10px 35px #0008
 
 }
 
 .auth-card h2{
 
-  margin-top:0;
+  text-align:center;
 
-  color:var(--green);
+  margin:0 0 18px;
+
+  color:var(--green)
 
 }
 
@@ -186,33 +182,33 @@ header{
 
   gap:8px;
 
-  margin:15px 0;
+  margin-bottom:18px
 
 }
 
 .auth-tab{
 
+  border:1px solid var(--border);
+
+  background:#08130e;
+
+  color:#8fa99b;
+
   padding:11px;
 
-  border:1px solid #214832;
+  border-radius:12px;
 
-  border-radius:13px;
-
-  background:#0d1e15;
-
-  color:#8ba998;
-
-  font-weight:800;
-
-  cursor:pointer;
+  font-weight:800
 
 }
 
 .auth-tab.active{
 
-  background:linear-gradient(135deg,#21e875,#00a957);
+  background:#103520;
 
-  color:#031008;
+  color:var(--green);
+
+  border-color:#39ff8860
 
 }
 
@@ -222,59 +218,47 @@ header{
 
   padding:12px;
 
-  border-radius:13px;
+  margin-bottom:10px;
 
-  border:1px solid #245039;
+  border-radius:12px;
 
   background:#08130e;
 
-  color:#fff;
+  color:white;
 
-  font-weight:700;
+  border:1px solid var(--border);
 
-  margin-bottom:10px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  gap:10px;
-
-  cursor:pointer;
+  font-weight:800
 
 }
 
-.btn-google{
+.google{
 
-  border-color:#ea4335;
+  color:#ff625b;
 
-  color:#ea4335;
+  border-color:#ff625b55
 
 }
 
-.btn-facebook{
+.facebook{
 
-  border-color:#1877f2;
+  color:#4b9cff;
 
-  color:#1877f2;
+  border-color:#4b9cff55
 
 }
 
 .divider{
 
-  margin:18px 0;
-
-  color:var(--muted);
-
-  font-size:13px;
-
   display:flex;
 
   align-items:center;
 
   gap:10px;
+
+  color:var(--muted);
+
+  margin:17px 0
 
 }
 
@@ -284,19 +268,17 @@ header{
 
   content:"";
 
-  flex:1;
-
   height:1px;
 
-  background:#183b2a;
+  background:var(--border);
+
+  flex:1
 
 }
 
 .form-group{
 
-  margin:14px 0;
-
-  text-align:left;
+  margin-bottom:13px
 
 }
 
@@ -304,67 +286,59 @@ header{
 
   display:block;
 
-  font-weight:700;
+  margin-bottom:6px;
 
-  margin-bottom:7px;
+  color:#b9d1c2;
 
-  color:#c9edda;
+  font-size:13px
 
 }
 
-.form-group input,
-
-.form-group select{
+input,select{
 
   width:100%;
 
   padding:13px;
 
-  border:1px solid #245039;
+  border-radius:12px;
 
-  border-radius:13px;
-
-  font-size:15px;
-
-  background:#08130e;
-
-  color:#eafff2;
+  border:1px solid var(--border);
 
   outline:none;
 
+  background:#06100b;
+
+  color:white
+
 }
 
-.form-group input:focus{
+input:focus,select:focus{
 
-  border-color:var(--green);
-
-  box-shadow:0 0 0 2px #39ff8815;
+  border-color:var(--green)
 
 }
 
 .primary{
 
-  border:1px solid #8affbd55;
+  width:100%;
 
-  background:linear-gradient(135deg,#21e875,#00a957);
+  padding:13px;
+
+  border:0;
+
+  border-radius:13px;
+
+  background:linear-gradient(135deg,#39ff88,#00b95c);
 
   color:#031008;
 
-  border-radius:22px;
-
-  padding:12px 20px;
-
-  font-weight:900;
-
-  cursor:pointer;
+  font-weight:900
 
 }
 
 .primary:disabled{
 
-  opacity:.6;
-
-  cursor:not-allowed;
+  opacity:.5
 
 }
 
@@ -372,21 +346,27 @@ header{
 
   display:none;
 
-  color:#ff8585;
+  margin-top:14px;
 
-  background:#ff000012;
-
-  border:1px solid #ff555530;
-
-  padding:10px;
+  padding:12px;
 
   border-radius:12px;
 
-  margin-top:12px;
+  background:#3a1018;
+
+  border:1px solid #ff526855;
+
+  color:#ffb8c0;
 
   font-size:13px;
 
+  line-height:1.5;
+
   text-align:left;
+
+  white-space:pre-wrap;
+
+  word-break:break-word
 
 }
 
@@ -394,21 +374,35 @@ header{
 
   display:none;
 
-  color:#7affb0;
+  margin-top:14px;
 
-  background:#00ff6a0d;
-
-  border:1px solid #39ff8830;
-
-  padding:10px;
+  padding:12px;
 
   border-radius:12px;
 
-  margin-top:12px;
+  background:#0c321e;
+
+  border:1px solid #39ff8855;
+
+  color:#baffd1;
 
   font-size:13px;
 
-  text-align:left;
+  line-height:1.5
+
+}
+
+.small-note{
+
+  margin-top:14px;
+
+  color:#718a7c;
+
+  font-size:11px;
+
+  text-align:center;
+
+  line-height:1.5
 
 }
 
@@ -416,171 +410,35 @@ header{
 
 #mainDashboard{
 
-  display:none;
+  display:none
 
 }
 
-.hero{
+.container{
 
-  background:
-
-    radial-gradient(circle at 85% 20%,#1d9c52 0,#0c4a2b 25%,transparent 55%),
-
-    linear-gradient(135deg,#06140d,#0a2b1a);
-
-  padding:22px 20px 28px;
-
-  border-radius:0 0 34px 34px;
-
-  border-bottom:1px solid #2eff8240;
-
-  box-shadow:0 12px 35px #00ff6a15;
-
-}
-
-.small{
-
-  color:#a6c7b4;
-
-}
-
-.balance{
-
-  font-size:42px;
-
-  font-weight:900;
-
-  margin:5px 0 18px;
-
-  color:var(--green);
-
-  text-shadow:0 0 18px #39ff8860;
-
-}
-
-.wallet{
-
-  width:100%;
-
-  border:1px solid #39ff8840;
-
-  border-radius:28px;
-
-  padding:14px;
-
-  background:#ffffff0c;
-
-  color:#dffff0;
-
-  font-size:16px;
-
-  cursor:pointer;
-
-}
-
-.card{
-
-  background:linear-gradient(145deg,#0d1c15,#09140f);
-
-  border-radius:24px;
-
-  border:1px solid var(--border);
-
-  box-shadow:0 8px 25px #00000050;
-
-}
-
-.quick{
-
-  margin:16px 10px;
-
-  padding:15px;
-
-  display:grid;
-
-  grid-template-columns:repeat(4,1fr);
-
-  gap:5px;
-
-}
-
-.quick button{
-
-  border:0;
-
-  background:none;
-
-  color:var(--text);
-
-  cursor:pointer;
-
-}
-
-.qicon{
-
-  width:52px;
-
-  height:52px;
+  width:min(720px,100%);
 
   margin:auto;
 
-  background:#0d2a1a;
-
-  border:1px solid #39ff8835;
-
-  border-radius:17px;
-
-  display:grid;
-
-  place-items:center;
-
-  font-size:20px;
-
-  color:var(--green);
-
-}
-
-.quick label{
-
-  display:block;
-
-  margin-top:7px;
-
-  font-weight:700;
-
-  font-size:12px;
-
-  color:#bdebd0;
-
-}
-
-.notice{
-
-  margin:0 10px 14px;
-
-  padding:16px;
-
-  color:#b6d5c2;
+  padding:15px 10px
 
 }
 
 .banner{
 
-  margin:0 10px 14px;
+  padding:22px;
 
-  padding:27px;
-
-  min-height:210px;
-
-  border-radius:26px;
+  border-radius:24px;
 
   background:
 
-    radial-gradient(circle at 90% 20%,#42ff9630,transparent 35%),
+    radial-gradient(circle at top right,#1b6b3c55,transparent 50%),
 
-    linear-gradient(135deg,#08291a,#0d4d2d);
+    linear-gradient(135deg,#092719,#07120d);
 
-  border:1px solid #39ff8845;
+  border:1px solid #1f5136;
+
+  margin-bottom:14px
 
 }
 
@@ -588,115 +446,175 @@ header{
 
   color:var(--green);
 
-  font-weight:800;
+  font-weight:800
 
 }
 
 .banner h1{
 
-  font-size:28px;
+  margin:8px 0;
 
-  margin:9px 0;
+  font-size:26px
 
 }
 
 .banner p{
 
-  line-height:1.5;
+  margin:0;
 
-  color:#b8d8c5;
+  color:#9ab5a5;
+
+  line-height:1.5
 
 }
 
-.tiles{
+.balance-card{
+
+  margin-top:16px;
+
+  padding:20px;
+
+  border-radius:20px;
+
+  background:#07160e;
+
+  border:1px solid #1b4b30
+
+}
+
+.balance-label{
+
+  color:#86a292;
+
+  font-size:13px
+
+}
+
+.balance{
+
+  font-size:38px;
+
+  font-weight:900;
+
+  color:var(--green);
+
+  margin-top:4px
+
+}
+
+.quick{
 
   display:grid;
 
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(4,1fr);
 
-  gap:10px;
+  gap:9px;
 
-  margin:0 10px;
+  margin:14px 0
 
 }
 
-.tile{
+.quick-btn{
+
+  min-height:82px;
+
+  border-radius:16px;
+
+  border:1px solid var(--border);
+
+  background:#0a1811;
+
+  color:white;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:7px
+
+}
+
+.quick-btn i{
+
+  color:var(--green);
+
+  font-size:21px
+
+}
+
+.quick-btn span{
+
+  font-size:11px
+
+}
+
+.card{
 
   padding:17px;
 
-  cursor:pointer;
+  border-radius:20px;
+
+  background:linear-gradient(145deg,#0d1c15,#09140f);
+
+  border:1px solid var(--border);
+
+  margin-bottom:13px
 
 }
 
-.tile b,
+.card h3{
 
-.tile small{
-
-  display:block;
-
-}
-
-.tile small{
-
-  margin-top:5px;
-
-  color:#7f9d8c;
-
-}
-
-/* TASK */
-
-.task-grid{
-
-  display:grid;
-
-  gap:12px;
-
-  margin:0 10px 16px;
+  margin:0 0 13px
 
 }
 
 .task-card{
 
-  padding:16px;
-
   display:flex;
 
   align-items:center;
 
-  gap:13px;
+  gap:12px;
+
+  padding:13px;
+
+  margin-bottom:10px;
+
+  border-radius:16px;
+
+  background:#08150e;
+
+  border:1px solid #183a28
 
 }
 
 .task-icon{
 
-  width:52px;
+  width:45px;
 
-  height:52px;
+  height:45px;
 
-  flex:0 0 52px;
+  border-radius:13px;
 
-  border-radius:16px;
-
-  background:#0c2a1a;
-
-  border:1px solid #39ff8830;
+  background:#0e2c1b;
 
   display:grid;
 
   place-items:center;
 
-  font-size:20px;
-
   color:var(--green);
+
+  flex-shrink:0
 
 }
 
 .task-info{
 
-  flex:1;
-
-  min-width:0;
+  flex:1
 
 }
 
@@ -704,31 +622,45 @@ header{
 
   display:block;
 
-  margin-bottom:5px;
+  margin-bottom:4px
 
 }
 
 .task-info small{
 
-  color:#789686;
+  color:#718c7d
+
+}
+
+.task-reward{
+
+  color:var(--green);
+
+  font-weight:900
 
 }
 
 .task-btn{
 
-  border:1px solid #8affbd40;
+  margin-top:7px;
 
-  background:linear-gradient(135deg,#21e875,#00a957);
+  padding:8px 10px;
 
-  color:#031008;
+  border-radius:10px;
 
-  border-radius:14px;
+  border:1px solid #39ff8850;
 
-  padding:9px 12px;
+  background:#143b24;
 
-  font-weight:900;
+  color:var(--green);
 
-  cursor:pointer;
+  font-weight:800
+
+}
+
+.task-btn:disabled{
+
+  opacity:.4
 
 }
 
@@ -738,31 +670,29 @@ header{
 
   position:fixed;
 
-  bottom:0;
-
   left:50%;
+
+  bottom:0;
 
   transform:translateX(-50%);
 
   width:min(720px,100%);
 
-  height:78px;
+  height:76px;
 
-  background:linear-gradient(180deg,#0d1d15,#07100c);
+  background:#07110c;
 
-  border:1px solid #1b422d;
-
-  border-bottom:0;
-
-  border-radius:27px 27px 0 0;
+  border:1px solid var(--border);
 
   display:flex;
 
-  align-items:center;
-
   justify-content:space-around;
 
-  z-index:50;
+  align-items:center;
+
+  z-index:15;
+
+  border-radius:25px 25px 0 0
 
 }
 
@@ -772,11 +702,9 @@ header{
 
   background:none;
 
-  color:#668072;
+  color:#71887b;
 
-  font-size:18px;
-
-  cursor:pointer;
+  font-size:18px
 
 }
 
@@ -784,31 +712,33 @@ header{
 
   display:block;
 
-  font-size:11px;
+  font-size:10px;
+
+  margin-top:4px
 
 }
 
-.nav .active{
+.nav button.active{
 
-  color:var(--green);
+  color:var(--green)
 
 }
 
 .nav .go{
 
-  width:62px;
+  width:58px;
 
-  height:62px;
+  height:58px;
 
   border-radius:50%;
 
-  background:radial-gradient(circle,#48ff9a,#00b95a);
+  background:linear-gradient(135deg,#48ff9a,#00a957);
 
   color:#031008;
 
-  border:5px solid #07130d;
+  border:4px solid #07140d;
 
-  margin-top:-32px;
+  margin-top:-28px
 
 }
 
@@ -822,23 +752,17 @@ header{
 
   inset:0;
 
-  background:#000000c9;
+  z-index:50;
 
-  z-index:100;
+  background:#000b;
 
   align-items:flex-end;
 
-  justify-content:center;
-
-  backdrop-filter:blur(5px);
+  justify-content:center
 
 }
 
 .sheet{
-
-  background:linear-gradient(145deg,#0d1d15,#07100c);
-
-  color:var(--text);
 
   width:min(720px,100%);
 
@@ -846,11 +770,13 @@ header{
 
   overflow:auto;
 
-  border-radius:28px 28px 0 0;
+  padding:22px;
 
-  padding:24px;
+  border-radius:27px 27px 0 0;
 
-  border:1px solid #1b4a30;
+  background:#09150f;
+
+  border:1px solid var(--border)
 
 }
 
@@ -858,45 +784,77 @@ header{
 
   float:right;
 
-  border:1px solid #294a38;
+  width:35px;
 
-  background:#122219;
-
-  color:#a8c7b5;
+  height:35px;
 
   border-radius:50%;
 
-  width:34px;
+  border:1px solid var(--border);
 
-  height:34px;
+  background:#0b1c13;
 
-  cursor:pointer;
+  color:white
 
 }
 
-.number{
+.sheet h2{
 
-  background:#0b2115;
+  margin-top:0;
 
-  border:1px solid #19452c;
+  color:var(--green)
 
-  color:#c9edda;
+}
 
-  border-radius:14px;
+.info-row{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:15px;
+
+  padding:12px 0;
+
+  border-bottom:1px solid #173426
+
+}
+
+.info-row span:first-child{
+
+  color:#789184
+
+}
+
+.history-item{
 
   padding:13px;
 
-  margin:10px 0;
+  border-radius:13px;
+
+  background:#07120d;
+
+  border:1px solid #173526;
+
+  margin-bottom:9px
 
 }
 
-.number b{
+.pending{
 
-  display:block;
+  color:#ffd15c
 
-  margin-bottom:5px;
+}
 
-  color:var(--green);
+.approved{
+
+  color:var(--green)
+
+}
+
+.rejected{
+
+  color:#ff6878
 
 }
 
@@ -910,413 +868,77 @@ header{
 
   inset:0;
 
-  background:#000000d9;
+  z-index:100;
 
-  z-index:200;
+  background:#000d;
 
   align-items:center;
 
   justify-content:center;
 
-  padding:18px;
+  padding:20px
 
 }
 
 .task-box{
 
-  background:radial-gradient(circle at 50% 0,#124d2d,#0b1811 60%);
+  width:min(400px,100%);
 
-  width:min(440px,100%);
+  padding:25px;
 
-  border-radius:26px;
-
-  padding:24px;
+  border-radius:24px;
 
   text-align:center;
 
-  border:1px solid #2a6b43;
+  background:#09170f;
 
-}
-
-.task-progress{
-
-  height:10px;
-
-  background:#16251d;
-
-  border-radius:10px;
-
-  overflow:hidden;
-
-  margin:18px 0;
-
-}
-
-.task-progress>div{
-
-  height:100%;
-
-  width:0;
-
-  background:linear-gradient(90deg,#00c967,#65ff9e);
-
-  transition:width 1s linear;
+  border:1px solid #235b39
 
 }
 
 .countdown{
 
-  font-size:46px;
+  font-size:58px;
 
   font-weight:900;
 
   color:var(--green);
 
-  margin:12px 0;
+  margin:15px
 
 }
 
-/* PROFILE */
+.progress{
 
-.profile-avatar-wrapper{
+  height:7px;
 
-  position:relative;
+  border-radius:10px;
 
-  width:90px;
+  background:#183022;
 
-  height:90px;
+  overflow:hidden;
 
-  margin:0 auto 12px;
-
-}
-
-.profile-avatar-img{
-
-  width:90px;
-
-  height:90px;
-
-  border-radius:50%;
-
-  object-fit:cover;
-
-  border:3px solid var(--green);
-
-  background:#0d2a1a;
-
-  display:grid;
-
-  place-items:center;
-
-  font-size:38px;
-
-  color:var(--green);
+  margin-bottom:18px
 
 }
 
-.avatar-edit-icon{
+.progress div{
 
-  position:absolute;
+  height:100%;
 
-  bottom:0;
+  width:0;
 
-  right:0;
+  background:var(--green);
 
-  background:var(--green2);
-
-  color:#031008;
-
-  width:28px;
-
-  height:28px;
-
-  border-radius:50%;
-
-  display:grid;
-
-  place-items:center;
-
-  cursor:pointer;
-
-  border:2px solid #07100c;
+  transition:width 1s linear
 
 }
 
-.uid-badge{
-
-  display:inline-flex;
-
-  align-items:center;
-
-  gap:8px;
-
-  background:#0d2a1a;
-
-  border:1px solid var(--green2);
-
-  color:var(--green);
-
-  padding:5px 14px;
-
-  border-radius:20px;
-
-  font-weight:800;
-
-  font-size:13px;
-
-  margin-top:6px;
-
-}
-
-.uid-badge i{
-
-  cursor:pointer;
-
-}
-
-/* VIP */
-
-.vip-card{
-
-  border-radius:20px;
-
-  padding:18px;
-
-  margin-bottom:16px;
-
-  position:relative;
-
-  box-shadow:0 8px 32px #00000060;
-
-}
-
-.vip-title{
-
-  font-size:18px;
-
-  font-weight:800;
-
-  margin-bottom:8px;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:8px;
-
-}
-
-.vip-price{
-
-  font-size:24px;
-
-  font-weight:900;
-
-  color:#fff;
-
-  margin-bottom:12px;
-
-}
-
-.vip-detail{
-
-  font-size:13.5px;
-
-  color:#e2f2e9;
-
-  margin-bottom:6px;
-
-}
-
-.vip-buy-btn{
-
-  width:100%;
-
-  border:none;
-
-  font-weight:900;
-
-  border-radius:12px;
-
-  padding:12px;
-
-  margin-top:12px;
-
-  cursor:pointer;
-
-}
-
-.vip-card-bronze{
-
-  background:#cd7f3226;
-
-  border:1px solid #cd7f3266;
-
-}
-
-.vip-card-bronze .vip-title{
-
-  color:#cd7f32;
-
-}
-
-.vip-card-bronze .vip-buy-btn{
-
-  background:linear-gradient(135deg,#cd7f32,#8c531d);
-
-  color:#fff;
-
-}
-
-.vip-card-silver{
-
-  background:#c0c0c026;
-
-  border:1px solid #ffffff66;
-
-}
-
-.vip-card-silver .vip-title{
-
-  color:#e0e0e0;
-
-}
-
-.vip-card-silver .vip-buy-btn{
-
-  background:linear-gradient(135deg,#e0e0e0,#9e9e9e);
-
-  color:#111;
-
-}
-
-.vip-card-gold{
-
-  background:#ffd70026;
-
-  border:1px solid #ffd70066;
-
-}
-
-.vip-card-gold .vip-title{
-
-  color:#ffd700;
-
-}
-
-.vip-card-gold .vip-buy-btn{
-
-  background:linear-gradient(135deg,#ffd700,#d4af37);
-
-  color:#000;
-
-}
-
-.vip-card-platinum{
-
-  background:#e5e4e226;
-
-  border:1px solid #e5e4e280;
-
-}
-
-.vip-card-platinum .vip-title{
-
-  color:#e5e4e2;
-
-}
-
-.vip-card-platinum .vip-buy-btn{
-
-  background:linear-gradient(135deg,#fff,#b0b0b0);
-
-  color:#000;
-
-}
-
-.vip-card-diamond{
-
-  background:#b9f2ff2e;
-
-  border:1px solid #b9f2ff80;
-
-}
-
-.vip-card-diamond .vip-title{
-
-  color:#b9f2ff;
-
-}
-
-.vip-card-diamond .vip-buy-btn{
-
-  background:linear-gradient(135deg,#b9f2ff,#38bdf8);
-
-  color:#000;
-
-}
-
-.vip-card-crown{
-
-  background:#9333ea33;
-
-  border:1px solid #c084fc80;
-
-}
-
-.vip-card-crown .vip-title{
-
-  color:#c084fc;
-
-}
-
-.vip-card-crown .vip-buy-btn{
-
-  background:linear-gradient(135deg,#c084fc,#9333ea);
-
-  color:#fff;
-
-}
-
-.hint{
-
-  color:var(--muted);
-
-  font-size:13px;
-
-  line-height:1.5;
-
-}
-
-.loading{
-
-  text-align:center;
-
-  padding:20px;
-
-  color:var(--muted);
-
-}
-
-@media(max-width:380px){
+@media(max-width:360px){
 
   .quick{
 
-    grid-template-columns:repeat(2,1fr);
-
-    gap:10px;
-
-  }
-
-  .balance{
-
-    font-size:35px;
-
-  }
-
-  .banner h1{
-
-    font-size:24px;
+    grid-template-columns:repeat(2,1fr)
 
   }
 
@@ -1336,31 +958,23 @@ header{
 
 </header>
 
-<!-- ================= AUTH ================= -->
+<!-- AUTH -->
 
-<div class="auth-landing" id="authLanding">
+<section class="auth-landing" id="authLanding">
 
   <div class="auth-card">
 
-    <h2 id="mainAuthTitle">লগইন করুন</h2>
+    <h2 id="authTitle">লগইন করুন</h2>
 
     <div class="auth-tabs">
 
-      <button class="auth-tab active" id="mainTabLogin">
+      <button class="auth-tab active" id="loginTab">Login</button>
 
-        Login
-
-      </button>
-
-      <button class="auth-tab" id="mainTabReg">
-
-        Register
-
-      </button>
+      <button class="auth-tab" id="registerTab">Register</button>
 
     </div>
 
-    <button class="social-btn btn-google" id="btnGoogleLogin">
+    <button class="social-btn google" id="googleBtn">
 
       <i class="fa-brands fa-google"></i>
 
@@ -1368,7 +982,7 @@ header{
 
     </button>
 
-    <button class="social-btn btn-facebook" id="btnFbLogin">
+    <button class="social-btn facebook" id="facebookBtn">
 
       <i class="fa-brands fa-facebook"></i>
 
@@ -1378,21 +992,13 @@ header{
 
     <div class="divider">অথবা</div>
 
-    <div id="regExtraFields" style="display:none">
+    <div id="registerFields" style="display:none">
 
       <div class="form-group">
 
         <label>আপনার নাম</label>
 
-        <input
-
-          id="mainName"
-
-          type="text"
-
-          placeholder="পুরো নাম"
-
-        >
+        <input id="name" type="text" placeholder="পুরো নাম">
 
       </div>
 
@@ -1400,15 +1006,7 @@ header{
 
         <label>মোবাইল নম্বর</label>
 
-        <input
-
-          id="mainPhone"
-
-          type="tel"
-
-          placeholder="01XXXXXXXXX"
-
-        >
+        <input id="phone" type="tel" inputmode="numeric" placeholder="01XXXXXXXXX">
 
       </div>
 
@@ -1416,19 +1014,9 @@ header{
 
     <div class="form-group">
 
-      <label>Email</label>
+      <label>Gmail / Email</label>
 
-      <input
-
-        id="mainEmail"
-
-        type="email"
-
-        placeholder="example@gmail.com"
-
-        autocomplete="email"
-
-      >
+      <input id="email" type="email" placeholder="example@gmail.com">
 
     </div>
 
@@ -1436,261 +1024,131 @@ header{
 
       <label>Password</label>
 
-      <input
-
-        id="mainPassword"
-
-        type="password"
-
-        placeholder="কমপক্ষে ৬ অক্ষর"
-
-        autocomplete="current-password"
-
-      >
+      <input id="password" type="password" placeholder="কমপক্ষে ৬ অক্ষর">
 
     </div>
 
-    <button
-
-      class="primary"
-
-      id="mainAuthSubmit"
-
-      style="width:100%;margin-top:10px"
-
-    >
+    <button class="primary" id="authBtn">
 
       Login
 
     </button>
 
-    <div
+    <button id="forgotBtn"
 
-      id="mainAuthError"
+      style="width:100%;margin-top:12px;background:none;border:0;color:#8db39c">
 
-      class="error-box"
+      Password ভুলে গেছেন?
 
-    ></div>
+    </button>
 
-    <div
+    <div class="error-box" id="errorBox"></div>
 
-      id="mainAuthSuccess"
+    <div class="success-box" id="successBox"></div>
 
-      class="success-box"
+    <div class="small-note">
 
-    ></div>
+      TUINCOME Account System<br>
+
+      Supabase Authentication
+
+    </div>
 
   </div>
 
-</div>
+</section>
 
-<!-- ================= DASHBOARD ================= -->
+<!-- DASHBOARD -->
 
-<div id="mainDashboard">
+<section id="mainDashboard">
 
-  <section class="hero">
+  <div class="container">
 
-    <div id="welcome">
+    <div class="banner">
 
-      স্বাগতম!
+      <small>TUINCOME v7</small>
 
-    </div>
+      <h1>স্বাগতম 👋</h1>
 
-    <div class="small">
+      <p>
 
-      বর্তমান ব্যালেন্স
+        ছোট ছোট টাস্ক সম্পন্ন করে আপনার অ্যাকাউন্ট ম্যানেজ করুন।
 
-    </div>
+      </p>
 
-    <div class="balance">
+      <div class="balance-card">
 
-      ৳ <span id="balanceText">0.00</span>
+        <div class="balance-label">বর্তমান ব্যালেন্স</div>
 
-    </div>
-
-    <button class="wallet" id="walletBtn">
-
-      <i class="fa-solid fa-wallet"></i>
-
-      ওয়ালেট ›
-
-    </button>
-
-  </section>
-
-  <!-- QUICK MENU -->
-
-  <section class="quick card">
-
-    <button id="btnDeposit">
-
-      <div class="qicon">
-
-        <i class="fa-solid fa-money-bill-wave"></i>
+        <div class="balance">৳ <span id="balance">0.00</span></div>
 
       </div>
 
-      <label>ডিপোজিট</label>
+    </div>
 
-    </button>
+    <div class="quick">
 
-    <button id="btnWithdraw">
+      <button class="quick-btn" id="depositBtn">
 
-      <div class="qicon">
+        <i class="fa-solid fa-circle-plus"></i>
 
-        <i class="fa-solid fa-building-columns"></i>
+        <span>Deposit</span>
 
-      </div>
+      </button>
 
-      <label>উত্তোলন</label>
+      <button class="quick-btn" id="withdrawBtn">
 
-    </button>
+        <i class="fa-solid fa-money-bill-transfer"></i>
 
-    <button id="btnRefer">
+        <span>Withdraw</span>
 
-      <div class="qicon">
+      </button>
+
+      <button class="quick-btn" id="referBtn">
 
         <i class="fa-solid fa-user-plus"></i>
 
-      </div>
+        <span>Refer</span>
 
-      <label>রেফার</label>
+      </button>
 
-    </button>
-
-    <button id="btnHistory">
-
-      <div class="qicon">
+      <button class="quick-btn" id="historyBtn">
 
         <i class="fa-solid fa-clock-rotate-left"></i>
 
-      </div>
+        <span>History</span>
 
-      <label>হিস্ট্রি</label>
+      </button>
 
-    </button>
+    </div>
 
-  </section>
+    <div class="card">
 
-  <div class="notice card">
+      <h3>
 
-    🔔 🎉 TUINCOME প্ল্যাটফর্মে স্বাগতম!
+        <i class="fa-solid fa-bolt" style="color:#39ff88"></i>
 
-  </div>
-
-  <section class="banner">
-
-    <small>TUINCOME</small>
-
-    <h1>
-
-      শিখুন • কাজ করুন • উপার্জন করুন
-
-    </h1>
-
-    <p>
-
-      আপনার অ্যাকাউন্ট পরিচালনা ও অনুরোধ জমা দেওয়ার জন্য তৈরি।
-
-    </p>
-
-  </section>
-
-  <!-- TASK -->
-
-  <section style="margin-top:8px">
-
-    <div
-
-      style="
-
-      display:flex;
-
-      justify-content:space-between;
-
-      align-items:center;
-
-      margin:0 14px 10px
-
-      "
-
-    >
-
-      <h3 style="margin:0">
-
-        ⚡ ছোট টাস্ক
+        Available Tasks
 
       </h3>
 
-      <small>
+      <div id="taskGrid">
 
-        ৩ সেকেন্ডের টাস্ক
+        <div style="color:#789184">
 
-      </small>
+          Task লোড হচ্ছে...
 
-    </div>
-
-    <div
-
-      class="task-grid"
-
-      id="taskGrid"
-
-    >
-
-      <div class="number">
-
-        <b>Task loading...</b>
+        </div>
 
       </div>
 
     </div>
 
-  </section>
-
-  <!-- TILES -->
-
-  <section class="tiles">
-
-    <div class="tile card">
-
-      <b>💼 কোম্পানি প্রোফাইল</b>
-
-      <small>আমাদের সম্পর্কে</small>
-
-    </div>
-
-    <div class="tile card">
-
-      <b>🛡️ উত্তোলনের নিয়ম</b>
-
-      <small>উত্তোলনের নিয়ম</small>
-
-    </div>
-
-    <div class="tile card">
-
-      <b>📈 আয়ের সুযোগ</b>
-
-      <small>আয়ের সুযোগ</small>
-
-    </div>
-
-    <div class="tile card" id="tileProfile">
-
-      <b>👤 প্রোফাইল</b>
-
-      <small>Account</small>
-
-    </div>
-
-  </section>
-
-  <!-- NAV -->
+  </div>
 
   <nav class="nav">
 
-    <button class="active">
+    <button class="active" id="homeNav">
 
       <i class="fa-solid fa-house"></i>
 
@@ -1698,145 +1156,93 @@ header{
 
     </button>
 
-    <button id="navWallet">
+    <button id="walletNav">
 
       <i class="fa-solid fa-wallet"></i>
 
-      <span>ওয়ালেট</span>
+      <span>Wallet</span>
 
     </button>
 
-    <button class="go" id="navStart">
+    <button class="go" id="startNav">
 
       <i class="fa-solid fa-bolt"></i>
 
-      <span>শুরু</span>
+    </button>
+
+    <button id="teamNav">
+
+      <i class="fa-solid fa-crown"></i>
+
+      <span>VIP</span>
 
     </button>
 
-    <button id="navTeam">
-
-      <i
-
-        class="fa-solid fa-crown"
-
-        style="color:var(--gold)"
-
-      ></i>
-
-      <span>VIP টিম</span>
-
-    </button>
-
-    <button id="navProfile">
+    <button id="profileNav">
 
       <i class="fa-solid fa-user"></i>
 
-      <span>প্রোফাইল</span>
+      <span>Profile</span>
 
     </button>
 
   </nav>
 
-</div>
+</section>
 
-<!-- ================= TASK MODAL ================= -->
+<!-- SHEET -->
 
-<div
+<div class="modal" id="modal">
 
-  class="task-modal"
+  <div class="sheet">
 
-  id="taskModal"
+    <button class="close" id="closeBtn">×</button>
 
->
+    <h2 id="sheetTitle">TUINCOME</h2>
 
-  <div class="task-box">
-
-    <div style="font-size:34px">
-
-      ⚡
-
-    </div>
-
-    <h2 id="taskTitle">
-
-      টাস্ক চলছে
-
-    </h2>
-
-    <p class="hint">
-
-      ৩ সেকেন্ড এই পেজে থাকুন।
-
-    </p>
-
-    <div
-
-      class="countdown"
-
-      id="taskCountdown"
-
-    >
-
-      3
-
-    </div>
-
-    <div class="task-progress">
-
-      <div id="taskProgress"></div>
-
-    </div>
-
-    <button
-
-      class="primary"
-
-      id="taskClose"
-
-      style="display:none"
-
-    >
-
-      ৳ Reward নিন
-
-    </button>
+    <div id="sheetBody"></div>
 
   </div>
 
 </div>
 
-<!-- ================= SHEET ================= -->
+<!-- TASK -->
 
-<div
+<div class="task-modal" id="taskModal">
 
-  class="modal"
+  <div class="task-box">
 
-  id="modal"
+    <div style="font-size:34px">⚡</div>
 
->
+    <h2 id="taskTitle">
 
-  <div class="sheet">
-
-    <button
-
-      class="close"
-
-      id="closeSheetBtn"
-
-    >
-
-      ✕
-
-    </button>
-
-    <h2 id="sheetTitle">
-
-      TUINCOME
+      Task চলছে
 
     </h2>
 
-    <div id="sheetBody"></div>
+    <p style="color:#819b8d">
+
+      ৩ সেকেন্ড অপেক্ষা করুন
+
+    </p>
+
+    <div class="countdown" id="countdown">
+
+      3
+
+    </div>
+
+    <div class="progress">
+
+      <div id="progressBar"></div>
+
+    </div>
+
+    <button class="primary" id="rewardBtn" style="display:none">
+
+      ৳ Reward নিন
+
+    </button>
 
   </div>
 
@@ -1848,47 +1254,37 @@ header{
 
 <script>
 
-window.addEventListener("load", function(){
-
 "use strict";
 
-/* =========================================
+/* =========================================================
 
    SUPABASE CONFIG
 
-========================================= */
+========================================================= */
 
-var SUPABASE_URL =
+const SUPABASE_URL =
 
 "https://vtaojjjaekjijfziocay.supabase.co";
 
-var SUPABASE_ANON_KEY =
+const SUPABASE_ANON_KEY =
 
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI6InZ0YW9qamFla2ppZnpvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ0YW9qamphZWtqaWpmemlvY2F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc4NTcwMDYsImV4cCI6MjEwMzQzMzAwNn0.9C1qpG41Z8tuwgYBO7LZKMP3LCYOzsgFNlhfqMUlues";
 
-var supabaseClient =
+let supabaseClient = null;
 
-window.supabase.createClient(
+let currentUser = null;
 
-  SUPABASE_URL,
+let currentProfile = null;
 
-  SUPABASE_ANON_KEY
+let authMode = "login";
 
-);
+let currentTask = null;
 
-var userProfile = null;
-
-var currentTaskData = null;
-
-var taskTimerId = null;
-
-var currentAuthMode = "login";
-
-/* =========================================
+/* =========================================================
 
    HELPERS
 
-========================================= */
+========================================================= */
 
 function $(id){
 
@@ -1896,223 +1292,293 @@ function $(id){
 
 }
 
-function safeText(str){
+function showError(message){
 
-  if(str === null || str === undefined){
+  $("successBox").style.display = "none";
 
-    return "";
+  $("errorBox").style.display = "block";
+
+  $("errorBox").textContent = message;
+
+}
+
+function showSuccess(message){
+
+  $("errorBox").style.display = "none";
+
+  $("successBox").style.display = "block";
+
+  $("successBox").textContent = message;
+
+}
+
+function clearMessages(){
+
+  $("errorBox").style.display = "none";
+
+  $("successBox").style.display = "none";
+
+}
+
+function getErrorMessage(error){
+
+  if(!error){
+
+    return "Unknown error";
 
   }
 
-  return String(str)
+  let msg =
 
-    .replace(/&/g,"&amp;")
+    error.message ||
 
-    .replace(/</g,"&lt;")
+    error.error_description ||
 
-    .replace(/>/g,"&gt;")
+    String(error);
 
-    .replace(/"/g,"&quot;")
+  if(
 
-    .replace(/'/g,"&#039;");
+    msg.includes("Failed to fetch") ||
 
-}
+    msg.includes("Load failed") ||
 
-function showAuthError(message){
+    msg.includes("NetworkError")
 
-  var box = $("mainAuthError");
+  ){
 
-  box.textContent = message || "একটি সমস্যা হয়েছে।";
+    return (
 
-  box.style.display = "block";
+      "Supabase server-এর সাথে কানেকশন হচ্ছে না।\n\n" +
 
-  $("mainAuthSuccess").style.display = "none";
+      "সম্ভাব্য কারণ:\n" +
 
-}
+      "1. Internet connection সমস্যা\n" +
 
-function showAuthSuccess(message){
+      "2. Supabase URL/Key ভুল\n" +
 
-  var box = $("mainAuthSuccess");
+      "3. Supabase project বন্ধ/paused\n" +
 
-  box.textContent = message || "";
+      "4. Browser থেকে Supabase request block হচ্ছে\n\n" +
 
-  box.style.display = "block";
+      "URL:\n" + SUPABASE_URL
 
-  $("mainAuthError").style.display = "none";
-
-}
-
-function hideAuthMessages(){
-
-  $("mainAuthError").style.display = "none";
-
-  $("mainAuthSuccess").style.display = "none";
-
-}
-
-/* =========================================
-
-   UID
-
-========================================= */
-
-function generateFormattedUID(num){
-
-  if(!num){
-
-    num =
-
-      Math.floor(
-
-        1000 +
-
-        Math.random() * 9000
-
-      );
+    );
 
   }
 
-  return "TU-" +
-
-    String(num).padStart(4,"0");
+  return msg;
 
 }
 
-/* =========================================
+/* =========================================================
 
-   AUTH MODE
+   AUTH UI
 
-========================================= */
+========================================================= */
 
 function setAuthMode(mode){
 
-  currentAuthMode = mode;
+  authMode = mode;
 
-  hideAuthMessages();
+  clearMessages();
 
-  if(mode === "register"){
+  if(mode === "login"){
 
-    $("mainAuthTitle").textContent =
+    $("authTitle").textContent = "লগইন করুন";
 
-      "রেজিস্ট্রেশন";
+    $("loginTab").classList.add("active");
 
-    $("mainTabLogin")
+    $("registerTab").classList.remove("active");
 
-      .classList.remove("active");
+    $("registerFields").style.display = "none";
 
-    $("mainTabReg")
-
-      .classList.add("active");
-
-    $("mainAuthSubmit")
-
-      .textContent = "Register";
-
-    $("mainPassword")
-
-      .setAttribute(
-
-        "autocomplete",
-
-        "new-password"
-
-      );
-
-    $("regExtraFields")
-
-      .style.display = "block";
+    $("authBtn").textContent = "Login";
 
   }else{
 
-    $("mainAuthTitle").textContent =
+    $("authTitle").textContent = "নতুন Account তৈরি করুন";
 
-      "লগইন করুন";
+    $("registerTab").classList.add("active");
 
-    $("mainTabReg")
+    $("loginTab").classList.remove("active");
 
-      .classList.remove("active");
+    $("registerFields").style.display = "block";
 
-    $("mainTabLogin")
-
-      .classList.add("active");
-
-    $("mainAuthSubmit")
-
-      .textContent = "Login";
-
-    $("mainPassword")
-
-      .setAttribute(
-
-        "autocomplete",
-
-        "current-password"
-
-      );
-
-    $("regExtraFields")
-
-      .style.display = "none";
+    $("authBtn").textContent = "Register";
 
   }
 
 }
 
-/* =========================================
+/* =========================================================
 
-   REGISTER / LOGIN
+   INIT SUPABASE
 
-========================================= */
+========================================================= */
 
-$("mainTabLogin").onclick =
+function initSupabase(){
 
-function(){
+  if(!window.supabase){
 
-  setAuthMode("login");
+    showError(
 
-};
+      "Supabase JavaScript library load হয়নি।\n\n" +
 
-$("mainTabReg").onclick =
-
-function(){
-
-  setAuthMode("register");
-
-};
-
-$("mainAuthSubmit").onclick =
-
-async function(){
-
-  hideAuthMessages();
-
-  var email =
-
-    $("mainEmail").value.trim();
-
-  var password =
-
-    $("mainPassword").value;
-
-  if(!email){
-
-    showAuthError(
-
-      "Email দিন।"
+      "Internet চালু আছে কিনা দেখুন এবং আবার পেজটি খুলুন।"
 
     );
+
+    return false;
+
+  }
+
+  try{
+
+    supabaseClient =
+
+      window.supabase.createClient(
+
+        SUPABASE_URL,
+
+        SUPABASE_ANON_KEY
+
+      );
+
+    return true;
+
+  }catch(error){
+
+    showError(
+
+      "Supabase initialize করা যাচ্ছে না:\n\n" +
+
+      getErrorMessage(error)
+
+    );
+
+    return false;
+
+  }
+
+}
+
+/* =========================================================
+
+   SUPABASE CONNECTION TEST
+
+========================================================= */
+
+async function testSupabase(){
+
+  try{
+
+    const controller =
+
+      new AbortController();
+
+    const timer =
+
+      setTimeout(
+
+        ()=>controller.abort(),
+
+        10000
+
+      );
+
+    const response =
+
+      await fetch(
+
+        SUPABASE_URL + "/auth/v1/settings",
+
+        {
+
+          method:"GET",
+
+          headers:{
+
+            "apikey":SUPABASE_ANON_KEY
+
+          },
+
+          signal:controller.signal
+
+        }
+
+      );
+
+    clearTimeout(timer);
+
+    if(!response.ok){
+
+      throw new Error(
+
+        "Supabase response HTTP " +
+
+        response.status
+
+      );
+
+    }
+
+    return true;
+
+  }catch(error){
+
+    console.error("SUPABASE CONNECTION ERROR:",error);
+
+    showError(
+
+      "Supabase connection failed.\n\n" +
+
+      getErrorMessage(error)
+
+    );
+
+    return false;
+
+  }
+
+}
+
+/* =========================================================
+
+   REGISTER
+
+========================================================= */
+
+async function registerUser(){
+
+  clearMessages();
+
+  const name =
+
+    $("name").value.trim();
+
+  const phone =
+
+    $("phone").value.trim();
+
+  const email =
+
+    $("email").value.trim();
+
+  const password =
+
+    $("password").value;
+
+  if(!name){
+
+    showError("আপনার নাম দিন।");
 
     return;
 
   }
 
-  if(!password){
+  if(!email){
 
-    showAuthError(
-
-      "Password দিন।"
-
-    );
+    showError("Gmail / Email দিন।");
 
     return;
 
@@ -2120,203 +1586,145 @@ async function(){
 
   if(password.length < 6){
 
-    showAuthError(
-
-      "Password কমপক্ষে ৬ অক্ষরের হতে হবে।"
-
-    );
+    showError("Password কমপক্ষে ৬ অক্ষরের হতে হবে।");
 
     return;
 
   }
 
-  var btn =
+  $("authBtn").disabled = true;
 
-    $("mainAuthSubmit");
-
-  btn.disabled = true;
-
-  btn.textContent =
-
-    currentAuthMode === "register"
-
-      ? "Register হচ্ছে..."
-
-      : "Login হচ্ছে...";
+  $("authBtn").textContent = "Register হচ্ছে...";
 
   try{
 
-    if(currentAuthMode === "register"){
+    const result =
 
-      var name =
+      await supabaseClient.auth.signUp({
 
-        $("mainName").value.trim();
+        email:email,
 
-      var phone =
+        password:password,
 
-        $("mainPhone").value.trim();
+        options:{
 
-      if(!name){
+          data:{
 
-        throw new Error(
+            full_name:name,
 
-          "আপনার নাম দিন।"
-
-        );
-
-      }
-
-      if(!phone){
-
-        throw new Error(
-
-          "মোবাইল নম্বর দিন।"
-
-        );
-
-      }
-
-      var reg =
-
-        await supabaseClient.auth.signUp({
-
-          email:email,
-
-          password:password,
-
-          options:{
-
-            data:{
-
-              full_name:name,
-
-              phone:phone
-
-            }
+            phone:phone
 
           }
 
-        });
+        }
 
-      if(reg.error){
+      });
 
-        throw reg.error;
+    if(result.error){
 
-      }
-
-      /*
-
-        Email confirmation ON থাকলে
-
-        session null হতে পারে।
-
-      */
-
-      if(!reg.data.session){
-
-        showAuthSuccess(
-
-          "রেজিস্ট্রেশন সফল হয়েছে। আপনার Email-এ verification link পাঠানো হয়েছে। Email verify করে তারপর Login করুন।"
-
-        );
-
-        $("mainPassword").value = "";
-
-        return;
-
-      }
-
-      await checkUserSession();
-
-    }else{
-
-      var login =
-
-        await supabaseClient.auth
-
-          .signInWithPassword({
-
-            email:email,
-
-            password:password
-
-          });
-
-      if(login.error){
-
-        throw login.error;
-
-      }
-
-      await checkUserSession();
+      throw result.error;
 
     }
 
-  }catch(err){
+    if(result.data.session){
 
-    console.error(
+      currentUser =
 
-      "AUTH ERROR:",
+        result.data.user;
 
-      err
+      await ensureProfile();
 
-    );
+      showDashboard();
 
-    showAuthError(
+      showSuccess("Account তৈরি হয়েছে।");
 
-      err.message ||
+    }else{
 
-      "Login/Register failed."
+      showSuccess(
+
+        "Registration সফল হয়েছে।\n\n" +
+
+        "আপনার Gmail inbox-এ verification email পাঠানো হয়ে থাকলে সেটি verify করে Login করুন।"
+
+      );
+
+    }
+
+  }catch(error){
+
+    console.error(error);
+
+    showError(
+
+      "Registration failed:\n\n" +
+
+      getErrorMessage(error)
 
     );
 
   }finally{
 
-    btn.disabled = false;
+    $("authBtn").disabled = false;
 
-    btn.textContent =
+    $("authBtn").textContent =
 
-      currentAuthMode === "register"
-
-        ? "Register"
-
-        : "Login";
+      "Register";
 
   }
 
-};
+}
 
-/* =========================================
+/* =========================================================
 
-   GOOGLE
+   LOGIN
 
-========================================= */
+========================================================= */
 
-$("btnGoogleLogin").onclick =
+async function loginUser(){
 
-async function(){
+  clearMessages();
+
+  const email =
+
+    $("email").value.trim();
+
+  const password =
+
+    $("password").value;
+
+  if(!email){
+
+    showError("Email দিন।");
+
+    return;
+
+  }
+
+  if(!password){
+
+    showError("Password দিন।");
+
+    return;
+
+  }
+
+  $("authBtn").disabled = true;
+
+  $("authBtn").textContent =
+
+    "Login হচ্ছে...";
 
   try{
 
-    var result =
+    const result =
 
-      await supabaseClient.auth
+      await supabaseClient.auth.signInWithPassword({
 
-        .signInWithOAuth({
+        email:email,
 
-          provider:"google",
+        password:password
 
-          options:{
-
-            redirectTo:
-
-              window.location.origin +
-
-              window.location.pathname
-
-          }
-
-        });
+      });
 
     if(result.error){
 
@@ -2324,231 +1732,261 @@ async function(){
 
     }
 
-  }catch(err){
+    currentUser =
 
-    console.error(err);
+      result.data.user;
 
-    showAuthError(
+    await ensureProfile();
 
-      err.message ||
+    showDashboard();
 
-      "Google Login চালু করা যায়নি।"
+  }catch(error){
 
-    );
+    console.error(error);
 
-  }
+    showError(
 
-};
+      "Login failed:\n\n" +
 
-/* =========================================
-
-   FACEBOOK
-
-========================================= */
-
-$("btnFbLogin").onclick =
-
-async function(){
-
-  try{
-
-    var result =
-
-      await supabaseClient.auth
-
-        .signInWithOAuth({
-
-          provider:"facebook",
-
-          options:{
-
-            redirectTo:
-
-              window.location.origin +
-
-              window.location.pathname
-
-          }
-
-        });
-
-    if(result.error){
-
-      throw result.error;
-
-    }
-
-  }catch(err){
-
-    console.error(err);
-
-    showAuthError(
-
-      err.message ||
-
-      "Facebook Login চালু করা যায়নি।"
+      getErrorMessage(error)
 
     );
 
+  }finally{
+
+    $("authBtn").disabled = false;
+
+    $("authBtn").textContent =
+
+      "Login";
+
   }
 
-};
+}
 
-/* =========================================
+/* =========================================================
 
-   CREATE PROFILE
+   PROFILE
 
-========================================= */
+========================================================= */
 
-async function createProfileIfNeeded(user){
+async function ensureProfile(){
 
-  if(!user){
+  if(!currentUser){
 
     return null;
 
   }
 
-  var existing =
+  try{
 
-    await supabaseClient
+    const result =
+
+      await supabaseClient
 
       .from("profiles")
 
       .select("*")
 
-      .eq("id",user.id)
+      .eq("id",currentUser.id)
 
       .maybeSingle();
 
-  if(existing.error){
+    if(result.error){
 
-    console.error(
+      console.warn(
 
-      "PROFILE SELECT ERROR:",
+        "Profile read error:",
 
-      existing.error
+        result.error
 
-    );
+      );
 
-    /*
+      currentProfile = {
 
-      যদি profiles table না থাকে
+        id:currentUser.id,
 
-      তাহলে এখানে error দেখাবে।
+        full_name:
 
-    */
+          currentUser.user_metadata?.full_name ||
 
-    throw new Error(
+          currentUser.email?.split("@")[0] ||
 
-      "profiles table load হচ্ছে না: " +
+          "User",
 
-      existing.error.message
+        phone:
 
-    );
+          currentUser.user_metadata?.phone ||
 
-  }
+          "",
 
-  if(existing.data){
+        balance:0
 
-    return existing.data;
+      };
 
-  }
+      return currentProfile;
 
-  var metadata =
+    }
 
-    user.user_metadata || {};
+    if(result.data){
 
-  var newUID =
+      currentProfile =
 
-    generateFormattedUID();
+        result.data;
 
-  var newProfile = {
+      return currentProfile;
 
-    id:user.id,
+    }
 
-    full_name:
+    const newProfile = {
 
-      metadata.full_name ||
+      id:currentUser.id,
 
-      metadata.name ||
+      full_name:
 
-      "ইউজার",
+        currentUser.user_metadata?.full_name ||
 
-    phone:
+        currentUser.email?.split("@")[0] ||
 
-      metadata.phone ||
+        "User",
 
-      "",
+      phone:
 
-    email:
+        currentUser.user_metadata?.phone ||
 
-      user.email ||
+        "",
 
-      "",
+      balance:0
 
-    balance:0,
+    };
 
-    custom_uid:newUID,
+    const insertResult =
 
-    avatar_url:
-
-      metadata.avatar_url ||
-
-      ""
-
-  };
-
-  var inserted =
-
-    await supabaseClient
+      await supabaseClient
 
       .from("profiles")
 
       .insert([newProfile])
 
-      .select("*")
+      .select()
 
-      .single();
+      .maybeSingle();
 
-  if(inserted.error){
+    if(insertResult.error){
 
-    console.error(
+      console.warn(
 
-      "PROFILE INSERT ERROR:",
+        "Profile create error:",
 
-      inserted.error
+        insertResult.error
 
-    );
+      );
 
-    throw new Error(
+      currentProfile =
 
-      "Profile তৈরি করা যায়নি: " +
+        newProfile;
 
-      inserted.error.message
+    }else{
 
-    );
+      currentProfile =
+
+        insertResult.data ||
+
+        newProfile;
+
+    }
+
+    return currentProfile;
+
+  }catch(error){
+
+    console.warn(error);
+
+    currentProfile = {
+
+      id:currentUser.id,
+
+      full_name:
+
+        currentUser.user_metadata?.full_name ||
+
+        "User",
+
+      phone:
+
+        currentUser.user_metadata?.phone ||
+
+        "",
+
+      balance:0
+
+    };
+
+    return currentProfile;
 
   }
 
-  return inserted.data;
+}
+
+/* =========================================================
+
+   SHOW DASHBOARD
+
+========================================================= */
+
+function showDashboard(){
+
+  $("authLanding").style.display = "none";
+
+  $("mainDashboard").style.display = "block";
+
+  updateBalance();
+
+  loadTasks();
 
 }
 
-/* =========================================
+/* =========================================================
+
+   BALANCE
+
+========================================================= */
+
+function updateBalance(){
+
+  const balance =
+
+    Number(
+
+      currentProfile?.balance || 0
+
+    );
+
+  $("balance").textContent =
+
+    balance.toFixed(2);
+
+}
+
+/* =========================================================
 
    SESSION
 
-========================================= */
+========================================================= */
 
-async function checkUserSession(){
+async function checkSession(){
+
+  if(!supabaseClient){
+
+    return;
+
+  }
 
   try{
 
-    var result =
+    const result =
 
-      await supabaseClient.auth
-
-        .getSession();
+      await supabaseClient.auth.getSession();
 
     if(result.error){
 
@@ -2556,175 +1994,41 @@ async function checkUserSession(){
 
     }
 
-    var session =
+    const session =
 
       result.data.session;
 
-    if(!session ||
+    if(!session){
 
-       !session.user){
+      $("authLanding").style.display = "flex";
 
-      $("authLanding")
-
-        .style.display = "flex";
-
-      $("mainDashboard")
-
-        .style.display = "none";
+      $("mainDashboard").style.display = "none";
 
       return;
 
     }
 
-    var user =
+    currentUser =
 
       session.user;
 
-    userProfile =
+    await ensureProfile();
 
-      await createProfileIfNeeded(
+    showDashboard();
 
-        user
+  }catch(error){
 
-      );
+    console.error(error);
 
-    if(!userProfile){
+    $("authLanding").style.display = "flex";
 
-      throw new Error(
+    $("mainDashboard").style.display = "none";
 
-        "Profile পাওয়া যায়নি।"
+    showError(
 
-      );
+      "Session load failed:\n\n" +
 
-    }
-
-    /*
-
-      Missing custom UID হলে
-
-      generate করে update করবে।
-
-    */
-
-    if(!userProfile.custom_uid){
-
-      var generated =
-
-        generateFormattedUID(
-
-          userProfile.serial_id
-
-        );
-
-      var uidUpdate =
-
-        await supabaseClient
-
-          .from("profiles")
-
-          .update({
-
-            custom_uid:generated
-
-          })
-
-          .eq("id",user.id);
-
-      if(!uidUpdate.error){
-
-        userProfile.custom_uid =
-
-          generated;
-
-      }
-
-    }
-
-    /*
-
-      Email নিশ্চিতভাবে profile-এ রাখা
-
-    */
-
-    if(!userProfile.email &&
-
-       user.email){
-
-      userProfile.email =
-
-        user.email;
-
-    }
-
-    $("welcome").textContent =
-
-      "স্বাগতম, " +
-
-      (
-
-        userProfile.full_name ||
-
-        "ব্যবহারকারী"
-
-      ) +
-
-      "!";
-
-    $("balanceText").textContent =
-
-      Number(
-
-        userProfile.balance || 0
-
-      ).toFixed(2);
-
-    $("authLanding")
-
-      .style.display = "none";
-
-    $("mainDashboard")
-
-      .style.display = "block";
-
-    /*
-
-      Task আলাদাভাবে load হবে।
-
-      Task error হলে dashboard বন্ধ হবে না।
-
-    */
-
-    fetchTasks();
-
-  }catch(err){
-
-    console.error(
-
-      "SESSION ERROR:",
-
-      err
-
-    );
-
-    $("authLanding")
-
-      .style.display = "flex";
-
-    $("mainDashboard")
-
-      .style.display = "none";
-
-    showAuthError(
-
-      "Account load করতে সমস্যা: " +
-
-      (
-
-        err.message ||
-
-        "Unknown error"
-
-      )
+      getErrorMessage(error)
 
     );
 
@@ -2732,87 +2036,31 @@ async function checkUserSession(){
 
 }
 
-/* =========================================
+/* =========================================================
 
-   LOGOUT
+   TASKS
 
-========================================= */
+========================================================= */
 
-async function handleLogout(){
+async function loadTasks(){
 
-  try{
-
-    await supabaseClient.auth.signOut();
-
-    userProfile = null;
-
-    $("modal").style.display =
-
-      "none";
-
-    $("taskModal").style.display =
-
-      "none";
-
-    await checkUserSession();
-
-  }catch(err){
-
-    alert(
-
-      "Logout failed: " +
-
-      err.message
-
-    );
-
-  }
-
-}
-
-/* =========================================
-
-   TASK LOAD
-
-========================================= */
-
-async function fetchTasks(){
-
-  var grid =
+  const grid =
 
     $("taskGrid");
 
   grid.innerHTML =
 
-    '<div class="number">' +
-
-    '<b>Task loading...</b>' +
-
-    '</div>';
+    '<div style="color:#789184">Task লোড হচ্ছে...</div>';
 
   try{
 
-    /*
-
-      active=true শুধু active task নেবে।
-
-      যদি active column না থাকে,
-
-      error দেখাবে।
-
-    */
-
-    var result =
+    const result =
 
       await supabaseClient
 
-        .from("tasks")
+      .from("tasks")
 
-        .select("*")
-
-        .eq("active",true)
-
-        .order("id",{ascending:true});
+      .select("*");
 
     if(result.error){
 
@@ -2820,349 +2068,389 @@ async function fetchTasks(){
 
     }
 
-    var tasks =
+    const tasks =
 
-      result.data || [];
+      (result.data || [])
 
-    if(tasks.length === 0){
+      .filter(task =>
+
+        task.active === undefined ||
+
+        task.active === true
+
+      );
+
+    if(!tasks.length){
 
       grid.innerHTML =
 
-        '<div class="number">' +
-
-        'কোনো Active Task পাওয়া যায়নি।' +
-
-        '</div>';
+        '<div style="color:#789184">এখন কোনো Task নেই।</div>';
 
       return;
 
     }
 
-    grid.innerHTML =
+    grid.innerHTML = "";
 
-      tasks.map(function(task){
+    tasks.forEach(task => {
 
-        var reward =
+      const title =
 
-          Number(task.reward || 0);
+        task.title ||
 
-        return (
+        "Task";
 
-          '<div class="card task-card">' +
+      const description =
 
-            '<div class="task-icon">' +
+        task.description ||
 
-              '<i class="fa-solid fa-bolt"></i>' +
+        "Task সম্পন্ন করুন";
 
-            '</div>' +
+      const reward =
 
-            '<div class="task-info">' +
+        Number(task.reward || 0);
 
-              '<b>' +
+      const card =
 
-                safeText(
+        document.createElement("div");
 
-                  task.title ||
+      card.className =
 
-                  "Task"
+        "task-card";
 
-                ) +
+      card.innerHTML = `
 
-              '</b>' +
+        <div class="task-icon">
 
-              '<small>' +
+          <i class="fa-solid fa-bolt"></i>
 
-                'রিওয়ার্ড: ৳' +
+        </div>
 
-                reward.toFixed(2) +
+        <div class="task-info">
 
-              '</small>' +
+          <b>${escapeHTML(title)}</b>
 
-            '</div>' +
+          <small>
 
-            '<button class="task-btn" ' +
+            ${escapeHTML(description)}
 
-              'onclick="startTask(' +
+          </small>
 
-                JSON.stringify(String(task.id)) +
+          <br>
 
-              ',' +
+          <span class="task-reward">
 
-                JSON.stringify(
+            ৳${reward.toFixed(2)}
 
-                  task.title || "Task"
+          </span>
 
-                ) +
+          <br>
 
-              ',' +
+          <button class="task-btn">
 
-                reward +
+            Start Task
 
-              ')">' +
+          </button>
 
-              'কাজ করুন' +
+        </div>
 
-            '</button>' +
+      `;
 
-          '</div>'
+      const button =
 
-        );
+        card.querySelector(".task-btn");
 
-      }).join("");
+      button.addEventListener(
 
-  }catch(err){
+        "click",
 
-    console.error(
+        () => startTask(task,button)
 
-      "TASK ERROR:",
+      );
 
-      err
+      grid.appendChild(card);
 
-    );
+    });
 
-    grid.innerHTML =
+  }catch(error){
 
-      '<div class="number">' +
+    console.error(error);
 
-        '<b>Task Load Failed</b>' +
+    grid.innerHTML = `
 
-        '<div style="margin-top:6px;color:#ff8585">' +
+      <div style="
 
-          safeText(
+        color:#ff9ca8;
 
-            err.message ||
+        padding:12px;
 
-            "Unknown error"
+        background:#2b1017;
 
-          ) +
+        border-radius:12px;
 
-        '</div>' +
+        line-height:1.5
 
-      '</div>';
+      ">
+
+        Task load failed.<br><br>
+
+        ${escapeHTML(
+
+          getErrorMessage(error)
+
+        )}
+
+      </div>
+
+    `;
 
   }
 
 }
 
-/* =========================================
+/* =========================================================
+
+   ESCAPE HTML
+
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value)
+
+    .replaceAll("&","&amp;")
+
+    .replaceAll("<","&lt;")
+
+    .replaceAll(">","&gt;")
+
+    .replaceAll('"',"&quot;")
+
+    .replaceAll("'","&#039;");
+
+}
+
+/* =========================================================
 
    START TASK
 
-========================================= */
+========================================================= */
 
-window.startTask =
+function startTask(task,button){
 
-function(id,title,reward){
+  if(!currentUser){
 
-  currentTaskData = {
-
-    id:id,
-
-    title:title,
-
-    reward:Number(reward || 0)
-
-  };
-
-  $("taskTitle").textContent =
-
-    title;
-
-  $("taskModal").style.display =
-
-    "flex";
-
-  $("taskClose").style.display =
-
-    "none";
-
-  var secondsLeft = 3;
-
-  $("taskCountdown").textContent =
-
-    secondsLeft;
-
-  $("taskProgress").style.width =
-
-    "0%";
-
-  if(taskTimerId){
-
-    clearInterval(taskTimerId);
-
-  }
-
-  taskTimerId =
-
-    setInterval(function(){
-
-      secondsLeft--;
-
-      $("taskCountdown").textContent =
-
-        secondsLeft;
-
-      var progress =
-
-        ((3 - secondsLeft) / 3) * 100;
-
-      $("taskProgress").style.width =
-
-        progress + "%";
-
-      if(secondsLeft <= 0){
-
-        clearInterval(taskTimerId);
-
-        taskTimerId = null;
-
-        $("taskClose").style.display =
-
-          "inline-block";
-
-      }
-
-    },1000);
-
-};
-
-/* =========================================
-
-   COMPLETE TASK
-
-========================================= */
-
-$("taskClose").onclick =
-
-async function(){
-
-  if(!currentTaskData ||
-
-     !userProfile){
+    alert("আগে Login করুন।");
 
     return;
 
   }
 
-  var reward =
+  if(button){
 
-    Number(
+    button.disabled = true;
 
-      currentTaskData.reward || 0
+  }
 
-    );
+  currentTask =
+
+    task;
+
+  $("taskTitle").textContent =
+
+    task.title || "Task চলছে";
+
+  $("countdown").textContent =
+
+    "3";
+
+  $("progressBar").style.width =
+
+    "0%";
+
+  $("rewardBtn").style.display =
+
+    "none";
+
+  $("taskModal").style.display =
+
+    "flex";
+
+  let count = 3;
+
+  const interval =
+
+    setInterval(() => {
+
+      count--;
+
+      $("countdown").textContent =
+
+        count;
+
+      $("progressBar").style.width =
+
+        ((3-count)/3*100) + "%";
+
+      if(count <= 0){
+
+        clearInterval(interval);
+
+        $("countdown").textContent =
+
+          "✓";
+
+        $("rewardBtn").style.display =
+
+          "block";
+
+      }
+
+    },1000);
+
+}
+
+/* =========================================================
+
+   CLAIM REWARD
+
+========================================================= */
+
+async function claimReward(){
+
+  if(!currentUser || !currentTask){
+
+    return;
+
+  }
+
+  const button =
+
+    $("rewardBtn");
+
+  button.disabled = true;
+
+  button.textContent =
+
+    "Saving...";
 
   try{
 
-    /*
-
-      সর্বশেষ profile balance আবার
-
-      database থেকে নেওয়া হচ্ছে।
-
-    */
-
-    var latest =
-
-      await supabaseClient
-
-        .from("profiles")
-
-        .select("balance")
-
-        .eq("id",userProfile.id)
-
-        .single();
-
-    if(latest.error){
-
-      throw latest.error;
-
-    }
-
-    var oldBalance =
+    const reward =
 
       Number(
 
-        latest.data.balance || 0
+        currentTask.reward || 0
 
       );
 
-    var newBalance =
+    /*
+
+      IMPORTANT:
+
+      Production app-এ reward server-side RPC/Edge Function
+
+      দিয়ে দেওয়া উচিত। এই version শুধু আপনার বর্তমান
+
+      client-side structure অনুযায়ী কাজ করবে।
+
+    */
+
+    const oldBalance =
+
+      Number(
+
+        currentProfile?.balance || 0
+
+      );
+
+    const newBalance =
 
       oldBalance + reward;
 
-    var update =
+    const updateResult =
 
       await supabaseClient
 
-        .from("profiles")
+      .from("profiles")
 
-        .update({
+      .update({
 
-          balance:newBalance
+        balance:newBalance
 
-        })
+      })
 
-        .eq("id",userProfile.id);
+      .eq("id",currentUser.id);
 
-    if(update.error){
+    if(updateResult.error){
 
-      throw update.error;
+      throw updateResult.error;
 
     }
 
     /*
 
-      completed_tasks table
+      প্রথমে completed_tasks ব্যবহার করবে।
+
+      আপনার database-এ যদি task_completions থাকে,
+
+      নিচের fallback সেটিও চেষ্টা করবে।
 
     */
 
-    var completed =
+    let completion =
 
       await supabaseClient
 
-        .from("completed_tasks")
+      .from("completed_tasks")
+
+      .insert([{
+
+        user_id:currentUser.id,
+
+        task_id:currentTask.id,
+
+        reward:reward
+
+      }]);
+
+    if(completion.error){
+
+      completion =
+
+        await supabaseClient
+
+        .from("task_completions")
 
         .insert([{
 
-          user_id:userProfile.id,
+          user_id:currentUser.id,
 
-          task_id:currentTaskData.id,
+          task_id:currentTask.id,
 
           reward:reward
 
         }]);
 
-    /*
+    }
 
-      completed_tasks না থাকলে
-
-      balance update rollback না করে
-
-      warning দেখানো হবে।
-
-    */
-
-    if(completed.error){
+    if(completion.error){
 
       console.warn(
 
-        "COMPLETED TASK ERROR:",
+        "Completion table error:",
 
-        completed.error
+        completion.error
 
       );
 
     }
 
-    userProfile.balance =
+    currentProfile.balance =
 
       newBalance;
 
-    $("balanceText").textContent =
-
-      newBalance.toFixed(2);
+    updateBalance();
 
     $("taskModal").style.display =
 
@@ -3170,47 +2458,157 @@ async function(){
 
     alert(
 
-      "অভিনন্দন! আপনি ৳" +
+      "Task complete!\n\n" +
 
-      reward.toFixed(2) +
+      "Reward: ৳" +
 
-      " রিওয়ার্ড পেয়েছেন।"
-
-    );
-
-  }catch(err){
-
-    console.error(
-
-      "COMPLETE TASK ERROR:",
-
-      err
+      reward.toFixed(2)
 
     );
+
+  }catch(error){
+
+    console.error(error);
 
     alert(
 
-      "Reward দিতে সমস্যা হয়েছে:\n" +
+      "Reward save করতে সমস্যা:\n\n" +
 
-      err.message
+      getErrorMessage(error)
 
     );
 
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+
+      "৳ Reward নিন";
+
   }
 
-};
+}
 
-/* =========================================
+/* =========================================================
 
-   AVATAR UPLOAD
+   DEPOSIT
 
-========================================= */
+========================================================= */
 
-async function handleAvatarUpload(file){
+function openDeposit(){
 
-  if(!file ||
+  openSheet(
 
-     !userProfile){
+    "Deposit",
+
+    `
+
+    <div class="form-group">
+
+      <label>Payment Method</label>
+
+      <select id="depositMethod">
+
+        <option>bKash</option>
+
+        <option>Nagad</option>
+
+        <option>Rocket</option>
+
+      </select>
+
+    </div>
+
+    <div class="card">
+
+      <div class="info-row">
+
+        <span>bKash</span>
+
+        <b>01XXXXXXXXX</b>
+
+      </div>
+
+      <div class="info-row">
+
+        <span>Nagad</span>
+
+        <b>01XXXXXXXXX</b>
+
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Amount</label>
+
+      <input id="depositAmount"
+
+             type="number"
+
+             placeholder="Amount">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Transaction ID</label>
+
+      <input id="transactionId"
+
+             placeholder="Transaction ID">
+
+    </div>
+
+    <button class="primary"
+
+            id="submitDeposit">
+
+      Deposit Submit
+
+    </button>
+
+    `
+
+  );
+
+  $("submitDeposit").onclick =
+
+    submitDeposit;
+
+}
+
+async function submitDeposit(){
+
+  const amount =
+
+    Number(
+
+      $("depositAmount").value
+
+    );
+
+  const transactionId =
+
+    $("transactionId").value.trim();
+
+  const method =
+
+    $("depositMethod").value;
+
+  if(amount <= 0){
+
+    alert("সঠিক Amount দিন।");
+
+    return;
+
+  }
+
+  if(!transactionId){
+
+    alert("Transaction ID দিন।");
 
     return;
 
@@ -3218,127 +2616,47 @@ async function handleAvatarUpload(file){
 
   try{
 
-    var extension =
-
-      file.name
-
-        .split(".")
-
-        .pop()
-
-        .toLowerCase();
-
-    var filePath =
-
-      userProfile.id +
-
-      "-" +
-
-      Date.now() +
-
-      "." +
-
-      extension;
-
-    alert(
-
-      "ছবি আপলোড হচ্ছে..."
-
-    );
-
-    var upload =
+    const result =
 
       await supabaseClient
 
-        .storage
+      .from("deposits")
 
-        .from("avatars")
+      .insert([{
 
-        .upload(
+        user_id:currentUser.id,
 
-          filePath,
+        amount:amount,
 
-          file,
+        payment_method:method,
 
-          {
+        transaction_id:transactionId,
 
-            upsert:true
+        status:"pending"
 
-          }
+      }]);
 
-        );
+    if(result.error){
 
-    if(upload.error){
-
-      throw upload.error;
+      throw result.error;
 
     }
 
-    var publicData =
-
-      supabaseClient
-
-        .storage
-
-        .from("avatars")
-
-        .getPublicUrl(
-
-          filePath
-
-        );
-
-    var avatarUrl =
-
-      publicData.data.publicUrl;
-
-    var update =
-
-      await supabaseClient
-
-        .from("profiles")
-
-        .update({
-
-          avatar_url:avatarUrl
-
-        })
-
-        .eq("id",userProfile.id);
-
-    if(update.error){
-
-      throw update.error;
-
-    }
-
-    userProfile.avatar_url =
-
-      avatarUrl;
-
     alert(
 
-      "প্রোফাইল ছবি সফলভাবে আপডেট হয়েছে!"
+      "Deposit request জমা হয়েছে।\nStatus: Pending"
 
     );
 
-    openSheet("profile");
+    closeModal();
 
-  }catch(err){
-
-    console.error(
-
-      "AVATAR ERROR:",
-
-      err
-
-    );
+  }catch(error){
 
     alert(
 
-      "ছবি আপলোড ব্যর্থ:\n" +
+      "Deposit submit failed:\n\n" +
 
-      err.message
+      getErrorMessage(error)
 
     );
 
@@ -3346,1125 +2664,1109 @@ async function handleAvatarUpload(file){
 
 }
 
-/* =========================================
+/* =========================================================
 
-   COPY UID
+   WITHDRAW
 
-========================================= */
+========================================================= */
 
-window.copyUID =
+function openWithdraw(){
 
-function(uid){
+  openSheet(
 
-  if(
+    "Withdraw",
 
-    navigator.clipboard &&
+    `
 
-    navigator.clipboard.writeText
+    <div class="form-group">
 
-  ){
+      <label>Payment Method</label>
 
-    navigator.clipboard
+      <select id="withdrawMethod">
 
-      .writeText(uid)
+        <option>bKash</option>
 
-      .then(function(){
+        <option>Nagad</option>
 
-        alert(
+      </select>
 
-          "UID কপি করা হয়েছে: " +
+    </div>
 
-          uid
+    <div class="form-group">
 
-        );
+      <label>Amount</label>
 
-      });
+      <input id="withdrawAmount"
 
-  }else{
+             type="number"
 
-    alert(uid);
+             placeholder="Minimum ৳500">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Mobile Number</label>
+
+      <input id="withdrawPhone"
+
+             type="tel"
+
+             inputmode="numeric"
+
+             placeholder="01XXXXXXXXX">
+
+    </div>
+
+    <button class="primary"
+
+            id="submitWithdraw">
+
+      Withdraw Request
+
+    </button>
+
+    `
+
+  );
+
+  $("submitWithdraw").onclick =
+
+    submitWithdraw;
+
+}
+
+async function submitWithdraw(){
+
+  const amount =
+
+    Number(
+
+      $("withdrawAmount").value
+
+    );
+
+  const phone =
+
+    $("withdrawPhone").value.trim();
+
+  const method =
+
+    $("withdrawMethod").value;
+
+  if(amount < 500){
+
+    alert("Minimum withdrawal ৳500।");
+
+    return;
 
   }
 
-};
+  const balance =
 
-/* =========================================
+    Number(
 
-   OPEN SHEET
+      currentProfile?.balance || 0
 
-========================================= */
+    );
 
-async function openSheet(type){
+  if(amount > balance){
 
-  var titles = {
+    alert("আপনার balance যথেষ্ট নয়।");
 
-    deposit:"ডিপোজিট",
+    return;
 
-    withdraw:"উত্তোলন",
+  }
 
-    profile:"মাই প্রোফাইল",
+  if(!phone){
 
-    wallet:"ওয়ালেট",
+    alert("Mobile number দিন।");
 
-    refer:"রেফারেল",
+    return;
 
-    history:"লেনদেনের ইতিহাস",
+  }
 
-    team:"VIP প্যাকেজসমূহ"
+  try{
 
-  };
+    const result =
+
+      await supabaseClient
+
+      .from("withdrawals")
+
+      .insert([{
+
+        user_id:currentUser.id,
+
+        amount:amount,
+
+        payment_method:method,
+
+        phone:phone,
+
+        status:"pending"
+
+      }]);
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+    alert(
+
+      "Withdrawal request জমা হয়েছে।\nStatus: Pending"
+
+    );
+
+    closeModal();
+
+  }catch(error){
+
+    alert(
+
+      "Withdrawal failed:\n\n" +
+
+      getErrorMessage(error)
+
+    );
+
+  }
+
+}
+
+/* =========================================================
+
+   PROFILE SHEET
+
+========================================================= */
+
+async function openProfile(){
+
+  const name =
+
+    currentProfile?.full_name ||
+
+    currentUser?.user_metadata?.full_name ||
+
+    "User";
+
+  const phone =
+
+    currentProfile?.phone ||
+
+    currentUser?.user_metadata?.phone ||
+
+    "Not set";
+
+  const email =
+
+    currentUser?.email ||
+
+    "";
+
+  openSheet(
+
+    "My Profile",
+
+    `
+
+    <div class="card">
+
+      <div class="info-row">
+
+        <span>Name</span>
+
+        <b>${escapeHTML(name)}</b>
+
+      </div>
+
+      <div class="info-row">
+
+        <span>Email</span>
+
+        <b>${escapeHTML(email)}</b>
+
+      </div>
+
+      <div class="info-row">
+
+        <span>Phone</span>
+
+        <b>${escapeHTML(phone)}</b>
+
+      </div>
+
+      <div class="info-row">
+
+        <span>Balance</span>
+
+        <b style="color:#39ff88">
+
+          ৳${Number(currentProfile?.balance||0).toFixed(2)}
+
+        </b>
+
+      </div>
+
+      <div class="info-row">
+
+        <span>User ID</span>
+
+        <b style="font-size:10px">
+
+          ${escapeHTML(currentUser.id)}
+
+        </b>
+
+      </div>
+
+    </div>
+
+    <button class="primary"
+
+            id="logoutBtn"
+
+            style="background:#202c26;color:white">
+
+      Logout
+
+    </button>
+
+    `
+
+  );
+
+  $("logoutBtn").onclick =
+
+    logoutUser;
+
+}
+
+/* =========================================================
+
+   WALLET
+
+========================================================= */
+
+function openWallet(){
+
+  const balance =
+
+    Number(
+
+      currentProfile?.balance || 0
+
+    );
+
+  openSheet(
+
+    "Wallet",
+
+    `
+
+    <div class="balance-card">
+
+      <div class="balance-label">
+
+        Current Balance
+
+      </div>
+
+      <div class="balance">
+
+        ৳${balance.toFixed(2)}
+
+      </div>
+
+    </div>
+
+    <br>
+
+    <button class="primary"
+
+            id="walletDeposit">
+
+      Deposit
+
+    </button>
+
+    <br><br>
+
+    <button class="primary"
+
+            id="walletWithdraw">
+
+      Withdraw
+
+    </button>
+
+    `
+
+  );
+
+  $("walletDeposit").onclick =
+
+    openDeposit;
+
+  $("walletWithdraw").onclick =
+
+    openWithdraw;
+
+}
+
+/* =========================================================
+
+   REFER
+
+========================================================= */
+
+function openRefer(){
+
+  const code =
+
+    currentUser?.id
+
+      ? currentUser.id.substring(0,8).toUpperCase()
+
+      : "TUINCOME";
+
+  openSheet(
+
+    "Refer & Earn",
+
+    `
+
+    <div class="card">
+
+      <h3>আপনার Referral Code</h3>
+
+      <div style="
+
+        font-size:25px;
+
+        font-weight:900;
+
+        color:#39ff88;
+
+        text-align:center;
+
+        padding:15px
+
+      ">
+
+        ${code}
+
+      </div>
+
+      <p style="color:#819b8d">
+
+        আপনার বন্ধু এই code ব্যবহার করে
+
+        Account তৈরি করতে পারবে।
+
+      </p>
+
+    </div>
+
+    `
+
+  );
+
+}
+
+/* =========================================================
+
+   HISTORY
+
+========================================================= */
+
+async function openHistory(){
+
+  openSheet(
+
+    "History",
+
+    '<div style="color:#789184">Loading...</div>'
+
+  );
+
+  let html = "";
+
+  try{
+
+    const deposits =
+
+      await supabaseClient
+
+      .from("deposits")
+
+      .select("*")
+
+      .eq("user_id",currentUser.id)
+
+      .order("created_at",{ascending:false})
+
+      .limit(20);
+
+    if(!deposits.error){
+
+      (deposits.data || [])
+
+      .forEach(item => {
+
+        html += `
+
+        <div class="history-item">
+
+          <b>Deposit</b><br>
+
+          Amount:
+
+          ৳${Number(item.amount||0).toFixed(2)}
+
+          <br>
+
+          Status:
+
+          <span class="${statusClass(item.status)}">
+
+            ${escapeHTML(item.status || "pending")}
+
+          </span>
+
+        </div>
+
+        `;
+
+      });
+
+    }
+
+  }catch(error){
+
+    console.warn(error);
+
+  }
+
+  try{
+
+    const withdrawals =
+
+      await supabaseClient
+
+      .from("withdrawals")
+
+      .select("*")
+
+      .eq("user_id",currentUser.id)
+
+      .order("created_at",{ascending:false})
+
+      .limit(20);
+
+    if(!withdrawals.error){
+
+      (withdrawals.data || [])
+
+      .forEach(item => {
+
+        html += `
+
+        <div class="history-item">
+
+          <b>Withdrawal</b><br>
+
+          Amount:
+
+          ৳${Number(item.amount||0).toFixed(2)}
+
+          <br>
+
+          Status:
+
+          <span class="${statusClass(item.status)}">
+
+            ${escapeHTML(item.status || "pending")}
+
+          </span>
+
+        </div>
+
+        `;
+
+      });
+
+    }
+
+  }catch(error){
+
+    console.warn(error);
+
+  }
+
+  if(!html){
+
+    html =
+
+      '<div style="color:#789184">কোনো history পাওয়া যায়নি।</div>';
+
+  }
+
+  $("sheetBody").innerHTML =
+
+    html;
+
+}
+
+function statusClass(status){
+
+  status =
+
+    String(status || "")
+
+    .toLowerCase();
+
+  if(status === "approved" ||
+
+     status === "completed"){
+
+    return "approved";
+
+  }
+
+  if(status === "rejected"){
+
+    return "rejected";
+
+  }
+
+  return "pending";
+
+}
+
+/* =========================================================
+
+   VIP
+
+========================================================= */
+
+async function openTeam(){
+
+  openSheet(
+
+    "VIP Team",
+
+    '<div style="color:#789184">VIP load হচ্ছে...</div>'
+
+  );
+
+  try{
+
+    const result =
+
+      await supabaseClient
+
+      .from("vip_packages")
+
+      .select("*")
+
+      .order("id");
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+    const items =
+
+      result.data || [];
+
+    if(!items.length){
+
+      $("sheetBody").innerHTML =
+
+        '<div style="color:#789184">VIP package এখনো যোগ করা হয়নি।</div>';
+
+      return;
+
+    }
+
+    $("sheetBody").innerHTML =
+
+      items.map(item => `
+
+        <div class="card">
+
+          <h3 style="color:#ffd700">
+
+            ${escapeHTML(item.name || ("VIP " + item.id))}
+
+          </h3>
+
+          <p style="color:#91a99a">
+
+            Price:
+
+            ৳${Number(item.price||0).toFixed(2)}
+
+          </p>
+
+        </div>
+
+      `).join("");
+
+  }catch(error){
+
+    $("sheetBody").innerHTML = `
+
+      <div class="error-box"
+
+           style="display:block">
+
+        VIP load failed:
+
+        ${escapeHTML(
+
+          getErrorMessage(error)
+
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+/* =========================================================
+
+   SHEET
+
+========================================================= */
+
+function openSheet(title,body){
 
   $("sheetTitle").textContent =
 
-    titles[type] || "TUINCOME";
+    title;
+
+  $("sheetBody").innerHTML =
+
+    body;
 
   $("modal").style.display =
 
     "flex";
 
-  /* ================= PROFILE ================= */
-
-  if(type === "profile"){
-
-    $("sheetBody").innerHTML =
-
-      '<div class="loading">' +
-
-      'প্রোফাইল লোড হচ্ছে...' +
-
-      '</div>';
-
-    try{
-
-      if(!userProfile){
-
-        throw new Error(
-
-          "ব্যবহারকারীর তথ্য পাওয়া যায়নি।"
-
-        );
-
-      }
-
-      var depositResult =
-
-        await supabaseClient
-
-          .from("deposits")
-
-          .select("amount,status")
-
-          .eq(
-
-            "user_id",
-
-            userProfile.id
-
-          );
-
-      var withdrawResult =
-
-        await supabaseClient
-
-          .from("withdrawals")
-
-          .select("amount,status")
-
-          .eq(
-
-            "user_id",
-
-            userProfile.id
-
-          );
-
-      var taskResult =
-
-        await supabaseClient
-
-          .from("completed_tasks")
-
-          .select("id")
-
-          .eq(
-
-            "user_id",
-
-            userProfile.id
-
-          );
-
-      /*
-
-        deposits/withdrawals না থাকলেও
-
-        পুরো profile ভেঙে যাবে না।
-
-      */
-
-      var deposits =
-
-        depositResult.data || [];
-
-      var withdrawals =
-
-        withdrawResult.data || [];
-
-      var completedCount =
-
-        taskResult.data
-
-          ? taskResult.data.length
-
-          : 0;
-
-      var totalDeposit =
-
-        deposits.reduce(
-
-          function(total,item){
-
-            return total +
-
-              Number(item.amount || 0);
-
-          },
-
-          0
-
-        );
-
-      var totalWithdraw =
-
-        withdrawals.reduce(
-
-          function(total,item){
-
-            return total +
-
-              Number(item.amount || 0);
-
-          },
-
-          0
-
-        );
-
-      var avatarElement =
-
-        userProfile.avatar_url
-
-        ?
-
-        '<img src="' +
-
-          safeText(
-
-            userProfile.avatar_url
-
-          ) +
-
-          '" class="profile-avatar-img">'
-
-        :
-
-        '<div class="profile-avatar-img">' +
-
-          '<i class="fa-solid fa-user"></i>' +
-
-        '</div>';
-
-      var displayUID =
-
-        userProfile.custom_uid ||
-
-        generateFormattedUID();
-
-      var profileHtml =
-
-        '<div style="text-align:center;padding:10px 0 20px;">' +
-
-          '<div class="profile-avatar-wrapper">' +
-
-            avatarElement +
-
-            '<label for="avatarInput" class="avatar-edit-icon">' +
-
-              '<i class="fa-solid fa-camera"></i>' +
-
-            '</label>' +
-
-            '<input ' +
-
-              'type="file" ' +
-
-              'id="avatarInput" ' +
-
-              'accept="image/*" ' +
-
-              'style="display:none">' +
-
-          '</div>' +
-
-          '<h3 style="margin:0 0 5px;color:#fff;">' +
-
-            safeText(
-
-              userProfile.full_name ||
-
-              "ব্যবহারকারী"
-
-            ) +
-
-          '</h3>' +
-
-          '<div class="uid-badge">' +
-
-            '<span>UID: ' +
-
-              safeText(displayUID) +
-
-            '</span>' +
-
-            '<i ' +
-
-              'class="fa-solid fa-copy" ' +
-
-              'onclick="copyUID(' +
-
-                JSON.stringify(
-
-                  displayUID
-
-                ) +
-
-              ')">' +
-
-            '</i>' +
-
-          '</div>' +
-
-          '<br><br>' +
-
-          '<span style="background:#143825;color:var(--green);padding:4px 12px;border-radius:12px;font-size:12px;font-weight:bold;">' +
-
-            'Active Member' +
-
-          '</span>' +
-
-        '</div>' +
-
-        '<div class="card" style="padding:15px;margin-bottom:15px;">' +
-
-          '<div style="margin-bottom:8px;font-size:14px;color:#b0d1c0;">' +
-
-            '<i class="fa-solid fa-envelope" style="color:var(--green);width:20px;"></i> ' +
-
-            '<b>ইমেইল:</b> ' +
-
-            safeText(
-
-              userProfile.email ||
-
-              "নাই"
-
-            ) +
-
-          '</div>' +
-
-          '<div style="font-size:14px;color:#b0d1c0;">' +
-
-            '<i class="fa-solid fa-phone" style="color:var(--green);width:20px;"></i> ' +
-
-            '<b>ফোন:</b> ' +
-
-            safeText(
-
-              userProfile.phone ||
-
-              "যুক্ত করা হয়নি"
-
-            ) +
-
-          '</div>' +
-
-        '</div>' +
-
-        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px;">' +
-
-          '<div class="card" style="padding:12px;text-align:center;">' +
-
-            '<small>মোট ডিপোজিট</small>' +
-
-            '<div style="color:var(--green);font-size:18px;font-weight:bold;margin-top:4px;">' +
-
-              '৳ ' +
-
-              totalDeposit.toFixed(2) +
-
-            '</div>' +
-
-          '</div>' +
-
-          '<div class="card" style="padding:12px;text-align:center;">' +
-
-            '<small>মোট উত্তোলন</small>' +
-
-            '<div style="color:#ff6b6b;font-size:18px;font-weight:bold;margin-top:4px;">' +
-
-              '৳ ' +
-
-              totalWithdraw.toFixed(2) +
-
-            '</div>' +
-
-          '</div>' +
-
-          '<div class="card" style="padding:12px;text-align:center;">' +
-
-            '<small>বর্তমান ব্যালেন্স</small>' +
-
-            '<div style="color:var(--green3);font-size:18px;font-weight:bold;margin-top:4px;">' +
-
-              '৳ ' +
-
-              Number(
-
-                userProfile.balance || 0
-
-              ).toFixed(2) +
-
-            '</div>' +
-
-          '</div>' +
-
-          '<div class="card" style="padding:12px;text-align:center;">' +
-
-            '<small>সম্পন্নকৃত টাস্ক</small>' +
-
-            '<div style="color:#7bdaff;font-size:18px;font-weight:bold;margin-top:4px;">' +
-
-              completedCount +
-
-              ' টি' +
-
-            '</div>' +
-
-          '</div>' +
-
-        '</div>' +
-
-        '<button ' +
-
-          'class="primary" ' +
-
-          'id="logoutBtn" ' +
-
-          'style="width:100%;padding:14px;background:#1b2921;color:#c2d2c8;">' +
-
-          'লগ আউট করুন' +
-
-        '</button>';
-
-      $("sheetBody").innerHTML =
-
-        profileHtml;
-
-      $("logoutBtn").onclick =
-
-        handleLogout;
-
-      var avatarInput =
-
-        $("avatarInput");
-
-      if(avatarInput){
-
-        avatarInput.onchange =
-
-          function(event){
-
-            var file =
-
-              event.target.files &&
-
-              event.target.files[0];
-
-            if(file){
-
-              handleAvatarUpload(
-
-                file
-
-              );
-
-            }
-
-          };
-
-      }
-
-    }catch(err){
-
-      console.error(
-
-        "PROFILE ERROR:",
-
-        err
-
-      );
-
-      $("sheetBody").innerHTML =
-
-        '<div class="number">' +
-
-          '<b>Profile data load error</b>' +
-
-          '<div style="margin-top:7px;color:#ff8585;">' +
-
-            safeText(
-
-              err.message
-
-            ) +
-
-          '</div>' +
-
-        '</div>';
-
-    }
-
-    return;
-
-  }
-
-  /* ================= VIP ================= */
-
-  if(type === "team"){
-
-    $("sheetBody").innerHTML =
-
-      '<div class="loading">' +
-
-      'VIP প্যাকেজ লোড হচ্ছে...' +
-
-      '</div>';
-
-    try{
-
-      var result =
-
-        await supabaseClient
-
-          .from("vip_packages")
-
-          .select("*")
-
-          .order(
-
-            "price",
-
-            {
-
-              ascending:true
-
-            }
-
-          );
-
-      if(result.error){
-
-        throw result.error;
-
-      }
-
-      var packages =
-
-        result.data || [];
-
-      if(packages.length === 0){
-
-        $("sheetBody").innerHTML =
-
-          '<div class="number">' +
-
-          'কোনো VIP package পাওয়া যায়নি।' +
-
-          '</div>';
-
-        return;
-
-      }
-
-      var html =
-
-        packages.map(
-
-          function(pkg){
-
-            var name =
-
-              String(
-
-                pkg.name || ""
-
-              );
-
-            var upper =
-
-              name.toUpperCase();
-
-            var theme =
-
-              "vip-card-bronze";
-
-            if(
-
-              upper.includes("SILVER")
-
-            ){
-
-              theme =
-
-                "vip-card-silver";
-
-            }else if(
-
-              upper.includes("GOLD")
-
-            ){
-
-              theme =
-
-                "vip-card-gold";
-
-            }else if(
-
-              upper.includes("PLATINUM")
-
-            ){
-
-              theme =
-
-                "vip-card-platinum";
-
-            }else if(
-
-              upper.includes("DIAMOND")
-
-            ){
-
-              theme =
-
-                "vip-card-diamond";
-
-            }else if(
-
-              upper.includes("CROWN")
-
-            ){
-
-              theme =
-
-                "vip-card-crown";
-
-            }
-
-            return (
-
-              '<div class="vip-card ' +
-
-                theme +
-
-              '">' +
-
-                '<div class="vip-title">' +
-
-                  '<i class="fa-solid fa-crown"></i> ' +
-
-                  safeText(name) +
-
-                '</div>' +
-
-                '<div class="vip-price">' +
-
-                  '৳ ' +
-
-                  Number(
-
-                    pkg.price || 0
-
-                  ).toFixed(2) +
-
-                '</div>' +
-
-                '<div class="vip-detail">' +
-
-                  '<b>দৈনিক আয়:</b> ৳ ' +
-
-                  Number(
-
-                    pkg.daily_income || 0
-
-                  ).toFixed(2) +
-
-                '</div>' +
-
-                '<div class="vip-detail">' +
-
-                  '<b>মেয়াদ:</b> ' +
-
-                  safeText(
-
-                    pkg.validity_days ||
-
-                    30
-
-                  ) +
-
-                  ' দিন' +
-
-                '</div>' +
-
-                '<button class="vip-buy-btn">' +
-
-                  'প্যাকেজ ক্রয় করুন' +
-
-                '</button>' +
-
-              '</div>'
-
-            );
-
-          }
-
-        ).join("");
-
-      $("sheetBody").innerHTML =
-
-        html;
-
-    }catch(err){
-
-      console.error(
-
-        "VIP ERROR:",
-
-        err
-
-      );
-
-      $("sheetBody").innerHTML =
-
-        '<div class="number">' +
-
-          '<b>VIP Load Failed</b>' +
-
-          '<div style="margin-top:7px;color:#ff8585;">' +
-
-            safeText(
-
-              err.message
-
-            ) +
-
-          '</div>' +
-
-        '</div>';
-
-    }
-
-    return;
-
-  }
-
-  /* ================= WALLET ================= */
-
-  if(type === "wallet"){
-
-    $("sheetBody").innerHTML =
-
-      '<div class="card" style="padding:20px;text-align:center;">' +
-
-        '<div style="font-size:40px;color:var(--green);">' +
-
-          '<i class="fa-solid fa-wallet"></i>' +
-
-        '</div>' +
-
-        '<h3>বর্তমান ব্যালেন্স</h3>' +
-
-        '<div style="font-size:32px;color:var(--green);font-weight:900;">' +
-
-          '৳ ' +
-
-          Number(
-
-            userProfile.balance || 0
-
-          ).toFixed(2) +
-
-        '</div>' +
-
-      '</div>';
-
-    return;
-
-  }
-
-  /* ================= DEPOSIT ================= */
-
-  if(type === "deposit"){
-
-    $("sheetBody").innerHTML =
-
-      '<div class="number">' +
-
-        '<b>ডিপোজিট</b>' +
-
-        '<p class="hint">' +
-
-          'ডিপোজিট ফিচারটি এখানে সেটআপ করা যাবে।' +
-
-        '</p>' +
-
-      '</div>';
-
-    return;
-
-  }
-
-  /* ================= WITHDRAW ================= */
-
-  if(type === "withdraw"){
-
-    $("sheetBody").innerHTML =
-
-      '<div class="number">' +
-
-        '<b>উত্তোলন</b>' +
-
-        '<p class="hint">' +
-
-          'উত্তোলনের জন্য আপনার অ্যাকাউন্টে পর্যাপ্ত ব্যালেন্স থাকতে হবে।' +
-
-        '</p>' +
-
-      '</div>';
-
-    return;
-
-  }
-
-  /* ================= REFER ================= */
-
-  if(type === "refer"){
-
-    var uid =
-
-      userProfile &&
-
-      userProfile.custom_uid
-
-        ? userProfile.custom_uid
-
-        : "TUINCOME";
-
-    $("sheetBody").innerHTML =
-
-      '<div class="card" style="padding:20px;text-align:center;">' +
-
-        '<h3>আপনার Referral UID</h3>' +
-
-        '<div class="uid-badge">' +
-
-          safeText(uid) +
-
-        '</div>' +
-
-        '<p class="hint">' +
-
-          'এই UID আপনার রেফারেল হিসেবে ব্যবহার করতে পারবেন।' +
-
-        '</p>' +
-
-      '</div>';
-
-    return;
-
-  }
-
-  /* ================= HISTORY ================= */
-
-  if(type === "history"){
-
-    $("sheetBody").innerHTML =
-
-      '<div class="number">' +
-
-        '<b>লেনদেনের ইতিহাস</b>' +
-
-        '<p class="hint">' +
-
-          'আপনার লেনদেনের ইতিহাস এখানে দেখা যাবে।' +
-
-        '</p>' +
-
-      '</div>';
-
-    return;
-
-  }
-
 }
 
-/* =========================================
-
-   NAVIGATION
-
-========================================= */
-
-$("tileProfile").onclick =
-
-function(){
-
-  openSheet("profile");
-
-};
-
-$("navProfile").onclick =
-
-function(){
-
-  openSheet("profile");
-
-};
-
-$("navTeam").onclick =
-
-function(){
-
-  openSheet("team");
-
-};
-
-$("navWallet").onclick =
-
-function(){
-
-  openSheet("wallet");
-
-};
-
-$("walletBtn").onclick =
-
-function(){
-
-  openSheet("wallet");
-
-};
-
-$("btnDeposit").onclick =
-
-function(){
-
-  openSheet("deposit");
-
-};
-
-$("btnWithdraw").onclick =
-
-function(){
-
-  openSheet("withdraw");
-
-};
-
-$("btnRefer").onclick =
-
-function(){
-
-  openSheet("refer");
-
-};
-
-$("btnHistory").onclick =
-
-function(){
-
-  openSheet("history");
-
-};
-
-$("navStart").onclick =
-
-function(){
-
-  window.scrollTo({
-
-    top:
-
-      document.querySelector(
-
-        ".task-grid"
-
-      ).offsetTop - 100,
-
-    behavior:"smooth"
-
-  });
-
-};
-
-/* =========================================
-
-   CLOSE SHEET
-
-========================================= */
-
-$("closeSheetBtn").onclick =
-
-function(){
+function closeModal(){
 
   $("modal").style.display =
 
     "none";
 
-};
+}
 
-$("modal").addEventListener(
+/* =========================================================
 
-  "click",
+   LOGOUT
 
-  function(event){
+========================================================= */
 
-    if(
+async function logoutUser(){
 
-      event.target ===
+  try{
 
-      $("modal")
+    await supabaseClient.auth.signOut();
 
-    ){
+  }catch(error){
 
-      $("modal").style.display =
-
-        "none";
-
-    }
+    console.error(error);
 
   }
 
-);
+  currentUser = null;
 
-/* =========================================
+  currentProfile = null;
 
-   TASK MODAL CLOSE
+  $("mainDashboard").style.display =
 
-========================================= */
+    "none";
 
-$("taskModal").addEventListener(
+  $("authLanding").style.display =
 
-  "click",
+    "flex";
 
-  function(event){
+  setAuthMode("login");
 
-    /*
+  clearMessages();
 
-      ৩ সেকেন্ড শেষ হওয়ার আগে
+}
 
-      বাইরে click করে বন্ধ হবে না।
+/* =========================================================
 
-    */
+   OAUTH
 
-    if(
+========================================================= */
 
-      event.target ===
+async function oauthLogin(provider){
 
-      $("taskModal") &&
+  clearMessages();
 
-      $("taskClose").style.display ===
+  if(
 
-      "inline-block"
+    window.location.protocol === "file:"
 
-    ){
+  ){
 
-      $("taskModal").style.display =
+    showError(
 
-        "none";
+      "Google/Facebook Login চালাতে HTML file সরাসরি ফোনে খুলবেন না।\n\n" +
 
-    }
-
-  }
-
-);
-
-/* =========================================
-
-   AUTH STATE CHANGE
-
-========================================= */
-
-supabaseClient.auth.onAuthStateChange(
-
-  function(event,session){
-
-    console.log(
-
-      "AUTH EVENT:",
-
-      event
+      "Site-টি HTTPS hosting-এ publish করতে হবে।"
 
     );
 
-    if(session){
-
-      /*
-
-        OAuth callback বা login-এর পর
-
-        profile load করার সুযোগ।
-
-      */
-
-      setTimeout(
-
-        function(){
-
-          checkUserSession();
-
-        },
-
-        100
-
-      );
-
-    }else{
-
-      userProfile = null;
-
-      $("authLanding")
-
-        .style.display = "flex";
-
-      $("mainDashboard")
-
-        .style.display = "none";
-
-    }
+    return;
 
   }
 
+  try{
+
+    const result =
+
+      await supabaseClient.auth.signInWithOAuth({
+
+        provider:provider,
+
+        options:{
+
+          redirectTo:
+
+            window.location.origin +
+
+            window.location.pathname
+
+        }
+
+      });
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+  }catch(error){
+
+    showError(
+
+      "OAuth Login failed:\n\n" +
+
+      getErrorMessage(error)
+
+    );
+
+  }
+
+}
+
+/* =========================================================
+
+   PASSWORD RESET
+
+========================================================= */
+
+async function resetPassword(){
+
+  clearMessages();
+
+  const email =
+
+    $("email").value.trim();
+
+  if(!email){
+
+    showError(
+
+      "আগে Email/Gmail লিখুন।"
+
+    );
+
+    return;
+
+  }
+
+  try{
+
+    const result =
+
+      await supabaseClient.auth
+
+      .resetPasswordForEmail(
+
+        email,
+
+        {
+
+          redirectTo:
+
+            window.location.origin +
+
+            window.location.pathname
+
+        }
+
+      );
+
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+    showSuccess(
+
+      "Password reset email পাঠানোর চেষ্টা করা হয়েছে। Gmail inbox/check করুন।"
+
+    );
+
+  }catch(error){
+
+    showError(
+
+      "Password reset failed:\n\n" +
+
+      getErrorMessage(error)
+
+    );
+
+  }
+
+}
+
+/* =========================================================
+
+   EVENTS
+
+========================================================= */
+
+$("loginTab").onclick =
+
+  () => setAuthMode("login");
+
+$("registerTab").onclick =
+
+  () => setAuthMode("register");
+
+$("authBtn").onclick = () => {
+
+  if(authMode === "login"){
+
+    loginUser();
+
+  }else{
+
+    registerUser();
+
+  }
+
+};
+
+$("googleBtn").onclick =
+
+  () => oauthLogin("google");
+
+$("facebookBtn").onclick =
+
+  () => oauthLogin("facebook");
+
+$("forgotBtn").onclick =
+
+  resetPassword;
+
+$("closeBtn").onclick =
+
+  closeModal;
+
+$("modal").onclick =
+
+  function(event){
+
+    if(event.target === $("modal")){
+
+      closeModal();
+
+    }
+
+  };
+
+$("depositBtn").onclick =
+
+  openDeposit;
+
+$("withdrawBtn").onclick =
+
+  openWithdraw;
+
+$("referBtn").onclick =
+
+  openRefer;
+
+$("historyBtn").onclick =
+
+  openHistory;
+
+$("walletNav").onclick =
+
+  openWallet;
+
+$("teamNav").onclick =
+
+  openTeam;
+
+$("profileNav").onclick =
+
+  openProfile;
+
+$("homeNav").onclick =
+
+  () => {
+
+    window.scrollTo({
+
+      top:0,
+
+      behavior:"smooth"
+
+    });
+
+  };
+
+$("startNav").onclick =
+
+  () => {
+
+    const firstTask =
+
+      document.querySelector(".task-btn");
+
+    if(firstTask){
+
+      firstTask.click();
+
+    }else{
+
+      alert("এখন কোনো Task নেই।");
+
+    }
+
+  };
+
+$("rewardBtn").onclick =
+
+  claimReward;
+
+$("langBtn").onclick =
+
+  function(){
+
+    alert(
+
+      "Language option পরে যোগ করা যাবে।"
+
+    );
+
+  };
+
+/* =========================================================
+
+   AUTH STATE
+
+========================================================= */
+
+async function startApp(){
+
+  if(!initSupabase()){
+
+    return;
+
+  }
+
+  /*
+
+    প্রথমে connection পরীক্ষা।
+
+    Network error হলে এখন আর শুধু "Load failed"
+
+    দেখাবে না—আসল কারণ দেখাবে।
+
+  */
+
+  const connected =
+
+    await testSupabase();
+
+  if(!connected){
+
+    return;
+
+  }
+
+  supabaseClient.auth.onAuthStateChange(
+
+    function(event,session){
+
+      console.log(
+
+        "AUTH EVENT:",
+
+        event
+
+      );
+
+      if(event === "SIGNED_OUT"){
+
+        currentUser = null;
+
+        currentProfile = null;
+
+        $("mainDashboard").style.display =
+
+          "none";
+
+        $("authLanding").style.display =
+
+          "flex";
+
+      }
+
+    }
+
+  );
+
+  await checkSession();
+
+}
+
+/* =========================================================
+
+   START
+
+========================================================= */
+
+document.addEventListener(
+
+  "DOMContentLoaded",
+
+  startApp
+
 );
-
-/* =========================================
-
-   INITIAL LOAD
-
-========================================= */
-
-checkUserSession();
-
-});
 
 </script>
 
