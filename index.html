@@ -919,6 +919,54 @@ function getErrorMessage(error){
 
 
 /* =========================================================
+   AUTH ERROR TRANSLATION
+========================================================= */
+
+function translateServerError(message){
+
+  let msg = String(message || "");
+
+  if(msg.includes("TASK_ALREADY_COMPLETED")){
+    return "আপনি এই Task আগে সম্পন্ন করেছেন।";
+  }
+
+  if(msg.includes("TASK_NOT_ACTIVE")){
+    return "এই Task বর্তমানে active নেই।";
+  }
+
+  if(msg.includes("TASK_NOT_FOUND")){
+    return "Task খুঁজে পাওয়া যায়নি।";
+  }
+
+  if(msg.includes("LOGIN_REQUIRED")){
+    return "আগে Login করুন।";
+  }
+
+  if(msg.includes("PROFILE_NOT_FOUND")){
+    return "আপনার profile পাওয়া যায়নি।";
+  }
+
+  if(msg.includes("INSUFFICIENT_BALANCE")){
+    return "আপনার balance যথেষ্ট নয়।";
+  }
+
+  if(msg.includes("MINIMUM_WITHDRAWAL_IS_500")){
+    return "Minimum withdrawal ৳500।";
+  }
+
+  if(msg.includes("TRANSACTION_ALREADY_USED")){
+    return "এই Transaction ID আগে ব্যবহার করা হয়েছে।";
+  }
+
+  if(msg.includes("INVALID_AMOUNT")){
+    return "সঠিক Amount দিন।";
+  }
+
+  return msg;
+}
+
+
+/* =========================================================
    AUTH MODE
 ========================================================= */
 
@@ -1236,45 +1284,13 @@ async function loadProfile(){
     }
 
 
-    const insertResult =
-      await supabaseClient
-        .from("profiles")
-        .insert([{
+    /*
+      এখানে direct profiles INSERT নেই।
+      Signup trigger profile তৈরি করার কথা।
+    */
 
-          id:currentUser.id,
-
-          full_name:
-            fallbackProfile.full_name,
-
-          phone:
-            fallbackProfile.phone,
-
-          balance:0,
-
-          referral_code:
-            fallbackProfile.referral_code
-
-        }])
-        .select()
-        .maybeSingle();
-
-
-    if(insertResult.error){
-
-      console.warn(
-        "Profile insert error:",
-        insertResult.error
-      );
-
-      currentProfile =
-        fallbackProfile;
-
-    }else{
-
-      currentProfile =
-        insertResult.data ||
-        fallbackProfile;
-    }
+    currentProfile =
+      fallbackProfile;
 
     return currentProfile;
 
@@ -1575,12 +1591,15 @@ function startTask(task,button){
 
 
 /* =========================================================
-   CLAIM TASK REWARD
+   CLAIM TASK REWARD - SERVER SIDE
 ========================================================= */
 
 async function claimReward(){
 
   if(!currentUser || !currentTask){
+
+    alert("Task information পাওয়া যায়নি।");
+
     return;
   }
 
@@ -1592,123 +1611,88 @@ async function claimReward(){
 
   try{
 
-    const reward =
-      Number(currentTask.reward || 0);
-
-    if(reward <= 0){
-      throw new Error("Task reward invalid.");
-    }
-
-
     /*
-      Check whether this user already completed
-      this task.
+      গুরুত্বপূর্ণ:
+      এখানে আর task_completions INSERT করা হচ্ছে না।
+      Balance-ও এখানে সরাসরি update করা হচ্ছে না।
+
+      সব কাজ Supabase RPC:
+      claim_task_reward()
     */
 
-    const existing =
-      await supabaseClient
-        .from("task_completions")
-        .select("id")
-        .eq("user_id",currentUser.id)
-        .eq("task_id",currentTask.id)
-        .limit(1);
+    const result =
+      await supabaseClient.rpc(
+        "claim_task_reward",
+        {
+          p_task_id:currentTask.id
+        }
+      );
 
-    if(
-      !existing.error &&
-      existing.data &&
-      existing.data.length > 0
-    ){
+    if(result.error){
+      throw result.error;
+    }
+
+    const data =
+      result.data;
+
+    if(!data || data.success !== true){
 
       throw new Error(
-        "আপনি এই Task আগে সম্পন্ন করেছেন।"
+        "Reward server থেকে পাওয়া যায়নি।"
       );
     }
 
 
     /*
-      Save completion first.
+      Server থেকে নতুন balance নেওয়া হচ্ছে।
     */
-
-    const completion =
-      await supabaseClient
-        .from("task_completions")
-        .insert([{
-
-          user_id:currentUser.id,
-
-          task_id:currentTask.id,
-
-          reward:reward
-
-        }]);
-
-    if(completion.error){
-      throw completion.error;
-    }
-
-
-    /*
-      Update profile balance.
-    */
-
-    const oldBalance =
-      Number(currentProfile?.balance || 0);
-
-    const newBalance =
-      oldBalance + reward;
-
-    const update =
-      await supabaseClient
-        .from("profiles")
-        .update({
-          balance:newBalance
-        })
-        .eq("id",currentUser.id);
-
-    if(update.error){
-
-      /*
-        Completion already saved but balance failed.
-        Reload profile so user sees actual database state.
-      */
-
-      await loadProfile();
-
-      throw update.error;
-    }
-
 
     currentProfile.balance =
-      newBalance;
+      Number(data.balance || 0);
 
     updateBalance();
+
 
     $("taskModal").style.display =
       "none";
 
     currentTask = null;
 
+
     alert(
       "Task Complete!\n\n" +
       "Reward: ৳" +
-      reward.toFixed(2)
+      Number(data.reward || 0).toFixed(2) +
+      "\n\nBalance: ৳" +
+      Number(data.balance || 0).toFixed(2)
     );
 
-    loadTasks();
+
+    await loadTasks();
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "SERVER REWARD ERROR:",
+      error
+    );
+
+    let message =
+      getErrorMessage(error);
+
+    message =
+      translateServerError(message);
 
     alert(
-      "Reward save করতে সমস্যা:\n\n" +
-      getErrorMessage(error)
+      "Reward নেওয়া যায়নি:\n\n" +
+      message
     );
 
   }finally{
 
     button.disabled = false;
-    button.textContent = "৳ Reward নিন";
+    button.textContent =
+      "৳ Reward নিন";
   }
 }
 
@@ -1801,7 +1785,18 @@ function openDeposit(){
 }
 
 
+/* =========================================================
+   SUBMIT DEPOSIT - SERVER SIDE
+========================================================= */
+
 async function submitDeposit(){
+
+  if(!currentUser){
+
+    alert("আগে Login করুন।");
+
+    return;
+  }
 
   const amount =
     Number($("depositAmount").value);
@@ -1830,49 +1825,77 @@ async function submitDeposit(){
     $("submitDeposit");
 
   button.disabled = true;
-  button.textContent = "Submitting...";
+  button.textContent =
+    "Submitting...";
 
   try{
 
+    /*
+      Deposit সরাসরি table-এ INSERT হচ্ছে না।
+
+      Server RPC:
+      create_deposit()
+    */
+
     const result =
-      await supabaseClient
-        .from("deposits")
-        .insert([{
-
-          user_id:currentUser.id,
-
-          amount:amount,
-
-          payment_method:method,
-
-          transaction_id:transactionId,
-
-          status:"pending"
-
-        }]);
+      await supabaseClient.rpc(
+        "create_deposit",
+        {
+          p_amount:amount,
+          p_payment_method:method,
+          p_transaction_id:transactionId
+        }
+      );
 
     if(result.error){
       throw result.error;
     }
 
+    const data =
+      result.data;
+
+    if(!data || data.success !== true){
+
+      throw new Error(
+        "Deposit request তৈরি হয়নি।"
+      );
+    }
+
+
     alert(
       "Deposit request জমা হয়েছে।\n\n" +
-      "Status: Pending"
+      "Amount: ৳" +
+      amount.toFixed(2) +
+      "\nStatus: Pending"
     );
+
 
     closeModal();
 
   }catch(error){
 
+    console.error(
+      "SERVER DEPOSIT ERROR:",
+      error
+    );
+
+    let message =
+      getErrorMessage(error);
+
+    message =
+      translateServerError(message);
+
     alert(
       "Deposit submit failed:\n\n" +
-      getErrorMessage(error)
+      message
     );
 
   }finally{
 
     button.disabled = false;
-    button.textContent = "Deposit Submit";
+
+    button.textContent =
+      "Deposit Submit";
   }
 }
 
@@ -1962,7 +1985,18 @@ function openWithdraw(){
 }
 
 
+/* =========================================================
+   SUBMIT WITHDRAW - SERVER SIDE
+========================================================= */
+
 async function submitWithdraw(){
+
+  if(!currentUser){
+
+    alert("আগে Login করুন।");
+
+    return;
+  }
 
   const amount =
     Number($("withdrawAmount").value);
@@ -1975,17 +2009,9 @@ async function submitWithdraw(){
 
   if(amount < 500){
 
-    alert("Minimum withdrawal ৳500।");
-
-    return;
-  }
-
-  const balance =
-    Number(currentProfile?.balance || 0);
-
-  if(amount > balance){
-
-    alert("আপনার balance যথেষ্ট নয়।");
+    alert(
+      "Minimum withdrawal ৳500।"
+    );
 
     return;
   }
@@ -1999,53 +2025,95 @@ async function submitWithdraw(){
     return;
   }
 
+
   const button =
     $("submitWithdraw");
 
   button.disabled = true;
-  button.textContent = "Submitting...";
+  button.textContent =
+    "Submitting...";
+
 
   try{
 
+    /*
+      Withdrawal সরাসরি table-এ INSERT হচ্ছে না।
+
+      Balance check + balance deduction +
+      withdrawal request সব server RPC-তে হচ্ছে।
+    */
+
     const result =
-      await supabaseClient
-        .from("withdrawals")
-        .insert([{
-
-          user_id:currentUser.id,
-
-          amount:amount,
-
-          payment_method:method,
-
-          phone:phone,
-
-          status:"pending"
-
-        }]);
+      await supabaseClient.rpc(
+        "create_withdrawal",
+        {
+          p_amount:amount,
+          p_payment_method:method,
+          p_phone:phone
+        }
+      );
 
     if(result.error){
       throw result.error;
     }
 
+    const data =
+      result.data;
+
+    if(!data || data.success !== true){
+
+      throw new Error(
+        "Withdrawal request তৈরি হয়নি।"
+      );
+    }
+
+
+    /*
+      Server থেকে remaining balance।
+    */
+
+    currentProfile.balance =
+      Number(data.balance || 0);
+
+    updateBalance();
+
+
     alert(
       "Withdrawal request জমা হয়েছে।\n\n" +
-      "Status: Pending"
+      "Amount: ৳" +
+      amount.toFixed(2) +
+      "\nStatus: Pending\n\n" +
+      "Remaining Balance: ৳" +
+      Number(data.balance || 0).toFixed(2)
     );
+
 
     closeModal();
 
   }catch(error){
 
+    console.error(
+      "SERVER WITHDRAW ERROR:",
+      error
+    );
+
+    let message =
+      getErrorMessage(error);
+
+    message =
+      translateServerError(message);
+
     alert(
       "Withdrawal failed:\n\n" +
-      getErrorMessage(error)
+      message
     );
 
   }finally{
 
     button.disabled = false;
-    button.textContent = "Withdraw Request";
+
+    button.textContent =
+      "Withdraw Request";
   }
 }
 
