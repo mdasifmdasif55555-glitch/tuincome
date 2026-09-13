@@ -1,8 +1,11 @@
 <!doctype html>
 <html lang="bn">
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <title>TUINCOME v7</title>
 
@@ -10,6 +13,7 @@
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
+
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
@@ -42,7 +46,9 @@ body{
   padding-bottom:90px;
 }
 
-button,input,select{
+button,
+input,
+select{
   font:inherit;
 }
 
@@ -55,7 +61,8 @@ button:disabled{
   cursor:not-allowed;
 }
 
-/* HEADER */
+
+/* ================= HEADER ================= */
 
 header{
   height:72px;
@@ -85,7 +92,8 @@ header{
   padding:8px 14px;
 }
 
-/* AUTH */
+
+/* ================= AUTH ================= */
 
 .auth-landing{
   min-height:calc(100vh - 72px);
@@ -180,7 +188,8 @@ header{
   font-size:13px;
 }
 
-input,select{
+input,
+select{
   width:100%;
   padding:13px;
   border-radius:12px;
@@ -238,7 +247,8 @@ select:focus{
   line-height:1.5;
 }
 
-/* DASHBOARD */
+
+/* ================= DASHBOARD ================= */
 
 #mainDashboard{
   display:none;
@@ -388,7 +398,8 @@ select:focus{
   font-weight:800;
 }
 
-/* NAV */
+
+/* ================= NAV ================= */
 
 .nav{
   position:fixed;
@@ -433,7 +444,8 @@ select:focus{
   margin-top:-28px;
 }
 
-/* MODAL */
+
+/* ================= MODAL ================= */
 
 .modal{
   display:none;
@@ -503,7 +515,8 @@ select:focus{
   color:#ff6878;
 }
 
-/* TASK MODAL */
+
+/* ================= TASK MODAL ================= */
 
 .task-modal{
   display:none;
@@ -560,121 +573,238 @@ select:focus{
 }
 
 @media(max-width:360px){
+
   .quick{
     grid-template-columns:repeat(2,1fr);
   }
+
 }
+
 </style>
 </head>
 
+
 <body>
 
+
 <header>
-  <div class="logo">▣ TUINCOME</div>
-  <button class="lang" id="langBtn">🌐 EN</button>
+
+  <div class="logo">
+    ▣ TUINCOME
+  </div>
+
+  <button class="lang" id="langBtn">
+    🌐 EN
+  </button>
+
 </header>
 
-<!-- AUTH -->
+
+<!-- ================= AUTH ================= -->
 
 <section class="auth-landing" id="authLanding">
 
   <div class="auth-card">
 
-    <h2 id="authTitle">লগইন করুন</h2>
+    <h2 id="authTitle">
+      লগইন করুন
+    </h2>
+
 
     <div class="auth-tabs">
-      <button class="auth-tab active" id="loginTab">Login</button>
-      <button class="auth-tab" id="registerTab">Register</button>
+
+      <button
+        class="auth-tab active"
+        id="loginTab">
+
+        Login
+
+      </button>
+
+
+      <button
+        class="auth-tab"
+        id="registerTab">
+
+        Register
+
+      </button>
+
     </div>
 
-    <button class="social-btn google" id="googleBtn">
+
+    <button
+      class="social-btn google"
+      id="googleBtn">
+
       <i class="fa-brands fa-google"></i>
+
       Continue with Google
+
     </button>
 
-    <button class="social-btn facebook" id="facebookBtn">
+
+    <button
+      class="social-btn facebook"
+      id="facebookBtn">
+
       <i class="fa-brands fa-facebook"></i>
+
       Continue with Facebook
+
     </button>
 
-    <div class="divider">অথবা</div>
 
-    <div id="registerFields" style="display:none">
+    <div class="divider">
+      অথবা
+    </div>
+
+
+    <div
+      id="registerFields"
+      style="display:none">
+
 
       <div class="form-group">
-        <label>আপনার নাম</label>
-        <input id="name"
-               type="text"
-               placeholder="পুরো নাম"
-               autocomplete="name">
+
+        <label>
+          আপনার নাম
+        </label>
+
+        <input
+          id="name"
+          type="text"
+          placeholder="পুরো নাম"
+          autocomplete="name">
+
       </div>
+
 
       <div class="form-group">
-        <label>মোবাইল নম্বর</label>
-        <input id="phone"
-               type="tel"
-               inputmode="numeric"
-               placeholder="01XXXXXXXXX"
-               maxlength="11">
+
+        <label>
+          মোবাইল নম্বর
+        </label>
+
+        <input
+          id="phone"
+          type="tel"
+          inputmode="numeric"
+          placeholder="01XXXXXXXXX"
+          maxlength="11">
+
       </div>
 
     </div>
 
-    <div class="form-group">
-      <label>Gmail / Email</label>
-      <input id="email"
-             type="email"
-             placeholder="example@gmail.com"
-             autocomplete="email">
-    </div>
 
     <div class="form-group">
-      <label>Password</label>
-      <input id="password"
-             type="password"
-             placeholder="কমপক্ষে ৬ অক্ষর"
-             autocomplete="current-password">
+
+      <label>
+        Gmail / Email
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="example@gmail.com"
+        autocomplete="email">
+
     </div>
 
-    <button class="primary" id="authBtn">
+
+    <div class="form-group">
+
+      <label>
+        Password
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        placeholder="কমপক্ষে ৬ অক্ষর"
+        autocomplete="current-password">
+
+    </div>
+
+
+    <button
+      class="primary"
+      id="authBtn">
+
       Login
+
     </button>
 
-    <button id="forgotBtn"
-      style="width:100%;margin-top:12px;background:none;border:0;color:#8db39c">
+
+    <button
+      id="forgotBtn"
+      style="
+        width:100%;
+        margin-top:12px;
+        background:none;
+        border:0;
+        color:#8db39c">
+
       Password ভুলে গেছেন?
+
     </button>
 
-    <div class="error-box" id="errorBox"></div>
-    <div class="success-box" id="successBox"></div>
+
+    <div
+      class="error-box"
+      id="errorBox">
+    </div>
+
+
+    <div
+      class="success-box"
+      id="successBox">
+    </div>
+
 
     <div class="small-note">
+
       TUINCOME Account System<br>
       Supabase Authentication
+
     </div>
 
   </div>
+
 </section>
 
 
-<!-- DASHBOARD -->
+<!-- ================= DASHBOARD ================= -->
 
 <section id="mainDashboard">
 
+
   <div class="container">
+
 
     <div class="banner">
 
-      <small>TUINCOME v7</small>
+      <small>
+        TUINCOME v7
+      </small>
+
 
       <h1>
+
         স্বাগতম,
-        <span id="welcomeName">User</span> 👋
+        <span id="welcomeName">
+          User
+        </span>
+        👋
+
       </h1>
+
 
       <p>
         ছোট ছোট টাস্ক সম্পন্ন করে আপনার অ্যাকাউন্ট ম্যানেজ করুন।
       </p>
+
 
       <div class="balance-card">
 
@@ -682,8 +812,14 @@ select:focus{
           বর্তমান ব্যালেন্স
         </div>
 
+
         <div class="balance">
-          ৳ <span id="balance">0.00</span>
+
+          ৳
+          <span id="balance">
+            0.00
+          </span>
+
         </div>
 
       </div>
@@ -693,40 +829,83 @@ select:focus{
 
     <div class="quick">
 
-      <button class="quick-btn" id="depositBtn">
+
+      <button
+        class="quick-btn"
+        id="depositBtn">
+
         <i class="fa-solid fa-circle-plus"></i>
-        <span>Deposit</span>
+
+        <span>
+          Deposit
+        </span>
+
       </button>
 
-      <button class="quick-btn" id="withdrawBtn">
+
+      <button
+        class="quick-btn"
+        id="withdrawBtn">
+
         <i class="fa-solid fa-money-bill-transfer"></i>
-        <span>Withdraw</span>
+
+        <span>
+          Withdraw
+        </span>
+
       </button>
 
-      <button class="quick-btn" id="referBtn">
+
+      <button
+        class="quick-btn"
+        id="referBtn">
+
         <i class="fa-solid fa-user-plus"></i>
-        <span>Refer</span>
+
+        <span>
+          Refer
+        </span>
+
       </button>
 
-      <button class="quick-btn" id="historyBtn">
+
+      <button
+        class="quick-btn"
+        id="historyBtn">
+
         <i class="fa-solid fa-clock-rotate-left"></i>
-        <span>History</span>
+
+        <span>
+          History
+        </span>
+
       </button>
+
 
     </div>
 
 
     <div class="card">
 
+
       <h3>
-        <i class="fa-solid fa-bolt" style="color:#39ff88"></i>
+
+        <i
+          class="fa-solid fa-bolt"
+          style="color:#39ff88">
+        </i>
+
         Available Tasks
+
       </h3>
 
+
       <div id="taskGrid">
+
         <div class="loading">
           Task লোড হচ্ছে...
         </div>
+
       </div>
 
     </div>
@@ -736,95 +915,164 @@ select:focus{
 
   <nav class="nav">
 
-    <button class="active" id="homeNav">
+
+    <button
+      class="active"
+      id="homeNav">
+
       <i class="fa-solid fa-house"></i>
-      <span>হোম</span>
+
+      <span>
+        হোম
+      </span>
+
     </button>
+
 
     <button id="walletNav">
+
       <i class="fa-solid fa-wallet"></i>
-      <span>Wallet</span>
+
+      <span>
+        Wallet
+      </span>
+
     </button>
 
-    <button class="go" id="startNav">
+
+    <button
+      class="go"
+      id="startNav">
+
       <i class="fa-solid fa-bolt"></i>
+
     </button>
+
 
     <button id="teamNav">
+
       <i class="fa-solid fa-crown"></i>
-      <span>VIP</span>
+
+      <span>
+        VIP
+      </span>
+
     </button>
 
+
     <button id="profileNav">
+
       <i class="fa-solid fa-user"></i>
-      <span>Profile</span>
+
+      <span>
+        Profile
+      </span>
+
     </button>
+
 
   </nav>
 
 </section>
 
 
-<!-- GENERAL MODAL -->
+<!-- ================= GENERAL MODAL ================= -->
 
-<div class="modal" id="modal">
+<div
+  class="modal"
+  id="modal">
+
 
   <div class="sheet">
 
-    <button class="close" id="closeBtn">×</button>
+
+    <button
+      class="close"
+      id="closeBtn">
+
+      ×
+
+    </button>
+
 
     <h2 id="sheetTitle">
       TUINCOME
     </h2>
 
+
     <div id="sheetBody"></div>
+
 
   </div>
 
 </div>
 
 
-<!-- TASK MODAL -->
+<!-- ================= TASK MODAL ================= -->
 
-<div class="task-modal" id="taskModal">
+<div
+  class="task-modal"
+  id="taskModal">
+
 
   <div class="task-box">
 
-    <div style="font-size:34px">⚡</div>
+
+    <div style="font-size:34px">
+      ⚡
+    </div>
+
 
     <h2 id="taskTitle">
       Task চলছে
     </h2>
 
+
     <p style="color:#819b8d">
       ৩ সেকেন্ড অপেক্ষা করুন
     </p>
 
-    <div class="countdown" id="countdown">
+
+    <div
+      class="countdown"
+      id="countdown">
+
       3
+
     </div>
+
 
     <div class="progress">
+
       <div id="progressBar"></div>
+
     </div>
 
-    <button class="primary"
-            id="rewardBtn"
-            style="display:none">
+
+    <button
+      class="primary"
+      id="rewardBtn"
+      style="display:none">
+
       ৳ Reward নিন
+
     </button>
+
 
   </div>
 
 </div>
 
 
-<!-- SUPABASE -->
+<!-- ================= SUPABASE ================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
+
 "use strict";
+
 
 /* =========================================================
    SUPABASE CONFIG
@@ -833,15 +1081,24 @@ select:focus{
 const SUPABASE_URL =
 "https://hgribbrofuqtfboaitgi.supabase.co";
 
+
 const SUPABASE_ANON_KEY =
 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhncmliYnJvZnVxdGZib2FpdGdpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1NzMyMjUsImV4cCI6MjEwMzE0OTIyNX0.VPFZ_jKsYDNO084W8qxkqYraY47iwiRGnQC6THLn-s8";
 
+
 let supabaseClient = null;
+
 let currentUser = null;
+
 let currentProfile = null;
+
 let authMode = "login";
+
 let currentTask = null;
+
 let taskTimer = null;
+
+let authListenerStarted = false;
 
 
 /* =========================================================
@@ -849,30 +1106,40 @@ let taskTimer = null;
 ========================================================= */
 
 function $(id){
+
   return document.getElementById(id);
+
 }
 
 
 function showError(message){
 
   $("successBox").style.display = "none";
+
   $("errorBox").style.display = "block";
+
   $("errorBox").textContent = message;
+
 }
 
 
 function showSuccess(message){
 
   $("errorBox").style.display = "none";
+
   $("successBox").style.display = "block";
+
   $("successBox").textContent = message;
+
 }
 
 
 function clearMessages(){
 
   $("errorBox").style.display = "none";
+
   $("successBox").style.display = "none";
+
 }
 
 
@@ -884,19 +1151,28 @@ function escapeHTML(value){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
 
+
+/* =========================================================
+   ERROR HANDLER
+========================================================= */
 
 function getErrorMessage(error){
 
   if(!error){
+
     return "Unknown error";
+
   }
+
 
   let msg =
     error.message ||
     error.error_description ||
     String(error);
+
 
   if(
     msg.includes("Failed to fetch") ||
@@ -906,63 +1182,106 @@ function getErrorMessage(error){
 
     return (
       "Supabase server-এর সাথে কানেকশন হচ্ছে না।\n\n" +
+
       "১. Internet connection check করুন\n" +
-      "২. Supabase URL/Key check করুন\n" +
+
+      "২. Supabase URL/Key check করুন\n\n" +
+
       "৩. Supabase project active আছে কিনা দেখুন\n\n" +
+
       "Project URL:\n" +
+
       SUPABASE_URL
     );
+
   }
 
+
   return msg;
+
 }
 
 
 /* =========================================================
-   AUTH ERROR TRANSLATION
+   SERVER ERROR TRANSLATION
 ========================================================= */
 
 function translateServerError(message){
 
-  let msg = String(message || "");
+  let msg =
+    String(message || "");
+
 
   if(msg.includes("TASK_ALREADY_COMPLETED")){
+
     return "আপনি এই Task আগে সম্পন্ন করেছেন।";
+
   }
+
 
   if(msg.includes("TASK_NOT_ACTIVE")){
+
     return "এই Task বর্তমানে active নেই।";
+
   }
+
 
   if(msg.includes("TASK_NOT_FOUND")){
+
     return "Task খুঁজে পাওয়া যায়নি।";
+
   }
+
 
   if(msg.includes("LOGIN_REQUIRED")){
+
     return "আগে Login করুন।";
+
   }
+
 
   if(msg.includes("PROFILE_NOT_FOUND")){
+
     return "আপনার profile পাওয়া যায়নি।";
+
   }
+
 
   if(msg.includes("INSUFFICIENT_BALANCE")){
+
     return "আপনার balance যথেষ্ট নয়।";
+
   }
+
 
   if(msg.includes("MINIMUM_WITHDRAWAL_IS_500")){
+
     return "Minimum withdrawal ৳500।";
+
   }
+
 
   if(msg.includes("TRANSACTION_ALREADY_USED")){
+
     return "এই Transaction ID আগে ব্যবহার করা হয়েছে।";
+
   }
+
 
   if(msg.includes("INVALID_AMOUNT")){
+
     return "সঠিক Amount দিন।";
+
   }
 
+
+  if(msg.includes("PGRST")){
+    return "Supabase database request-এ সমস্যা হয়েছে।";
+  }
+
+
   return msg;
+
 }
 
 
@@ -973,20 +1292,27 @@ function translateServerError(message){
 function setAuthMode(mode){
 
   authMode = mode;
+
   clearMessages();
+
 
   if(mode === "login"){
 
-    $("authTitle").textContent = "লগইন করুন";
+    $("authTitle").textContent =
+      "লগইন করুন";
 
     $("loginTab").classList.add("active");
+
     $("registerTab").classList.remove("active");
 
-    $("registerFields").style.display = "none";
+    $("registerFields").style.display =
+      "none";
 
-    $("authBtn").textContent = "Login";
+    $("authBtn").textContent =
+      "Login";
 
-    $("password").autocomplete = "current-password";
+    $("password").autocomplete =
+      "current-password";
 
   }else{
 
@@ -994,14 +1320,20 @@ function setAuthMode(mode){
       "নতুন Account তৈরি করুন";
 
     $("registerTab").classList.add("active");
+
     $("loginTab").classList.remove("active");
 
-    $("registerFields").style.display = "block";
+    $("registerFields").style.display =
+      "block";
 
-    $("authBtn").textContent = "Register";
+    $("authBtn").textContent =
+      "Register";
 
-    $("password").autocomplete = "new-password";
+    $("password").autocomplete =
+      "new-password";
+
   }
+
 }
 
 
@@ -1019,7 +1351,9 @@ function initSupabase(){
     );
 
     return false;
+
   }
+
 
   try{
 
@@ -1028,6 +1362,7 @@ function initSupabase(){
         SUPABASE_URL,
         SUPABASE_ANON_KEY
       );
+
 
     return true;
 
@@ -1039,7 +1374,57 @@ function initSupabase(){
     );
 
     return false;
+
   }
+
+}
+
+
+/* =========================================================
+   LOAD PROFILE - SERVER DATABASE ONLY
+========================================================= */
+
+async function loadProfile(){
+
+  if(!currentUser){
+
+    throw new Error("LOGIN_REQUIRED");
+
+  }
+
+
+  const result =
+    await supabaseClient
+      .from("profiles")
+      .select("*")
+      .eq("id",currentUser.id)
+      .maybeSingle();
+
+
+  if(result.error){
+
+    throw result.error;
+
+  }
+
+
+  if(!result.data){
+
+    throw new Error("PROFILE_NOT_FOUND");
+
+  }
+
+
+  currentProfile =
+    result.data;
+
+
+  currentProfile.balance =
+    Number(currentProfile.balance || 0);
+
+
+  return currentProfile;
+
 }
 
 
@@ -1050,6 +1435,7 @@ function initSupabase(){
 async function registerUser(){
 
   clearMessages();
+
 
   const name =
     $("name").value.trim();
@@ -1063,28 +1449,59 @@ async function registerUser(){
   const password =
     $("password").value;
 
+
   if(!name){
-    showError("আপনার নাম দিন।");
+
+    showError(
+      "আপনার নাম দিন।"
+    );
+
     return;
+
   }
 
-  if(phone && !/^01[0-9]{9}$/.test(phone)){
-    showError("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।");
+
+  if(
+    phone &&
+    !/^01[0-9]{9}$/.test(phone)
+  ){
+
+    showError(
+      "সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।"
+    );
+
     return;
+
   }
+
 
   if(!email){
-    showError("Gmail / Email দিন।");
+
+    showError(
+      "Gmail / Email দিন।"
+    );
+
     return;
+
   }
+
 
   if(password.length < 6){
-    showError("Password কমপক্ষে ৬ অক্ষরের হতে হবে।");
+
+    showError(
+      "Password কমপক্ষে ৬ অক্ষরের হতে হবে।"
+    );
+
     return;
+
   }
 
+
   $("authBtn").disabled = true;
-  $("authBtn").textContent = "Register হচ্ছে...";
+
+  $("authBtn").textContent =
+    "Register হচ্ছে...";
+
 
   try{
 
@@ -1104,18 +1521,25 @@ async function registerUser(){
 
       });
 
+
     if(result.error){
+
       throw result.error;
+
     }
+
 
     if(result.data.session){
 
       currentUser =
         result.data.user;
 
+
       await loadProfile();
 
+
       showDashboard();
+
 
       showSuccess(
         "Account সফলভাবে তৈরি হয়েছে।"
@@ -1125,19 +1549,28 @@ async function registerUser(){
 
       showSuccess(
         "Registration সফল হয়েছে।\n\n" +
+
         "আপনার Gmail inbox-এ verification email এলে " +
+
         "email verify করে Login করুন।"
       );
+
     }
+
 
   }catch(error){
 
     console.error(error);
 
+
     showError(
       "Registration failed:\n\n" +
-      getErrorMessage(error)
+
+      translateServerError(
+        getErrorMessage(error)
+      )
     );
+
 
   }finally{
 
@@ -1147,7 +1580,9 @@ async function registerUser(){
       authMode === "login"
         ? "Login"
         : "Register";
+
   }
+
 }
 
 
@@ -1159,24 +1594,41 @@ async function loginUser(){
 
   clearMessages();
 
+
   const email =
     $("email").value.trim();
 
   const password =
     $("password").value;
 
+
   if(!email){
-    showError("Email দিন।");
+
+    showError(
+      "Email দিন।"
+    );
+
     return;
+
   }
+
 
   if(!password){
-    showError("Password দিন।");
+
+    showError(
+      "Password দিন।"
+    );
+
     return;
+
   }
 
+
   $("authBtn").disabled = true;
-  $("authBtn").textContent = "Login হচ্ছে...";
+
+  $("authBtn").textContent =
+    "Login হচ্ছে...";
+
 
   try{
 
@@ -1184,125 +1636,52 @@ async function loginUser(){
       await supabaseClient.auth.signInWithPassword({
 
         email:email,
+
         password:password
 
       });
 
+
     if(result.error){
+
       throw result.error;
+
     }
+
 
     currentUser =
       result.data.user;
 
+
     await loadProfile();
 
+
     showDashboard();
+
 
   }catch(error){
 
     console.error(error);
 
+
     showError(
       "Login failed:\n\n" +
-      getErrorMessage(error)
+
+      translateServerError(
+        getErrorMessage(error)
+      )
     );
+
 
   }finally{
 
     $("authBtn").disabled = false;
-    $("authBtn").textContent = "Login";
-  }
-}
 
+    $("authBtn").textContent =
+      "Login";
 
-/* =========================================================
-   LOAD PROFILE
-========================================================= */
-
-async function loadProfile(){
-
-  if(!currentUser){
-    return null;
   }
 
-  const fallbackProfile = {
-
-    id:currentUser.id,
-
-    full_name:
-      currentUser.user_metadata?.full_name ||
-      currentUser.email?.split("@")[0] ||
-      "User",
-
-    phone:
-      currentUser.user_metadata?.phone ||
-      "",
-
-    balance:0,
-
-    referral_code:
-      currentUser.id
-        .substring(0,8)
-        .toUpperCase()
-  };
-
-
-  try{
-
-    const result =
-      await supabaseClient
-        .from("profiles")
-        .select("*")
-        .eq("id",currentUser.id)
-        .maybeSingle();
-
-    if(result.error){
-
-      console.warn(
-        "Profile select error:",
-        result.error
-      );
-
-      currentProfile =
-        fallbackProfile;
-
-      return currentProfile;
-    }
-
-
-    if(result.data){
-
-      currentProfile =
-        result.data;
-
-      if(currentProfile.balance == null){
-        currentProfile.balance = 0;
-      }
-
-      return currentProfile;
-    }
-
-
-    /*
-      এখানে direct profiles INSERT নেই।
-      Signup trigger profile তৈরি করার কথা।
-    */
-
-    currentProfile =
-      fallbackProfile;
-
-    return currentProfile;
-
-  }catch(error){
-
-    console.error(error);
-
-    currentProfile =
-      fallbackProfile;
-
-    return currentProfile;
-  }
 }
 
 
@@ -1312,18 +1691,28 @@ async function loadProfile(){
 
 function showDashboard(){
 
-  $("authLanding").style.display = "none";
-  $("mainDashboard").style.display = "block";
+  $("authLanding").style.display =
+    "none";
+
+  $("mainDashboard").style.display =
+    "block";
+
 
   updateDashboard();
 
   loadTasks();
+
 }
 
+
+/* =========================================================
+   UPDATE DASHBOARD
+========================================================= */
 
 function updateDashboard(){
 
   updateBalance();
+
 
   const name =
     currentProfile?.full_name ||
@@ -1331,8 +1720,10 @@ function updateDashboard(){
     currentUser?.email?.split("@")[0] ||
     "User";
 
+
   $("welcomeName").textContent =
     name;
+
 }
 
 
@@ -1345,8 +1736,41 @@ function updateBalance(){
   const balance =
     Number(currentProfile?.balance || 0);
 
+
   $("balance").textContent =
     balance.toFixed(2);
+
+}
+
+
+/* =========================================================
+   REFRESH PROFILE/BALANCE
+========================================================= */
+
+async function refreshProfile(){
+
+  if(!currentUser){
+
+    return;
+
+  }
+
+
+  try{
+
+    await loadProfile();
+
+    updateDashboard();
+
+  }catch(error){
+
+    console.error(
+      "PROFILE REFRESH ERROR:",
+      error
+    );
+
+  }
+
 }
 
 
@@ -1361,40 +1785,68 @@ async function checkSession(){
     const result =
       await supabaseClient.auth.getSession();
 
+
     if(result.error){
+
       throw result.error;
+
     }
+
 
     const session =
       result.data.session;
 
+
     if(!session){
 
-      $("authLanding").style.display = "flex";
-      $("mainDashboard").style.display = "none";
+      $("authLanding").style.display =
+        "flex";
+
+      $("mainDashboard").style.display =
+        "none";
 
       return;
+
     }
+
 
     currentUser =
       session.user;
 
+
     await loadProfile();
 
+
     showDashboard();
+
 
   }catch(error){
 
     console.error(error);
 
-    $("authLanding").style.display = "flex";
-    $("mainDashboard").style.display = "none";
+
+    currentUser = null;
+
+    currentProfile = null;
+
+
+    $("authLanding").style.display =
+      "flex";
+
+    $("mainDashboard").style.display =
+      "none";
+
 
     showError(
-      "Session load failed:\n\n" +
-      getErrorMessage(error)
+      "Session/Profile load failed:\n\n" +
+
+      translateServerError(
+        getErrorMessage(error)
+      )
     );
+
   }
+
 }
 
 
@@ -1407,8 +1859,10 @@ async function loadTasks(){
   const grid =
     $("taskGrid");
 
+
   grid.innerHTML =
     '<div class="loading">Task লোড হচ্ছে...</div>';
+
 
   try{
 
@@ -1416,17 +1870,20 @@ async function loadTasks(){
       await supabaseClient
         .from("tasks")
         .select("*")
+        .eq("active",true)
         .order("id",{ascending:true});
 
+
     if(result.error){
+
       throw result.error;
+
     }
 
+
     const tasks =
-      (result.data || []).filter(task =>
-        task.active === undefined ||
-        task.active === true
-      );
+      result.data || [];
+
 
     if(!tasks.length){
 
@@ -1434,69 +1891,100 @@ async function loadTasks(){
         '<div class="empty">এখন কোনো Task নেই।</div>';
 
       return;
+
     }
+
 
     grid.innerHTML = "";
 
+
     tasks.forEach(task => {
+
 
       const title =
         task.title || "Task";
+
 
       const description =
         task.description ||
         "Task সম্পন্ন করুন";
 
+
       const reward =
         Number(task.reward || 0);
+
 
       const card =
         document.createElement("div");
 
+
       card.className =
         "task-card";
+
 
       card.innerHTML = `
 
         <div class="task-icon">
+
           <i class="fa-solid fa-bolt"></i>
+
         </div>
+
 
         <div class="task-info">
 
-          <b>${escapeHTML(title)}</b>
+          <b>
+            ${escapeHTML(title)}
+          </b>
+
 
           <small>
             ${escapeHTML(description)}
           </small>
 
+
           <br>
+
 
           <span class="task-reward">
+
             ৳${reward.toFixed(2)}
+
           </span>
+
 
           <br>
 
-          <button class="task-btn">
+
+          <button
+            class="task-btn">
+
             Start Task
+
           </button>
 
         </div>
+
       `;
+
 
       const button =
         card.querySelector(".task-btn");
 
+
       button.onclick =
         () => startTask(task,button);
 
+
       grid.appendChild(card);
+
     });
+
 
   }catch(error){
 
     console.error(error);
+
 
     grid.innerHTML = `
 
@@ -1505,8 +1993,7 @@ async function loadTasks(){
         padding:12px;
         background:#2b1017;
         border-radius:12px;
-        line-height:1.5
-      ">
+        line-height:1.5">
 
         Task load failed.<br><br>
 
@@ -1515,8 +2002,11 @@ async function loadTasks(){
         )}
 
       </div>
+
     `;
+
   }
+
 }
 
 
@@ -1528,49 +2018,83 @@ function startTask(task,button){
 
   if(!currentUser){
 
-    alert("আগে Login করুন।");
+    alert(
+      "আগে Login করুন।"
+    );
 
     return;
+
   }
+
+
+  if(!task || !task.id){
+
+    alert(
+      "Task information পাওয়া যায়নি।"
+    );
+
+    return;
+
+  }
+
 
   if(taskTimer){
+
     clearInterval(taskTimer);
+
+    taskTimer = null;
+
   }
 
+
   if(button){
+
     button.disabled = true;
+
   }
+
 
   currentTask =
     task;
 
+
   $("taskTitle").textContent =
     task.title || "Task চলছে";
+
 
   $("countdown").textContent =
     "3";
 
+
   $("progressBar").style.width =
     "0%";
+
 
   $("rewardBtn").style.display =
     "none";
 
+
   $("taskModal").style.display =
     "flex";
 
+
   let count = 3;
+
 
   taskTimer =
     setInterval(() => {
 
+
       count--;
+
 
       $("countdown").textContent =
         count;
 
+
       $("progressBar").style.width =
         ((3-count)/3*100) + "%";
+
 
       if(count <= 0){
 
@@ -1578,15 +2102,43 @@ function startTask(task,button){
 
         taskTimer = null;
 
+
         $("countdown").textContent =
           "✓";
+
 
         $("rewardBtn").style.display =
           "block";
 
       }
 
+
     },1000);
+
+}
+
+
+/* =========================================================
+   CLOSE TASK MODAL
+========================================================= */
+
+function closeTaskModal(){
+
+  $("taskModal").style.display =
+    "none";
+
+
+  if(taskTimer){
+
+    clearInterval(taskTimer);
+
+    taskTimer = null;
+
+  }
+
+
+  currentTask = null;
+
 }
 
 
@@ -1598,27 +2150,26 @@ async function claimReward(){
 
   if(!currentUser || !currentTask){
 
-    alert("Task information পাওয়া যায়নি।");
+    alert(
+      "Task information পাওয়া যায়নি।"
+    );
 
     return;
+
   }
+
 
   const button =
     $("rewardBtn");
 
+
   button.disabled = true;
-  button.textContent = "Saving...";
+
+  button.textContent =
+    "Saving...";
+
 
   try{
-
-    /*
-      গুরুত্বপূর্ণ:
-      এখানে আর task_completions INSERT করা হচ্ছে না।
-      Balance-ও এখানে সরাসরি update করা হচ্ছে না।
-
-      সব কাজ Supabase RPC:
-      claim_task_reward()
-    */
 
     const result =
       await supabaseClient.rpc(
@@ -1628,47 +2179,58 @@ async function claimReward(){
         }
       );
 
+
     if(result.error){
+
       throw result.error;
+
     }
+
 
     const data =
       result.data;
+
 
     if(!data || data.success !== true){
 
       throw new Error(
         "Reward server থেকে পাওয়া যায়নি।"
       );
+
     }
 
-
-    /*
-      Server থেকে নতুন balance নেওয়া হচ্ছে।
-    */
 
     currentProfile.balance =
       Number(data.balance || 0);
 
+
     updateBalance();
 
 
-    $("taskModal").style.display =
-      "none";
-
-    currentTask = null;
+    closeTaskModal();
 
 
     alert(
+
       "Task Complete!\n\n" +
+
       "Reward: ৳" +
-      Number(data.reward || 0).toFixed(2) +
+
+      Number(
+        data.reward || 0
+      ).toFixed(2) +
+
       "\n\nBalance: ৳" +
-      Number(data.balance || 0).toFixed(2)
+
+      Number(
+        data.balance || 0
+      ).toFixed(2)
+
     );
 
 
     await loadTasks();
+
 
   }catch(error){
 
@@ -1677,23 +2239,27 @@ async function claimReward(){
       error
     );
 
-    let message =
-      getErrorMessage(error);
-
-    message =
-      translateServerError(message);
 
     alert(
+
       "Reward নেওয়া যায়নি:\n\n" +
-      message
+
+      translateServerError(
+        getErrorMessage(error)
+      )
+
     );
+
 
   }finally{
 
     button.disabled = false;
+
     button.textContent =
       "৳ Reward নিন";
+
   }
+
 }
 
 
@@ -1703,6 +2269,17 @@ async function claimReward(){
 
 function openDeposit(){
 
+  if(!currentUser){
+
+    alert(
+      "আগে Login করুন।"
+    );
+
+    return;
+
+  }
+
+
   openSheet(
 
     "Deposit",
@@ -1711,13 +2288,24 @@ function openDeposit(){
 
     <div class="form-group">
 
-      <label>Payment Method</label>
+      <label>
+        Payment Method
+      </label>
+
 
       <select id="depositMethod">
 
-        <option value="bKash">bKash</option>
-        <option value="Nagad">Nagad</option>
-        <option value="Rocket">Rocket</option>
+        <option value="bKash">
+          bKash
+        </option>
+
+        <option value="Nagad">
+          Nagad
+        </option>
+
+        <option value="Rocket">
+          Rocket
+        </option>
 
       </select>
 
@@ -1727,18 +2315,41 @@ function openDeposit(){
     <div class="card">
 
       <div class="info-row">
-        <span>bKash</span>
-        <b>01XXXXXXXXX</b>
+
+        <span>
+          bKash
+        </span>
+
+        <b>
+          01XXXXXXXXX
+        </b>
+
       </div>
 
-      <div class="info-row">
-        <span>Nagad</span>
-        <b>01XXXXXXXXX</b>
-      </div>
 
       <div class="info-row">
-        <span>Rocket</span>
-        <b>01XXXXXXXXX</b>
+
+        <span>
+          Nagad
+        </span>
+
+        <b>
+          01XXXXXXXXX
+        </b>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <span>
+          Rocket
+        </span>
+
+        <b>
+          01XXXXXXXXX
+        </b>
+
       </div>
 
     </div>
@@ -1746,12 +2357,16 @@ function openDeposit(){
 
     <div class="form-group">
 
-      <label>Amount</label>
+      <label>
+        Amount
+      </label>
+
 
       <input
         id="depositAmount"
         type="number"
         min="1"
+        step="0.01"
         placeholder="Amount">
 
     </div>
@@ -1759,7 +2374,10 @@ function openDeposit(){
 
     <div class="form-group">
 
-      <label>Transaction ID</label>
+      <label>
+        Transaction ID
+      </label>
+
 
       <input
         id="transactionId"
@@ -1778,10 +2396,13 @@ function openDeposit(){
     </button>
 
     `
+
   );
+
 
   $("submitDeposit").onclick =
     submitDeposit;
+
 }
 
 
@@ -1793,49 +2414,62 @@ async function submitDeposit(){
 
   if(!currentUser){
 
-    alert("আগে Login করুন।");
+    alert(
+      "আগে Login করুন।"
+    );
 
     return;
+
   }
 
+
   const amount =
-    Number($("depositAmount").value);
+    Number(
+      $("depositAmount").value
+    );
+
 
   const transactionId =
     $("transactionId").value.trim();
 
+
   const method =
     $("depositMethod").value;
 
-  if(amount <= 0){
 
-    alert("সঠিক Amount দিন।");
+  if(!Number.isFinite(amount) || amount <= 0){
+
+    alert(
+      "সঠিক Amount দিন।"
+    );
 
     return;
+
   }
+
 
   if(!transactionId){
 
-    alert("Transaction ID দিন।");
+    alert(
+      "Transaction ID দিন।"
+    );
 
     return;
+
   }
+
 
   const button =
     $("submitDeposit");
 
+
   button.disabled = true;
+
   button.textContent =
     "Submitting...";
 
+
   try{
-
-    /*
-      Deposit সরাসরি table-এ INSERT হচ্ছে না।
-
-      Server RPC:
-      create_deposit()
-    */
 
     const result =
       await supabaseClient.rpc(
@@ -1847,30 +2481,42 @@ async function submitDeposit(){
         }
       );
 
+
     if(result.error){
+
       throw result.error;
+
     }
+
 
     const data =
       result.data;
+
 
     if(!data || data.success !== true){
 
       throw new Error(
         "Deposit request তৈরি হয়নি।"
       );
+
     }
 
 
     alert(
+
       "Deposit request জমা হয়েছে।\n\n" +
+
       "Amount: ৳" +
+
       amount.toFixed(2) +
+
       "\nStatus: Pending"
+
     );
 
 
     closeModal();
+
 
   }catch(error){
 
@@ -1879,16 +2525,17 @@ async function submitDeposit(){
       error
     );
 
-    let message =
-      getErrorMessage(error);
-
-    message =
-      translateServerError(message);
 
     alert(
+
       "Deposit submit failed:\n\n" +
-      message
+
+      translateServerError(
+        getErrorMessage(error)
+      )
+
     );
+
 
   }finally{
 
@@ -1896,7 +2543,9 @@ async function submitDeposit(){
 
     button.textContent =
       "Deposit Submit";
+
   }
+
 }
 
 
@@ -1906,8 +2555,22 @@ async function submitDeposit(){
 
 function openWithdraw(){
 
+  if(!currentUser){
+
+    alert(
+      "আগে Login করুন।"
+    );
+
+    return;
+
+  }
+
+
   const balance =
-    Number(currentProfile?.balance || 0);
+    Number(
+      currentProfile?.balance || 0
+    );
+
 
   openSheet(
 
@@ -1921,6 +2584,7 @@ function openWithdraw(){
         Available Balance
       </div>
 
+
       <div class="balance">
         ৳${balance.toFixed(2)}
       </div>
@@ -1930,12 +2594,20 @@ function openWithdraw(){
 
     <div class="form-group">
 
-      <label>Payment Method</label>
+      <label>
+        Payment Method
+      </label>
+
 
       <select id="withdrawMethod">
 
-        <option value="bKash">bKash</option>
-        <option value="Nagad">Nagad</option>
+        <option value="bKash">
+          bKash
+        </option>
+
+        <option value="Nagad">
+          Nagad
+        </option>
 
       </select>
 
@@ -1944,12 +2616,16 @@ function openWithdraw(){
 
     <div class="form-group">
 
-      <label>Amount</label>
+      <label>
+        Amount
+      </label>
+
 
       <input
         id="withdrawAmount"
         type="number"
         min="500"
+        step="0.01"
         placeholder="Minimum ৳500">
 
     </div>
@@ -1957,7 +2633,10 @@ function openWithdraw(){
 
     <div class="form-group">
 
-      <label>Mobile Number</label>
+      <label>
+        Mobile Number
+      </label>
+
 
       <input
         id="withdrawPhone"
@@ -1978,10 +2657,13 @@ function openWithdraw(){
     </button>
 
     `
+
   );
+
 
   $("submitWithdraw").onclick =
     submitWithdraw;
+
 }
 
 
@@ -1993,19 +2675,39 @@ async function submitWithdraw(){
 
   if(!currentUser){
 
-    alert("আগে Login করুন।");
+    alert(
+      "আগে Login করুন।"
+    );
 
     return;
+
   }
 
+
   const amount =
-    Number($("withdrawAmount").value);
+    Number(
+      $("withdrawAmount").value
+    );
+
 
   const phone =
     $("withdrawPhone").value.trim();
 
+
   const method =
     $("withdrawMethod").value;
+
+
+  if(!Number.isFinite(amount)){
+
+    alert(
+      "সঠিক Amount দিন।"
+    );
+
+    return;
+
+  }
+
 
   if(amount < 500){
 
@@ -2014,7 +2716,9 @@ async function submitWithdraw(){
     );
 
     return;
+
   }
+
 
   if(!/^01[0-9]{9}$/.test(phone)){
 
@@ -2023,25 +2727,21 @@ async function submitWithdraw(){
     );
 
     return;
+
   }
 
 
   const button =
     $("submitWithdraw");
 
+
   button.disabled = true;
+
   button.textContent =
     "Submitting...";
 
 
   try{
-
-    /*
-      Withdrawal সরাসরি table-এ INSERT হচ্ছে না।
-
-      Balance check + balance deduction +
-      withdrawal request সব server RPC-তে হচ্ছে।
-    */
 
     const result =
       await supabaseClient.rpc(
@@ -2053,42 +2753,55 @@ async function submitWithdraw(){
         }
       );
 
+
     if(result.error){
+
       throw result.error;
+
     }
+
 
     const data =
       result.data;
+
 
     if(!data || data.success !== true){
 
       throw new Error(
         "Withdrawal request তৈরি হয়নি।"
       );
+
     }
 
 
-    /*
-      Server থেকে remaining balance।
-    */
-
     currentProfile.balance =
       Number(data.balance || 0);
+
 
     updateBalance();
 
 
     alert(
+
       "Withdrawal request জমা হয়েছে।\n\n" +
+
       "Amount: ৳" +
+
       amount.toFixed(2) +
+
       "\nStatus: Pending\n\n" +
+
       "Remaining Balance: ৳" +
-      Number(data.balance || 0).toFixed(2)
+
+      Number(
+        data.balance || 0
+      ).toFixed(2)
+
     );
 
 
     closeModal();
+
 
   }catch(error){
 
@@ -2097,16 +2810,17 @@ async function submitWithdraw(){
       error
     );
 
-    let message =
-      getErrorMessage(error);
-
-    message =
-      translateServerError(message);
 
     alert(
+
       "Withdrawal failed:\n\n" +
-      message
+
+      translateServerError(
+        getErrorMessage(error)
+      )
+
     );
+
 
   }finally{
 
@@ -2114,7 +2828,9 @@ async function submitWithdraw(){
 
     button.textContent =
       "Withdraw Request";
+
   }
+
 }
 
 
@@ -2124,19 +2840,34 @@ async function submitWithdraw(){
 
 async function openProfile(){
 
+  if(!currentUser){
+
+    alert(
+      "আগে Login করুন।"
+    );
+
+    return;
+
+  }
+
+
+  await refreshProfile();
+
+
   const name =
     currentProfile?.full_name ||
-    currentUser?.user_metadata?.full_name ||
     "User";
+
 
   const phone =
     currentProfile?.phone ||
-    currentUser?.user_metadata?.phone ||
     "Not set";
+
 
   const email =
     currentUser?.email ||
     "";
+
 
   const referralCode =
     currentProfile?.referral_code ||
@@ -2144,8 +2875,12 @@ async function openProfile(){
       .substring(0,8)
       .toUpperCase();
 
+
   const balance =
-    Number(currentProfile?.balance || 0);
+    Number(
+      currentProfile?.balance || 0
+    );
+
 
   openSheet(
 
@@ -2155,38 +2890,75 @@ async function openProfile(){
 
     <div class="card">
 
-      <div class="info-row">
-        <span>Name</span>
-        <b>${escapeHTML(name)}</b>
-      </div>
 
       <div class="info-row">
-        <span>Email</span>
-        <b>${escapeHTML(email)}</b>
+
+        <span>
+          Name
+        </span>
+
+        <b>
+          ${escapeHTML(name)}
+        </b>
+
       </div>
 
-      <div class="info-row">
-        <span>Phone</span>
-        <b>${escapeHTML(phone)}</b>
-      </div>
 
       <div class="info-row">
-        <span>Balance</span>
+
+        <span>
+          Email
+        </span>
+
+        <b>
+          ${escapeHTML(email)}
+        </b>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <span>
+          Phone
+        </span>
+
+        <b>
+          ${escapeHTML(phone)}
+        </b>
+
+      </div>
+
+
+      <div class="info-row">
+
+        <span>
+          Balance
+        </span>
 
         <b style="color:#39ff88">
+
           ৳${balance.toFixed(2)}
+
         </b>
 
       </div>
+
 
       <div class="info-row">
-        <span>Referral Code</span>
+
+        <span>
+          Referral Code
+        </span>
 
         <b style="color:#39ff88">
+
           ${escapeHTML(referralCode)}
+
         </b>
 
       </div>
+
 
     </div>
 
@@ -2201,10 +2973,13 @@ async function openProfile(){
     </button>
 
     `
+
   );
+
 
   $("logoutBtn").onclick =
     logoutUser;
+
 }
 
 
@@ -2214,8 +2989,22 @@ async function openProfile(){
 
 function openWallet(){
 
+  if(!currentUser){
+
+    alert(
+      "আগে Login করুন।"
+    );
+
+    return;
+
+  }
+
+
   const balance =
-    Number(currentProfile?.balance || 0);
+    Number(
+      currentProfile?.balance || 0
+    );
+
 
   openSheet(
 
@@ -2229,13 +3018,16 @@ function openWallet(){
         Current Balance
       </div>
 
+
       <div class="balance">
         ৳${balance.toFixed(2)}
       </div>
 
     </div>
 
+
     <br>
+
 
     <button
       class="primary"
@@ -2245,7 +3037,9 @@ function openWallet(){
 
     </button>
 
+
     <br><br>
+
 
     <button
       class="primary"
@@ -2256,13 +3050,25 @@ function openWallet(){
     </button>
 
     `
+
   );
 
+
   $("walletDeposit").onclick =
-    openDeposit;
+    () => {
+
+      openDeposit();
+
+    };
+
 
   $("walletWithdraw").onclick =
-    openWithdraw;
+    () => {
+
+      openWithdraw();
+
+    };
+
 }
 
 
@@ -2272,12 +3078,23 @@ function openWallet(){
 
 function openRefer(){
 
+  if(!currentUser){
+
+    alert(
+      "আগে Login করুন।"
+    );
+
+    return;
+
+  }
+
+
   const code =
     currentProfile?.referral_code ||
-    currentUser?.id
-      ?.substring(0,8)
-      .toUpperCase() ||
-    "TUINCOME";
+    currentUser.id
+      .substring(0,8)
+      .toUpperCase();
+
 
   openSheet(
 
@@ -2291,27 +3108,32 @@ function openRefer(){
         আপনার Referral Code
       </h3>
 
+
       <div style="
         font-size:25px;
         font-weight:900;
         color:#39ff88;
         text-align:center;
-        padding:15px
-      ">
+        padding:15px">
 
         ${escapeHTML(code)}
 
       </div>
 
+
       <p style="color:#819b8d">
+
         এই referral code আপনার বন্ধুকে
         দিতে পারেন।
+
       </p>
 
     </div>
 
     `
+
   );
+
 }
 
 
@@ -2321,12 +3143,28 @@ function openRefer(){
 
 async function openHistory(){
 
+  if(!currentUser){
+
+    alert(
+      "আগে Login করুন।"
+    );
+
+    return;
+
+  }
+
+
   openSheet(
+
     "History",
+
     '<div class="loading">Loading...</div>'
+
   );
 
+
   let items = [];
+
 
   try{
 
@@ -2338,31 +3176,43 @@ async function openHistory(){
         .order("created_at",{ascending:false})
         .limit(20);
 
+
     if(!deposits.error){
 
-      (deposits.data || []).forEach(item => {
+      (deposits.data || [])
+        .forEach(item => {
 
-        items.push({
 
-          type:"Deposit",
+          items.push({
 
-          amount:
-            Number(item.amount || 0),
+            type:"Deposit",
 
-          status:
-            item.status || "pending",
+            amount:
+              Number(item.amount || 0),
 
-          created_at:
-            item.created_at || ""
+            status:
+              item.status || "pending",
+
+            created_at:
+              item.created_at || "",
+
+            method:
+              item.payment_method || ""
+
+          });
+
 
         });
 
-      });
     }
 
   }catch(error){
 
-    console.warn(error);
+    console.warn(
+      "Deposit history error:",
+      error
+    );
+
   }
 
 
@@ -2376,31 +3226,43 @@ async function openHistory(){
         .order("created_at",{ascending:false})
         .limit(20);
 
+
     if(!withdrawals.error){
 
-      (withdrawals.data || []).forEach(item => {
+      (withdrawals.data || [])
+        .forEach(item => {
 
-        items.push({
 
-          type:"Withdrawal",
+          items.push({
 
-          amount:
-            Number(item.amount || 0),
+            type:"Withdrawal",
 
-          status:
-            item.status || "pending",
+            amount:
+              Number(item.amount || 0),
 
-          created_at:
-            item.created_at || ""
+            status:
+              item.status || "pending",
+
+            created_at:
+              item.created_at || "",
+
+            method:
+              item.payment_method || ""
+
+          });
+
 
         });
 
-      });
     }
 
   }catch(error){
 
-    console.warn(error);
+    console.warn(
+      "Withdrawal history error:",
+      error
+    );
+
   }
 
 
@@ -2410,55 +3272,95 @@ async function openHistory(){
       '<div class="empty">কোনো History পাওয়া যায়নি।</div>';
 
     return;
+
   }
 
 
   items.sort((a,b) =>
     String(b.created_at)
-      .localeCompare(String(a.created_at))
+      .localeCompare(
+        String(a.created_at)
+      )
   );
 
 
   $("sheetBody").innerHTML =
+
     items.map(item => `
 
+
       <div class="history-item">
+
 
         <b>
           ${escapeHTML(item.type)}
         </b>
 
+
         <br>
+
 
         Amount:
         ৳${item.amount.toFixed(2)}
 
+
         <br>
 
-        Status:
-
-        <span class="${statusClass(item.status)}">
-          ${escapeHTML(item.status)}
-        </span>
 
         ${
-          item.created_at
+          item.method
           ?
-          `<br>
-           <small style="color:#718c7d">
-             ${escapeHTML(
-               new Date(item.created_at).toLocaleString()
-             )}
-           </small>`
+          `Method:
+           ${escapeHTML(item.method)}
+           <br>`
           :
           ""
         }
 
+
+        Status:
+
+
+        <span
+          class="${statusClass(item.status)}">
+
+          ${escapeHTML(item.status)}
+
+        </span>
+
+
+        ${
+          item.created_at
+          ?
+
+          `<br>
+           <small style="color:#718c7d">
+
+             ${escapeHTML(
+               new Date(
+                 item.created_at
+               ).toLocaleString()
+             )}
+
+           </small>`
+
+          :
+
+          ""
+        }
+
+
       </div>
 
+
     `).join("");
+
 }
 
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
 
 function statusClass(status){
 
@@ -2466,18 +3368,26 @@ function statusClass(status){
     String(status || "")
       .toLowerCase();
 
+
   if(
     status === "approved" ||
     status === "completed"
   ){
+
     return "approved";
+
   }
+
 
   if(status === "rejected"){
+
     return "rejected";
+
   }
 
+
   return "pending";
+
 }
 
 
@@ -2487,10 +3397,25 @@ function statusClass(status){
 
 async function openTeam(){
 
+  if(!currentUser){
+
+    alert(
+      "আগে Login করুন।"
+    );
+
+    return;
+
+  }
+
+
   openSheet(
+
     "VIP Team",
+
     '<div class="loading">VIP load হচ্ছে...</div>'
+
   );
+
 
   try{
 
@@ -2500,12 +3425,17 @@ async function openTeam(){
         .select("*")
         .order("id");
 
+
     if(result.error){
+
       throw result.error;
+
     }
+
 
     const items =
       result.data || [];
+
 
     if(!items.length){
 
@@ -2513,12 +3443,17 @@ async function openTeam(){
         '<div class="empty">VIP package এখনো যোগ করা হয়নি।</div>';
 
       return;
+
     }
 
+
     $("sheetBody").innerHTML =
+
       items.map(item => `
 
+
         <div class="card">
+
 
           <h3 style="color:#ffd700">
 
@@ -2529,14 +3464,19 @@ async function openTeam(){
 
           </h3>
 
+
           <p style="color:#91a99a">
 
             Price:
-            ৳${Number(item.price || 0).toFixed(2)}
+            ৳${Number(
+              item.price || 0
+            ).toFixed(2)}
 
           </p>
 
+
         </div>
+
 
       `).join("");
 
@@ -2544,8 +3484,9 @@ async function openTeam(){
 
     $("sheetBody").innerHTML = `
 
-      <div class="error-box"
-           style="display:block">
+      <div
+        class="error-box"
+        style="display:block">
 
         VIP load failed:
 
@@ -2554,8 +3495,11 @@ async function openTeam(){
         )}
 
       </div>
+
     `;
+
   }
+
 }
 
 
@@ -2568,18 +3512,26 @@ function openSheet(title,body){
   $("sheetTitle").textContent =
     title;
 
+
   $("sheetBody").innerHTML =
     body;
 
+
   $("modal").style.display =
     "flex";
+
 }
 
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
 
 function closeModal(){
 
   $("modal").style.display =
     "none";
+
 }
 
 
@@ -2596,31 +3548,55 @@ async function logoutUser(){
   }catch(error){
 
     console.error(error);
+
   }
+
 
   currentUser = null;
+
   currentProfile = null;
+
   currentTask = null;
 
+
   if(taskTimer){
+
     clearInterval(taskTimer);
+
     taskTimer = null;
+
   }
+
 
   $("mainDashboard").style.display =
     "none";
 
+
   $("authLanding").style.display =
     "flex";
 
+
   closeModal();
+
+
+  $("taskModal").style.display =
+    "none";
+
 
   setAuthMode("login");
 
+
   $("email").value = "";
+
   $("password").value = "";
 
+  $("name").value = "";
+
+  $("phone").value = "";
+
+
   clearMessages();
+
 }
 
 
@@ -2632,15 +3608,23 @@ async function oauthLogin(provider){
 
   clearMessages();
 
-  if(window.location.protocol === "file:"){
+
+  if(
+    window.location.protocol === "file:"
+  ){
 
     showError(
+
       "Google/Facebook Login চালাতে HTML file সরাসরি খুলবেন না।\n\n" +
+
       "HTTPS hosting-এ site publish করতে হবে।"
+
     );
 
     return;
+
   }
+
 
   try{
 
@@ -2650,24 +3634,34 @@ async function oauthLogin(provider){
         provider:provider,
 
         options:{
+
           redirectTo:
             window.location.origin +
             window.location.pathname
+
         }
 
       });
 
+
     if(result.error){
+
       throw result.error;
+
     }
 
   }catch(error){
 
     showError(
+
       "OAuth Login failed:\n\n" +
+
       getErrorMessage(error)
+
     );
+
   }
+
 }
 
 
@@ -2679,8 +3673,10 @@ async function resetPassword(){
 
   clearMessages();
 
+
   const email =
     $("email").value.trim();
+
 
   if(!email){
 
@@ -2689,7 +3685,9 @@ async function resetPassword(){
     );
 
     return;
+
   }
+
 
   try{
 
@@ -2700,29 +3698,43 @@ async function resetPassword(){
           email,
 
           {
+
             redirectTo:
               window.location.origin +
               window.location.pathname
+
           }
 
         );
 
+
     if(result.error){
+
       throw result.error;
+
     }
 
+
     showSuccess(
-      "Password reset email পাঠানো হয়েছে/পাঠানোর চেষ্টা করা হয়েছে।\n\n" +
+
+      "Password reset email পাঠানোর চেষ্টা করা হয়েছে।\n\n" +
+
       "আপনার Gmail inbox এবং Spam folder check করুন।"
+
     );
 
   }catch(error){
 
     showError(
+
       "Password reset failed:\n\n" +
+
       getErrorMessage(error)
+
     );
+
   }
+
 }
 
 
@@ -2738,15 +3750,20 @@ $("registerTab").onclick =
   () => setAuthMode("register");
 
 
-$("authBtn").onclick = () => {
+$("authBtn").onclick =
+  () => {
 
-  if(authMode === "login"){
-    loginUser();
-  }else{
-    registerUser();
-  }
+    if(authMode === "login"){
 
-};
+      loginUser();
+
+    }else{
+
+      registerUser();
+
+    }
+
+  };
 
 
 $("googleBtn").onclick =
@@ -2768,8 +3785,12 @@ $("closeBtn").onclick =
 $("modal").onclick =
   function(event){
 
-    if(event.target === $("modal")){
+    if(
+      event.target === $("modal")
+    ){
+
       closeModal();
+
     }
 
   };
@@ -2803,31 +3824,42 @@ $("profileNav").onclick =
   openProfile;
 
 
-$("homeNav").onclick = () => {
+$("homeNav").onclick =
+  () => {
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+    window.scrollTo({
 
-};
+      top:0,
+
+      behavior:"smooth"
+
+    });
+
+  };
 
 
-$("startNav").onclick = () => {
+$("startNav").onclick =
+  () => {
 
-  const firstTask =
-    document.querySelector(".task-btn");
+    const firstTask =
+      document.querySelector(
+        ".task-btn"
+      );
 
-  if(firstTask){
 
-    firstTask.click();
+    if(firstTask){
 
-  }else{
+      firstTask.click();
 
-    alert("এখন কোনো Task নেই।");
-  }
+    }else{
 
-};
+      alert(
+        "এখন কোনো Task নেই।"
+      );
+
+    }
+
+  };
 
 
 $("rewardBtn").onclick =
@@ -2835,7 +3867,7 @@ $("rewardBtn").onclick =
 
 
 $("langBtn").onclick =
-  function(){
+  () => {
 
     alert(
       "Language option পরে যোগ করা যাবে।"
@@ -2845,12 +3877,23 @@ $("langBtn").onclick =
 
 
 /* =========================================================
-   AUTH STATE
+   AUTH STATE LISTENER
 ========================================================= */
 
 function setupAuthListener(){
 
+  if(authListenerStarted){
+
+    return;
+
+  }
+
+
+  authListenerStarted = true;
+
+
   supabaseClient.auth.onAuthStateChange(
+
     async function(event,session){
 
       console.log(
@@ -2858,35 +3901,82 @@ function setupAuthListener(){
         event
       );
 
+
       if(event === "SIGNED_OUT"){
 
         currentUser = null;
+
         currentProfile = null;
+
 
         $("mainDashboard").style.display =
           "none";
 
+
         $("authLanding").style.display =
           "flex";
 
+
         return;
+
       }
+
 
       if(
         event === "SIGNED_IN" &&
         session
       ){
 
-        currentUser =
-          session.user;
+        try{
 
-        await loadProfile();
+          currentUser =
+            session.user;
 
-        showDashboard();
+
+          await loadProfile();
+
+
+          showDashboard();
+
+        }catch(error){
+
+          console.error(
+            "AUTH PROFILE ERROR:",
+            error
+          );
+
+
+          currentUser = null;
+
+          currentProfile = null;
+
+
+          $("mainDashboard").style.display =
+            "none";
+
+
+          $("authLanding").style.display =
+            "flex";
+
+
+          showError(
+
+            "Profile load failed:\n\n" +
+
+            translateServerError(
+              getErrorMessage(error)
+            )
+
+          );
+
+        }
+
       }
 
     }
+
   );
+
 }
 
 
@@ -2897,12 +3987,17 @@ function setupAuthListener(){
 async function startApp(){
 
   if(!initSupabase()){
+
     return;
+
   }
+
+
+  setupAuthListener();
+
 
   await checkSession();
 
-  setupAuthListener();
 }
 
 
@@ -2910,7 +4005,9 @@ async function startApp(){
    START
 ========================================================= */
 
-if(document.readyState === "loading"){
+if(
+  document.readyState === "loading"
+){
 
   document.addEventListener(
     "DOMContentLoaded",
@@ -2920,6 +4017,7 @@ if(document.readyState === "loading"){
 }else{
 
   startApp();
+
 }
 
 </script>
