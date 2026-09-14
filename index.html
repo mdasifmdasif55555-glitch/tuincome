@@ -2371,6 +2371,9 @@ async function openAdmin() {
    ADMIN PANEL
 ===================================================== */
 async function loadAdminPanel(){
+   console.log("ADMIN LOAD START");
+console.log("Current user:", currentUser?.id);
+console.log("Current profile:", currentProfile);
 try{
 const [
 profilesRes,
