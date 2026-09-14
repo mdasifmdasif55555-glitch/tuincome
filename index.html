@@ -6,7 +6,9 @@
 
 <meta charset="utf-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport"
+
+content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 
 <title>TUINCOME v7</title>
 
@@ -96,7 +98,7 @@ isolation:isolate
 
 /* =====================================================
 
-   ✨ ANIMATED LUXURY BACKGROUND
+   LUXURY BACKGROUND
 
 ===================================================== */
 
@@ -240,8 +242,6 @@ background-position:
 
 }
 
-/* LARGE MOVING GLOW */
-
 body::after{
 
 content:"";
@@ -328,12 +328,6 @@ scale(1.3)
 
 }
 
-/* =====================================================
-
-   ✨ LUXURY GRID
-
-===================================================== */
-
 body{
 
 background-image:
@@ -381,12 +375,6 @@ background-position:55px 55px
 }
 
 }
-
-/* =====================================================
-
-   FLOATING LIGHT PARTICLES
-
-===================================================== */
 
 body .container::before,
 
@@ -2134,9 +2122,47 @@ font-weight:800
 
 }
 
+/* TASK TYPE BADGES */
+
+.task-type-badge{
+
+display:inline-block;
+
+margin-top:6px;
+
+padding:4px 8px;
+
+border-radius:20px;
+
+font-size:10px;
+
+font-weight:900
+
+}
+
+.task-type-normal{
+
+background:#103622;
+
+border:1px solid #28764a;
+
+color:#71ffad
+
+}
+
+.task-type-vip{
+
+background:#352a0d;
+
+border:1px solid #a3822e;
+
+color:#ffe58a
+
+}
+
 /* =====================================================
 
-   👑 VIP LUXURY ANIMATED
+   VIP
 
 ===================================================== */
 
@@ -2195,8 +2221,6 @@ box-shadow:
 inset 0 1px #fff3
 
 }
-
-/* VIP moving gold glow */
 
 .vip-luxury::before{
 
@@ -2276,8 +2300,6 @@ opacity:.4
 
 }
 
-/* VIP crown */
-
 .vip-crown{
 
 text-align:center;
@@ -2315,8 +2337,6 @@ transform:translateY(-7px)
 }
 
 }
-
-/* VIP current */
 
 .vip-current{
 
@@ -2445,8 +2465,6 @@ color:#a99a70;
 font-size:11px
 
 }
-
-/* VIP levels */
 
 .vip-level{
 
@@ -2653,12 +2671,6 @@ grid-template-columns:repeat(2,1fr)
 }
 
 }
-
-/* =====================================================
-
-   REDUCE MOTION
-
-===================================================== */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -2908,7 +2920,7 @@ TUINCOME v7 • PREMIUM
 
 <p>
 
-VIP TASK ক্রয় করলে আরো বেশি ইনকাম করতে সক্ষম হবেন দৈনিক ৫০০০ এর উপরে ইনকাম এর সুযোগ রয়েছে
+VIP TASK ব্যবহার করলে আপনার অ্যাকাউন্টের নির্ধারিত Task ও Reward অনুযায়ী অতিরিক্ত Reward পাওয়ার সুযোগ থাকতে পারে।
 
 </p>
 
@@ -3270,7 +3282,11 @@ $("successBox").style.display="none";
 
 }
 
-/* AUTH MODE */
+/* =====================================================
+
+   AUTH MODE
+
+===================================================== */
 
 function setAuthMode(mode){
 
@@ -3326,7 +3342,11 @@ $("authBtn")
 
 }
 
-/* PROFILE */
+/* =====================================================
+
+   PROFILE
+
+===================================================== */
 
 async function loadProfile(){
 
@@ -3410,7 +3430,11 @@ currentUser?.email?.split("@")[0]||
 
 }
 
-/* REGISTER */
+/* =====================================================
+
+   REGISTER
+
+===================================================== */
 
 async function registerUser(){
 
@@ -3568,7 +3592,11 @@ $("authBtn").textContent=
 
 }
 
-/* LOGIN */
+/* =====================================================
+
+   LOGIN
+
+===================================================== */
 
 async function loginUser(){
 
@@ -3680,7 +3708,11 @@ $("authBtn").textContent=
 
 }
 
-/* DASHBOARD */
+/* =====================================================
+
+   DASHBOARD
+
+===================================================== */
 
 function showDashboard(){
 
@@ -3698,7 +3730,11 @@ loadTasks();
 
 }
 
-/* SESSION */
+/* =====================================================
+
+   SESSION
+
+===================================================== */
 
 async function checkSession(){
 
@@ -3752,643 +3788,939 @@ $("mainDashboard").style.display=
 
 }
 
-/* TASKS */
+/* =====================================================
+
+   TASKS
+
+===================================================== */
 
 async function loadTasks(){
 
-  const grid = $("taskGrid");
-
-  grid.innerHTML =
-    '<div class="loading">Task লোড হচ্ছে...</div>';
-
-  try{
-
-    /* =========================
-       LOAD ACTIVE TASKS
-    ========================= */
-
-    const {
-      data: tasks,
-      error: taskError
-    } = await sb
-      .from("tasks")
-      .select("*")
-      .eq("active", true)
-      .order("id", { ascending:true });
-
-    if(taskError) throw taskError;
-
-    const allTasks = tasks || [];
-
-    /* =========================
-       NORMAL TASKS
-       vip_level = 0 / null
-    ========================= */
+const grid=$("taskGrid");
 
-    const normalTasks = allTasks.filter(task =>
-      Number(task.vip_level || 0) === 0
-    );
+grid.innerHTML=
 
-    /* =========================
-       VIP TASKS
-    ========================= */
+'<div class="loading">Task লোড হচ্ছে...</div>';
 
-    const vipTasks = allTasks.filter(task =>
-      Number(task.vip_level || 0) > 0
-    );
+try{
 
-    /* =========================
-       LOAD CURRENT VIP
-    ========================= */
-
-    let currentVip = 0;
-    let dailyLimit = 0;
-
-    if(currentUser){
-
-      /* Approved Deposit */
-
-      const {
-        data: deposits,
-        error: depositError
-      } = await sb
-        .from("deposits")
-        .select("amount")
-        .eq("user_id", currentUser.id)
-        .eq("status","approved");
-
-      if(depositError) throw depositError;
-
-      const approvedDeposit =
-        (deposits || []).reduce(
-          (sum,row) =>
-            sum + Number(row.amount || 0),
-          0
-        );
-
-      /* VIP Packages */
-
-      const {
-        data: packages,
-        error: vipError
-      } = await sb
-        .from("vip_packages")
-        .select(
-          "level,min_deposit,daily_reward_limit,active"
-        )
-        .eq("active",true)
-        .gt("level",0)
-        .order("level",{ascending:true});
-
-      if(vipError) throw vipError;
-
-      const availablePackages =
-        packages || [];
-
-      availablePackages.forEach(pkg=>{
-
-        if(
-          approvedDeposit >=
-          Number(pkg.min_deposit || 0)
-        ){
-
-          if(
-            Number(pkg.level) >
-            currentVip
-          ){
-            currentVip =
-              Number(pkg.level);
-          }
-
-        }
-
-      });
-
-      const currentPackage =
-        availablePackages.find(
-          pkg =>
-            Number(pkg.level) ===
-            currentVip
-        );
-
-      if(currentPackage){
-
-        dailyLimit =
-          Number(
-            currentPackage.daily_reward_limit || 0
-          );
-
-      }
-
-    }
-
-    /* =========================
-       LOAD TODAY'S COMPLETIONS
-    ========================= */
-
-    let todayCompletions = [];
-
-    if(currentUser){
-
-      const {
-        data: completions,
-        error: completionError
-      } = await sb
-        .from("task_completions")
-        .select(
-          "task_id,reward,created_at"
-        )
-        .eq(
-          "user_id",
-          currentUser.id
-        )
-        .order(
-          "created_at",
-          {ascending:false}
-        )
-        .limit(100);
+const {
 
-      if(completionError)
-        throw completionError;
+data:tasks,
 
-      /*
-       * Bangladesh date check
-       */
+error:taskError
 
-      const todayBD =
-        new Intl.DateTimeFormat(
-          "en-CA",
-          {
-            timeZone:"Asia/Dhaka",
-            year:"numeric",
-            month:"2-digit",
-            day:"2-digit"
-          }
-        ).format(new Date());
-
-      todayCompletions =
-        (completions || []).filter(row=>{
+}=await sb
 
-          const rowDate =
-            new Intl.DateTimeFormat(
-              "en-CA",
-              {
-                timeZone:"Asia/Dhaka",
-                year:"numeric",
-                month:"2-digit",
-                day:"2-digit"
-              }
-            ).format(
-              new Date(row.created_at)
-            );
+.from("tasks")
 
-          return rowDate === todayBD;
+.select("*")
 
-        });
+.eq("active",true)
 
-    }
+.order("id",{ascending:true});
 
-    /* =========================
-       VIP TODAY STATS
-    ========================= */
+if(taskError)
 
-    let vipTodayCount = 0;
-    let vipTodayReward = 0;
+throw taskError;
 
-    if(currentVip > 0){
+const allTasks=tasks||[];
 
-      const vipTaskIds =
-        new Set(
-          vipTasks
-            .filter(
-              task =>
-                Number(task.vip_level) ===
-                currentVip
-            )
-            .map(task =>
-              Number(task.id)
-            )
-        );
+const normalTasks=
 
-      todayCompletions.forEach(row=>{
+allTasks.filter(task=>
 
-        if(
-          vipTaskIds.has(
-            Number(row.task_id)
-          )
-        ){
-
-          vipTodayCount++;
+Number(task.vip_level||0)===0
 
-          vipTodayReward +=
-            Number(row.reward || 0);
+);
 
-        }
+const vipTasks=
 
-      });
-
-    }
-
-    /* =========================
-       NORMAL TASK HTML
-    ========================= */
-
-    let html = "";
-
-    if(normalTasks.length){
-
-      normalTasks.forEach(task=>{
-
-        html += `
-
-          <div class="task-card">
-
-            <div class="task-icon">
-              <i class="fa-solid fa-bolt"></i>
-            </div>
-
-            <div class="task-info">
-
-              <b>
-                ${esc(task.title || "Task")}
-              </b>
-
-              <small>
-                ${esc(
-                  task.description ||
-                  "Task সম্পন্ন করুন"
-                )}
-              </small>
-
-              <br>
-
-              <span class="task-reward">
-                ৳${money(task.reward)}
-              </span>
-
-              <br>
-
-              <button
-                class="task-btn"
-                data-task-id="${task.id}">
-                Start Task
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      });
-
-    }else{
-
-      html += `
-        <div class="empty">
-          এখন কোনো Normal Task নেই।
-        </div>
-      `;
-
-    }
-
-    /* =========================
-       VIP TASK SECTION
-    ========================= */
-
-    html += `
-
-      <div
-        style="
-          grid-column:1/-1;
-          margin-top:18px;
-          padding:16px;
-          border-radius:18px;
-          background:rgba(57,255,136,.07);
-          border:1px solid rgba(57,255,136,.20);
-        "
-      >
-
-        <div
-          style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:10px;
-            margin-bottom:12px;
-          "
-        >
-
-          <div>
-
-            <b
-              style="
-                font-size:18px;
-              "
-            >
-              👑 VIP Tasks
-            </b>
-
-            <small
-              style="
-                display:block;
-                margin-top:4px;
-                opacity:.75;
-              "
-            >
-              VIP ${currentVip > 0 ? currentVip : "Locked"}
-            </small>
-
-          </div>
-
-          ${
-            currentVip > 0
-            ? `
-              <div
-                style="
-                  text-align:right;
-                  font-size:12px;
-                "
-              >
-                <div>
-                  ${vipTodayCount}/6 Tasks
-                </div>
-
-                <div>
-                  ৳${money(vipTodayReward)}
-                  /
-                  ৳${money(dailyLimit)}
-                </div>
-              </div>
-            `
-            : `
-              <div
-                style="
-                  font-size:12px;
-                  opacity:.7;
-                "
-              >
-                🔒 Locked
-              </div>
-            `
-          }
-
-        </div>
-
-    `;
-
-    /* =========================
-       NO VIP
-    ========================= */
-
-    if(currentVip <= 0){
-
-      html += `
-
-        <div
-          class="empty"
-          style="
-            margin:0;
-            text-align:center;
-          "
-        >
-
-          🔒 VIP Task ব্যবহার করতে
-          একটি সক্রিয় VIP Level প্রয়োজন।
-
-        </div>
-
-      `;
-
-    }else{
-
-      const myVipTasks =
-        vipTasks.filter(task =>
-          Number(task.vip_level) ===
-          currentVip
-        );
-
-      if(!myVipTasks.length){
-
-        html += `
-
-          <div
-            class="empty"
-            style="margin:0;"
-          >
-            VIP ${currentVip}-এর কোনো Task নেই।
-          </div>
-
-        `;
-
-      }else{
-
-        myVipTasks.forEach(task=>{
-
-          const completedToday =
-            todayCompletions.some(
-              row =>
-                Number(row.task_id) ===
-                Number(task.id)
-            );
-
-          const sixLimitReached =
-            vipTodayCount >= 6;
-
-          const rewardLimitReached =
-            dailyLimit > 0 &&
-            (
-              vipTodayReward +
-              Number(task.reward || 0)
-            ) > dailyLimit;
-
-          const disabled =
-            completedToday ||
-            sixLimitReached ||
-            rewardLimitReached;
-
-          let buttonText =
-            "Start VIP Task";
-
-          if(completedToday){
-
-            buttonText =
-              "✓ আজ Completed";
-
-          }else if(sixLimitReached){
-
-            buttonText =
-              "আজকের Limit শেষ";
-
-          }else if(rewardLimitReached){
-
-            buttonText =
-              "Daily Reward Limit";
-
-          }
-
-          html += `
-
-            <div
-              class="task-card"
-              style="
-                border-color:
-                  rgba(57,255,136,.35);
-              "
-            >
-
-              <div
-                class="task-icon"
-                style="
-                  color:#39ff88;
-                "
-              >
-                <i class="fa-solid fa-crown"></i>
-              </div>
-
-              <div class="task-info">
-
-                <b>
-                  ${esc(
-                    task.title ||
-                    "VIP Task"
-                  )}
-                </b>
-
-                <small>
-                  ${esc(
-                    task.description ||
-                    "VIP Task সম্পন্ন করুন"
-                  )}
-                </small>
-
-                <br>
-
-                <span class="task-reward">
-                  ৳${money(task.reward)}
-                </span>
-
-                <small
-                  style="
-                    display:block;
-                    margin-top:4px;
-                  "
-                >
-                  VIP ${currentVip}
-                </small>
-
-                <br>
-
-                <button
-                  class="task-btn"
-                  data-vip-task-id="${task.id}"
-                  ${disabled ? "disabled" : ""}
-                  style="
-                    ${
-                      disabled
-                      ? "opacity:.55;cursor:not-allowed;"
-                      : ""
-                    }
-                  "
-                >
-                  ${buttonText}
-                </button>
-
-              </div>
-
-            </div>
-
-          `;
-
-        });
-
-      }
-
-    }
-
-    html += `</div>`;
-
-    /* =========================
-       RENDER
-    ========================= */
-
-    grid.innerHTML = html;
-
-    /* =========================
-       NORMAL TASK BUTTONS
-    ========================= */
-
-    grid
-      .querySelectorAll(
-        ".task-btn[data-task-id]"
-      )
-      .forEach(btn=>{
-
-        const task =
-          allTasks.find(
-            x =>
-              String(x.id) ===
-              String(
-                btn.dataset.taskId
-              )
-          );
-
-        if(task){
-
-          btn.onclick =
-            () => startTask(task);
-
-        }
-
-      });
-
-    /* =========================
-       VIP TASK BUTTONS
-    ========================= */
-
-    grid
-      .querySelectorAll(
-        ".task-btn[data-vip-task-id]"
-      )
-      .forEach(btn=>{
-
-        const task =
-          allTasks.find(
-            x =>
-              String(x.id) ===
-              String(
-                btn.dataset.vipTaskId
-              )
-          );
-
-        if(task){
-
-          btn.onclick =
-            () => startTask(task);
-
-        }
-
-      });
-
-  }catch(e){
-
-    grid.innerHTML = `
-
-      <div class="empty">
-
-        Task load failed:<br>
-
-        ${esc(
-          errorText(e)
-        )}
-
-      </div>
-
-    `;
-
-  }
+allTasks.filter(task=>
+
+Number(task.vip_level||0)>0
+
+);
+
+let currentVip=0;
+
+let dailyLimit=0;
+
+if(currentUser){
+
+const {
+
+data:deposits,
+
+error:depositError
+
+}=await sb
+
+.from("deposits")
+
+.select("amount")
+
+.eq("user_id",currentUser.id)
+
+.eq("status","approved");
+
+if(depositError)
+
+throw depositError;
+
+const approvedDeposit=
+
+(deposits||[]).reduce(
+
+(sum,row)=>
+
+sum+Number(row.amount||0),
+
+0
+
+);
+
+const {
+
+data:packages,
+
+error:vipError
+
+}=await sb
+
+.from("vip_packages")
+
+.select(
+
+"level,min_deposit,daily_reward_limit,active"
+
+)
+
+.eq("active",true)
+
+.gt("level",0)
+
+.order("level",{ascending:true});
+
+if(vipError)
+
+throw vipError;
+
+const availablePackages=
+
+packages||[];
+
+availablePackages.forEach(pkg=>{
+
+if(
+
+approvedDeposit>=
+
+Number(pkg.min_deposit||0)
+
+){
+
+if(
+
+Number(pkg.level)>
+
+currentVip
+
+){
+
+currentVip=
+
+Number(pkg.level);
 
 }
+
+}
+
+});
+
+const currentPackage=
+
+availablePackages.find(
+
+pkg=>
+
+Number(pkg.level)===
+
+currentVip
+
+);
+
+if(currentPackage){
+
+dailyLimit=
+
+Number(
+
+currentPackage.daily_reward_limit||0
+
+);
+
+}
+
+}
+
+/* TODAY COMPLETIONS */
+
+let todayCompletions=[];
+
+if(currentUser){
+
+const {
+
+data:completions,
+
+error:completionError
+
+}=await sb
+
+.from("task_completions")
+
+.select(
+
+"task_id,reward,created_at"
+
+)
+
+.eq(
+
+"user_id",
+
+currentUser.id
+
+)
+
+.order(
+
+"created_at",
+
+{ascending:false}
+
+)
+
+.limit(100);
+
+if(completionError)
+
+throw completionError;
+
+const todayBD=
+
+new Intl.DateTimeFormat(
+
+"en-CA",
+
+{
+
+timeZone:"Asia/Dhaka",
+
+year:"numeric",
+
+month:"2-digit",
+
+day:"2-digit"
+
+}
+
+).format(new Date());
+
+todayCompletions=
+
+(completions||[]).filter(row=>{
+
+const rowDate=
+
+new Intl.DateTimeFormat(
+
+"en-CA",
+
+{
+
+timeZone:"Asia/Dhaka",
+
+year:"numeric",
+
+month:"2-digit",
+
+day:"2-digit"
+
+}
+
+).format(
+
+new Date(row.created_at)
+
+);
+
+return rowDate===todayBD;
+
+});
+
+}
+
+/* VIP TODAY */
+
+let vipTodayCount=0;
+
+let vipTodayReward=0;
+
+if(currentVip>0){
+
+const vipTaskIds=
+
+new Set(
+
+vipTasks
+
+.filter(
+
+task=>
+
+Number(task.vip_level)===
+
+currentVip
+
+)
+
+.map(task=>
+
+Number(task.id)
+
+)
+
+);
+
+todayCompletions.forEach(row=>{
+
+if(
+
+vipTaskIds.has(
+
+Number(row.task_id)
+
+)
+
+){
+
+vipTodayCount++;
+
+vipTodayReward+=
+
+Number(row.reward||0);
+
+}
+
+});
+
+}
+
+/* NORMAL TASKS */
+
+let html="";
+
+if(normalTasks.length){
+
+normalTasks.forEach(task=>{
+
+html+=`
+
+<div class="task-card">
+
+<div class="task-icon">
+
+<i class="fa-solid fa-bolt"></i>
+
+</div>
+
+<div class="task-info">
+
+<b>
+
+${esc(task.title||"Task")}
+
+</b>
+
+<small>
+
+${esc(
+
+task.description||
+
+"Task সম্পন্ন করুন"
+
+)}
+
+</small>
+
+<br>
+
+<span class="task-reward">
+
+৳${money(task.reward)}
+
+</span>
+
+<br>
+
+<button
+
+class="task-btn"
+
+data-task-id="${task.id}">
+
+Start Task
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}else{
+
+html+=`
+
+<div class="empty">
+
+এখন কোনো Normal Task নেই।
+
+</div>
+
+`;
+
+}
+
+/* VIP SECTION */
+
+html+=`
+
+<div
+
+style="
+
+grid-column:1/-1;
+
+margin-top:18px;
+
+padding:16px;
+
+border-radius:18px;
+
+background:rgba(57,255,136,.07);
+
+border:1px solid rgba(57,255,136,.20);
+
+">
+
+<div
+
+style="
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+gap:10px;
+
+margin-bottom:12px;
+
+">
+
+<div>
+
+<b style="font-size:18px">
+
+👑 VIP Tasks
+
+</b>
+
+<small
+
+style="
+
+display:block;
+
+margin-top:4px;
+
+opacity:.75;
+
+">
+
+VIP ${currentVip>0?currentVip:"Locked"}
+
+</small>
+
+</div>
+
+${
+
+currentVip>0
+
+?
+
+`
+
+<div
+
+style="
+
+text-align:right;
+
+font-size:12px;
+
+">
+
+<div>
+
+${vipTodayCount}/6 Tasks
+
+</div>
+
+<div>
+
+৳${money(vipTodayReward)}
+
+/
+
+৳${money(dailyLimit)}
+
+</div>
+
+</div>
+
+`
+
+:
+
+`
+
+<div
+
+style="
+
+font-size:12px;
+
+opacity:.7;
+
+">
+
+🔒 Locked
+
+</div>
+
+`
+
+}
+
+</div>
+
+`;
+
+if(currentVip<=0){
+
+html+=`
+
+<div
+
+class="empty"
+
+style="
+
+margin:0;
+
+text-align:center;
+
+">
+
+🔒 VIP Task ব্যবহার করতে
+
+একটি সক্রিয় VIP Level প্রয়োজন।
+
+</div>
+
+`;
+
+}else{
+
+const myVipTasks=
+
+vipTasks.filter(task=>
+
+Number(task.vip_level)===
+
+currentVip
+
+);
+
+if(!myVipTasks.length){
+
+html+=`
+
+<div
+
+class="empty"
+
+style="margin:0;">
+
+VIP ${currentVip}-এর কোনো Task নেই।
+
+</div>
+
+`;
+
+}else{
+
+myVipTasks.forEach(task=>{
+
+const completedToday=
+
+todayCompletions.some(
+
+row=>
+
+Number(row.task_id)===
+
+Number(task.id)
+
+);
+
+const sixLimitReached=
+
+vipTodayCount>=6;
+
+const rewardLimitReached=
+
+dailyLimit>0 &&
+
+(
+
+vipTodayReward+
+
+Number(task.reward||0)
+
+)>dailyLimit;
+
+const disabled=
+
+completedToday||
+
+sixLimitReached||
+
+rewardLimitReached;
+
+let buttonText=
+
+"Start VIP Task";
+
+if(completedToday){
+
+buttonText=
+
+"✓ আজ Completed";
+
+}else if(sixLimitReached){
+
+buttonText=
+
+"আজকের Limit শেষ";
+
+}else if(rewardLimitReached){
+
+buttonText=
+
+"Daily Reward Limit";
+
+}
+
+html+=`
+
+<div
+
+class="task-card"
+
+style="
+
+border-color:
+
+rgba(57,255,136,.35);
+
+">
+
+<div
+
+class="task-icon"
+
+style="
+
+color:#39ff88;
+
+">
+
+<i class="fa-solid fa-crown"></i>
+
+</div>
+
+<div class="task-info">
+
+<b>
+
+${esc(
+
+task.title||
+
+"VIP Task"
+
+)}
+
+</b>
+
+<small>
+
+${esc(
+
+task.description||
+
+"VIP Task সম্পন্ন করুন"
+
+)}
+
+</small>
+
+<br>
+
+<span class="task-reward">
+
+৳${money(task.reward)}
+
+</span>
+
+<small
+
+style="
+
+display:block;
+
+margin-top:4px;
+
+">
+
+VIP ${currentVip}
+
+</small>
+
+<br>
+
+<button
+
+class="task-btn"
+
+data-vip-task-id="${task.id}"
+
+${disabled?"disabled":""}>
+
+${buttonText}
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+}
+
+html+=`</div>`;
+
+grid.innerHTML=html;
+
+/* NORMAL BUTTONS */
+
+grid
+
+.querySelectorAll(
+
+".task-btn[data-task-id]"
+
+)
+
+.forEach(btn=>{
+
+const task=
+
+allTasks.find(
+
+x=>
+
+String(x.id)===
+
+String(
+
+btn.dataset.taskId
+
+)
+
+);
+
+if(task){
+
+btn.onclick=
+
+()=>startTask(task);
+
+}
+
+});
+
+/* VIP BUTTONS */
+
+grid
+
+.querySelectorAll(
+
+".task-btn[data-vip-task-id]"
+
+)
+
+.forEach(btn=>{
+
+const task=
+
+allTasks.find(
+
+x=>
+
+String(x.id)===
+
+String(
+
+btn.dataset.vipTaskId
+
+)
+
+);
+
+if(task){
+
+btn.onclick=
+
+()=>startTask(task);
+
+}
+
+});
+
+}catch(e){
+
+grid.innerHTML=`
+
+<div class="empty">
+
+Task load failed:<br>
+
+${esc(errorText(e))}
+
+</div>
+
+`;
+
+}
+
+}
+
+/* =====================================================
+
+   START TASK
+
+===================================================== */
+
+function startTask(task){
+
+if(!currentUser){
+
+alert("আগে Login করুন।");
+
+return;
+
+}
+
+if(taskTimer)
+
+clearInterval(taskTimer);
+
+currentTask=task;
+
+$("taskTitle").textContent=
+
+task.title||
+
+"Task চলছে";
+
+$("countdown").textContent=
+
+"3";
+
+$("progressBar").style.width=
+
+"0%";
+
+$("rewardBtn").style.display=
+
+"none";
+
+$("taskModal").style.display=
+
+"flex";
+
+let n=3;
+
+taskTimer=setInterval(()=>{
+
+n--;
+
+$("countdown").textContent=n;
+
+$("progressBar").style.width=
+
+((3-n)/3*100)+"%";
+
+if(n<=0){
+
+clearInterval(taskTimer);
+
+taskTimer=null;
+
+$("countdown").textContent="✓";
+
+$("rewardBtn").style.display=
+
+"block";
+
+}
+
+},1000);
+
+}
+
+/* =====================================================
+
+   CLAIM REWARD
+
+===================================================== */
 
 async function claimReward(){
 
@@ -4396,9 +4728,7 @@ if(!currentUser||!currentTask)
 
 return;
 
-const btn=
-
-$("rewardBtn");
+const btn=$("rewardBtn");
 
 btn.disabled=true;
 
@@ -4504,7 +4834,11 @@ currentTask=null;
 
 }
 
-/* DEPOSIT */
+/* =====================================================
+
+   DEPOSIT
+
+===================================================== */
 
 function openDeposit(){
 
@@ -4780,7 +5114,11 @@ btn.textContent=
 
 }
 
-/* WITHDRAW */
+/* =====================================================
+
+   WITHDRAW
+
+===================================================== */
 
 function openWithdraw(){
 
@@ -5040,7 +5378,11 @@ btn.textContent=
 
 }
 
-/* PROFILE */
+/* =====================================================
+
+   PROFILE
+
+===================================================== */
 
 async function openProfile(){
 
@@ -5256,7 +5598,11 @@ openAdmin;
 
 }
 
-/* EDIT PROFILE */
+/* =====================================================
+
+   EDIT PROFILE
+
+===================================================== */
 
 function openEditProfile(){
 
@@ -5468,7 +5814,11 @@ btn.textContent=
 
 }
 
-/* WALLET */
+/* =====================================================
+
+   WALLET
+
+===================================================== */
 
 function openWallet(){
 
@@ -5536,7 +5886,11 @@ openWithdraw;
 
 }
 
-/* REFER */
+/* =====================================================
+
+   REFER
+
+===================================================== */
 
 async function openRefer(){
 
@@ -5676,7 +6030,11 @@ alert(
 
 }
 
-/* HISTORY */
+/* =====================================================
+
+   HISTORY
+
+===================================================== */
 
 async function openHistory(){
 
@@ -5922,7 +6280,9 @@ ${
 
 x.date
 
-?esc(
+?
+
+esc(
 
 new Date(x.date)
 
@@ -5930,7 +6290,9 @@ new Date(x.date)
 
 )
 
-:""
+:
+
+""
 
 }
 
@@ -5942,11 +6304,11 @@ new Date(x.date)
 
 }
 
-/* =================================================
+/* =====================================================
 
-   VIP LUXURY SYSTEM
+   VIP
 
-================================================= */
+===================================================== */
 
 async function openTeam(){
 
@@ -5974,7 +6336,7 @@ error
 
 .order(
 
-"price",
+"level",
 
 {
 
@@ -6040,7 +6402,15 @@ if(
 
 approvedDeposit>=
 
-Number(x.price||0)
+Number(
+
+x.min_deposit ??
+
+x.price ??
+
+0
+
+)
 
 ){
 
@@ -6062,7 +6432,7 @@ currentIndex>=0
 
 packages[currentIndex].name||
 
-("VIP "+(currentIndex+1))
+("VIP "+packages[currentIndex].level)
 
 )
 
@@ -6078,7 +6448,27 @@ currentIndex>=0
 
 Number(
 
-packages[currentIndex].price||0
+packages[currentIndex].min_deposit ??
+
+packages[currentIndex].price ??
+
+0
+
+)
+
+:
+
+0;
+
+const currentDailyLimit=
+
+currentIndex>=0
+
+?
+
+Number(
+
+packages[currentIndex].daily_reward_limit||0
 
 )
 
@@ -6098,7 +6488,15 @@ if(nextPackage){
 
 const nextPrice=
 
-Number(nextPackage.price||0);
+Number(
+
+nextPackage.min_deposit ??
+
+nextPackage.price ??
+
+0
+
+);
 
 const base=
 
@@ -6188,6 +6586,22 @@ Approved Deposit
 
 </div>
 
+<div class="info-row">
+
+<span>
+
+Daily Reward Limit
+
+</span>
+
+<b class="gold">
+
+৳${money(currentDailyLimit)}
+
+</b>
+
+</div>
+
 ${
 
 nextPackage
@@ -6198,9 +6612,7 @@ nextPackage
 
 <div class="vip-progress">
 
-<div
-
-style="width:${progress}%">
+<div style="width:${progress}%">
 
 </div>
 
@@ -6216,7 +6628,7 @@ ${esc(
 
 nextPackage.name||
 
-"VIP"
+"VIP "+nextPackage.level
 
 )}
 
@@ -6251,6 +6663,8 @@ nextPackage.name||
 "পরের VIP"
 
 )}
+
+unlock হবে।
 
 </div>
 
@@ -6296,13 +6710,21 @@ margin:18px 0 12px">
 
 (x,i)=>{
 
-const price=
+const threshold=
 
-Number(x.price||0);
+Number(
+
+x.min_deposit ??
+
+x.price ??
+
+0
+
+);
 
 const unlocked=
 
-approvedDeposit>=price;
+approvedDeposit>=threshold;
 
 const isCurrent=
 
@@ -6332,7 +6754,7 @@ ${esc(
 
 x.name||
 
-("VIP "+(i+1))
+("VIP "+x.level)
 
 )}
 
@@ -6340,19 +6762,7 @@ x.name||
 
 <div class="vip-status">
 
-${
-
-unlocked
-
-?
-
-"✓ Unlocked"
-
-:
-
-"🔒 Locked"
-
-}
+${unlocked?"✓ Unlocked":"🔒 Locked"}
 
 </div>
 
@@ -6364,7 +6774,21 @@ text-align:right">
 
 <div class="vip-price">
 
-৳${money(price)}
+৳${money(threshold)}
+
+</div>
+
+<div style="
+
+font-size:11px;
+
+color:#a99a70;
+
+margin-top:4px">
+
+Daily:
+
+৳${money(x.daily_reward_limit)}
 
 </div>
 
@@ -6376,9 +6800,7 @@ isCurrent
 
 `
 
-<div class="
-
-vip-current-badge">
+<div class="vip-current-badge">
 
 CURRENT
 
@@ -6426,7 +6848,11 @@ ${esc(errorText(e))}
 
 }
 
-/* ADMIN */
+/* =====================================================
+
+   ADMIN
+
+===================================================== */
 
 function isAdmin(){
 
@@ -7030,7 +7456,25 @@ id="adminAddTaskBtn">
 
 </button>
 
-<br><br>
+<div
+
+style="
+
+margin-top:10px;
+
+color:#789184;
+
+font-size:11px;
+
+line-height:1.5">
+
+Normal Task অথবা VIP Task তৈরি করতে
+
+Add New Task চাপুন।
+
+</div>
+
+<br>
 
 <div id="adminTasks">
 
@@ -7040,7 +7484,13 @@ tasks.length
 
 ?
 
-tasks.map(x=>`
+tasks.map(x=>{
+
+const vipLevel=
+
+Number(x.vip_level||0);
+
+return `
 
 <div class="admin-item">
 
@@ -7058,6 +7508,38 @@ x.title||
 
 <br>
 
+${
+
+vipLevel>0
+
+?
+
+`
+
+<span class="task-type-badge task-type-vip">
+
+👑 VIP ${vipLevel}
+
+</span>
+
+`
+
+:
+
+`
+
+<span class="task-type-badge task-type-normal">
+
+⚡ NORMAL
+
+</span>
+
+`
+
+}
+
+<br>
+
 Reward:
 
 <span class="gold">
@@ -7068,21 +7550,15 @@ Reward:
 
 <br>
 
+Max Completions:
+
+${Number(x.max_completions||1)}
+
+<br>
+
 Status:
 
-${
-
-x.active
-
-?
-
-"Active"
-
-:
-
-"Inactive"
-
-}
+${x.active?"Active":"Inactive"}
 
 <div class="admin-actions">
 
@@ -7098,19 +7574,7 @@ ${!x.active}
 
 )">
 
-${
-
-x.active
-
-?
-
-"Disable"
-
-:
-
-"Enable"
-
-}
+${x.active?"Disable":"Enable"}
 
 </button>
 
@@ -7134,7 +7598,9 @@ Delete
 
 </div>
 
-`).join("")
+`;
+
+}).join("")
 
 :
 
@@ -7170,7 +7636,11 @@ ${esc(errorText(e))}
 
 }
 
-/* ADMIN DEPOSIT */
+/* =====================================================
+
+   ADMIN DEPOSIT
+
+===================================================== */
 
 async function adminDeposit(
 
@@ -7262,7 +7732,11 @@ errorText(e)
 
 }
 
-/* ADMIN WITHDRAW */
+/* =====================================================
+
+   ADMIN WITHDRAW
+
+===================================================== */
 
 async function adminWithdraw(
 
@@ -7354,7 +7828,11 @@ errorText(e)
 
 }
 
-/* ADMIN USER */
+/* =====================================================
+
+   ADMIN USER
+
+===================================================== */
 
 async function adminUserStatus(
 
@@ -7442,13 +7920,19 @@ errorText(e)
 
 }
 
-/* ADD TASK */
+/* =====================================================
+
+   NEW ADMIN ADD TASK
+
+===================================================== */
 
 async function adminAddTask(){
 
 if(!isAdmin())
 
 return;
+
+/* TASK TITLE */
 
 const title=
 
@@ -7458,9 +7942,19 @@ prompt(
 
 );
 
-if(!title)
+if(!title || !title.trim()){
+
+alert(
+
+"Task Title দিতে হবে।"
+
+);
 
 return;
+
+}
+
+/* DESCRIPTION */
 
 const description=
 
@@ -7469,6 +7963,8 @@ prompt(
 "Task Description:"
 
 )||"";
+
+/* REWARD */
 
 const reward=
 
@@ -7500,6 +7996,162 @@ return;
 
 }
 
+/* TASK TYPE */
+
+const taskType=
+
+prompt(
+
+"Task Type নির্বাচন করুন:\n\n"+
+
+"1 = Normal Task\n"+
+
+"2 = VIP Task\n\n"+
+
+"1 অথবা 2 লিখুন:",
+
+"1"
+
+);
+
+if(
+
+taskType!=="1" &&
+
+taskType!=="2"
+
+){
+
+alert(
+
+"Task Type সঠিক নয়।\n"+
+
+"শুধু 1 অথবা 2 দিন।"
+
+);
+
+return;
+
+}
+
+/* VIP LEVEL */
+
+let vipLevel=0;
+
+if(taskType==="2"){
+
+vipLevel=
+
+Number(
+
+prompt(
+
+"VIP Level লিখুন:\n\n"+
+
+"1 থেকে 10 এর মধ্যে একটি Level দিন:",
+
+"1"
+
+)
+
+);
+
+if(
+
+!Number.isInteger(vipLevel)||
+
+vipLevel<1||
+
+vipLevel>10
+
+){
+
+alert(
+
+"VIP Level অবশ্যই 1 থেকে 10 এর মধ্যে হতে হবে।"
+
+);
+
+return;
+
+}
+
+}
+
+/* MAX COMPLETIONS */
+
+const maxCompletions=
+
+Number(
+
+prompt(
+
+"Max Completions:\n\n"+
+
+"এই Task একজন User কতবার Complete করতে পারবে?\n\n"+
+
+"উদাহরণ: 1",
+
+"1"
+
+)
+
+);
+
+if(
+
+!Number.isInteger(maxCompletions)||
+
+maxCompletions<1
+
+){
+
+alert(
+
+"Max Completions কমপক্ষে 1 হতে হবে।"
+
+);
+
+return;
+
+}
+
+/* CONFIRM */
+
+const taskTypeText=
+
+vipLevel>0
+
+?
+
+"VIP "+vipLevel
+
+:
+
+"Normal";
+
+const confirmCreate=
+
+confirm(
+
+"Task তৈরি করবেন?\n\n"+
+
+"Title: "+title.trim()+
+
+"\nReward: ৳"+money(reward)+
+
+"\nType: "+taskTypeText+
+
+"\nMax Completions: "+maxCompletions
+
+);
+
+if(!confirmCreate)
+
+return;
+
+/* SUPABASE */
+
 try{
 
 const {
@@ -7514,11 +8166,15 @@ error
 
 {
 
-p_title:title,
+p_title:title.trim(),
 
-p_description:description,
+p_description:description.trim(),
 
-p_reward:reward
+p_reward:reward,
+
+p_vip_level:vipLevel,
+
+p_max_completions:maxCompletions
 
 }
 
@@ -7540,7 +8196,13 @@ data.message||
 
 alert(
 
-"Task তৈরি হয়েছে।"
+"Task তৈরি হয়েছে।\n\n"+
+
+"Type: "+taskTypeText+
+
+"\nReward: ৳"+money(reward)+
+
+"\nMax Completions: "+maxCompletions
 
 );
 
@@ -7560,7 +8222,11 @@ errorText(e)
 
 }
 
-/* TOGGLE TASK */
+/* =====================================================
+
+   TOGGLE TASK
+
+===================================================== */
 
 async function adminToggleTask(
 
@@ -7626,7 +8292,11 @@ errorText(e)
 
 }
 
-/* DELETE TASK */
+/* =====================================================
+
+   DELETE TASK
+
+===================================================== */
 
 async function adminDeleteTask(id){
 
@@ -7702,7 +8372,11 @@ errorText(e)
 
 }
 
-/* SHEET */
+/* =====================================================
+
+   SHEET
+
+===================================================== */
 
 function openSheet(
 
@@ -7734,7 +8408,11 @@ $("modal").style.display=
 
 }
 
-/* LOGOUT */
+/* =====================================================
+
+   LOGOUT
+
+===================================================== */
 
 async function logoutUser(){
 
@@ -7764,7 +8442,11 @@ closeModal();
 
 }
 
-/* OAUTH */
+/* =====================================================
+
+   OAUTH
+
+===================================================== */
 
 async function oauthLogin(
 
@@ -7812,7 +8494,11 @@ errorText(e)
 
 }
 
-/* RESET PASSWORD */
+/* =====================================================
+
+   RESET PASSWORD
+
+===================================================== */
 
 async function resetPassword(){
 
@@ -7882,7 +8568,11 @@ errorText(e)
 
 }
 
-/* AUTH LISTENER */
+/* =====================================================
+
+   AUTH LISTENER
+
+===================================================== */
 
 function setupAuthListener(){
 
@@ -7936,7 +8626,11 @@ $("authLanding").style.display=
 
 }
 
-/* BUTTONS */
+/* =====================================================
+
+   BUTTONS
+
+===================================================== */
 
 $("loginTab").onclick=()=>{
 
@@ -8126,7 +8820,11 @@ alert(
 
 };
 
-/* START */
+/* =====================================================
+
+   START
+
+===================================================== */
 
 async function startApp(){
 
