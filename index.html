@@ -1,2727 +1,1392 @@
 <!doctype html>
-
 <html lang="bn">
-
 <head>
-
 <meta charset="utf-8">
-
-<meta name="viewport"
-
-content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>TUINCOME v7</title>
 
 <link rel="stylesheet"
-
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-
 *{
-
 box-sizing:border-box;
-
 -webkit-tap-highlight-color:transparent
-
 }
 
 :root{
-
 --bg:#020504;
-
 --bg2:#06100b;
-
 --card:#0b1710;
-
 --card2:#101d15;
-
 --green:#39ff88;
-
 --green2:#00d66b;
-
 --gold:#e2bd4f;
-
 --gold2:#ffe58a;
-
 --text:#f3fff7;
-
 --muted:#8da698;
-
 --border:#29422f;
-
 --gold-border:#685522;
-
 --red:#ff5b6e;
-
 --yellow:#ffd15c
-
 }
 
 html,body{
-
 margin:0;
-
 padding:0;
-
 min-height:100%;
-
 background:#020504;
-
 color:var(--text);
-
-font-family:
-
--apple-system,
-
-BlinkMacSystemFont,
-
-"Segoe UI",
-
-Arial,
-
-sans-serif
-
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
 }
 
 body{
-
 padding-bottom:90px;
-
 position:relative;
-
 overflow-x:hidden;
-
 isolation:isolate
-
 }
 
 /* =====================================================
-
    LUXURY BACKGROUND
-
 ===================================================== */
 
 body::before{
-
 content:"";
-
 position:fixed;
-
 inset:-30%;
-
 z-index:-5;
-
 pointer-events:none;
-
 background:
-
-radial-gradient(
-
-circle at 10% 10%,
-
-rgba(57,255,136,.20),
-
-transparent 25%
-
-),
-
-radial-gradient(
-
-circle at 90% 15%,
-
-rgba(226,189,79,.14),
-
-transparent 26%
-
-),
-
-radial-gradient(
-
-circle at 75% 80%,
-
-rgba(0,214,107,.13),
-
-transparent 30%
-
-),
-
-radial-gradient(
-
-circle at 20% 85%,
-
-rgba(57,255,136,.09),
-
-transparent 28%
-
-),
-
-linear-gradient(
-
-135deg,
-
-#010302,
-
-#031009,
-
-#020604,
-
-#06140d,
-
-#010302
-
-);
-
+radial-gradient(circle at 10% 10%,rgba(57,255,136,.20),transparent 25%),
+radial-gradient(circle at 90% 15%,rgba(226,189,79,.14),transparent 26%),
+radial-gradient(circle at 75% 80%,rgba(0,214,107,.13),transparent 30%),
+radial-gradient(circle at 20% 85%,rgba(57,255,136,.09),transparent 28%),
+linear-gradient(135deg,#010302,#031009,#020604,#06140d,#010302);
 background-size:
-
 180% 180%,
-
 170% 170%,
-
 180% 180%,
-
 170% 170%,
-
 300% 300%;
-
-animation:
-
-luxuryBackgroundMove 20s ease-in-out infinite alternate
-
+animation:luxuryBackgroundMove 20s ease-in-out infinite alternate
 }
 
 @keyframes luxuryBackgroundMove{
-
 0%{
-
 background-position:
-
-0% 0%,
-
-100% 0%,
-
-100% 100%,
-
-0% 100%,
-
-0% 50%
-
+0% 0%,100% 0%,100% 100%,0% 100%,0% 50%
 }
-
 50%{
-
 background-position:
-
-45% 30%,
-
-60% 40%,
-
-40% 80%,
-
-70% 20%,
-
-50% 50%
-
+45% 30%,60% 40%,40% 80%,70% 20%,50% 50%
 }
-
 100%{
-
 background-position:
-
-100% 70%,
-
-0% 80%,
-
-20% 0%,
-
-100% 90%,
-
-100% 50%
-
+100% 70%,0% 80%,20% 0%,100% 90%,100% 50%
 }
-
 }
 
 body::after{
-
 content:"";
-
 position:fixed;
-
 width:420px;
-
 height:420px;
-
 left:-150px;
-
 top:15%;
-
 z-index:-4;
-
 pointer-events:none;
-
 border-radius:50%;
-
 background:
-
 radial-gradient(
-
 circle,
-
 rgba(57,255,136,.19) 0%,
-
 rgba(57,255,136,.08) 30%,
-
 transparent 72%
-
 );
-
 filter:blur(25px);
-
-animation:
-
-luxuryOrbMove 14s ease-in-out infinite alternate
-
+animation:luxuryOrbMove 14s ease-in-out infinite alternate
 }
 
 @keyframes luxuryOrbMove{
-
 0%{
-
-transform:
-
-translate3d(0,0,0)
-
-scale(.85)
-
+transform:translate3d(0,0,0) scale(.85)
 }
-
 35%{
-
-transform:
-
-translate3d(35vw,15vh,0)
-
-scale(1.15)
-
+transform:translate3d(35vw,15vh,0) scale(1.15)
 }
-
 70%{
-
-transform:
-
-translate3d(70vw,45vh,0)
-
-scale(.9)
-
+transform:translate3d(70vw,45vh,0) scale(.9)
 }
-
 100%{
-
-transform:
-
-translate3d(35vw,70vh,0)
-
-scale(1.3)
-
+transform:translate3d(35vw,70vh,0) scale(1.3)
 }
-
 }
 
 body{
-
 background-image:
-
-linear-gradient(
-
-rgba(57,255,136,.018) 1px,
-
-transparent 1px
-
-),
-
-linear-gradient(
-
-90deg,
-
-rgba(57,255,136,.018) 1px,
-
-transparent 1px
-
-);
-
-background-size:
-
-55px 55px;
-
-animation:
-
-luxuryGrid 25s linear infinite
-
+linear-gradient(rgba(57,255,136,.018) 1px,transparent 1px),
+linear-gradient(90deg,rgba(57,255,136,.018) 1px,transparent 1px);
+background-size:55px 55px;
+animation:luxuryGrid 25s linear infinite
 }
 
 @keyframes luxuryGrid{
-
-0%{
-
-background-position:0 0
-
-}
-
-100%{
-
-background-position:55px 55px
-
-}
-
+0%{background-position:0 0}
+100%{background-position:55px 55px}
 }
 
 body .container::before,
-
 body .container::after{
-
 content:"";
-
 position:fixed;
-
 width:5px;
-
 height:5px;
-
 border-radius:50%;
-
 background:var(--green);
-
 box-shadow:
-
 0 0 8px var(--green),
-
 0 0 18px rgba(57,255,136,.6);
-
 opacity:.45;
-
 pointer-events:none;
-
 z-index:-1
-
 }
 
 body .container::before{
-
 left:12%;
-
 bottom:15%;
-
-animation:
-
-particleFloatOne 9s ease-in-out infinite
-
+animation:particleFloatOne 9s ease-in-out infinite
 }
 
 body .container::after{
-
 right:13%;
-
 top:35%;
-
-animation:
-
-particleFloatTwo 11s ease-in-out infinite
-
+animation:particleFloatTwo 11s ease-in-out infinite
 }
 
 @keyframes particleFloatOne{
-
 0%,100%{
-
-transform:
-
-translate(0,0)
-
-scale(.7);
-
+transform:translate(0,0) scale(.7);
 opacity:.2
-
 }
-
 50%{
-
-transform:
-
-translate(60px,-100px)
-
-scale(1.4);
-
+transform:translate(60px,-100px) scale(1.4);
 opacity:.7
-
 }
-
 }
 
 @keyframes particleFloatTwo{
-
 0%,100%{
-
-transform:
-
-translate(0,0)
-
-scale(.6);
-
+transform:translate(0,0) scale(.6);
 opacity:.2
-
 }
-
 50%{
-
-transform:
-
-translate(-70px,100px)
-
-scale(1.3);
-
+transform:translate(-70px,100px) scale(1.3);
 opacity:.6
-
 }
-
 }
 
 /* =====================================================
-
    COMMON
-
 ===================================================== */
 
 button,input,select{
-
 font:inherit
-
 }
 
 button{
-
 cursor:pointer
-
 }
 
 button:disabled{
-
 opacity:.55;
-
 cursor:not-allowed
-
 }
 
 /* =====================================================
-
    HEADER
-
 ===================================================== */
 
 header{
-
 height:72px;
-
 padding:15px 18px;
-
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
 background:
-
 linear-gradient(
-
 135deg,
-
 rgba(3,12,8,.94),
-
 rgba(10,20,13,.90)
-
 );
-
 backdrop-filter:blur(20px);
-
 -webkit-backdrop-filter:blur(20px);
-
 border-bottom:1px solid var(--gold-border);
-
 position:sticky;
-
 top:0;
-
 z-index:10;
-
 box-shadow:
-
 0 5px 25px #0009,
-
 0 1px 0 rgba(255,255,255,.03)
-
 }
 
 .logo{
-
 color:var(--gold2);
-
 font-size:22px;
-
 font-weight:950;
-
 letter-spacing:1px;
-
 text-shadow:
-
 0 0 10px rgba(226,189,79,.35),
-
 0 0 25px rgba(226,189,79,.15)
-
 }
 
 .lang{
-
 border:1px solid #806a2d;
-
 background:
-
 linear-gradient(
-
 135deg,
-
 #171307,
-
 #251e0b
-
 );
-
 color:var(--gold2);
-
 border-radius:20px;
-
 padding:8px 14px;
-
 box-shadow:
-
 0 0 15px rgba(226,189,79,.08)
-
 }
 
 /* =====================================================
-
    AUTH
-
 ===================================================== */
 
 .auth-landing{
-
 min-height:calc(100vh - 72px);
-
 display:flex;
-
 align-items:center;
-
 justify-content:center;
-
 padding:18px;
-
 position:relative
-
 }
 
 .auth-card{
-
 width:min(430px,100%);
-
 padding:24px;
-
 border-radius:26px;
-
 background:
-
 radial-gradient(
-
 circle at 100% 0%,
-
 rgba(216,184,76,.12),
-
 transparent 35%
-
 ),
-
 linear-gradient(
-
 145deg,
-
 rgba(16,27,20,.90),
-
 rgba(6,11,8,.94)
-
 );
-
 border:1px solid var(--gold-border);
-
 box-shadow:
-
 0 20px 55px #000b,
-
 0 0 40px rgba(57,255,136,.03),
-
 inset 0 1px #ffffff0a;
-
 backdrop-filter:blur(18px);
-
 -webkit-backdrop-filter:blur(18px)
-
 }
 
 .auth-card h2{
-
 text-align:center;
-
 margin:0 0 18px;
-
 color:var(--gold2);
-
-text-shadow:
-
-0 0 12px #d8b84c33
-
+text-shadow:0 0 12px #d8b84c33
 }
 
 .auth-tabs{
-
 display:grid;
-
 grid-template-columns:1fr 1fr;
-
 gap:8px;
-
 margin-bottom:18px
-
 }
 
 .auth-tab{
-
 border:1px solid var(--border);
-
 background:#08130e;
-
 color:#8fa99b;
-
 padding:11px;
-
 border-radius:12px;
-
 font-weight:800
-
 }
 
 .auth-tab.active{
-
 background:
-
 linear-gradient(
-
 135deg,
-
 #173b26,
-
 #2b250d
-
 );
-
 color:var(--gold2);
-
 border-color:#a3822e;
-
-box-shadow:
-
-0 0 15px rgba(226,189,79,.08)
-
+box-shadow:0 0 15px rgba(226,189,79,.08)
 }
 
 .social-btn{
-
 width:100%;
-
 padding:12px;
-
 margin-bottom:10px;
-
 border-radius:12px;
-
 background:#08130e;
-
 color:white;
-
 border:1px solid var(--border);
-
 font-weight:800
-
 }
 
 .google{
-
 color:#ff625b;
-
 border-color:#ff625b55
-
 }
 
 .facebook{
-
 color:#4b9cff;
-
 border-color:#4b9cff55
-
 }
 
 .divider{
-
 display:flex;
-
 align-items:center;
-
 gap:10px;
-
 color:var(--muted);
-
 margin:17px 0
-
 }
 
 .divider:before,
-
 .divider:after{
-
 content:"";
-
 height:1px;
-
 background:var(--border);
-
 flex:1
-
 }
 
 /* =====================================================
-
    FORMS
-
 ===================================================== */
 
 .form-group{
-
 margin-bottom:13px
-
 }
 
 .form-group label{
-
 display:block;
-
 margin-bottom:6px;
-
 color:#b9d1c2;
-
 font-size:13px
-
 }
 
 input,select{
-
 width:100%;
-
 padding:13px;
-
 border-radius:12px;
-
 border:1px solid var(--border);
-
 outline:none;
-
-background:
-
-rgba(5,13,8,.90);
-
+background:rgba(5,13,8,.90);
 color:white;
-
 backdrop-filter:blur(8px)
-
 }
 
 input:focus,
-
 select:focus{
-
 border-color:var(--gold);
-
 box-shadow:
-
 0 0 0 2px #d8b84c12,
-
 0 0 18px rgba(226,189,79,.06)
-
 }
 
 .primary{
-
 width:100%;
-
 padding:13px;
-
 border:0;
-
 border-radius:13px;
-
 background:
-
 linear-gradient(
-
 135deg,
-
 #ffe58a,
-
 #bd8f24
-
 );
-
 color:#080702;
-
 font-weight:950;
-
 box-shadow:
-
 0 7px 22px #c9a52c22,
-
 0 0 20px rgba(226,189,79,.08)
-
 }
 
 .secondary{
-
 width:100%;
-
 padding:12px;
-
 border-radius:12px;
-
 border:1px solid var(--border);
-
 background:#0b1d13;
-
 color:white;
-
 font-weight:800
-
 }
 
 .danger{
-
 width:100%;
-
 padding:12px;
-
 border-radius:12px;
-
 border:1px solid #ff5b6e55;
-
 background:#351018;
-
 color:#ff9da8;
-
 font-weight:800
-
 }
 
 .error-box,
-
 .success-box{
-
 display:none;
-
 margin-top:14px;
-
 padding:12px;
-
 border-radius:12px;
-
 font-size:13px;
-
 line-height:1.5;
-
 white-space:pre-wrap;
-
 word-break:break-word
-
 }
 
 .error-box{
-
 background:#3a1018;
-
 border:1px solid #ff526855;
-
 color:#ffb8c0
-
 }
 
 .success-box{
-
 background:#0c321e;
-
 border:1px solid #39ff8855;
-
 color:#baffd1
-
 }
 
 .small-note{
-
 margin-top:14px;
-
 color:#718a7c;
-
 font-size:11px;
-
 text-align:center;
-
 line-height:1.5
-
 }
 
 /* =====================================================
-
    DASHBOARD
-
 ===================================================== */
 
 #mainDashboard{
-
 display:none
-
 }
 
 .container{
-
 width:min(720px,100%);
-
 margin:auto;
-
 padding:15px 10px;
-
 position:relative
-
 }
 
 .banner{
-
 position:relative;
-
 overflow:hidden;
-
 padding:22px;
-
 border-radius:25px;
-
 background:
-
 radial-gradient(
-
 circle at 95% 0%,
-
 rgba(255,229,138,.14),
-
 transparent 35%
-
 ),
-
 radial-gradient(
-
 circle at 0% 100%,
-
 rgba(57,255,136,.12),
-
 transparent 40%
-
 ),
-
 linear-gradient(
-
 145deg,
-
 rgba(13,33,22,.91),
-
 rgba(6,12,8,.94)
-
 );
-
 border:1px solid #625127;
-
 margin-bottom:14px;
-
 box-shadow:
-
 0 15px 45px #0009,
-
 0 0 35px rgba(57,255,136,.035),
-
 inset 0 1px #ffffff0a;
-
 backdrop-filter:blur(15px);
-
 -webkit-backdrop-filter:blur(15px)
-
 }
 
 .banner::after{
-
 content:"";
-
 position:absolute;
-
 width:180px;
-
 height:180px;
-
 right:-100px;
-
 bottom:-100px;
-
 border-radius:50%;
-
 background:
-
 radial-gradient(
-
 circle,
-
 rgba(57,255,136,.12),
-
 transparent 70%
-
 );
-
-animation:
-
-bannerGlow 7s ease-in-out infinite alternate
-
+animation:bannerGlow 7s ease-in-out infinite alternate
 }
 
 @keyframes bannerGlow{
-
-from{
-
-transform:scale(.8)
-
-}
-
-to{
-
-transform:scale(1.5)
-
-}
-
+from{transform:scale(.8)}
+to{transform:scale(1.5)}
 }
 
 .banner small{
-
 color:var(--gold2);
-
 font-weight:900;
-
 letter-spacing:1px
-
 }
 
 .banner h1{
-
 margin:8px 0;
-
 font-size:26px;
-
 background:
-
 linear-gradient(
-
 90deg,
-
 #fff4b0,
-
 #d8b84d,
-
 #fff4b0
-
 );
-
 -webkit-background-clip:text;
-
 -webkit-text-fill-color:transparent;
-
 background-size:200% auto;
-
-animation:
-
-goldTextMove 5s linear infinite
-
+animation:goldTextMove 5s linear infinite
 }
 
 @keyframes goldTextMove{
-
-to{
-
-background-position:200% center
-
-}
-
+to{background-position:200% center}
 }
 
 .banner p{
-
 margin:0;
-
 color:#9ab5a5;
-
 line-height:1.5
-
 }
 
 /* =====================================================
-
    BALANCE
-
 ===================================================== */
 
 .balance-card{
-
 margin-top:16px;
-
 padding:20px;
-
 border-radius:21px;
-
 background:
-
 linear-gradient(
-
 145deg,
-
 rgba(17,29,21,.88),
-
 rgba(7,13,9,.93)
-
 );
-
 border:1px solid #695728;
-
 box-shadow:
-
 inset 0 1px #ffffff09,
-
 0 8px 30px #0008,
-
 0 0 25px rgba(57,255,136,.025);
-
 backdrop-filter:blur(12px)
-
 }
 
 .balance-label{
-
 color:#86a292;
-
 font-size:13px
-
 }
 
 .balance{
-
 font-size:38px;
-
 font-weight:950;
-
 margin-top:4px;
-
 background:
-
 linear-gradient(
-
 90deg,
-
 #39ff88,
-
 #e0c35c,
-
 #39ff88
-
 );
-
 background-size:200% auto;
-
 -webkit-background-clip:text;
-
 -webkit-text-fill-color:transparent;
-
-animation:
-
-balanceGlow 4s linear infinite
-
+animation:balanceGlow 4s linear infinite
 }
 
 @keyframes balanceGlow{
-
-to{
-
-background-position:200% center
-
-}
-
+to{background-position:200% center}
 }
 
 /* =====================================================
-
    QUICK
-
 ===================================================== */
 
 .quick{
-
 display:grid;
-
 grid-template-columns:repeat(4,1fr);
-
 gap:9px;
-
 margin:14px 0
-
 }
 
 .quick-btn{
-
 min-height:82px;
-
 border-radius:16px;
-
 border:1px solid #39452c;
-
 background:
-
 linear-gradient(
-
 145deg,
-
 rgba(16,27,20,.88),
-
 rgba(7,13,9,.93)
-
 );
-
 color:white;
-
 display:flex;
-
 flex-direction:column;
-
 align-items:center;
-
 justify-content:center;
-
 gap:7px;
-
 box-shadow:
-
 0 7px 22px #0007,
-
 0 0 18px rgba(57,255,136,.025);
-
 transition:.2s;
-
 backdrop-filter:blur(12px)
-
 }
 
 .quick-btn:active{
-
 transform:scale(.95)
-
 }
 
 .quick-btn i{
-
 color:var(--gold2);
-
 font-size:21px;
-
-text-shadow:
-
-0 0 10px #d8b84c44
-
+text-shadow:0 0 10px #d8b84c44
 }
 
 .quick-btn span{
-
 font-size:11px
-
 }
 
 /* =====================================================
-
    CARD
-
 ===================================================== */
 
 .card{
-
 padding:17px;
-
 border-radius:21px;
-
 background:
-
 linear-gradient(
-
 145deg,
-
 rgba(13,28,21,.88),
-
 rgba(8,14,10,.93)
-
 );
-
 border:1px solid #293f2d;
-
 margin-bottom:13px;
-
 box-shadow:
-
 0 10px 30px #0007,
-
 0 0 20px rgba(57,255,136,.02);
-
 backdrop-filter:blur(14px);
-
 -webkit-backdrop-filter:blur(14px)
-
 }
 
 .card h3{
-
 margin:0 0 13px
-
 }
 
 /* =====================================================
-
    TASK
-
 ===================================================== */
 
 .task-card{
-
 display:flex;
-
 align-items:center;
-
 gap:12px;
-
 padding:13px;
-
 margin-bottom:10px;
-
 border-radius:16px;
-
 background:
-
 linear-gradient(
-
 145deg,
-
 rgba(13,27,20,.88),
-
 rgba(7,16,11,.93)
-
 );
-
 border:1px solid #203b29;
-
-box-shadow:
-
-0 7px 20px rgba(0,0,0,.3);
-
+box-shadow:0 7px 20px rgba(0,0,0,.3);
 transition:.2s
-
 }
 
 .task-card:active{
-
 transform:scale(.985)
-
 }
 
 .task-icon{
-
 width:45px;
-
 height:45px;
-
 border-radius:13px;
-
 background:
-
 linear-gradient(
-
 145deg,
-
 #163d28,
-
 #0b2015
-
 );
-
 display:grid;
-
 place-items:center;
-
 color:var(--green);
-
 border:1px solid #3d704e;
-
 flex-shrink:0;
-
-box-shadow:
-
-0 0 15px rgba(57,255,136,.08)
-
+box-shadow:0 0 15px rgba(57,255,136,.08)
 }
 
 .task-info{
-
 flex:1;
-
 min-width:0
-
 }
 
 .task-info b{
-
 display:block;
-
 margin-bottom:4px
-
 }
 
 .task-info small{
-
 color:#718c7d
-
 }
 
 .task-reward{
-
 color:var(--gold2);
-
 font-weight:950
-
 }
 
 .task-btn{
-
 margin-top:7px;
-
 padding:8px 10px;
-
 border-radius:10px;
-
 border:1px solid #75602b;
-
 background:
-
 linear-gradient(
-
 135deg,
-
 #173b24,
-
 #241f0d
-
 );
-
 color:var(--gold2);
-
 font-weight:850
-
 }
 
 /* =====================================================
-
    NAV
-
 ===================================================== */
 
 .nav{
-
 position:fixed;
-
 left:50%;
-
 bottom:0;
-
 transform:translateX(-50%);
-
 width:min(720px,100%);
-
 height:76px;
-
 background:
-
 rgba(4,10,7,.90);
-
 backdrop-filter:blur(22px);
-
 -webkit-backdrop-filter:blur(22px);
-
 border:1px solid #4b4325;
-
 display:flex;
-
 justify-content:space-around;
-
 align-items:center;
-
 z-index:15;
-
 border-radius:25px 25px 0 0;
-
 box-shadow:
-
 0 -8px 30px #000b,
-
 0 -1px 20px rgba(57,255,136,.025)
-
 }
 
 .nav button{
-
 border:0;
-
 background:none;
-
 color:#71887b;
-
 font-size:18px
-
 }
 
 .nav button span{
-
 display:block;
-
 font-size:10px;
-
 margin-top:4px
-
 }
 
 .nav button.active{
-
 color:var(--gold2);
-
-text-shadow:
-
-0 0 10px rgba(226,189,79,.25)
-
+text-shadow:0 0 10px rgba(226,189,79,.25)
 }
 
 .nav .go{
-
 width:58px;
-
 height:58px;
-
 border-radius:50%;
-
 background:
-
 linear-gradient(
-
 135deg,
-
 #ffe58a,
-
 #b88920
-
 );
-
 color:#031008;
-
 border:4px solid #07140d;
-
 margin-top:-28px;
-
 box-shadow:
-
 0 0 25px #d8b84c55,
-
 0 0 45px rgba(226,189,79,.10)
-
 }
 
 /* =====================================================
-
    MODAL
-
 ===================================================== */
 
 .modal{
-
 display:none;
-
 position:fixed;
-
 inset:0;
-
 z-index:50;
-
 background:
-
 rgba(0,0,0,.78);
-
 backdrop-filter:blur(5px);
-
 align-items:flex-end;
-
 justify-content:center
-
 }
 
 .sheet{
-
 width:min(720px,100%);
-
 max-height:90vh;
-
 overflow:auto;
-
 padding:22px;
-
 border-radius:27px 27px 0 0;
-
 background:
-
 radial-gradient(
-
 circle at 100% 0%,
-
 rgba(216,184,76,.12),
-
 transparent 35%
-
 ),
-
 linear-gradient(
-
 145deg,
-
 rgba(12,23,17,.97),
-
 rgba(5,10,7,.98)
-
 );
-
 border:1px solid #655328;
-
 box-shadow:
-
 0 -15px 50px #000c,
-
 0 0 40px rgba(57,255,136,.025);
-
 backdrop-filter:blur(20px)
-
 }
 
 .close{
-
 float:right;
-
 width:35px;
-
 height:35px;
-
 border-radius:50%;
-
 border:1px solid #665329;
-
 background:#171307;
-
 color:white;
-
 font-size:22px
-
 }
 
 .sheet h2{
-
 margin-top:0;
-
 color:var(--gold2)
-
 }
 
 .info-row{
-
 display:flex;
-
 justify-content:space-between;
-
 gap:15px;
-
 padding:12px 0;
-
 border-bottom:1px solid #273421
-
 }
 
 .info-row span:first-child{
-
 color:#789184
-
 }
 
 /* =====================================================
-
    HISTORY
-
 ===================================================== */
 
 .history-item{
-
 padding:13px;
-
 border-radius:13px;
-
-background:
-
-rgba(7,18,13,.85);
-
+background:rgba(7,18,13,.85);
 border:1px solid #173526;
-
 margin-bottom:9px
-
 }
 
 .pending{
-
 color:#ffd15c
-
 }
 
 .approved{
-
 color:var(--green)
-
 }
 
 .rejected{
-
 color:#ff6878
-
 }
 
 /* =====================================================
-
    TASK MODAL
-
 ===================================================== */
 
 .task-modal{
-
 display:none;
-
 position:fixed;
-
 inset:0;
-
 z-index:100;
-
 background:
-
 rgba(0,0,0,.84);
-
 backdrop-filter:blur(5px);
-
 align-items:center;
-
 justify-content:center;
-
 padding:20px
-
 }
 
 .task-box{
-
 width:min(400px,100%);
-
 padding:25px;
-
 border-radius:24px;
-
 text-align:center;
-
 background:
-
 radial-gradient(
-
 circle at 50% 0%,
-
 rgba(57,255,136,.10),
-
 transparent 45%
-
 ),
-
 rgba(9,23,15,.97);
-
 border:1px solid #386b48;
-
 box-shadow:
-
 0 20px 60px #000c,
-
 0 0 35px rgba(57,255,136,.06)
-
 }
 
 .countdown{
-
 font-size:58px;
-
 font-weight:950;
-
 color:var(--green);
-
 margin:15px;
-
-text-shadow:
-
-0 0 20px rgba(57,255,136,.35)
-
+text-shadow:0 0 20px rgba(57,255,136,.35)
 }
 
 .progress{
-
 height:7px;
-
 border-radius:10px;
-
 background:#183022;
-
 overflow:hidden;
-
 margin-bottom:18px
-
 }
 
 .progress div{
-
 height:100%;
-
 width:0;
-
 background:
-
 linear-gradient(
-
 90deg,
-
 #00d66b,
-
 #39ff88,
-
 #ffe58a
-
 );
-
 transition:width 1s linear;
-
-box-shadow:
-
-0 0 12px rgba(57,255,136,.4)
-
+box-shadow:0 0 12px rgba(57,255,136,.4)
 }
 
 /* =====================================================
-
    ADMIN
-
 ===================================================== */
 
 .loading,
-
 .empty{
-
 color:#789184;
-
 text-align:center;
-
 padding:15px
-
 }
 
 .admin-stat{
-
 display:grid;
-
 grid-template-columns:repeat(2,1fr);
-
 gap:10px;
-
 margin-bottom:12px
-
 }
 
 .stat-box{
-
 padding:15px;
-
 border-radius:15px;
-
-background:
-
-rgba(7,21,14,.88);
-
+background:rgba(7,21,14,.88);
 border:1px solid var(--border);
-
 backdrop-filter:blur(10px)
-
 }
 
 .stat-box small{
-
 color:var(--muted)
-
 }
 
 .stat-box b{
-
 display:block;
-
 margin-top:5px;
-
 font-size:22px;
-
 color:var(--green)
-
 }
 
 .admin-item{
-
 padding:14px;
-
 border:1px solid var(--border);
-
-background:
-
-rgba(7,20,14,.88);
-
+background:rgba(7,20,14,.88);
 border-radius:15px;
-
 margin-bottom:10px
-
 }
 
 .admin-actions{
-
 display:grid;
-
 grid-template-columns:1fr 1fr;
-
 gap:8px;
-
 margin-top:10px
-
 }
 
 .admin-actions button{
-
 padding:9px;
-
 border-radius:10px;
-
 border:1px solid var(--border);
-
 background:#10251a;
-
 color:white
-
 }
 
 .approve{
-
 color:var(--green)!important
-
 }
 
 .reject{
-
 color:#ff7d8c!important
-
 }
 
 .gold{
-
 color:var(--gold2)!important
-
 }
 
 .badge{
-
 display:inline-block;
-
 padding:4px 8px;
-
 border-radius:20px;
-
 background:
-
 linear-gradient(
-
 135deg,
-
 #5d4915,
-
 #201807
-
 );
-
 border:1px solid #9a7928;
-
 color:#ffe58a;
-
 font-size:11px
-
 }
 
 .copy-btn{
-
 margin-top:10px;
-
 padding:8px 12px;
-
 border-radius:10px;
-
 border:1px solid #75602b;
-
 background:#143b24;
-
 color:var(--gold2);
-
 font-weight:800
-
 }
 
-/* TASK TYPE BADGES */
-
 .task-type-badge{
-
 display:inline-block;
-
 margin-top:6px;
-
 padding:4px 8px;
-
 border-radius:20px;
-
 font-size:10px;
-
 font-weight:900
-
 }
 
 .task-type-normal{
-
 background:#103622;
-
 border:1px solid #28764a;
-
 color:#71ffad
-
 }
 
 .task-type-vip{
-
 background:#352a0d;
-
 border:1px solid #a3822e;
-
 color:#ffe58a
-
 }
 
 /* =====================================================
-
    VIP
-
 ===================================================== */
 
 .vip-luxury{
-
 position:relative;
-
 overflow:hidden;
-
 padding:20px;
-
 margin-bottom:15px;
-
 border-radius:25px;
-
 background:
-
 radial-gradient(
-
 circle at 50% -20%,
-
 rgba(255,229,138,.22),
-
 transparent 45%
-
 ),
-
 radial-gradient(
-
 circle at 100% 100%,
-
 rgba(212,155,38,.16),
-
 transparent 40%
-
 ),
-
 linear-gradient(
-
 145deg,
-
 rgba(23,18,7,.97),
-
 rgba(8,10,7,.98)
-
 );
-
 border:1px solid #92742a;
-
 box-shadow:
-
 0 15px 45px #000b,
-
 0 0 35px rgba(226,189,79,.08),
-
 inset 0 1px #fff3
-
 }
 
 .vip-luxury::before{
-
 content:"";
-
 position:absolute;
-
 width:260px;
-
 height:260px;
-
 right:-130px;
-
 top:-130px;
-
 border-radius:50%;
-
 background:
-
 radial-gradient(
-
 circle,
-
 rgba(255,229,138,.22),
-
 rgba(226,189,79,.06) 35%,
-
 transparent 70%
-
 );
-
 filter:blur(8px);
-
-animation:
-
-vipGoldenGlow 7s ease-in-out infinite alternate
-
+animation:vipGoldenGlow 7s ease-in-out infinite alternate
 }
 
 @keyframes vipGoldenGlow{
-
 0%{
-
-transform:
-
-translate(0,0)
-
-scale(.75);
-
+transform:translate(0,0) scale(.75);
 opacity:.45
-
 }
-
 50%{
-
-transform:
-
-translate(-80px,100px)
-
-scale(1.15);
-
+transform:translate(-80px,100px) scale(1.15);
 opacity:.8
-
 }
-
 100%{
-
-transform:
-
-translate(-180px,180px)
-
-scale(.75);
-
+transform:translate(-180px,180px) scale(.75);
 opacity:.4
-
 }
-
 }
 
 .vip-crown{
-
 text-align:center;
-
 font-size:52px;
-
-filter:
-
-drop-shadow(
-
-0 0 12px
-
-rgba(216,184,76,.55)
-
-);
-
-animation:
-
-crownFloat 3s ease-in-out infinite
-
+filter:drop-shadow(0 0 12px rgba(216,184,76,.55));
+animation:crownFloat 3s ease-in-out infinite
 }
 
 @keyframes crownFloat{
-
-0%,100%{
-
-transform:translateY(0)
-
-}
-
-50%{
-
-transform:translateY(-7px)
-
-}
-
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-7px)}
 }
 
 .vip-current{
-
 text-align:center;
-
 margin:4px 0;
-
 font-size:34px;
-
 font-weight:950;
-
 background:
-
 linear-gradient(
-
 90deg,
-
 #fff1a6,
-
 #d2a932,
-
 #fff1a6
-
 );
-
 background-size:200% auto;
-
 -webkit-background-clip:text;
-
 -webkit-text-fill-color:transparent;
-
-animation:
-
-vipTextShine 5s linear infinite
-
+animation:vipTextShine 5s linear infinite
 }
 
 @keyframes vipTextShine{
-
-to{
-
-background-position:200% center
-
-}
-
+to{background-position:200% center}
 }
 
 .vip-sub{
-
 text-align:center;
-
 color:#a99a70;
-
 font-size:12px;
-
 letter-spacing:1px
-
 }
 
 .vip-progress{
-
 height:10px;
-
 margin:17px 0 7px;
-
 background:#292313;
-
 border-radius:20px;
-
 overflow:hidden;
-
 border:1px solid #57461e
-
 }
 
 .vip-progress div{
-
 height:100%;
-
 border-radius:20px;
-
 background:
-
 linear-gradient(
-
 90deg,
-
 #a77b19,
-
 #ffe58a,
-
 #bd8e21
-
 );
-
 background-size:200% auto;
-
-box-shadow:
-
-0 0 14px #e1b83c66;
-
-animation:
-
-vipProgressShine 3s linear infinite
-
+box-shadow:0 0 14px #e1b83c66;
+animation:vipProgressShine 3s linear infinite
 }
 
 @keyframes vipProgressShine{
-
-to{
-
-background-position:200% center
-
-}
-
+to{background-position:200% center}
 }
 
 .vip-progress-text{
-
 display:flex;
-
 justify-content:space-between;
-
 color:#a99a70;
-
 font-size:11px
-
 }
 
 .vip-level{
-
 position:relative;
-
 padding:17px;
-
 margin-bottom:11px;
-
 border-radius:19px;
-
 background:
-
 linear-gradient(
-
 145deg,
-
 rgba(17,25,16,.90),
-
 rgba(8,13,10,.94)
-
 );
-
 border:1px solid #3c3b27;
-
 overflow:hidden;
-
 transition:.25s;
-
 backdrop-filter:blur(12px)
-
 }
 
 .vip-level::after{
-
 content:"";
-
 position:absolute;
-
 width:100px;
-
 height:100px;
-
 right:-60px;
-
 bottom:-60px;
-
 border-radius:50%;
-
 background:
-
 radial-gradient(
-
 circle,
-
 rgba(226,189,79,.08),
-
 transparent 70%
-
 );
-
 pointer-events:none
-
 }
 
 .vip-level.current{
-
 border-color:#d2ad42;
-
 box-shadow:
-
 0 0 25px #d2ad4218,
-
 0 0 45px rgba(226,189,79,.05),
-
 inset 0 1px #fff2
-
 }
 
 .vip-level-top{
-
 display:flex;
-
 align-items:center;
-
 justify-content:space-between;
-
 gap:10px
-
 }
 
 .vip-name{
-
 font-size:18px;
-
 font-weight:950;
-
 color:#f0d36d
-
 }
 
 .vip-price{
-
 font-size:17px;
-
 font-weight:900;
-
 color:#fff0a0
-
 }
 
 .vip-status{
-
 margin-top:7px;
-
 color:#7e917f;
-
 font-size:12px
-
 }
 
 .vip-current-badge{
-
 display:inline-block;
-
 margin-top:5px;
-
 padding:5px 9px;
-
 border-radius:20px;
-
 background:
-
 linear-gradient(
-
 135deg,
-
 #d6b344,
-
 #715416
-
 );
-
 color:#130f03;
-
 font-size:10px;
-
 font-weight:950;
-
-box-shadow:
-
-0 0 12px rgba(226,189,79,.18)
-
+box-shadow:0 0 12px rgba(226,189,79,.18)
 }
 
 .vip-locked{
-
 opacity:.62
-
 }
 
 /* =====================================================
-
    MOBILE
-
 ===================================================== */
 
 @media(max-width:600px){
-
 body::after{
-
 width:280px;
-
 height:280px;
-
 filter:blur(22px)
-
 }
 
 body{
-
 background-size:70px 70px
-
 }
 
 .auth-card{
-
 box-shadow:
-
 0 15px 45px #000b,
-
 0 0 25px rgba(57,255,136,.03)
-
 }
-
 }
 
 @media(max-width:360px){
-
 .quick{
-
 grid-template-columns:repeat(2,1fr)
-
 }
-
 }
 
 @media(prefers-reduced-motion:reduce){
-
 body::before,
-
 body::after,
-
 body .container::before,
-
 body .container::after,
-
 .banner::after,
-
 .banner h1,
-
 .balance,
-
 .vip-luxury::before,
-
 .vip-crown,
-
 .vip-current,
-
 .vip-progress div{
-
 animation:none!important
-
 }
-
 }
-
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-<div class="logo">
-
-▣ TUINCOME
-
-</div>
-
-<button class="lang" id="langBtn">
-
-🌐 EN
-
-</button>
-
+<div class="logo">▣ TUINCOME</div>
+<button class="lang" id="langBtn">🌐 EN</button>
 </header>
 
 <!-- AUTH -->
@@ -2730,172 +1395,66 @@ animation:none!important
 
 <div class="auth-card">
 
-<h2 id="authTitle">
-
-লগইন করুন
-
-</h2>
+<h2 id="authTitle">লগইন করুন</h2>
 
 <div class="auth-tabs">
-
-<button class="auth-tab active" id="loginTab">
-
-Login
-
-</button>
-
-<button class="auth-tab" id="registerTab">
-
-Register
-
-</button>
-
+<button class="auth-tab active" id="loginTab">Login</button>
+<button class="auth-tab" id="registerTab">Register</button>
 </div>
 
 <button class="social-btn google" id="googleBtn">
-
 <i class="fa-brands fa-google"></i>
-
 Continue with Google
-
 </button>
 
 <button class="social-btn facebook" id="facebookBtn">
-
 <i class="fa-brands fa-facebook"></i>
-
 Continue with Facebook
-
 </button>
 
-<div class="divider">
-
-অথবা
-
-</div>
+<div class="divider">অথবা</div>
 
 <div id="registerFields" style="display:none">
 
 <div class="form-group">
-
-<label>
-
-আপনার নাম
-
-</label>
-
-<input
-
-id="name"
-
-type="text"
-
-placeholder="পুরো নাম">
-
+<label>আপনার নাম</label>
+<input id="name" type="text" placeholder="পুরো নাম">
 </div>
 
 <div class="form-group">
-
-<label>
-
-মোবাইল নম্বর
-
-</label>
-
-<input
-
-id="phone"
-
-type="tel"
-
-inputmode="numeric"
-
-maxlength="11"
-
-placeholder="01XXXXXXXXX">
-
+<label>মোবাইল নম্বর</label>
+<input id="phone" type="tel" inputmode="numeric" maxlength="11" placeholder="01XXXXXXXXX">
 </div>
 
 </div>
 
 <div class="form-group">
-
-<label>
-
-Gmail / Email
-
-</label>
-
-<input
-
-id="email"
-
-type="email"
-
-placeholder="example@gmail.com">
-
+<label>Gmail / Email</label>
+<input id="email" type="email" placeholder="example@gmail.com">
 </div>
 
 <div class="form-group">
-
-<label>
-
-Password
-
-</label>
-
-<input
-
-id="password"
-
-type="password"
-
-placeholder="কমপক্ষে ৬ অক্ষর">
-
+<label>Password</label>
+<input id="password" type="password" placeholder="কমপক্ষে ৬ অক্ষর">
 </div>
 
-<button class="primary" id="authBtn">
+<button class="primary" id="authBtn">Login</button>
 
-Login
-
-</button>
-
-<button
-
-id="forgotBtn"
-
-style="
-
-width:100%;
-
-margin-top:12px;
-
-background:none;
-
-border:0;
-
-color:#8db39c">
-
+<button id="forgotBtn"
+style="width:100%;margin-top:12px;background:none;border:0;color:#8db39c">
 Password ভুলে গেছেন?
-
 </button>
 
 <div class="error-box" id="errorBox"></div>
-
 <div class="success-box" id="successBox"></div>
 
 <div class="small-note">
-
 TUINCOME Account System
-
 <br>
-
 Supabase Authentication
-
 </div>
 
 </div>
-
 </section>
 
 <!-- DASHBOARD -->
@@ -2906,90 +1465,49 @@ Supabase Authentication
 
 <div class="banner">
 
-<small>
-
-TUINCOME v7 • PREMIUM
-
-</small>
+<small>TUINCOME v7 • PREMIUM</small>
 
 <h1>
-
 স্বাগতম, <span id="welcomeName">User</span> 👋
-
 </h1>
 
 <p>
-
 VIP TASK ব্যবহার করলে আপনার অ্যাকাউন্টের নির্ধারিত Task ও Reward অনুযায়ী অতিরিক্ত Reward পাওয়ার সুযোগ থাকতে পারে।
-
 </p>
 
 <div class="balance-card">
 
 <div class="balance-label">
-
 বর্তমান ব্যালেন্স
-
 </div>
 
 <div class="balance">
-
 ৳<span id="balance">0.00</span>
-
 </div>
 
 </div>
-
 </div>
 
 <div class="quick">
 
 <button class="quick-btn" id="depositBtn">
-
 <i class="fa-solid fa-circle-plus"></i>
-
-<span>
-
-Deposit
-
-</span>
-
+<span>Deposit</span>
 </button>
 
 <button class="quick-btn" id="withdrawBtn">
-
 <i class="fa-solid fa-money-bill-transfer"></i>
-
-<span>
-
-Withdraw
-
-</span>
-
+<span>Withdraw</span>
 </button>
 
 <button class="quick-btn" id="referBtn">
-
 <i class="fa-solid fa-user-plus"></i>
-
-<span>
-
-Refer
-
-</span>
-
+<span>Refer</span>
 </button>
 
 <button class="quick-btn" id="historyBtn">
-
 <i class="fa-solid fa-clock-rotate-left"></i>
-
-<span>
-
-History
-
-</span>
-
+<span>History</span>
 </button>
 
 </div>
@@ -2997,27 +1515,12 @@ History
 <div class="card">
 
 <h3>
-
-<i
-
-class="fa-solid fa-bolt"
-
-style="color:#e2bd4f">
-
-</i>
-
+<i class="fa-solid fa-bolt" style="color:#e2bd4f"></i>
 Available Tasks
-
 </h3>
 
 <div id="taskGrid">
-
-<div class="loading">
-
-Task লোড হচ্ছে...
-
-</div>
-
+<div class="loading">Task লোড হচ্ছে...</div>
 </div>
 
 </div>
@@ -3027,57 +1530,27 @@ Task লোড হচ্ছে...
 <nav class="nav">
 
 <button class="active" id="homeNav">
-
 <i class="fa-solid fa-house"></i>
-
-<span>
-
-হোম
-
-</span>
-
+<span>হোম</span>
 </button>
 
 <button id="walletNav">
-
 <i class="fa-solid fa-wallet"></i>
-
-<span>
-
-Wallet
-
-</span>
-
+<span>Wallet</span>
 </button>
 
 <button class="go" id="startNav">
-
 <i class="fa-solid fa-bolt"></i>
-
 </button>
 
 <button id="teamNav">
-
 <i class="fa-solid fa-crown"></i>
-
-<span>
-
-VIP
-
-</span>
-
+<span>VIP</span>
 </button>
 
 <button id="profileNav">
-
 <i class="fa-solid fa-user"></i>
-
-<span>
-
-Profile
-
-</span>
-
+<span>Profile</span>
 </button>
 
 </nav>
@@ -3090,22 +1563,13 @@ Profile
 
 <div class="sheet">
 
-<button class="close" id="closeBtn">
+<button class="close" id="closeBtn">×</button>
 
-×
-
-</button>
-
-<h2 id="sheetTitle">
-
-TUINCOME
-
-</h2>
+<h2 id="sheetTitle">TUINCOME</h2>
 
 <div id="sheetBody"></div>
 
 </div>
-
 </div>
 
 <!-- TASK MODAL -->
@@ -3114,294 +1578,181 @@ TUINCOME
 
 <div class="task-box">
 
-<div style="font-size:34px">
+<div style="font-size:34px">⚡</div>
 
-⚡
-
-</div>
-
-<h2 id="taskTitle">
-
-Task চলছে
-
-</h2>
+<h2 id="taskTitle">Task চলছে</h2>
 
 <p style="color:#819b8d">
-
 ৩ সেকেন্ড অপেক্ষা করুন
-
 </p>
 
-<div class="countdown" id="countdown">
-
-3
-
-</div>
+<div class="countdown" id="countdown">3</div>
 
 <div class="progress">
-
 <div id="progressBar"></div>
-
 </div>
 
-<button
-
-class="primary"
-
-id="rewardBtn"
-
-style="display:none">
-
+<button class="primary" id="rewardBtn" style="display:none">
 ৳ Reward নিন
-
 </button>
 
 </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
 "use strict";
 
-const SUPABASE_URL=
+/* =====================================================
+   SUPABASE
+===================================================== */
 
+const SUPABASE_URL=
 "https://hgribbrofuqtfboaitgi.supabase.co";
 
 const SUPABASE_ANON_KEY=
-
 "sb_publishable_43NuQPUFS7dzMlo4qdLjEA_wZG45-3I";
 
 const sb=
-
 window.supabase.createClient(
-
 SUPABASE_URL,
-
 SUPABASE_ANON_KEY
-
 );
 
 let currentUser=null;
-
 let currentProfile=null;
-
 let currentTask=null;
-
 let taskTimer=null;
-
 let authMode="login";
-
 let authListenerStarted=false;
 
-const $=
-
-id=>document.getElementById(id);
+const $=id=>document.getElementById(id);
 
 function esc(v){
-
 return String(v??"")
-
 .replaceAll("&","&amp;")
-
 .replaceAll("<","&lt;")
-
 .replaceAll(">","&gt;")
-
 .replaceAll('"',"&quot;")
-
 .replaceAll("'","&#039;");
-
 }
 
 function money(v){
-
 return Number(v||0).toFixed(2);
-
 }
 
 function errorText(e){
-
 return e?.message||
-
 e?.error_description||
-
 String(e);
-
 }
 
 function statusClass(s){
-
 s=String(s||"").toLowerCase();
 
 if(
-
 s==="approved"||
-
 s==="completed"
-
 )
-
 return "approved";
 
 if(s==="rejected")
-
 return "rejected";
 
 return "pending";
-
 }
 
 function showError(t){
-
 $("successBox").style.display="none";
-
 $("errorBox").style.display="block";
-
 $("errorBox").textContent=t;
-
 }
 
 function showSuccess(t){
-
 $("errorBox").style.display="none";
-
 $("successBox").style.display="block";
-
 $("successBox").textContent=t;
-
 }
 
 function clearMessages(){
-
 $("errorBox").style.display="none";
-
 $("successBox").style.display="none";
-
 }
 
 /* =====================================================
-
    AUTH MODE
-
 ===================================================== */
 
 function setAuthMode(mode){
 
 authMode=mode;
-
 clearMessages();
 
 if(mode==="login"){
 
-$("authTitle").textContent=
+$("authTitle").textContent="লগইন করুন";
 
-"লগইন করুন";
+$("loginTab").classList.add("active");
+$("registerTab").classList.remove("active");
 
-$("loginTab")
+$("registerFields").style.display="none";
 
-.classList.add("active");
-
-$("registerTab")
-
-.classList.remove("active");
-
-$("registerFields")
-
-.style.display="none";
-
-$("authBtn")
-
-.textContent="Login";
+$("authBtn").textContent="Login";
 
 }else{
 
-$("authTitle").textContent=
+$("authTitle").textContent="নতুন Account তৈরি করুন";
 
-"নতুন Account তৈরি করুন";
+$("registerTab").classList.add("active");
+$("loginTab").classList.remove("active");
 
-$("registerTab")
+$("registerFields").style.display="block";
 
-.classList.add("active");
-
-$("loginTab")
-
-.classList.remove("active");
-
-$("registerFields")
-
-.style.display="block";
-
-$("authBtn")
-
-.textContent="Register";
-
+$("authBtn").textContent="Register";
 }
-
 }
 
 /* =====================================================
-
    PROFILE
-
 ===================================================== */
 
 async function loadProfile(){
 
 if(!currentUser)
-
 throw new Error("LOGIN_REQUIRED");
 
 const {
-
 data,
-
 error
-
 }=await sb
-
 .from("profiles")
-
 .select("*")
-
 .eq("id",currentUser.id)
-
 .maybeSingle();
 
 if(error)
-
 throw error;
 
 if(!data)
-
-throw new Error(
-
-"PROFILE_NOT_FOUND"
-
-);
+throw new Error("PROFILE_NOT_FOUND");
 
 currentProfile=data;
 
 currentProfile.balance=
-
 Number(data.balance||0);
 
 return data;
-
 }
 
 async function refreshProfile(){
 
 if(!currentUser)
-
 return;
 
 try{
 
 await loadProfile();
-
 updateDashboard();
 
 }catch(e){
@@ -3409,143 +1760,79 @@ updateDashboard();
 console.error(e);
 
 }
-
 }
 
 function updateDashboard(){
 
 $("balance").textContent=
-
 money(currentProfile?.balance);
 
 $("welcomeName").textContent=
-
 currentProfile?.full_name||
-
 currentUser?.user_metadata?.full_name||
-
 currentUser?.email?.split("@")[0]||
-
 "User";
-
 }
 
 /* =====================================================
-
    REGISTER
-
 ===================================================== */
 
 async function registerUser(){
 
 clearMessages();
 
-const name=
-
-$("name").value.trim();
-
-const phone=
-
-$("phone").value.trim();
-
-const email=
-
-$("email").value.trim();
-
-const password=
-
-$("password").value;
+const name=$("name").value.trim();
+const phone=$("phone").value.trim();
+const email=$("email").value.trim();
+const password=$("password").value;
 
 if(!name){
-
-showError(
-
-"আপনার নাম দিন।"
-
-);
-
+showError("আপনার নাম দিন।");
 return;
-
 }
 
 if(
-
 phone &&
-
 !/^01[0-9]{9}$/.test(phone)
-
 ){
-
-showError(
-
-"সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।"
-
-);
-
+showError("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।");
 return;
-
 }
 
 if(!email){
-
-showError(
-
-"Email দিন।"
-
-);
-
+showError("Email দিন।");
 return;
-
 }
 
 if(password.length<6){
-
-showError(
-
-"Password কমপক্ষে ৬ অক্ষরের হতে হবে।"
-
-);
-
+showError("Password কমপক্ষে ৬ অক্ষরের হতে হবে।");
 return;
-
 }
 
 $("authBtn").disabled=true;
-
-$("authBtn").textContent=
-
-"Register হচ্ছে...";
+$("authBtn").textContent="Register হচ্ছে...";
 
 try{
 
 const {
-
 data,
-
 error
-
 }=await sb.auth.signUp({
 
 email,
-
 password,
 
 options:{
-
 data:{
-
 full_name:name,
-
 phone:phone
-
 }
-
 }
 
 });
 
 if(error)
-
 throw error;
 
 if(data.session){
@@ -3559,13 +1846,9 @@ showDashboard();
 }else{
 
 showSuccess(
-
 "Registration সফল হয়েছে.\n\n"+
-
 "Gmail inbox-এ verification email এলে "+
-
 "Email Verify করে Login করুন।"
-
 );
 
 }
@@ -3573,91 +1856,53 @@ showSuccess(
 }catch(e){
 
 showError(
-
 "Registration failed:\n\n"+
-
 errorText(e)
-
 );
 
 }finally{
 
 $("authBtn").disabled=false;
-
-$("authBtn").textContent=
-
-"Register";
+$("authBtn").textContent="Register";
 
 }
-
 }
 
 /* =====================================================
-
    LOGIN
-
 ===================================================== */
 
 async function loginUser(){
 
 clearMessages();
 
-const email=
-
-$("email").value.trim();
-
-const password=
-
-$("password").value;
+const email=$("email").value.trim();
+const password=$("password").value;
 
 if(!email){
-
-showError(
-
-"Email দিন।"
-
-);
-
+showError("Email দিন।");
 return;
-
 }
 
 if(!password){
-
-showError(
-
-"Password দিন।"
-
-);
-
+showError("Password দিন।");
 return;
-
 }
 
 $("authBtn").disabled=true;
-
-$("authBtn").textContent=
-
-"Login হচ্ছে...";
+$("authBtn").textContent="Login হচ্ছে...";
 
 try{
 
 const {
-
 data,
-
 error
-
 }=await sb.auth.signInWithPassword({
-
 email,
-
 password
-
 });
 
 if(error)
-
 throw error;
 
 currentUser=data.user;
@@ -3665,21 +1910,15 @@ currentUser=data.user;
 await loadProfile();
 
 if(
-
 currentProfile.status &&
-
 currentProfile.status!=="active"
-
 ){
 
 await sb.auth.signOut();
 
 throw new Error(
-
 "আপনার Account বর্তমানে "+
-
 currentProfile.status
-
 );
 
 }
@@ -3689,51 +1928,34 @@ showDashboard();
 }catch(e){
 
 showError(
-
 "Login failed:\n\n"+
-
 errorText(e)
-
 );
 
 }finally{
 
 $("authBtn").disabled=false;
-
-$("authBtn").textContent=
-
-"Login";
+$("authBtn").textContent="Login";
 
 }
-
 }
 
 /* =====================================================
-
    DASHBOARD
-
 ===================================================== */
 
 function showDashboard(){
 
-$("authLanding").style.display=
-
-"none";
-
-$("mainDashboard").style.display=
-
-"block";
+$("authLanding").style.display="none";
+$("mainDashboard").style.display="block";
 
 updateDashboard();
-
 loadTasks();
 
 }
 
 /* =====================================================
-
    SESSION
-
 ===================================================== */
 
 async function checkSession(){
@@ -3741,26 +1963,17 @@ async function checkSession(){
 try{
 
 const {
-
 data,
-
 error
-
 }=await sb.auth.getSession();
 
 if(error)
-
 throw error;
 
 if(!data.session){
 
-$("authLanding").style.display=
-
-"flex";
-
-$("mainDashboard").style.display=
-
-"none";
+$("authLanding").style.display="flex";
+$("mainDashboard").style.display="none";
 
 return;
 
@@ -3776,22 +1989,14 @@ showDashboard();
 
 console.error(e);
 
-$("authLanding").style.display=
-
-"flex";
-
-$("mainDashboard").style.display=
-
-"none";
+$("authLanding").style.display="flex";
+$("mainDashboard").style.display="none";
 
 }
-
 }
 
 /* =====================================================
-
    TASKS
-
 ===================================================== */
 
 async function loadTasks(){
@@ -3799,137 +2004,88 @@ async function loadTasks(){
 const grid=$("taskGrid");
 
 grid.innerHTML=
-
 '<div class="loading">Task লোড হচ্ছে...</div>';
 
 try{
 
 const {
-
 data:tasks,
-
 error:taskError
-
 }=await sb
-
 .from("tasks")
-
 .select("*")
-
 .eq("active",true)
-
 .order("id",{ascending:true});
 
 if(taskError)
-
 throw taskError;
 
 const allTasks=tasks||[];
 
 const normalTasks=
-
 allTasks.filter(task=>
-
 Number(task.vip_level||0)===0
-
 );
 
 const vipTasks=
-
 allTasks.filter(task=>
-
 Number(task.vip_level||0)>0
-
 );
 
 let currentVip=0;
-
 let dailyLimit=0;
 
 if(currentUser){
 
 const {
-
 data:deposits,
-
 error:depositError
-
 }=await sb
-
 .from("deposits")
-
 .select("amount")
-
 .eq("user_id",currentUser.id)
-
 .eq("status","approved");
 
 if(depositError)
-
 throw depositError;
 
 const approvedDeposit=
-
 (deposits||[]).reduce(
-
 (sum,row)=>
-
 sum+Number(row.amount||0),
-
 0
-
 );
 
 const {
-
 data:packages,
-
 error:vipError
-
 }=await sb
-
 .from("vip_packages")
-
 .select(
-
 "level,min_deposit,daily_reward_limit,active"
-
 )
-
 .eq("active",true)
-
 .gt("level",0)
-
 .order("level",{ascending:true});
 
 if(vipError)
-
 throw vipError;
 
-const availablePackages=
-
-packages||[];
+const availablePackages=packages||[];
 
 availablePackages.forEach(pkg=>{
 
 if(
-
 approvedDeposit>=
-
 Number(pkg.min_deposit||0)
-
 ){
 
 if(
-
 Number(pkg.level)>
-
 currentVip
-
 ){
 
 currentVip=
-
 Number(pkg.level);
 
 }
@@ -3939,25 +2095,16 @@ Number(pkg.level);
 });
 
 const currentPackage=
-
 availablePackages.find(
-
 pkg=>
-
-Number(pkg.level)===
-
-currentVip
-
+Number(pkg.level)===currentVip
 );
 
 if(currentPackage){
 
 dailyLimit=
-
 Number(
-
 currentPackage.daily_reward_limit||0
-
 );
 
 }
@@ -3971,89 +2118,43 @@ let todayCompletions=[];
 if(currentUser){
 
 const {
-
 data:completions,
-
 error:completionError
-
 }=await sb
-
 .from("task_completions")
-
-.select(
-
-"task_id,reward,created_at"
-
-)
-
-.eq(
-
-"user_id",
-
-currentUser.id
-
-)
-
-.order(
-
-"created_at",
-
-{ascending:false}
-
-)
-
+.select("task_id,reward,created_at")
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false})
 .limit(100);
 
 if(completionError)
-
 throw completionError;
 
 const todayBD=
-
 new Intl.DateTimeFormat(
-
 "en-CA",
-
 {
-
 timeZone:"Asia/Dhaka",
-
 year:"numeric",
-
 month:"2-digit",
-
 day:"2-digit"
-
 }
-
 ).format(new Date());
 
 todayCompletions=
-
 (completions||[]).filter(row=>{
 
 const rowDate=
-
 new Intl.DateTimeFormat(
-
 "en-CA",
-
 {
-
 timeZone:"Asia/Dhaka",
-
 year:"numeric",
-
 month:"2-digit",
-
 day:"2-digit"
-
 }
-
 ).format(
-
 new Date(row.created_at)
-
 );
 
 return rowDate===todayBD;
@@ -4065,51 +2166,29 @@ return rowDate===todayBD;
 /* VIP TODAY */
 
 let vipTodayCount=0;
-
 let vipTodayReward=0;
 
 if(currentVip>0){
 
 const vipTaskIds=
-
 new Set(
-
 vipTasks
-
 .filter(
-
 task=>
-
-Number(task.vip_level)===
-
-currentVip
-
+Number(task.vip_level)===currentVip
 )
-
-.map(task=>
-
-Number(task.id)
-
-)
-
+.map(task=>Number(task.id))
 );
 
 todayCompletions.forEach(row=>{
 
 if(
-
-vipTaskIds.has(
-
-Number(row.task_id)
-
-)
-
+vipTaskIds.has(Number(row.task_id))
 ){
 
 vipTodayCount++;
 
 vipTodayReward+=
-
 Number(row.reward||0);
 
 }
@@ -4131,49 +2210,34 @@ html+=`
 <div class="task-card">
 
 <div class="task-icon">
-
 <i class="fa-solid fa-bolt"></i>
-
 </div>
 
 <div class="task-info">
 
 <b>
-
 ${esc(task.title||"Task")}
-
 </b>
 
 <small>
-
 ${esc(
-
 task.description||
-
 "Task সম্পন্ন করুন"
-
 )}
-
 </small>
 
 <br>
 
 <span class="task-reward">
-
 ৳${money(task.reward)}
-
 </span>
 
 <br>
 
 <button
-
 class="task-btn"
-
-data-task-id="${task.id}">
-
+data-task-id="${esc(task.id)}">
 Start Task
-
 </button>
 
 </div>
@@ -4187,13 +2251,9 @@ Start Task
 }else{
 
 html+=`
-
 <div class="empty">
-
 এখন কোনো Normal Task নেই।
-
 </div>
-
 `;
 
 }
@@ -4203,127 +2263,78 @@ html+=`
 html+=`
 
 <div
-
 style="
-
 grid-column:1/-1;
-
 margin-top:18px;
-
 padding:16px;
-
 border-radius:18px;
-
 background:rgba(57,255,136,.07);
-
 border:1px solid rgba(57,255,136,.20);
-
 ">
 
 <div
-
 style="
-
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
 gap:10px;
-
 margin-bottom:12px;
-
 ">
 
 <div>
 
 <b style="font-size:18px">
-
 👑 VIP Tasks
-
 </b>
 
 <small
-
 style="
-
 display:block;
-
 margin-top:4px;
-
 opacity:.75;
-
 ">
-
 VIP ${currentVip>0?currentVip:"Locked"}
-
 </small>
 
 </div>
 
 ${
-
 currentVip>0
-
 ?
-
 `
 
 <div
-
 style="
-
 text-align:right;
-
 font-size:12px;
-
 ">
 
 <div>
-
 ${vipTodayCount}/6 Tasks
-
 </div>
 
 <div>
-
 ৳${money(vipTodayReward)}
-
 /
-
 ৳${money(dailyLimit)}
-
 </div>
 
 </div>
-
 `
-
 :
-
 `
 
 <div
-
 style="
-
 font-size:12px;
-
 opacity:.7;
-
 ">
-
 🔒 Locked
-
 </div>
-
 `
-
 }
 
 </div>
-
 `;
 
 if(currentVip<=0){
@@ -4331,19 +2342,10 @@ if(currentVip<=0){
 html+=`
 
 <div
-
 class="empty"
-
-style="
-
-margin:0;
-
-text-align:center;
-
-">
+style="margin:0;text-align:center;">
 
 🔒 VIP Task ব্যবহার করতে
-
 একটি সক্রিয় VIP Level প্রয়োজন।
 
 </div>
@@ -4353,27 +2355,16 @@ text-align:center;
 }else{
 
 const myVipTasks=
-
 vipTasks.filter(task=>
-
-Number(task.vip_level)===
-
-currentVip
-
+Number(task.vip_level)===currentVip
 );
 
 if(!myVipTasks.length){
 
 html+=`
 
-<div
-
-class="empty"
-
-style="margin:0;">
-
+<div class="empty" style="margin:0;">
 VIP ${currentVip}-এর কোনো Task নেই।
-
 </div>
 
 `;
@@ -4383,88 +2374,45 @@ VIP ${currentVip}-এর কোনো Task নেই।
 myVipTasks.forEach(task=>{
 
 const completedToday=
-
 todayCompletions.some(
-
 row=>
-
-Number(row.task_id)===
-
-Number(task.id)
-
+Number(row.task_id)===Number(task.id)
 );
 
 const sixLimitReached=
-
 vipTodayCount>=6;
 
 const rewardLimitReached=
-
 dailyLimit>0 &&
-
 (
-
 vipTodayReward+
-
 Number(task.reward||0)
-
 )>dailyLimit;
 
 const disabled=
-
 completedToday||
-
 sixLimitReached||
-
 rewardLimitReached;
 
-let buttonText=
-
-"Start VIP Task";
+let buttonText="Start VIP Task";
 
 if(completedToday){
-
-buttonText=
-
-"✓ আজ Completed";
-
+buttonText="✓ আজ Completed";
 }else if(sixLimitReached){
-
-buttonText=
-
-"আজকের Limit শেষ";
-
+buttonText="আজকের Limit শেষ";
 }else if(rewardLimitReached){
-
-buttonText=
-
-"Daily Reward Limit";
-
+buttonText="Daily Reward Limit";
 }
 
 html+=`
 
 <div
-
 class="task-card"
-
-style="
-
-border-color:
-
-rgba(57,255,136,.35);
-
-">
+style="border-color:rgba(57,255,136,.35);">
 
 <div
-
 class="task-icon"
-
-style="
-
-color:#39ff88;
-
-">
+style="color:#39ff88;">
 
 <i class="fa-solid fa-crown"></i>
 
@@ -4473,63 +2421,34 @@ color:#39ff88;
 <div class="task-info">
 
 <b>
-
-${esc(
-
-task.title||
-
-"VIP Task"
-
-)}
-
+${esc(task.title||"VIP Task")}
 </b>
 
 <small>
-
 ${esc(
-
 task.description||
-
 "VIP Task সম্পন্ন করুন"
-
 )}
-
 </small>
 
 <br>
 
 <span class="task-reward">
-
 ৳${money(task.reward)}
-
 </span>
 
 <small
-
-style="
-
-display:block;
-
-margin-top:4px;
-
-">
-
+style="display:block;margin-top:4px;">
 VIP ${currentVip}
-
 </small>
 
 <br>
 
 <button
-
 class="task-btn"
-
-data-vip-task-id="${task.id}"
-
+data-vip-task-id="${esc(task.id)}"
 ${disabled?"disabled":""}>
-
 ${buttonText}
-
 </button>
 
 </div>
@@ -4551,37 +2470,18 @@ grid.innerHTML=html;
 /* NORMAL BUTTONS */
 
 grid
-
-.querySelectorAll(
-
-".task-btn[data-task-id]"
-
-)
-
+.querySelectorAll(".task-btn[data-task-id]")
 .forEach(btn=>{
 
 const task=
-
 allTasks.find(
-
 x=>
-
 String(x.id)===
-
-String(
-
-btn.dataset.taskId
-
-)
-
+String(btn.dataset.taskId)
 );
 
 if(task){
-
-btn.onclick=
-
-()=>startTask(task);
-
+btn.onclick=()=>startTask(task);
 }
 
 });
@@ -4589,37 +2489,18 @@ btn.onclick=
 /* VIP BUTTONS */
 
 grid
-
-.querySelectorAll(
-
-".task-btn[data-vip-task-id]"
-
-)
-
+.querySelectorAll(".task-btn[data-vip-task-id]")
 .forEach(btn=>{
 
 const task=
-
 allTasks.find(
-
 x=>
-
 String(x.id)===
-
-String(
-
-btn.dataset.vipTaskId
-
-)
-
+String(btn.dataset.vipTaskId)
 );
 
 if(task){
-
-btn.onclick=
-
-()=>startTask(task);
-
+btn.onclick=()=>startTask(task);
 }
 
 });
@@ -4630,7 +2511,7 @@ grid.innerHTML=`
 
 <div class="empty">
 
-Task load failed:<br>
+Task load failed:<br><br>
 
 ${esc(errorText(e))}
 
@@ -4639,13 +2520,10 @@ ${esc(errorText(e))}
 `;
 
 }
-
 }
 
 /* =====================================================
-
    START TASK
-
 ===================================================== */
 
 function startTask(task){
@@ -4655,36 +2533,23 @@ if(!currentUser){
 alert("আগে Login করুন।");
 
 return;
-
 }
 
 if(taskTimer)
-
 clearInterval(taskTimer);
 
 currentTask=task;
 
 $("taskTitle").textContent=
+task.title||"Task চলছে";
 
-task.title||
+$("countdown").textContent="3";
 
-"Task চলছে";
+$("progressBar").style.width="0%";
 
-$("countdown").textContent=
+$("rewardBtn").style.display="none";
 
-"3";
-
-$("progressBar").style.width=
-
-"0%";
-
-$("rewardBtn").style.display=
-
-"none";
-
-$("taskModal").style.display=
-
-"flex";
+$("taskModal").style.display="flex";
 
 let n=3;
 
@@ -4695,20 +2560,16 @@ n--;
 $("countdown").textContent=n;
 
 $("progressBar").style.width=
-
 ((3-n)/3*100)+"%";
 
 if(n<=0){
 
 clearInterval(taskTimer);
-
 taskTimer=null;
 
 $("countdown").textContent="✓";
 
-$("rewardBtn").style.display=
-
-"block";
+$("rewardBtn").style.display="block";
 
 }
 
@@ -4717,61 +2578,41 @@ $("rewardBtn").style.display=
 }
 
 /* =====================================================
-
    CLAIM REWARD
-
 ===================================================== */
 
 async function claimReward(){
 
 if(!currentUser||!currentTask)
-
 return;
 
 const btn=$("rewardBtn");
 
 btn.disabled=true;
-
-btn.textContent=
-
-"Saving...";
+btn.textContent="Saving...";
 
 try{
 
 const {
-
 data,
-
 error
-
 }=await sb.rpc(
-
 "claim_task_reward",
-
 {
-
 p_task_id:currentTask.id
-
 }
-
 );
 
 if(error)
-
 throw error;
 
 if(!data?.success)
-
 throw new Error(
-
 data?.message||
-
 "Reward নেওয়া যায়নি।"
-
 );
 
 currentProfile.balance=
-
 Number(data.balance||0);
 
 updateDashboard();
@@ -4779,17 +2620,11 @@ updateDashboard();
 closeTaskModal();
 
 alert(
-
 "Task Complete!\n\n"+
-
 "Reward: ৳"+
-
 money(data.reward)+
-
 "\nBalance: ৳"+
-
 money(data.balance)
-
 );
 
 await loadTasks();
@@ -4797,53 +2632,39 @@ await loadTasks();
 }catch(e){
 
 alert(
-
 "Reward নেওয়া যায়নি:\n\n"+
-
 errorText(e)
-
 );
 
 }finally{
 
 btn.disabled=false;
-
-btn.textContent=
-
-"৳ Reward নিন";
+btn.textContent="৳ Reward নিন";
 
 }
-
 }
 
 function closeTaskModal(){
 
-$("taskModal").style.display=
-
-"none";
+$("taskModal").style.display="none";
 
 if(taskTimer){
 
 clearInterval(taskTimer);
-
 taskTimer=null;
 
 }
 
 currentTask=null;
-
 }
 
 /* =====================================================
-
    DEPOSIT
-
 ===================================================== */
 
 function openDeposit(){
 
 openSheet(
-
 "Deposit",
 
 `
@@ -4851,47 +2672,22 @@ openSheet(
 <div class="card">
 
 <div class="info-row">
-
-<span>
-
-bKash
-
-</span>
-
+<span>bKash</span>
 <b style="color:#39ff88">
-
 01726270731
-
 </b>
-
 </div>
 
 <div class="info-row">
-
-<span>
-
-Nagad
-
-</span>
-
+<span>Nagad</span>
 <b style="color:#39ff88">
-
 01344875536
-
 </b>
-
 </div>
 
-<p style="
-
-color:#819b8d;
-
-font-size:12px;
-
-margin-bottom:0">
+<p style="color:#819b8d;font-size:12px;margin-bottom:0">
 
 উপরের নম্বরে টাকা পাঠানোর পর
-
 Transaction ID দিন।
 
 </p>
@@ -4900,25 +2696,12 @@ Transaction ID দিন।
 
 <div class="form-group">
 
-<label>
-
-Payment Method
-
-</label>
+<label>Payment Method</label>
 
 <select id="depositMethod">
 
-<option value="bKash">
-
-bKash
-
-</option>
-
-<option value="Nagad">
-
-Nagad
-
-</option>
+<option value="bKash">bKash</option>
+<option value="Nagad">Nagad</option>
 
 </select>
 
@@ -4926,46 +2709,29 @@ Nagad
 
 <div class="form-group">
 
-<label>
-
-Amount
-
-</label>
+<label>Amount</label>
 
 <input
-
 id="depositAmount"
-
 type="number"
-
 min="1"
-
 placeholder="Amount">
 
 </div>
 
 <div class="form-group">
 
-<label>
-
-Transaction ID
-
-</label>
+<label>Transaction ID</label>
 
 <input
-
 id="transactionId"
-
 type="text"
-
 placeholder="Transaction ID">
 
 </div>
 
 <button
-
 class="primary"
-
 id="submitDeposit">
 
 Deposit Submit
@@ -4976,118 +2742,68 @@ Deposit Submit
 
 );
 
-$("submitDeposit").onclick=
-
-submitDeposit;
+$("submitDeposit").onclick=submitDeposit;
 
 }
 
 async function submitDeposit(){
 
 const amount=
-
-Number(
-
-$("depositAmount").value
-
-);
+Number($("depositAmount").value);
 
 const method=
-
 $("depositMethod").value;
 
 const transactionId=
-
 $("transactionId").value.trim();
 
-if(
+if(!Number.isFinite(amount)||amount<=0){
 
-!Number.isFinite(amount)||
-
-amount<=0
-
-){
-
-alert(
-
-"সঠিক Amount দিন।"
-
-);
-
+alert("সঠিক Amount দিন।");
 return;
 
 }
 
 if(!transactionId){
 
-alert(
-
-"Transaction ID দিন।"
-
-);
-
+alert("Transaction ID দিন।");
 return;
 
 }
 
-const btn=
-
-$("submitDeposit");
+const btn=$("submitDeposit");
 
 btn.disabled=true;
-
-btn.textContent=
-
-"Submitting...";
+btn.textContent="Submitting...";
 
 try{
 
 const {
-
 data,
-
 error
-
 }=await sb.rpc(
-
 "create_deposit",
-
 {
-
 p_amount:amount,
-
 p_payment_method:method,
-
 p_transaction_id:transactionId
-
 }
-
 );
 
 if(error)
-
 throw error;
 
 if(!data?.success)
-
 throw new Error(
-
 data?.message||
-
 "Deposit request তৈরি হয়নি।"
-
 );
 
 alert(
-
 "Deposit request জমা হয়েছে.\n\n"+
-
 "Amount: ৳"+
-
 money(amount)+
-
 "\nStatus: Pending"
-
 );
 
 closeModal();
@@ -5095,43 +2811,28 @@ closeModal();
 }catch(e){
 
 alert(
-
 "Deposit failed:\n\n"+
-
 errorText(e)
-
 );
 
 }finally{
 
 btn.disabled=false;
-
-btn.textContent=
-
-"Deposit Submit";
+btn.textContent="Deposit Submit";
 
 }
-
 }
 
 /* =====================================================
-
    WITHDRAW
-
 ===================================================== */
 
 function openWithdraw(){
 
 const balance=
-
-Number(
-
-currentProfile?.balance||0
-
-);
+Number(currentProfile?.balance||0);
 
 openSheet(
-
 "Withdraw",
 
 `
@@ -5139,40 +2840,23 @@ openSheet(
 <div class="balance-card">
 
 <div class="balance-label">
-
 Available Balance
-
 </div>
 
 <div class="balance">
-
 ৳${money(balance)}
-
 </div>
 
 </div>
 
 <div class="form-group">
 
-<label>
-
-Payment Method
-
-</label>
+<label>Payment Method</label>
 
 <select id="withdrawMethod">
 
-<option value="bKash">
-
-bKash
-
-</option>
-
-<option value="Nagad">
-
-Nagad
-
-</option>
+<option value="bKash">bKash</option>
+<option value="Nagad">Nagad</option>
 
 </select>
 
@@ -5180,50 +2864,31 @@ Nagad
 
 <div class="form-group">
 
-<label>
-
-Amount
-
-</label>
+<label>Amount</label>
 
 <input
-
 id="withdrawAmount"
-
 type="number"
-
 min="500"
-
 placeholder="Minimum ৳500">
 
 </div>
 
 <div class="form-group">
 
-<label>
-
-Mobile Number
-
-</label>
+<label>Mobile Number</label>
 
 <input
-
 id="withdrawPhone"
-
 type="tel"
-
 inputmode="numeric"
-
 maxlength="11"
-
 placeholder="01XXXXXXXXX">
 
 </div>
 
 <button
-
 class="primary"
-
 id="submitWithdraw">
 
 Withdraw Request
@@ -5234,124 +2899,70 @@ Withdraw Request
 
 );
 
-$("submitWithdraw").onclick=
-
-submitWithdraw;
+$("submitWithdraw").onclick=submitWithdraw;
 
 }
 
 async function submitWithdraw(){
 
 const amount=
-
-Number(
-
-$("withdrawAmount").value
-
-);
+Number($("withdrawAmount").value);
 
 const phone=
-
 $("withdrawPhone").value.trim();
 
 const method=
-
 $("withdrawMethod").value;
 
-if(
+if(!Number.isFinite(amount)||amount<500){
 
-!Number.isFinite(amount)||
-
-amount<500
-
-){
-
-alert(
-
-"Minimum withdrawal ৳500।"
-
-);
-
+alert("Minimum withdrawal ৳500।");
 return;
 
 }
 
-if(
+if(!/^01[0-9]{9}$/.test(phone)){
 
-!/^01[0-9]{9}$/.test(phone)
-
-){
-
-alert(
-
-"সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।"
-
-);
-
+alert("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।");
 return;
 
 }
 
-const btn=
-
-$("submitWithdraw");
+const btn=$("submitWithdraw");
 
 btn.disabled=true;
-
-btn.textContent=
-
-"Submitting...";
+btn.textContent="Submitting...";
 
 try{
 
 const {
-
 data,
-
 error
-
 }=await sb.rpc(
-
 "create_withdrawal",
-
 {
-
 p_amount:amount,
-
 p_payment_method:method,
-
 p_phone:phone
-
 }
-
 );
 
 if(error)
-
 throw error;
 
 if(!data?.success)
-
 throw new Error(
-
 data?.message||
-
 "Withdrawal request তৈরি হয়নি।"
-
 );
 
 await refreshProfile();
 
 alert(
-
 "Withdrawal request জমা হয়েছে.\n\n"+
-
 "Amount: ৳"+
-
 money(amount)+
-
 "\nStatus: Pending"
-
 );
 
 closeModal();
@@ -5359,41 +2970,29 @@ closeModal();
 }catch(e){
 
 alert(
-
 "Withdrawal failed:\n\n"+
-
 errorText(e)
-
 );
 
 }finally{
 
 btn.disabled=false;
-
-btn.textContent=
-
-"Withdraw Request";
+btn.textContent="Withdraw Request";
 
 }
-
 }
 
 /* =====================================================
-
    PROFILE
-
 ===================================================== */
 
 async function openProfile(){
 
 await refreshProfile();
 
-const p=
-
-currentProfile||{};
+const p=currentProfile||{};
 
 openSheet(
-
 "My Profile",
 
 `
@@ -5401,183 +3000,84 @@ openSheet(
 <div class="card">
 
 <div class="info-row">
-
-<span>
-
-Name
-
-</span>
-
-<b>
-
-${esc(p.full_name||"")}
-
-</b>
-
+<span>Name</span>
+<b>${esc(p.full_name||"")}</b>
 </div>
 
 <div class="info-row">
-
-<span>
-
-Email
-
-</span>
-
-<b>
-
-${esc(currentUser?.email||"")}
-
-</b>
-
+<span>Email</span>
+<b>${esc(currentUser?.email||"")}</b>
 </div>
 
 <div class="info-row">
-
-<span>
-
-Phone
-
-</span>
-
-<b>
-
-${esc(p.phone||"Not set")}
-
-</b>
-
+<span>Phone</span>
+<b>${esc(p.phone||"Not set")}</b>
 </div>
 
 <div class="info-row">
-
-<span>
-
-Balance
-
-</span>
-
+<span>Balance</span>
 <b style="color:#39ff88">
-
 ৳${money(p.balance)}
-
 </b>
-
 </div>
 
 <div class="info-row">
-
-<span>
-
-Referral Code
-
-</span>
-
+<span>Referral Code</span>
 <b style="color:#39ff88">
-
 ${esc(p.referral_code||"")}
-
 </b>
-
 </div>
 
 <div class="info-row">
-
-<span>
-
-Role
-
-</span>
-
+<span>Role</span>
 <b class="badge">
-
 ${esc(p.role||"user")}
-
 </b>
-
 </div>
 
 <div class="info-row">
-
-<span>
-
-Status
-
-</span>
-
+<span>Status</span>
 <b>
-
 ${esc(p.status||"active")}
-
 </b>
-
 </div>
 
 </div>
 
-<button
-
-class="primary"
-
-id="editProfileBtn">
-
+<button class="primary" id="editProfileBtn">
 Edit Profile
-
 </button>
 
 <br><br>
 
-<button
-
-class="danger"
-
-id="logoutBtn">
-
+<button class="danger" id="logoutBtn">
 Logout
-
 </button>
 
 `
 
 );
 
-$("editProfileBtn").onclick=
-
-openEditProfile;
-
-$("logoutBtn").onclick=
-
-logoutUser;
+$("editProfileBtn").onclick=openEditProfile;
+$("logoutBtn").onclick=logoutUser;
 
 if(isAdmin()){
 
-const div=
+const div=document.createElement("div");
 
-document.createElement("div");
-
-div.style.marginTop=
-
-"12px";
+div.style.marginTop="12px";
 
 div.innerHTML=`
 
 <button
-
 class="primary"
-
 id="adminPanelBtn"
-
 style="
-
 background:
-
 linear-gradient(
-
 135deg,
-
 #ffe58a,
-
 #c28d20
-
 )">
 
 🛠️ Admin Panel
@@ -5586,94 +3086,61 @@ linear-gradient(
 
 `;
 
-$("sheetBody")
+$("sheetBody").appendChild(div);
 
-.appendChild(div);
-
-$("adminPanelBtn").onclick=
-
-openAdmin;
+$("adminPanelBtn").onclick=openAdmin;
 
 }
-
 }
 
 /* =====================================================
-
    EDIT PROFILE
-
 ===================================================== */
 
 function openEditProfile(){
 
-const p=
-
-currentProfile||{};
+const p=currentProfile||{};
 
 openSheet(
-
 "Edit Profile",
 
 `
 
 <div class="form-group">
 
-<label>
-
-নাম
-
-</label>
+<label>নাম</label>
 
 <input
-
 id="editName"
-
 value="${esc(p.full_name||"")}">
 
 </div>
 
 <div class="form-group">
 
-<label>
-
-Phone
-
-</label>
+<label>Phone</label>
 
 <input
-
 id="editPhone"
-
 maxlength="11"
-
 inputmode="numeric"
-
 value="${esc(p.phone||"")}">
 
 </div>
 
 <div class="form-group">
 
-<label>
-
-Avatar URL (optional)
-
-</label>
+<label>Avatar URL (optional)</label>
 
 <input
-
 id="editAvatar"
-
 value="${esc(p.avatar_url||"")}"
-
 placeholder="https://...">
 
 </div>
 
 <button
-
 class="primary"
-
 id="saveProfileBtn">
 
 Save Profile
@@ -5684,150 +3151,96 @@ Save Profile
 
 );
 
-$("saveProfileBtn").onclick=
-
-saveProfile;
+$("saveProfileBtn").onclick=saveProfile;
 
 }
 
 async function saveProfile(){
 
 const name=
-
 $("editName").value.trim();
 
 const phone=
-
 $("editPhone").value.trim();
 
 const avatar=
-
 $("editAvatar").value.trim();
 
 if(!name){
 
-alert(
-
-"নাম দিন।"
-
-);
-
+alert("নাম দিন।");
 return;
 
 }
 
 if(
-
 phone &&
-
 !/^01[0-9]{9}$/.test(phone)
-
 ){
 
-alert(
-
-"সঠিক মোবাইল নম্বর দিন।"
-
-);
-
+alert("সঠিক মোবাইল নম্বর দিন।");
 return;
 
 }
 
-const btn=
-
-$("saveProfileBtn");
+const btn=$("saveProfileBtn");
 
 btn.disabled=true;
-
-btn.textContent=
-
-"Saving...";
+btn.textContent="Saving...";
 
 try{
 
 const {
-
 data,
-
 error
-
 }=await sb.rpc(
-
 "update_my_profile",
-
 {
-
 p_full_name:name,
-
 p_phone:phone,
-
 p_avatar_url:avatar||null
-
 }
-
 );
 
 if(error)
-
 throw error;
 
 if(data?.success===false)
-
 throw new Error(
-
 data.message||
-
 "Profile update failed"
-
 );
 
 await refreshProfile();
 
-alert(
-
-"Profile update হয়েছে।"
-
-);
+alert("Profile update হয়েছে।");
 
 openProfile();
 
 }catch(e){
 
 alert(
-
 "Profile update failed:\n\n"+
-
 errorText(e)
-
 );
 
 }finally{
 
 btn.disabled=false;
-
-btn.textContent=
-
-"Save Profile";
+btn.textContent="Save Profile";
 
 }
-
 }
 
 /* =====================================================
-
    WALLET
-
 ===================================================== */
 
 function openWallet(){
 
-const p=
-
-currentProfile||{};
+const p=currentProfile||{};
 
 openSheet(
-
 "Wallet",
 
 `
@@ -5835,103 +3248,59 @@ openSheet(
 <div class="balance-card">
 
 <div class="balance-label">
-
 Current Balance
-
 </div>
 
 <div class="balance">
-
 ৳${money(p.balance)}
-
 </div>
 
 </div>
 
 <br>
 
-<button
-
-class="primary"
-
-id="walletDeposit">
-
+<button class="primary" id="walletDeposit">
 Deposit
-
 </button>
 
 <br><br>
 
-<button
-
-class="secondary"
-
-id="walletWithdraw">
-
+<button class="secondary" id="walletWithdraw">
 Withdraw
-
 </button>
 
 `
 
 );
 
-$("walletDeposit").onclick=
-
-openDeposit;
-
-$("walletWithdraw").onclick=
-
-openWithdraw;
+$("walletDeposit").onclick=openDeposit;
+$("walletWithdraw").onclick=openWithdraw;
 
 }
 
 /* =====================================================
-
    REFER
-
 ===================================================== */
 
 async function openRefer(){
 
 const code=
-
 currentProfile?.referral_code||"";
 
 let count=0;
 
 try{
 
-const {
-
-count:c
-
-}=await sb
-
+const {count:c}=await sb
 .from("profiles")
-
-.select("id",{
-
-count:"exact",
-
-head:true
-
-})
-
-.eq(
-
-"referred_by",
-
-currentUser.id
-
-);
+.select("id",{count:"exact",head:true})
+.eq("referred_by",currentUser.id);
 
 count=c||0;
 
 }catch(e){}
 
 openSheet(
-
 "Refer & Earn",
 
 `
@@ -5939,57 +3308,35 @@ openSheet(
 <div class="card">
 
 <h3>
-
 আপনার Referral Code
-
 </h3>
 
 <div style="
-
 font-size:27px;
-
 font-weight:900;
-
 color:#39ff88;
-
 text-align:center;
-
 padding:15px">
 
 ${esc(code)}
 
 </div>
 
-<button
-
-class="copy-btn"
-
-id="copyReferral">
-
+<button class="copy-btn" id="copyReferral">
 Copy Code
-
 </button>
 
 <div class="info-row">
 
-<span>
+<span>Total Referral</span>
 
-Total Referral
-
-</span>
-
-<b>
-
-${count}
-
-</b>
+<b>${count}</b>
 
 </div>
 
 <p style="color:#819b8d">
 
 আপনার Referral Code বন্ধুদের
-
 দিতে পারেন।
 
 </p>
@@ -6000,29 +3347,17 @@ ${count}
 
 );
 
-$("copyReferral").onclick=
-
-async()=>{
+$("copyReferral").onclick=async()=>{
 
 try{
 
-await navigator.clipboard
+await navigator.clipboard.writeText(code);
 
-.writeText(code);
-
-alert(
-
-"Referral Code copy হয়েছে।"
-
-);
+alert("Referral Code copy হয়েছে।");
 
 }catch(e){
 
-alert(
-
-"Code: "+code
-
-);
+alert("Code: "+code);
 
 }
 
@@ -6031,71 +3366,35 @@ alert(
 }
 
 /* =====================================================
-
    HISTORY
-
 ===================================================== */
 
 async function openHistory(){
 
 openSheet(
-
 "History",
-
 '<div class="loading">History load হচ্ছে...</div>'
-
 );
 
 let items=[];
 
 try{
 
-const {
-
-data
-
-}=await sb
-
+const {data}=await sb
 .from("deposits")
-
 .select("*")
-
-.eq(
-
-"user_id",
-
-currentUser.id
-
-)
-
-.order(
-
-"created_at",
-
-{
-
-ascending:false
-
-}
-
-)
-
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false})
 .limit(30);
 
 (data||[]).forEach(x=>{
 
 items.push({
-
 type:"Deposit",
-
 amount:x.amount,
-
 status:x.status,
-
 method:x.payment_method,
-
 date:x.created_at
-
 });
 
 });
@@ -6104,52 +3403,21 @@ date:x.created_at
 
 try{
 
-const {
-
-data
-
-}=await sb
-
+const {data}=await sb
 .from("withdrawals")
-
 .select("*")
-
-.eq(
-
-"user_id",
-
-currentUser.id
-
-)
-
-.order(
-
-"created_at",
-
-{
-
-ascending:false
-
-}
-
-)
-
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false})
 .limit(30);
 
 (data||[]).forEach(x=>{
 
 items.push({
-
 type:"Withdraw",
-
 amount:x.amount,
-
 status:x.status,
-
 method:x.payment_method,
-
 date:x.created_at
-
 });
 
 });
@@ -6158,52 +3426,21 @@ date:x.created_at
 
 try{
 
-const {
-
-data
-
-}=await sb
-
+const {data}=await sb
 .from("task_completions")
-
 .select("*")
-
-.eq(
-
-"user_id",
-
-currentUser.id
-
-)
-
-.order(
-
-"created_at",
-
-{
-
-ascending:false
-
-}
-
-)
-
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false})
 .limit(30);
 
 (data||[]).forEach(x=>{
 
 items.push({
-
 type:"Task Reward",
-
 amount:x.reward,
-
 status:"completed",
-
 method:"Task",
-
 date:x.created_at
-
 });
 
 });
@@ -6211,23 +3448,14 @@ date:x.created_at
 }catch(e){}
 
 items.sort(
-
 (a,b)=>
-
 String(b.date||"")
-
-.localeCompare(
-
-String(a.date||"")
-
-)
-
+.localeCompare(String(a.date||""))
 );
 
 if(!items.length){
 
 $("sheetBody").innerHTML=
-
 '<div class="empty">কোনো History নেই।</div>';
 
 return;
@@ -6235,41 +3463,29 @@ return;
 }
 
 $("sheetBody").innerHTML=
-
 items.map(x=>`
 
 <div class="history-item">
 
-<b>
-
-${esc(x.type)}
-
-</b>
+<b>${esc(x.type)}</b>
 
 <br>
 
 Amount:
-
 <span style="color:#39ff88">
-
 ৳${money(x.amount)}
-
 </span>
 
 <br>
 
 Method:
-
 ${esc(x.method||"")}
 
 <br>
 
 Status:
-
 <span class="${statusClass(x.status)}">
-
 ${esc(x.status)}
-
 </span>
 
 <br>
@@ -6277,23 +3493,11 @@ ${esc(x.status)}
 <small style="color:#718c7d">
 
 ${
-
 x.date
-
 ?
-
-esc(
-
-new Date(x.date)
-
-.toLocaleString()
-
-)
-
+esc(new Date(x.date).toLocaleString())
 :
-
 ""
-
 }
 
 </small>
@@ -6305,246 +3509,128 @@ new Date(x.date)
 }
 
 /* =====================================================
-
    VIP
-
 ===================================================== */
 
 async function openTeam(){
 
 openSheet(
-
 "👑 VIP Luxury",
-
 '<div class="loading">VIP load হচ্ছে...</div>'
-
 );
 
 try{
 
 const {
-
 data:packages,
-
 error
-
 }=await sb
-
 .from("vip_packages")
-
 .select("*")
-
-.order(
-
-"level",
-
-{
-
-ascending:true
-
-}
-
-);
+.order("level",{ascending:true});
 
 if(error)
-
 throw error;
 
 let approvedDeposit=0;
 
 const {
-
 data:deps,
-
 error:depError
-
 }=await sb
-
 .from("deposits")
-
 .select("amount")
-
-.eq(
-
-"user_id",
-
-currentUser.id
-
-)
-
-.eq(
-
-"status",
-
-"approved"
-
-);
+.eq("user_id",currentUser.id)
+.eq("status","approved");
 
 if(depError)
-
 throw depError;
 
 (deps||[]).forEach(x=>{
-
-approvedDeposit+=
-
-Number(x.amount||0);
-
+approvedDeposit+=Number(x.amount||0);
 });
 
 let currentIndex=-1;
 
-(packages||[]).forEach(
-
-(x,i)=>{
+(packages||[]).forEach((x,i)=>{
 
 if(
-
 approvedDeposit>=
-
 Number(
-
 x.min_deposit ??
-
 x.price ??
-
 0
-
 )
-
 ){
 
 currentIndex=i;
 
 }
 
-}
-
-);
+});
 
 const currentVIP=
-
 currentIndex>=0
-
 ?
-
 (
-
 packages[currentIndex].name||
-
 ("VIP "+packages[currentIndex].level)
-
 )
-
 :
-
 "VIP 0";
 
 const currentPrice=
-
 currentIndex>=0
-
 ?
-
 Number(
-
 packages[currentIndex].min_deposit ??
-
 packages[currentIndex].price ??
-
 0
-
 )
-
 :
-
 0;
 
 const currentDailyLimit=
-
 currentIndex>=0
-
 ?
-
 Number(
-
 packages[currentIndex].daily_reward_limit||0
-
 )
-
 :
-
 0;
 
 const nextPackage=
-
 packages[currentIndex+1]||null;
 
 let progress=100;
-
 let remaining=0;
 
 if(nextPackage){
 
 const nextPrice=
-
 Number(
-
 nextPackage.min_deposit ??
-
 nextPackage.price ??
-
 0
-
 );
 
-const base=
-
-currentPrice;
+const base=currentPrice;
 
 progress=
-
 nextPrice>base
-
 ?
-
 (
-
 (approvedDeposit-base)/
-
 (nextPrice-base)
-
 )*100
-
 :
-
 0;
 
 progress=
-
-Math.max(
-
-0,
-
-Math.min(
-
-100,
-
-progress
-
-)
-
-);
+Math.max(0,Math.min(100,progress));
 
 remaining=
-
-Math.max(
-
-0,
-
-nextPrice-approvedDeposit
-
-);
+Math.max(0,nextPrice-approvedDeposit);
 
 }
 
@@ -6552,136 +3638,87 @@ let html=`
 
 <div class="vip-luxury">
 
-<div class="vip-crown">
-
-👑
-
-</div>
+<div class="vip-crown">👑</div>
 
 <div class="vip-current">
-
 ${esc(currentVIP)}
-
 </div>
 
 <div class="vip-sub">
-
 TUINCOME PREMIUM MEMBER
-
 </div>
 
 <div class="info-row">
 
-<span>
-
-Approved Deposit
-
-</span>
+<span>Approved Deposit</span>
 
 <b class="gold">
-
 ৳${money(approvedDeposit)}
-
 </b>
 
 </div>
 
 <div class="info-row">
 
-<span>
-
-Daily Reward Limit
-
-</span>
+<span>Daily Reward Limit</span>
 
 <b class="gold">
-
 ৳${money(currentDailyLimit)}
-
 </b>
 
 </div>
 
 ${
-
 nextPackage
-
 ?
-
 `
 
 <div class="vip-progress">
 
-<div style="width:${progress}%">
-
-</div>
+<div style="width:${progress}%"></div>
 
 </div>
 
 <div class="vip-progress-text">
 
 <span>
-
 Next:
-
 ${esc(
-
 nextPackage.name||
-
 "VIP "+nextPackage.level
-
 )}
-
 </span>
 
 <span>
-
 ${Math.round(progress)}%
-
 </span>
 
 </div>
 
 <div style="
-
 text-align:center;
-
 margin-top:12px;
-
 color:#d8c05b;
-
 font-size:12px">
 
 আরও ৳${money(remaining)}
-
 deposit করলে
-
 ${esc(
-
 nextPackage.name||
-
 "পরের VIP"
-
 )}
-
 unlock হবে।
 
 </div>
 
 `
-
 :
-
 `
 
 <div style="
-
 text-align:center;
-
 margin-top:18px;
-
 color:#ffe58a;
-
 font-weight:900">
 
 🏆 সর্বোচ্চ VIP Level অর্জন করেছেন
@@ -6689,15 +3726,12 @@ font-weight:900">
 </div>
 
 `
-
 }
 
 </div>
 
 <h3 style="
-
 color:#e1c35b;
-
 margin:18px 0 12px">
 
 ✦ VIP Levels
@@ -6706,40 +3740,27 @@ margin:18px 0 12px">
 
 `;
 
-(packages||[]).forEach(
-
-(x,i)=>{
+(packages||[]).forEach((x,i)=>{
 
 const threshold=
-
 Number(
-
 x.min_deposit ??
-
 x.price ??
-
 0
-
 );
 
 const unlocked=
-
 approvedDeposit>=threshold;
 
 const isCurrent=
-
 i===currentIndex;
 
 html+=`
 
 <div class="
-
 vip-level
-
 ${isCurrent?"current":""}
-
 ${!unlocked?"vip-locked":""}
-
 ">
 
 <div class="vip-level-top">
@@ -6749,13 +3770,9 @@ ${!unlocked?"vip-locked":""}
 <div class="vip-name">
 
 👑
-
 ${esc(
-
 x.name||
-
 ("VIP "+x.level)
-
 )}
 
 </div>
@@ -6768,9 +3785,7 @@ ${unlocked?"✓ Unlocked":"🔒 Locked"}
 
 </div>
 
-<div style="
-
-text-align:right">
+<div style="text-align:right">
 
 <div class="vip-price">
 
@@ -6779,39 +3794,27 @@ text-align:right">
 </div>
 
 <div style="
-
 font-size:11px;
-
 color:#a99a70;
-
 margin-top:4px">
 
 Daily:
-
 ৳${money(x.daily_reward_limit)}
 
 </div>
 
 ${
-
 isCurrent
-
 ?
-
 `
 
 <div class="vip-current-badge">
-
 CURRENT
-
 </div>
 
 `
-
 :
-
 ""
-
 }
 
 </div>
@@ -6822,13 +3825,9 @@ CURRENT
 
 `;
 
-}
+});
 
-);
-
-$("sheetBody").innerHTML=
-
-html;
+$("sheetBody").innerHTML=html;
 
 }catch(e){
 
@@ -6836,7 +3835,7 @@ $("sheetBody").innerHTML=`
 
 <div class="empty">
 
-VIP load failed:<br>
+VIP load failed:<br><br>
 
 ${esc(errorText(e))}
 
@@ -6849,169 +3848,112 @@ ${esc(errorText(e))}
 }
 
 /* =====================================================
-
-   ADMIN
-
+   ADMIN PANEL
+   DIRECT SUPABASE UI
 ===================================================== */
 
 function isAdmin(){
 
-return currentProfile?.role==="admin";
+return String(
+currentProfile?.role||""
+).toLowerCase()==="admin";
 
 }
+
+function adminEscape(v){
+
+return esc(v);
+
+}
+
+/* =====================================================
+   ADMIN OPEN
+===================================================== */
 
 async function openAdmin(){
 
 if(!isAdmin()){
 
-alert(
-
-"Admin access required."
-
-);
+alert("Admin access required.");
 
 return;
 
 }
 
 openSheet(
-
 "🛠️ Admin Panel",
-
 '<div class="loading">Admin data load হচ্ছে...</div>'
-
 );
 
 await loadAdminPanel();
 
 }
 
+/* =====================================================
+   ADMIN PANEL LOAD
+===================================================== */
+
 async function loadAdminPanel(){
 
 try{
 
 const [
-
 profilesRes,
-
 depositsRes,
-
 withdrawalsRes,
-
 tasksRes
-
 ]=await Promise.all([
 
 sb
-
 .from("profiles")
-
 .select("*")
-
-.order(
-
-"created_at",
-
-{
-
-ascending:false
-
-}
-
-)
-
-.limit(100),
+.order("created_at",{ascending:false})
+.limit(200),
 
 sb
-
 .from("deposits")
-
 .select("*")
-
-.order(
-
-"created_at",
-
-{
-
-ascending:false
-
-}
-
-)
-
-.limit(100),
+.order("created_at",{ascending:false})
+.limit(200),
 
 sb
-
 .from("withdrawals")
-
 .select("*")
-
-.order(
-
-"created_at",
-
-{
-
-ascending:false
-
-}
-
-)
-
-.limit(100),
+.order("created_at",{ascending:false})
+.limit(200),
 
 sb
-
 .from("tasks")
-
 .select("*")
-
-.order(
-
-"id",
-
-{
-
-ascending:true
-
-}
-
-)
+.order("id",{ascending:true})
 
 ]);
 
-const profiles=
+if(profilesRes.error)
+throw profilesRes.error;
 
-profilesRes.data||[];
+if(depositsRes.error)
+throw depositsRes.error;
 
-const deposits=
+if(withdrawalsRes.error)
+throw withdrawalsRes.error;
 
-depositsRes.data||[];
+if(tasksRes.error)
+throw tasksRes.error;
 
-const withdrawals=
-
-withdrawalsRes.data||[];
-
-const tasks=
-
-tasksRes.data||[];
+const profiles=profilesRes.data||[];
+const deposits=depositsRes.data||[];
+const withdrawals=withdrawalsRes.data||[];
+const tasks=tasksRes.data||[];
 
 const pendingDeposits=
-
-deposits.filter(
-
-x=>x.status==="pending"
-
+deposits.filter(x=>
+String(x.status).toLowerCase()==="pending"
 );
 
 const pendingWithdrawals=
-
-withdrawals.filter(
-
-x=>x.status==="pending"
-
+withdrawals.filter(x=>
+String(x.status).toLowerCase()==="pending"
 );
 
 $("sheetBody").innerHTML=`
@@ -7019,141 +3961,82 @@ $("sheetBody").innerHTML=`
 <div class="admin-stat">
 
 <div class="stat-box">
-
-<small>
-
-Users
-
-</small>
-
-<b>
-
-${profiles.length}
-
-</b>
-
+<small>Users</small>
+<b>${profiles.length}</b>
 </div>
 
 <div class="stat-box">
-
-<small>
-
-Pending Deposit
-
-</small>
-
-<b>
-
-${pendingDeposits.length}
-
-</b>
-
+<small>Pending Deposit</small>
+<b>${pendingDeposits.length}</b>
 </div>
 
 <div class="stat-box">
-
-<small>
-
-Pending Withdraw
-
-</small>
-
-<b>
-
-${pendingWithdrawals.length}
-
-</b>
-
+<small>Pending Withdraw</small>
+<b>${pendingWithdrawals.length}</b>
 </div>
 
 <div class="stat-box">
-
-<small>
-
-Tasks
-
-</small>
-
-<b>
-
-${tasks.length}
-
-</b>
-
+<small>Tasks</small>
+<b>${tasks.length}</b>
 </div>
 
 </div>
+
+<button
+class="secondary"
+id="adminRefreshBtn"
+style="margin-bottom:12px">
+
+🔄 Refresh Admin Panel
+
+</button>
+
+<!-- DEPOSITS -->
 
 <div class="card">
 
-<h3>
-
-💰 Pending Deposits
-
-</h3>
+<h3>💰 Pending Deposits</h3>
 
 <div id="adminDeposits">
 
 ${
-
 pendingDeposits.length
-
 ?
-
 pendingDeposits.map(x=>`
 
 <div class="admin-item">
 
-<b>
-
+<b class="gold">
 ৳${money(x.amount)}
-
 </b>
 
 <br>
 
 Method:
-
-${esc(
-
-x.payment_method||""
-
-)}
+${adminEscape(x.payment_method||"")}
 
 <br>
 
 Transaction:
-
-${esc(
-
-x.transaction_id||""
-
-)}
+<b>
+${adminEscape(x.transaction_id||"")}
+</b>
 
 <br>
 
-User:
-
-${esc(
-
-x.user_id||""
-
-)}
+User ID:
+<small>
+${adminEscape(x.user_id||"")}
+</small>
 
 <div class="admin-actions">
 
 <button
-
 class="approve"
-
 onclick="
-
 adminDeposit(
-
-'${esc(x.id)}',
-
+'${adminEscape(x.id)}',
 'approved'
-
 )">
 
 ✓ Approve
@@ -7161,17 +4044,11 @@ adminDeposit(
 </button>
 
 <button
-
 class="reject"
-
 onclick="
-
 adminDeposit(
-
-'${esc(x.id)}',
-
+'${adminEscape(x.id)}',
 'rejected'
-
 )">
 
 ✕ Reject
@@ -7183,87 +4060,57 @@ adminDeposit(
 </div>
 
 `).join("")
-
 :
-
 '<div class="empty">Pending Deposit নেই।</div>'
-
 }
 
 </div>
-
 </div>
+
+<!-- WITHDRAWALS -->
 
 <div class="card">
 
-<h3>
-
-💸 Pending Withdrawals
-
-</h3>
+<h3>💸 Pending Withdrawals</h3>
 
 <div id="adminWithdrawals">
 
 ${
-
 pendingWithdrawals.length
-
 ?
-
 pendingWithdrawals.map(x=>`
 
 <div class="admin-item">
 
-<b>
-
+<b class="gold">
 ৳${money(x.amount)}
-
 </b>
 
 <br>
 
 Method:
-
-${esc(
-
-x.payment_method||""
-
-)}
+${adminEscape(x.payment_method||"")}
 
 <br>
 
 Phone:
-
-${esc(
-
-x.phone||""
-
-)}
+${adminEscape(x.phone||"")}
 
 <br>
 
-User:
-
-${esc(
-
-x.user_id||""
-
-)}
+User ID:
+<small>
+${adminEscape(x.user_id||"")}
+</small>
 
 <div class="admin-actions">
 
 <button
-
 class="approve"
-
 onclick="
-
 adminWithdraw(
-
-'${esc(x.id)}',
-
+'${adminEscape(x.id)}',
 'approved'
-
 )">
 
 ✓ Approve
@@ -7271,17 +4118,11 @@ adminWithdraw(
 </button>
 
 <button
-
 class="reject"
-
 onclick="
-
 adminWithdraw(
-
-'${esc(x.id)}',
-
+'${adminEscape(x.id)}',
 'rejected'
-
 )">
 
 ✕ Reject
@@ -7293,163 +4134,166 @@ adminWithdraw(
 </div>
 
 `).join("")
-
 :
-
 '<div class="empty">Pending Withdraw নেই।</div>'
-
 }
 
 </div>
-
 </div>
+
+<!-- USERS -->
 
 <div class="card">
 
-<h3>
-
-👥 Users
-
-</h3>
+<h3>👥 User Management</h3>
 
 <div id="adminUsers">
 
 ${
-
 profiles.length
-
 ?
+profiles.map(x=>{
 
-profiles.map(x=>`
+const status=
+String(
+x.status||"active"
+).toLowerCase();
 
-<div class="admin-item">
+const role=
+String(
+x.role||"user"
+);
 
-<b>
+return `
 
-${esc(
+<div
+class="admin-item"
+data-admin-user="${adminEscape(x.id)}">
 
-x.full_name||
+<b style="font-size:16px">
 
-"No Name"
-
+${adminEscape(
+x.full_name||"No Name"
 )}
 
 </b>
 
 <br>
 
-Phone:
-
-${esc(
-
-x.phone||""
-
+Email:
+<small>
+${adminEscape(
+x.email||"Auth Email"
 )}
+</small>
+
+<br>
+
+Phone:
+${adminEscape(
+x.phone||"Not set"
+)}
+
+<br>
+
+Balance:
+
+<b class="gold">
+৳${money(x.balance)}
+</b>
 
 <br>
 
 Role:
 
-${esc(
-
-x.role||"user"
-
-)}
+<span class="badge">
+${adminEscape(role)}
+</span>
 
 <br>
 
 Status:
 
-${esc(
+<span class="${
+status==="active"
+?"approved"
+:"rejected"
+}">
 
-x.status||"active"
+${adminEscape(status)}
 
-)}
+</span>
 
 <div class="admin-actions">
 
+<button
+onclick="
+adminEditUser(
+'${adminEscape(x.id)}'
+)">
+
+✏️ Edit
+
+</button>
+
 ${
-
-x.status==="active"
-
+status==="active"
 ?
-
 `
 
 <button
-
 class="reject"
-
 onclick="
-
 adminUserStatus(
-
-'${esc(x.id)}',
-
+'${adminEscape(x.id)}',
 'blocked'
-
 )">
 
-Block
+🚫 Block
 
 </button>
 
 `
-
 :
-
 `
 
 <button
-
 class="approve"
-
 onclick="
-
 adminUserStatus(
-
-'${esc(x.id)}',
-
+'${adminEscape(x.id)}',
 'active'
-
 )">
 
-Activate
+✓ Activate
 
 </button>
 
 `
-
 }
 
 </div>
 
 </div>
 
-`).join("")
+`;
 
+}).join("")
 :
-
 '<div class="empty">User নেই।</div>'
-
 }
 
 </div>
-
 </div>
+
+<!-- TASKS -->
 
 <div class="card">
 
-<h3>
-
-⚡ Task Management
-
-</h3>
+<h3>⚡ Task Management</h3>
 
 <button
-
 class="primary"
-
 id="adminAddTaskBtn">
 
 + Add New Task
@@ -7457,20 +4301,14 @@ id="adminAddTaskBtn">
 </button>
 
 <div
-
 style="
-
 margin-top:10px;
-
 color:#789184;
-
 font-size:11px;
-
 line-height:1.5">
 
-Normal Task অথবা VIP Task তৈরি করতে
-
-Add New Task চাপুন।
+Normal অথবা VIP Task এখান থেকেই তৈরি,
+Enable/Disable এবং Delete করতে পারবেন।
 
 </div>
 
@@ -7479,63 +4317,52 @@ Add New Task চাপুন।
 <div id="adminTasks">
 
 ${
-
 tasks.length
-
 ?
-
 tasks.map(x=>{
 
 const vipLevel=
-
 Number(x.vip_level||0);
+
+const active=
+Boolean(x.active);
 
 return `
 
 <div class="admin-item">
 
 <b>
-
-${esc(
-
-x.title||
-
-"Task"
-
+${adminEscape(
+x.title||"Task"
 )}
-
 </b>
 
 <br>
 
 ${
-
 vipLevel>0
-
 ?
-
 `
 
-<span class="task-type-badge task-type-vip">
+<span
+class="task-type-badge task-type-vip">
 
 👑 VIP ${vipLevel}
 
 </span>
 
 `
-
 :
-
 `
 
-<span class="task-type-badge task-type-normal">
+<span
+class="task-type-badge task-type-normal">
 
 ⚡ NORMAL
 
 </span>
 
 `
-
 }
 
 <br>
@@ -7543,54 +4370,49 @@ vipLevel>0
 Reward:
 
 <span class="gold">
-
 ৳${money(x.reward)}
-
 </span>
 
 <br>
 
 Max Completions:
-
 ${Number(x.max_completions||1)}
 
 <br>
 
 Status:
 
-${x.active?"Active":"Inactive"}
+<span class="${
+active
+?"approved"
+:"rejected"
+}">
+
+${active?"Active":"Inactive"}
+
+</span>
 
 <div class="admin-actions">
 
 <button
-
 onclick="
-
 adminToggleTask(
-
-'${esc(x.id)}',
-
-${!x.active}
-
+'${adminEscape(x.id)}',
+${!active}
 )">
 
-${x.active?"Disable":"Enable"}
+${active?"Disable":"Enable"}
 
 </button>
 
 <button
-
 class="reject"
-
 onclick="
-
 adminDeleteTask(
-
-'${esc(x.id)}'
-
+'${adminEscape(x.id)}'
 )">
 
-Delete
+🗑️ Delete
 
 </button>
 
@@ -7601,11 +4423,8 @@ Delete
 `;
 
 }).join("")
-
 :
-
 '<div class="empty">Task নেই।</div>'
-
 }
 
 </div>
@@ -7614,8 +4433,10 @@ Delete
 
 `;
 
-$("adminAddTaskBtn").onclick=
+$("adminRefreshBtn").onclick=
+loadAdminPanel;
 
+$("adminAddTaskBtn").onclick=
 adminAddTask;
 
 }catch(e){
@@ -7624,9 +4445,19 @@ $("sheetBody").innerHTML=`
 
 <div class="empty">
 
-Admin load failed:<br>
+Admin load failed:<br><br>
 
-${esc(errorText(e))}
+${adminEscape(errorText(e))}
+
+<br><br>
+
+<button
+class="secondary"
+onclick="loadAdminPanel()">
+
+🔄 আবার চেষ্টা করুন
+
+</button>
 
 </div>
 
@@ -7637,95 +4468,58 @@ ${esc(errorText(e))}
 }
 
 /* =====================================================
-
    ADMIN DEPOSIT
-
+   SECURE RPC RETAINED
 ===================================================== */
 
-async function adminDeposit(
-
-id,
-
-status
-
-){
+async function adminDeposit(id,status){
 
 if(!isAdmin())
-
 return;
 
-if(
-
-!confirm(
-
+if(!confirm(
 "Deposit status "+
-
 status+
-
 " করতে চান?"
-
-)
-
-)
-
+))
 return;
 
 try{
 
 const {
-
 data,
-
 error
-
 }=await sb.rpc(
-
 "admin_update_deposit",
-
 {
-
 p_deposit_id:id,
-
 p_status:status
-
 }
-
 );
 
 if(error)
-
 throw error;
 
 if(data?.success===false)
-
 throw new Error(
-
 data.message||
-
 "Deposit update failed"
-
 );
 
 alert(
-
 "Deposit "+
-
 status+
-
 " হয়েছে।"
-
 );
 
+await refreshProfile();
 await loadAdminPanel();
 
 }catch(e){
 
 alert(
-
 "Deposit update failed:\n\n"+
-
 errorText(e)
-
 );
 
 }
@@ -7733,95 +4527,58 @@ errorText(e)
 }
 
 /* =====================================================
-
    ADMIN WITHDRAW
-
+   SECURE RPC RETAINED
 ===================================================== */
 
-async function adminWithdraw(
-
-id,
-
-status
-
-){
+async function adminWithdraw(id,status){
 
 if(!isAdmin())
-
 return;
 
-if(
-
-!confirm(
-
+if(!confirm(
 "Withdrawal status "+
-
 status+
-
 " করতে চান?"
-
-)
-
-)
-
+))
 return;
 
 try{
 
 const {
-
 data,
-
 error
-
 }=await sb.rpc(
-
 "admin_update_withdrawal",
-
 {
-
 p_withdrawal_id:id,
-
 p_status:status
-
 }
-
 );
 
 if(error)
-
 throw error;
 
 if(data?.success===false)
-
 throw new Error(
-
 data.message||
-
 "Withdrawal update failed"
-
 );
 
 alert(
-
 "Withdrawal "+
-
 status+
-
 " হয়েছে।"
-
 );
 
+await refreshProfile();
 await loadAdminPanel();
 
 }catch(e){
 
 alert(
-
 "Withdrawal update failed:\n\n"+
-
 errorText(e)
-
 );
 
 }
@@ -7829,79 +4586,46 @@ errorText(e)
 }
 
 /* =====================================================
-
-   ADMIN USER
-
+   USER STATUS
+   DIRECT TABLE UPDATE
 ===================================================== */
 
-async function adminUserStatus(
-
-id,
-
-status
-
-){
+async function adminUserStatus(id,status){
 
 if(!isAdmin())
+return;
+
+if(!id){
+
+alert("User ID পাওয়া যায়নি।");
 
 return;
 
-if(
+}
 
-!confirm(
-
+if(!confirm(
 "User status "+
-
 status+
-
 " করতে চান?"
-
-)
-
-)
-
+))
 return;
 
 try{
 
 const {
-
-data,
-
 error
-
-}=await sb.rpc(
-
-"admin_update_user_status",
-
-{
-
-p_user_id:id,
-
-p_status:status
-
-}
-
-);
+}=await sb
+.from("profiles")
+.update({
+status:status
+})
+.eq("id",id);
 
 if(error)
-
 throw error;
 
-if(data?.success===false)
-
-throw new Error(
-
-data.message||
-
-"User update failed"
-
-);
-
 alert(
-
 "User status update হয়েছে।"
-
 );
 
 await loadAdminPanel();
@@ -7909,11 +4633,9 @@ await loadAdminPanel();
 }catch(e){
 
 alert(
-
-"User update failed:\n\n"+
-
-errorText(e)
-
+"User status update failed:\n\n"+
+errorText(e)+
+"\n\nSupabase RLS policy check করুন।"
 );
 
 }
@@ -7921,155 +4643,397 @@ errorText(e)
 }
 
 /* =====================================================
+   EDIT USER
+===================================================== */
 
-   NEW ADMIN ADD TASK
+async function adminEditUser(id){
 
+if(!isAdmin())
+return;
+
+const {
+data:user,
+error
+}=await sb
+.from("profiles")
+.select("*")
+.eq("id",id)
+.maybeSingle();
+
+if(error){
+
+alert(
+"User load failed:\n\n"+
+errorText(error)
+);
+
+return;
+
+}
+
+if(!user){
+
+alert("User পাওয়া যায়নি।");
+
+return;
+
+}
+
+openSheet(
+"✏️ Edit User",
+
+`
+
+<div class="form-group">
+
+<label>User ID</label>
+
+<input
+value="${adminEscape(user.id||"")}"
+readonly>
+
+</div>
+
+<div class="form-group">
+
+<label>Name</label>
+
+<input
+id="adminEditName"
+value="${adminEscape(
+user.full_name||""
+)}">
+
+</div>
+
+<div class="form-group">
+
+<label>Phone</label>
+
+<input
+id="adminEditPhone"
+type="tel"
+maxlength="11"
+value="${adminEscape(
+user.phone||""
+)}">
+
+</div>
+
+<div class="form-group">
+
+<label>Avatar URL</label>
+
+<input
+id="adminEditAvatar"
+value="${adminEscape(
+user.avatar_url||""
+)}">
+
+</div>
+
+<div class="form-group">
+
+<label>Role</label>
+
+<select id="adminEditRole">
+
+<option
+value="user"
+${
+user.role==="user"
+?"selected"
+:""
+}>
+User
+</option>
+
+<option
+value="admin"
+${
+user.role==="admin"
+?"selected"
+:""
+}>
+Admin
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Status</label>
+
+<select id="adminEditStatus">
+
+<option
+value="active"
+${
+user.status==="active"
+?"selected"
+:""
+}>
+Active
+</option>
+
+<option
+value="blocked"
+${
+user.status==="blocked"
+?"selected"
+:""
+}>
+Blocked
+</option>
+
+<option
+value="pending"
+${
+user.status==="pending"
+?"selected"
+:""
+}>
+Pending
+</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Balance</label>
+
+<input
+id="adminEditBalance"
+type="number"
+step="0.01"
+min="0"
+value="${Number(
+user.balance||0
+)}">
+
+</div>
+
+<button
+class="primary"
+id="adminSaveUserBtn">
+
+💾 Save User
+
+</button>
+
+`
+
+);
+
+$("adminSaveUserBtn").onclick=
+()=>adminSaveUser(id);
+
+}
+
+/* =====================================================
+   SAVE USER
+===================================================== */
+
+async function adminSaveUser(id){
+
+if(!isAdmin())
+return;
+
+const name=
+$("adminEditName").value.trim();
+
+const phone=
+$("adminEditPhone").value.trim();
+
+const avatar=
+$("adminEditAvatar").value.trim();
+
+const role=
+$("adminEditRole").value;
+
+const status=
+$("adminEditStatus").value;
+
+const balance=
+Number(
+$("adminEditBalance").value
+);
+
+if(!name){
+
+alert("Name দিতে হবে।");
+
+return;
+
+}
+
+if(
+phone &&
+!/^01[0-9]{9}$/.test(phone)
+){
+
+alert(
+"সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।"
+);
+
+return;
+
+}
+
+if(
+!Number.isFinite(balance)||
+balance<0
+){
+
+alert(
+"সঠিক Balance দিন।"
+);
+
+return;
+
+}
+
+const btn=
+$("adminSaveUserBtn");
+
+btn.disabled=true;
+btn.textContent="Saving...";
+
+try{
+
+const {
+error
+}=await sb
+.from("profiles")
+.update({
+
+full_name:name,
+
+phone:phone||null,
+
+avatar_url:
+avatar||null,
+
+role:role,
+
+status:status,
+
+balance:balance
+
+})
+.eq("id",id);
+
+if(error)
+throw error;
+
+alert(
+"User information update হয়েছে।"
+);
+
+await loadAdminPanel();
+
+}catch(e){
+
+alert(
+"User update failed:\n\n"+
+errorText(e)+
+"\n\nSupabase RLS policy check করুন।"
+);
+
+}finally{
+
+btn.disabled=false;
+btn.textContent="💾 Save User";
+
+}
+
+}
+
+/* =====================================================
+   ADD TASK
+   DIRECT INSERT
 ===================================================== */
 
 async function adminAddTask(){
 
 if(!isAdmin())
-
 return;
-
-/* TASK TITLE */
 
 const title=
+prompt("Task Title:");
 
-prompt(
+if(!title||!title.trim()){
 
-"Task Title:"
-
-);
-
-if(!title || !title.trim()){
-
-alert(
-
-"Task Title দিতে হবে।"
-
-);
+alert("Task Title দিতে হবে।");
 
 return;
 
 }
-
-/* DESCRIPTION */
 
 const description=
-
-prompt(
-
-"Task Description:"
-
-)||"";
-
-/* REWARD */
+prompt("Task Description:")||"";
 
 const reward=
-
 Number(
-
-prompt(
-
-"Task Reward:"
-
-)
-
+prompt("Task Reward:")
 );
 
 if(
-
 !Number.isFinite(reward)||
-
 reward<0
-
 ){
 
-alert(
-
-"সঠিক reward দিন।"
-
-);
+alert("সঠিক reward দিন।");
 
 return;
 
 }
-
-/* TASK TYPE */
 
 const taskType=
-
 prompt(
-
-"Task Type নির্বাচন করুন:\n\n"+
-
+"Task Type:\n\n"+
 "1 = Normal Task\n"+
-
-"2 = VIP Task\n\n"+
-
-"1 অথবা 2 লিখুন:",
-
+"2 = VIP Task",
 "1"
-
 );
 
 if(
-
-taskType!=="1" &&
-
+taskType!=="1"&&
 taskType!=="2"
-
 ){
 
 alert(
-
-"Task Type সঠিক নয়।\n"+
-
 "শুধু 1 অথবা 2 দিন।"
-
 );
 
 return;
 
 }
-
-/* VIP LEVEL */
 
 let vipLevel=0;
 
 if(taskType==="2"){
 
 vipLevel=
-
 Number(
-
 prompt(
-
-"VIP Level লিখুন:\n\n"+
-
-"1 থেকে 10 এর মধ্যে একটি Level দিন:",
-
+"VIP Level (1-10):",
 "1"
-
 )
-
 );
 
 if(
-
 !Number.isInteger(vipLevel)||
-
 vipLevel<1||
-
 vipLevel>10
-
 ){
 
 alert(
-
-"VIP Level অবশ্যই 1 থেকে 10 এর মধ্যে হতে হবে।"
-
+"VIP Level 1 থেকে 10 এর মধ্যে হতে হবে।"
 );
 
 return;
@@ -8077,133 +5041,87 @@ return;
 }
 
 }
-
-/* MAX COMPLETIONS */
 
 const maxCompletions=
-
 Number(
-
 prompt(
-
-"Max Completions:\n\n"+
-
-"এই Task একজন User কতবার Complete করতে পারবে?\n\n"+
-
-"উদাহরণ: 1",
-
+"Max Completions:",
 "1"
-
 )
-
 );
 
 if(
-
 !Number.isInteger(maxCompletions)||
-
 maxCompletions<1
-
 ){
 
 alert(
-
 "Max Completions কমপক্ষে 1 হতে হবে।"
-
 );
 
 return;
 
 }
 
-/* CONFIRM */
-
-const taskTypeText=
-
+const typeText=
 vipLevel>0
-
 ?
-
 "VIP "+vipLevel
-
 :
-
 "Normal";
 
-const confirmCreate=
-
-confirm(
-
+if(!confirm(
 "Task তৈরি করবেন?\n\n"+
-
-"Title: "+title.trim()+
-
-"\nReward: ৳"+money(reward)+
-
-"\nType: "+taskTypeText+
-
-"\nMax Completions: "+maxCompletions
-
-);
-
-if(!confirmCreate)
-
+"Title: "+
+title.trim()+
+"\nReward: ৳"+
+money(reward)+
+"\nType: "+
+typeText+
+"\nMax Completions: "+
+maxCompletions
+))
 return;
-
-/* SUPABASE */
 
 try{
 
 const {
-
 data,
-
 error
+}=await sb
+.from("tasks")
+.insert({
 
-}=await sb.rpc(
+title:title.trim(),
 
-"admin_create_task",
+description:
+description.trim(),
 
-{
+reward:reward,
 
-p_title:title.trim(),
+vip_level:
+vipLevel,
 
-p_description:description.trim(),
+max_completions:
+maxCompletions,
 
-p_reward:reward,
+active:true
 
-p_vip_level:vipLevel,
-
-p_max_completions:maxCompletions
-
-}
-
-);
+})
+.select()
+.single();
 
 if(error)
-
 throw error;
 
-if(data?.success===false)
-
-throw new Error(
-
-data.message||
-
-"Task create failed"
-
-);
-
 alert(
-
 "Task তৈরি হয়েছে।\n\n"+
-
-"Type: "+taskTypeText+
-
-"\nReward: ৳"+money(reward)+
-
-"\nMax Completions: "+maxCompletions
-
+"Type: "+
+typeText+
+"\nReward: ৳"+
+money(reward)+
+"\nMax Completions: "+
+maxCompletions
 );
 
 await loadAdminPanel();
@@ -8211,11 +5129,9 @@ await loadAdminPanel();
 }catch(e){
 
 alert(
-
 "Task create failed:\n\n"+
-
-errorText(e)
-
+errorText(e)+
+"\n\nSupabase RLS policy অথবা table column check করুন।"
 );
 
 }
@@ -8223,69 +5139,37 @@ errorText(e)
 }
 
 /* =====================================================
-
    TOGGLE TASK
-
+   DIRECT UPDATE
 ===================================================== */
 
-async function adminToggleTask(
-
-id,
-
-active
-
-){
+async function adminToggleTask(id,active){
 
 if(!isAdmin())
-
 return;
 
 try{
 
 const {
-
-data,
-
 error
-
-}=await sb.rpc(
-
-"admin_toggle_task",
-
-{
-
-p_task_id:id,
-
-p_active:active
-
-}
-
-);
+}=await sb
+.from("tasks")
+.update({
+active:Boolean(active)
+})
+.eq("id",id);
 
 if(error)
-
 throw error;
-
-if(data?.success===false)
-
-throw new Error(
-
-data.message||
-
-"Task update failed"
-
-);
 
 await loadAdminPanel();
 
 }catch(e){
 
 alert(
-
 "Task update failed:\n\n"+
-
-errorText(e)
-
+errorText(e)+
+"\n\nTask ID / RLS policy check করুন।"
 );
 
 }
@@ -8293,79 +5177,42 @@ errorText(e)
 }
 
 /* =====================================================
-
    DELETE TASK
-
+   DIRECT DELETE
 ===================================================== */
 
 async function adminDeleteTask(id){
 
 if(!isAdmin())
-
 return;
 
-if(
-
-!confirm(
-
+if(!confirm(
 "এই Task delete করতে চান?"
-
-)
-
-)
-
+))
 return;
 
 try{
 
 const {
-
-data,
-
 error
-
-}=await sb.rpc(
-
-"admin_delete_task",
-
-{
-
-p_task_id:id
-
-}
-
-);
+}=await sb
+.from("tasks")
+.delete()
+.eq("id",id);
 
 if(error)
-
 throw error;
 
-if(data?.success===false)
-
-throw new Error(
-
-data.message||
-
-"Task delete failed"
-
-);
-
-alert(
-
-"Task delete হয়েছে।"
-
-);
+alert("Task delete হয়েছে।");
 
 await loadAdminPanel();
 
 }catch(e){
 
 alert(
-
 "Task delete failed:\n\n"+
-
-errorText(e)
-
+errorText(e)+
+"\n\nTask ID / RLS policy check করুন।"
 );
 
 }
@@ -8373,45 +5220,27 @@ errorText(e)
 }
 
 /* =====================================================
-
    SHEET
-
 ===================================================== */
 
-function openSheet(
+function openSheet(title,body){
 
-title,
+$("sheetTitle").textContent=title;
 
-body
+$("sheetBody").innerHTML=body;
 
-){
-
-$("sheetTitle").textContent=
-
-title;
-
-$("sheetBody").innerHTML=
-
-body;
-
-$("modal").style.display=
-
-"flex";
+$("modal").style.display="flex";
 
 }
 
 function closeModal(){
 
-$("modal").style.display=
-
-"none";
+$("modal").style.display="none";
 
 }
 
 /* =====================================================
-
    LOGOUT
-
 ===================================================== */
 
 async function logoutUser(){
@@ -8427,67 +5256,45 @@ console.error(e);
 }
 
 currentUser=null;
-
 currentProfile=null;
 
-$("mainDashboard").style.display=
-
-"none";
-
-$("authLanding").style.display=
-
-"flex";
+$("mainDashboard").style.display="none";
+$("authLanding").style.display="flex";
 
 closeModal();
 
 }
 
 /* =====================================================
-
    OAUTH
-
 ===================================================== */
 
-async function oauthLogin(
-
-provider
-
-){
+async function oauthLogin(provider){
 
 clearMessages();
 
 try{
 
 const {
-
 error
-
 }=await sb.auth.signInWithOAuth({
 
 provider,
 
 options:{
-
-redirectTo:
-
-window.location.href
-
+redirectTo:window.location.href
 }
 
 });
 
 if(error)
-
 throw error;
 
 }catch(e){
 
 showError(
-
 "OAuth Login failed:\n\n"+
-
 errorText(e)
-
 );
 
 }
@@ -8495,9 +5302,7 @@ errorText(e)
 }
 
 /* =====================================================
-
    RESET PASSWORD
-
 ===================================================== */
 
 async function resetPassword(){
@@ -8505,15 +5310,12 @@ async function resetPassword(){
 clearMessages();
 
 const email=
-
 $("email").value.trim();
 
 if(!email){
 
 showError(
-
 "Password reset করার জন্য আগে Email দিন।"
-
 );
 
 return;
@@ -8523,45 +5325,28 @@ return;
 try{
 
 const {
-
 error
-
 }=await sb.auth
-
 .resetPasswordForEmail(
-
 email,
-
 {
-
-redirectTo:
-
-window.location.href
-
+redirectTo:window.location.href
 }
-
 );
 
 if(error)
-
 throw error;
 
 showSuccess(
-
 "Password reset email পাঠানো হয়েছে.\n\n"+
-
 "আপনার Gmail inbox চেক করুন।"
-
 );
 
 }catch(e){
 
 showError(
-
 "Password reset failed:\n\n"+
-
 errorText(e)
-
 );
 
 }
@@ -8569,28 +5354,22 @@ errorText(e)
 }
 
 /* =====================================================
-
    AUTH LISTENER
-
 ===================================================== */
 
 function setupAuthListener(){
 
 if(authListenerStarted)
-
 return;
 
 authListenerStarted=true;
 
 sb.auth.onAuthStateChange(
-
 async(event,session)=>{
 
 if(session?.user){
 
-currentUser=
-
-session.user;
+currentUser=session.user;
 
 try{
 
@@ -8607,118 +5386,79 @@ console.error(e);
 }else{
 
 currentUser=null;
-
 currentProfile=null;
 
-$("mainDashboard").style.display=
-
-"none";
-
-$("authLanding").style.display=
-
-"flex";
+$("mainDashboard").style.display="none";
+$("authLanding").style.display="flex";
 
 }
 
 }
-
 );
 
 }
 
 /* =====================================================
-
    BUTTONS
-
 ===================================================== */
 
 $("loginTab").onclick=()=>{
-
 setAuthMode("login");
-
 };
 
 $("registerTab").onclick=()=>{
-
 setAuthMode("register");
-
 };
 
 $("authBtn").onclick=()=>{
 
 if(authMode==="login")
-
 loginUser();
-
 else
-
 registerUser();
 
 };
 
-$("forgotBtn").onclick=
-
-resetPassword;
+$("forgotBtn").onclick=resetPassword;
 
 $("googleBtn").onclick=
-
 ()=>oauthLogin("google");
 
 $("facebookBtn").onclick=
-
 ()=>oauthLogin("facebook");
 
 $("closeBtn").onclick=
-
 closeModal;
 
 $("modal").addEventListener(
-
 "click",
-
 e=>{
-
 if(e.target===$("modal"))
-
 closeModal();
-
 }
-
 );
 
 $("homeNav").onclick=()=>{
 
 document
-
 .querySelectorAll(".nav button")
-
 .forEach(x=>
-
 x.classList.remove("active")
-
 );
 
-$("homeNav")
-
-.classList.add("active");
+$("homeNav").classList.add("active");
 
 };
 
 $("walletNav").onclick=()=>{
 
 document
-
 .querySelectorAll(".nav button")
-
 .forEach(x=>
-
 x.classList.remove("active")
-
 );
 
-$("walletNav")
-
-.classList.add("active");
+$("walletNav").classList.add("active");
 
 openWallet();
 
@@ -8727,25 +5467,16 @@ openWallet();
 $("startNav").onclick=()=>{
 
 document
-
 .querySelectorAll(".nav button")
-
 .forEach(x=>
-
 x.classList.remove("active")
-
 );
 
-$("startNav")
-
-.classList.add("active");
+$("startNav").classList.add("active");
 
 window.scrollTo({
-
 top:0,
-
 behavior:"smooth"
-
 });
 
 };
@@ -8753,18 +5484,12 @@ behavior:"smooth"
 $("teamNav").onclick=()=>{
 
 document
-
 .querySelectorAll(".nav button")
-
 .forEach(x=>
-
 x.classList.remove("active")
-
 );
 
-$("teamNav")
-
-.classList.add("active");
+$("teamNav").classList.add("active");
 
 openTeam();
 
@@ -8773,57 +5498,33 @@ openTeam();
 $("profileNav").onclick=()=>{
 
 document
-
 .querySelectorAll(".nav button")
-
 .forEach(x=>
-
 x.classList.remove("active")
-
 );
 
-$("profileNav")
-
-.classList.add("active");
+$("profileNav").classList.add("active");
 
 openProfile();
 
 };
 
-$("depositBtn").onclick=
-
-openDeposit;
-
-$("withdrawBtn").onclick=
-
-openWithdraw;
-
-$("referBtn").onclick=
-
-openRefer;
-
-$("historyBtn").onclick=
-
-openHistory;
-
-$("rewardBtn").onclick=
-
-claimReward;
+$("depositBtn").onclick=openDeposit;
+$("withdrawBtn").onclick=openWithdraw;
+$("referBtn").onclick=openRefer;
+$("historyBtn").onclick=openHistory;
+$("rewardBtn").onclick=claimReward;
 
 $("langBtn").onclick=()=>{
 
 alert(
-
 "English / বাংলা language system পরে আরও customize করা যাবে।"
-
 );
 
 };
 
 /* =====================================================
-
    START
-
 ===================================================== */
 
 async function startApp(){
@@ -8839,5 +5540,4 @@ startApp();
 </script>
 
 </body>
-
 </html>
