@@ -3756,207 +3756,639 @@ $("mainDashboard").style.display=
 
 async function loadTasks(){
 
-const grid=
+  const grid = $("taskGrid");
 
-$("taskGrid");
+  grid.innerHTML =
+    '<div class="loading">Task লোড হচ্ছে...</div>';
 
-grid.innerHTML=
+  try{
 
-'<div class="loading">Task লোড হচ্ছে...</div>';
+    /* =========================
+       LOAD ACTIVE TASKS
+    ========================= */
 
-try{
+    const {
+      data: tasks,
+      error: taskError
+    } = await sb
+      .from("tasks")
+      .select("*")
+      .eq("active", true)
+      .order("id", { ascending:true });
 
-const {
+    if(taskError) throw taskError;
 
-data,
+    const allTasks = tasks || [];
 
-error
+    /* =========================
+       NORMAL TASKS
+       vip_level = 0 / null
+    ========================= */
 
-}=await sb
+    const normalTasks = allTasks.filter(task =>
+      Number(task.vip_level || 0) === 0
+    );
 
-.from("tasks")
+    /* =========================
+       VIP TASKS
+    ========================= */
 
-.select("*")
+    const vipTasks = allTasks.filter(task =>
+      Number(task.vip_level || 0) > 0
+    );
 
-.eq("active",true)
+    /* =========================
+       LOAD CURRENT VIP
+    ========================= */
 
-.order("id",{ascending:true});
+    let currentVip = 0;
+    let dailyLimit = 0;
 
-if(error)
+    if(currentUser){
 
-throw error;
+      /* Approved Deposit */
 
-if(!data?.length){
+      const {
+        data: deposits,
+        error: depositError
+      } = await sb
+        .from("deposits")
+        .select("amount")
+        .eq("user_id", currentUser.id)
+        .eq("status","approved");
 
-grid.innerHTML=
+      if(depositError) throw depositError;
 
-'<div class="empty">এখন কোনো Task নেই।</div>';
+      const approvedDeposit =
+        (deposits || []).reduce(
+          (sum,row) =>
+            sum + Number(row.amount || 0),
+          0
+        );
 
-return;
+      /* VIP Packages */
+
+      const {
+        data: packages,
+        error: vipError
+      } = await sb
+        .from("vip_packages")
+        .select(
+          "level,min_deposit,daily_reward_limit,active"
+        )
+        .eq("active",true)
+        .gt("level",0)
+        .order("level",{ascending:true});
+
+      if(vipError) throw vipError;
+
+      const availablePackages =
+        packages || [];
+
+      availablePackages.forEach(pkg=>{
+
+        if(
+          approvedDeposit >=
+          Number(pkg.min_deposit || 0)
+        ){
+
+          if(
+            Number(pkg.level) >
+            currentVip
+          ){
+            currentVip =
+              Number(pkg.level);
+          }
+
+        }
+
+      });
+
+      const currentPackage =
+        availablePackages.find(
+          pkg =>
+            Number(pkg.level) ===
+            currentVip
+        );
+
+      if(currentPackage){
+
+        dailyLimit =
+          Number(
+            currentPackage.daily_reward_limit || 0
+          );
+
+      }
+
+    }
+
+    /* =========================
+       LOAD TODAY'S COMPLETIONS
+    ========================= */
+
+    let todayCompletions = [];
+
+    if(currentUser){
+
+      const {
+        data: completions,
+        error: completionError
+      } = await sb
+        .from("task_completions")
+        .select(
+          "task_id,reward,created_at"
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .order(
+          "created_at",
+          {ascending:false}
+        )
+        .limit(100);
+
+      if(completionError)
+        throw completionError;
+
+      /*
+       * Bangladesh date check
+       */
+
+      const todayBD =
+        new Intl.DateTimeFormat(
+          "en-CA",
+          {
+            timeZone:"Asia/Dhaka",
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit"
+          }
+        ).format(new Date());
+
+      todayCompletions =
+        (completions || []).filter(row=>{
+
+          const rowDate =
+            new Intl.DateTimeFormat(
+              "en-CA",
+              {
+                timeZone:"Asia/Dhaka",
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit"
+              }
+            ).format(
+              new Date(row.created_at)
+            );
+
+          return rowDate === todayBD;
+
+        });
+
+    }
+
+    /* =========================
+       VIP TODAY STATS
+    ========================= */
+
+    let vipTodayCount = 0;
+    let vipTodayReward = 0;
+
+    if(currentVip > 0){
+
+      const vipTaskIds =
+        new Set(
+          vipTasks
+            .filter(
+              task =>
+                Number(task.vip_level) ===
+                currentVip
+            )
+            .map(task =>
+              Number(task.id)
+            )
+        );
+
+      todayCompletions.forEach(row=>{
+
+        if(
+          vipTaskIds.has(
+            Number(row.task_id)
+          )
+        ){
+
+          vipTodayCount++;
+
+          vipTodayReward +=
+            Number(row.reward || 0);
+
+        }
+
+      });
+
+    }
+
+    /* =========================
+       NORMAL TASK HTML
+    ========================= */
+
+    let html = "";
+
+    if(normalTasks.length){
+
+      normalTasks.forEach(task=>{
+
+        html += `
+
+          <div class="task-card">
+
+            <div class="task-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+
+            <div class="task-info">
+
+              <b>
+                ${esc(task.title || "Task")}
+              </b>
+
+              <small>
+                ${esc(
+                  task.description ||
+                  "Task সম্পন্ন করুন"
+                )}
+              </small>
+
+              <br>
+
+              <span class="task-reward">
+                ৳${money(task.reward)}
+              </span>
+
+              <br>
+
+              <button
+                class="task-btn"
+                data-task-id="${task.id}">
+                Start Task
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+    }else{
+
+      html += `
+        <div class="empty">
+          এখন কোনো Normal Task নেই।
+        </div>
+      `;
+
+    }
+
+    /* =========================
+       VIP TASK SECTION
+    ========================= */
+
+    html += `
+
+      <div
+        style="
+          grid-column:1/-1;
+          margin-top:18px;
+          padding:16px;
+          border-radius:18px;
+          background:rgba(57,255,136,.07);
+          border:1px solid rgba(57,255,136,.20);
+        "
+      >
+
+        <div
+          style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:10px;
+            margin-bottom:12px;
+          "
+        >
+
+          <div>
+
+            <b
+              style="
+                font-size:18px;
+              "
+            >
+              👑 VIP Tasks
+            </b>
+
+            <small
+              style="
+                display:block;
+                margin-top:4px;
+                opacity:.75;
+              "
+            >
+              VIP ${currentVip > 0 ? currentVip : "Locked"}
+            </small>
+
+          </div>
+
+          ${
+            currentVip > 0
+            ? `
+              <div
+                style="
+                  text-align:right;
+                  font-size:12px;
+                "
+              >
+                <div>
+                  ${vipTodayCount}/6 Tasks
+                </div>
+
+                <div>
+                  ৳${money(vipTodayReward)}
+                  /
+                  ৳${money(dailyLimit)}
+                </div>
+              </div>
+            `
+            : `
+              <div
+                style="
+                  font-size:12px;
+                  opacity:.7;
+                "
+              >
+                🔒 Locked
+              </div>
+            `
+          }
+
+        </div>
+
+    `;
+
+    /* =========================
+       NO VIP
+    ========================= */
+
+    if(currentVip <= 0){
+
+      html += `
+
+        <div
+          class="empty"
+          style="
+            margin:0;
+            text-align:center;
+          "
+        >
+
+          🔒 VIP Task ব্যবহার করতে
+          একটি সক্রিয় VIP Level প্রয়োজন।
+
+        </div>
+
+      `;
+
+    }else{
+
+      const myVipTasks =
+        vipTasks.filter(task =>
+          Number(task.vip_level) ===
+          currentVip
+        );
+
+      if(!myVipTasks.length){
+
+        html += `
+
+          <div
+            class="empty"
+            style="margin:0;"
+          >
+            VIP ${currentVip}-এর কোনো Task নেই।
+          </div>
+
+        `;
+
+      }else{
+
+        myVipTasks.forEach(task=>{
+
+          const completedToday =
+            todayCompletions.some(
+              row =>
+                Number(row.task_id) ===
+                Number(task.id)
+            );
+
+          const sixLimitReached =
+            vipTodayCount >= 6;
+
+          const rewardLimitReached =
+            dailyLimit > 0 &&
+            (
+              vipTodayReward +
+              Number(task.reward || 0)
+            ) > dailyLimit;
+
+          const disabled =
+            completedToday ||
+            sixLimitReached ||
+            rewardLimitReached;
+
+          let buttonText =
+            "Start VIP Task";
+
+          if(completedToday){
+
+            buttonText =
+              "✓ আজ Completed";
+
+          }else if(sixLimitReached){
+
+            buttonText =
+              "আজকের Limit শেষ";
+
+          }else if(rewardLimitReached){
+
+            buttonText =
+              "Daily Reward Limit";
+
+          }
+
+          html += `
+
+            <div
+              class="task-card"
+              style="
+                border-color:
+                  rgba(57,255,136,.35);
+              "
+            >
+
+              <div
+                class="task-icon"
+                style="
+                  color:#39ff88;
+                "
+              >
+                <i class="fa-solid fa-crown"></i>
+              </div>
+
+              <div class="task-info">
+
+                <b>
+                  ${esc(
+                    task.title ||
+                    "VIP Task"
+                  )}
+                </b>
+
+                <small>
+                  ${esc(
+                    task.description ||
+                    "VIP Task সম্পন্ন করুন"
+                  )}
+                </small>
+
+                <br>
+
+                <span class="task-reward">
+                  ৳${money(task.reward)}
+                </span>
+
+                <small
+                  style="
+                    display:block;
+                    margin-top:4px;
+                  "
+                >
+                  VIP ${currentVip}
+                </small>
+
+                <br>
+
+                <button
+                  class="task-btn"
+                  data-vip-task-id="${task.id}"
+                  ${disabled ? "disabled" : ""}
+                  style="
+                    ${
+                      disabled
+                      ? "opacity:.55;cursor:not-allowed;"
+                      : ""
+                    }
+                  "
+                >
+                  ${buttonText}
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        });
+
+      }
+
+    }
+
+    html += `</div>`;
+
+    /* =========================
+       RENDER
+    ========================= */
+
+    grid.innerHTML = html;
+
+    /* =========================
+       NORMAL TASK BUTTONS
+    ========================= */
+
+    grid
+      .querySelectorAll(
+        ".task-btn[data-task-id]"
+      )
+      .forEach(btn=>{
+
+        const task =
+          allTasks.find(
+            x =>
+              String(x.id) ===
+              String(
+                btn.dataset.taskId
+              )
+          );
+
+        if(task){
+
+          btn.onclick =
+            () => startTask(task);
+
+        }
+
+      });
+
+    /* =========================
+       VIP TASK BUTTONS
+    ========================= */
+
+    grid
+      .querySelectorAll(
+        ".task-btn[data-vip-task-id]"
+      )
+      .forEach(btn=>{
+
+        const task =
+          allTasks.find(
+            x =>
+              String(x.id) ===
+              String(
+                btn.dataset.vipTaskId
+              )
+          );
+
+        if(task){
+
+          btn.onclick =
+            () => startTask(task);
+
+        }
+
+      });
+
+  }catch(e){
+
+    grid.innerHTML = `
+
+      <div class="empty">
+
+        Task load failed:<br>
+
+        ${esc(
+          errorText(e)
+        )}
+
+      </div>
+
+    `;
+
+  }
 
 }
-
-grid.innerHTML="";
-
-data.forEach(task=>{
-
-const div=
-
-document.createElement("div");
-
-div.className=
-
-"task-card";
-
-div.innerHTML=`
-
-<div class="task-icon">
-
-<i class="fa-solid fa-bolt"></i>
-
-</div>
-
-<div class="task-info">
-
-<b>
-
-${esc(task.title||"Task")}
-
-</b>
-
-<small>
-
-${esc(
-
-task.description||
-
-"Task সম্পন্ন করুন"
-
-)}
-
-</small>
-
-<br>
-
-<span class="task-reward">
-
-৳${money(task.reward)}
-
-</span>
-
-<br>
-
-<button class="task-btn">
-
-Start Task
-
-</button>
-
-</div>
-
-`;
-
-div.querySelector(
-
-".task-btn"
-
-).onclick=
-
-()=>startTask(task);
-
-grid.appendChild(div);
-
-});
-
-}catch(e){
-
-grid.innerHTML=`
-
-<div class="empty">
-
-Task load failed:<br>
-
-${esc(errorText(e))}
-
-</div>
-
-`;
-
-}
-
-}
-
-/* START TASK */
-
-function startTask(task){
-
-if(!currentUser){
-
-alert(
-
-"আগে Login করুন।"
-
-);
-
-return;
-
-}
-
-if(taskTimer)
-
-clearInterval(taskTimer);
-
-currentTask=task;
-
-$("taskTitle").textContent=
-
-task.title||"Task চলছে";
-
-$("countdown").textContent="3";
-
-$("progressBar").style.width=
-
-"0%";
-
-$("rewardBtn").style.display=
-
-"none";
-
-$("taskModal").style.display=
-
-"flex";
-
-let n=3;
-
-taskTimer=setInterval(()=>{
-
-n--;
-
-$("countdown").textContent=n;
-
-$("progressBar").style.width=
-
-((3-n)/3*100)+"%";
-
-if(n<=0){
-
-clearInterval(taskTimer);
-
-taskTimer=null;
-
-$("countdown").textContent="✓";
-
-$("rewardBtn").style.display=
-
-"block";
-
-}
-
-},1000);
-
-}
-
-/* CLAIM */
 
 async function claimReward(){
 
