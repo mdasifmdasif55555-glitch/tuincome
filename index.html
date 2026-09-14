@@ -5538,6 +5538,883 @@ await checkSession();
 startApp();
 
 </script>
+<script>
+/* =====================================================
+   TUINCOME v7
+   ADMIN USER MESSAGE / NOTE SYSTEM
+===================================================== */
 
+(function(){
+
+"use strict";
+
+
+/* =====================================================
+   USER PROFILE — ADMIN MESSAGE
+===================================================== */
+
+const originalOpenProfile = window.openProfile;
+
+window.openProfile = async function(){
+
+    await originalOpenProfile();
+
+    try{
+
+        const { data, error } = await sb.rpc(
+            "get_my_admin_note"
+        );
+
+        if(error){
+            console.error("Admin note load failed:", error);
+            return;
+        }
+
+        const note = String(data || "").trim();
+
+        if(!note) return;
+
+        const box = document.createElement("div");
+
+        box.style.marginTop = "14px";
+
+        box.innerHTML = `
+
+        <div
+        style="
+        padding:16px;
+        border-radius:16px;
+
+        background:
+        linear-gradient(
+        145deg,
+        rgba(16,35,24,.95),
+        rgba(6,14,9,.98)
+        );
+
+        border:1px solid #39ff8866;
+
+        box-shadow:
+        0 0 20px rgba(57,255,136,.06);
+
+        ">
+
+            <div
+            style="
+            color:#39ff88;
+            font-size:15px;
+            font-weight:900;
+            margin-bottom:9px;
+            ">
+
+                <i class="fa-solid fa-bullhorn"></i>
+                Admin Message
+
+            </div>
+
+            <div
+            style="
+            color:#eafff1;
+            font-size:14px;
+            line-height:1.65;
+            white-space:pre-wrap;
+            word-break:break-word;
+            ">
+
+                ${esc(note)}
+
+            </div>
+
+        </div>
+
+        `;
+
+        $("sheetBody").insertBefore(
+            box,
+            $("sheetBody").firstChild
+        );
+
+    }catch(e){
+
+        console.error(
+            "Admin message error:",
+            e
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   ADMIN CUSTOM MESSAGE CARD
+===================================================== */
+
+const originalLoadAdminPanel =
+    window.loadAdminPanel;
+
+window.loadAdminPanel = async function(){
+
+    await originalLoadAdminPanel();
+
+    if(!isAdmin())
+        return;
+
+    addAdminMessageCard();
+
+};
+
+
+/* =====================================================
+   CREATE ADMIN MESSAGE CARD
+===================================================== */
+
+function addAdminMessageCard(){
+
+    const body = $("sheetBody");
+
+    if(!body)
+        return;
+
+    /* already added */
+    if(
+        document.getElementById(
+            "adminCustomMessageCard"
+        )
+    )
+        return;
+
+
+    const card =
+    document.createElement("div");
+
+    card.id =
+        "adminCustomMessageCard";
+
+    card.className =
+        "card";
+
+    card.style.marginTop =
+        "13px";
+
+
+    card.innerHTML = `
+
+        <h3>
+
+            <i
+            class="fa-solid fa-bullhorn"
+            style="color:#39ff88">
+            </i>
+
+            User Account Message
+
+        </h3>
+
+        <div
+        style="
+        color:#789184;
+        font-size:12px;
+        line-height:1.5;
+        margin-bottom:12px;
+        ">
+
+            এখান থেকে যেকোনো User-এর
+            Account-এ নিজের মতো Message/Note
+            লিখে দিতে পারবেন।
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Select User
+            </label>
+
+            <select id="adminNoteUserSelect">
+
+                <option value="">
+                    User নির্বাচন করুন
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Admin Message
+            </label>
+
+            <textarea
+            id="adminUserNote"
+            maxlength="5000"
+            placeholder="User-এর জন্য Message লিখুন..."
+            style="
+            width:100%;
+            min-height:130px;
+            resize:vertical;
+            padding:13px;
+            border-radius:12px;
+            border:1px solid #29422f;
+            outline:none;
+            background:#050d08;
+            color:#fff;
+            font-family:inherit;
+            line-height:1.5;
+            "
+            ></textarea>
+
+            <div
+            style="
+            text-align:right;
+            color:#657c6e;
+            font-size:10px;
+            margin-top:5px;
+            ">
+
+                সর্বোচ্চ 5000 characters
+
+            </div>
+
+        </div>
+
+
+        <button
+        class="primary"
+        id="saveAdminUserNoteBtn">
+
+            <i class="fa-solid fa-floppy-disk"></i>
+
+            Save Message
+
+        </button>
+
+    `;
+
+
+    /*
+       User Management-এর আগে Message Card
+       দেখানো হবে
+    */
+
+    const cards =
+        body.querySelectorAll(".card");
+
+    if(cards.length >= 3){
+
+        body.insertBefore(
+            card,
+            cards[cards.length - 2]
+        );
+
+    }else{
+
+        body.appendChild(card);
+
+    }
+
+
+    loadAdminMessageUsers();
+
+
+    const select =
+        $("adminNoteUserSelect");
+
+    if(select){
+
+        select.addEventListener(
+            "change",
+            loadSelectedAdminNote
+        );
+
+    }
+
+
+    $("saveAdminUserNoteBtn").onclick =
+        saveAdminUserNote;
+
+}
+
+
+/* =====================================================
+   LOAD USERS
+===================================================== */
+
+async function loadAdminMessageUsers(){
+
+    const select =
+        $("adminNoteUserSelect");
+
+    if(!select)
+        return;
+
+
+    select.innerHTML = `
+
+        <option value="">
+            Users লোড হচ্ছে...
+        </option>
+
+    `;
+
+
+    try{
+
+        const {
+            data,
+            error
+        } = await sb
+        .from("profiles")
+        .select(
+            "id,full_name,phone,role,status"
+        )
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        )
+        .limit(500);
+
+
+        if(error)
+            throw error;
+
+
+        select.innerHTML = `
+
+            <option value="">
+                User নির্বাচন করুন
+            </option>
+
+        `;
+
+
+        (data || []).forEach(user=>{
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                user.id;
+
+
+            const name =
+                user.full_name ||
+                "No Name";
+
+
+            const phone =
+                user.phone ||
+                "No Phone";
+
+
+            option.textContent =
+                `${name} — ${phone}`;
+
+
+            select.appendChild(option);
+
+        });
+
+
+    }catch(e){
+
+        console.error(e);
+
+
+        select.innerHTML = `
+
+            <option value="">
+                User load failed
+            </option>
+
+        `;
+
+
+        alert(
+            "User list load failed:\n\n"+
+            errorText(e)
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD SELECTED USER MESSAGE
+===================================================== */
+
+async function loadSelectedAdminNote(){
+
+    const select =
+        $("adminNoteUserSelect");
+
+    const textarea =
+        $("adminUserNote");
+
+
+    if(!select || !textarea)
+        return;
+
+
+    const userId =
+        select.value;
+
+
+    textarea.value = "";
+
+
+    if(!userId)
+        return;
+
+
+    try{
+
+        const {
+            data,
+            error
+        } = await sb.rpc(
+            "admin_get_user_note",
+            {
+                p_user_id:userId
+            }
+        );
+
+
+        if(error)
+            throw error;
+
+
+        textarea.value =
+            data || "";
+
+
+    }catch(e){
+
+        console.error(e);
+
+
+        alert(
+            "Message load failed:\n\n"+
+            errorText(e)
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE USER MESSAGE
+===================================================== */
+
+async function saveAdminUserNote(){
+
+    if(!isAdmin()){
+
+        alert(
+            "Admin access required."
+        );
+
+        return;
+
+    }
+
+
+    const select =
+        $("adminNoteUserSelect");
+
+    const textarea =
+        $("adminUserNote");
+
+    const btn =
+        $("saveAdminUserNoteBtn");
+
+
+    if(!select || !textarea)
+        return;
+
+
+    const userId =
+        select.value;
+
+
+    const note =
+        textarea.value.trim();
+
+
+    if(!userId){
+
+        alert(
+            "আগে একজন User নির্বাচন করুন।"
+        );
+
+        return;
+
+    }
+
+
+    if(note.length > 5000){
+
+        alert(
+            "Message সর্বোচ্চ 5000 characters হতে পারবে।"
+        );
+
+        return;
+
+    }
+
+
+    btn.disabled = true;
+
+    btn.textContent =
+        "Saving...";
+
+
+    try{
+
+        const {
+            data,
+            error
+        } = await sb.rpc(
+            "admin_update_user_note",
+            {
+                p_user_id:userId,
+                p_note:note
+            }
+        );
+
+
+        if(error)
+            throw error;
+
+
+        if(
+            data &&
+            data.success === false
+        ){
+
+            throw new Error(
+                data.message ||
+                "Message save failed"
+            );
+
+        }
+
+
+        alert(
+            "✅ User Message successfully saved."
+        );
+
+
+    }catch(e){
+
+        alert(
+            "Message save failed:\n\n"+
+            errorText(e)
+        );
+
+
+    }finally{
+
+        btn.disabled = false;
+
+        btn.innerHTML = `
+            <i class="fa-solid fa-floppy-disk"></i>
+            Save Message
+        `;
+
+    }
+
+}
+
+
+/* =====================================================
+   ADMIN USER STATUS
+   USE SECURE RPC
+===================================================== */
+
+window.adminUserStatus =
+async function(id,status){
+
+    if(!isAdmin()){
+
+        alert(
+            "Admin access required."
+        );
+
+        return;
+
+    }
+
+
+    if(!id){
+
+        alert(
+            "User ID পাওয়া যায়নি।"
+        );
+
+        return;
+
+    }
+
+
+    if(!confirm(
+        "User status "+
+        status+
+        " করতে চান?"
+    ))
+        return;
+
+
+    try{
+
+        const {
+            data,
+            error
+        } = await sb.rpc(
+            "admin_update_user_status",
+            {
+                p_user_id:id,
+                p_status:status
+            }
+        );
+
+
+        if(error)
+            throw error;
+
+
+        if(
+            data &&
+            data.success === false
+        ){
+
+            throw new Error(
+                data.message ||
+                "Status update failed"
+            );
+
+        }
+
+
+        alert(
+            "✅ User status update হয়েছে।"
+        );
+
+
+        await loadAdminPanel();
+
+
+    }catch(e){
+
+        alert(
+            "User status update failed:\n\n"+
+            errorText(e)
+        );
+
+    }
+
+};
+
+
+/* =====================================================
+   RE-BIND ADMIN PANEL
+===================================================== */
+
+const oldProfileNav =
+    $("profileNav");
+
+if(oldProfileNav){
+
+    oldProfileNav.onclick = ()=>{
+
+        document
+        .querySelectorAll(".nav button")
+        .forEach(x=>
+            x.classList.remove("active")
+        );
+
+        oldProfileNav.classList.add(
+            "active"
+        );
+
+        openProfile();
+
+    };
+
+}
+
+
+/* =====================================================
+   SHOW ADMIN MESSAGE AFTER LOGIN
+===================================================== */
+
+const originalShowDashboard =
+    window.showDashboard;
+
+
+window.showDashboard =
+function(){
+
+    originalShowDashboard();
+
+    setTimeout(
+        loadDashboardAdminMessage,
+        400
+    );
+
+};
+
+
+async function loadDashboardAdminMessage(){
+
+    if(!currentUser)
+        return;
+
+
+    try{
+
+        const {
+            data,
+            error
+        } = await sb.rpc(
+            "get_my_admin_note"
+        );
+
+
+        if(error)
+            return;
+
+
+        const note =
+            String(data || "").trim();
+
+
+        const old =
+            document.getElementById(
+                "dashboardAdminMessage"
+            );
+
+
+        if(old)
+            old.remove();
+
+
+        if(!note)
+            return;
+
+
+        const container =
+            document.querySelector(
+                "#mainDashboard .container"
+            );
+
+
+        if(!container)
+            return;
+
+
+        const box =
+            document.createElement("div");
+
+
+        box.id =
+            "dashboardAdminMessage";
+
+
+        box.className =
+            "card";
+
+
+        box.style.borderColor =
+            "#39ff8866";
+
+
+        box.innerHTML = `
+
+            <div
+            style="
+            color:#39ff88;
+            font-size:15px;
+            font-weight:900;
+            margin-bottom:8px;
+            ">
+
+                <i
+                class="fa-solid fa-bullhorn">
+                </i>
+
+                Admin Message
+
+            </div>
+
+
+            <div
+            style="
+            color:#effff4;
+            font-size:14px;
+            line-height:1.65;
+            white-space:pre-wrap;
+            word-break:break-word;
+            ">
+
+                ${esc(note)}
+
+            </div>
+
+        `;
+
+
+        /*
+           Banner-এর পরে message দেখাবে
+        */
+
+        const banner =
+            container.querySelector(
+                ".banner"
+            );
+
+
+        if(banner){
+
+            banner.after(box);
+
+        }else{
+
+            container.prepend(box);
+
+        }
+
+
+    }catch(e){
+
+        console.error(
+            "Dashboard admin message:",
+            e
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   DONE
+===================================================== */
+
+console.log(
+    "TUINCOME Admin Message System loaded."
+);
+
+})();
+</script>
 </body>
 </html>
