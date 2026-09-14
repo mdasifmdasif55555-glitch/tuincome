@@ -1,6717 +1,3806 @@
 <!doctype html>
-
 <html lang="bn">
-
 <head>
-
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
 <title>TUINCOME v7</title>
-
 <link rel="stylesheet"
-
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
 <style>
-
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-
 :root{
-
 --bg:#020504;--bg2:#06100b;--card:#0b1710;--card2:#101d15;
-
 --green:#39ff88;--green2:#00d66b;--gold:#e2bd4f;--gold2:#ffe58a;
-
 --text:#f3fff7;--muted:#8da698;--border:#29422f;
-
 --gold-border:#685522;--red:#ff5b6e;--yellow:#ffd15c
-
 }
-
 html,body{
-
 margin:0;padding:0;min-height:100%;background:#020504;color:var(--text);
-
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif
-
 }
-
-body{padding-bottom:90px;position:relative;overflow-x:hidden;isolation:isolate}
-
-body::before{
-
-content:"";position:fixed;inset:-30%;z-index:-5;pointer-events:none;
-
-background:
-
-radial-gradient(circle at 10% 10%,rgba(57,255,136,.20),transparent 25%),
-
-radial-gradient(circle at 90% 15%,rgba(226,189,79,.14),transparent 26%),
-
-radial-gradient(circle at 75% 80%,rgba(0,214,107,.13),transparent 30%),
-
-radial-gradient(circle at 20% 85%,rgba(57,255,136,.09),transparent 28%),
-
-linear-gradient(135deg,#010302,#031009,#020604,#06140d,#010302);
-
-background-size:180% 180%,170% 170%,180% 180%,170% 170%,300% 300%;
-
-animation:luxuryBackgroundMove 20s ease-in-out infinite alternate
-
-}
-
-@keyframes luxuryBackgroundMove{
-
-0%{background-position:0 0,100% 0,100% 100%,0 100%,0 50%}
-
-50%{background-position:45% 30%,60% 40%,40% 80%,70% 20%,50% 50%}
-
-100%{background-position:100% 70%,0 80%,20% 0%,100% 90%,100% 50%}
-
-}
-
-body::after{
-
-content:"";position:fixed;width:420px;height:420px;left:-150px;top:15%;
-
-z-index:-4;pointer-events:none;border-radius:50%;
-
-background:radial-gradient(circle,rgba(57,255,136,.19) 0%,rgba(57,255,136,.08) 30%,transparent 72%);
-
-filter:blur(25px);animation:luxuryOrbMove 14s ease-in-out infinite alternate
-
-}
-
-@keyframes luxuryOrbMove{
-
-0%{transform:translate3d(0,0,0) scale(.85)}
-
-35%{transform:translate3d(35vw,15vh,0) scale(1.15)}
-
-70%{transform:translate3d(70vw,45vh,0) scale(.9)}
-
-100%{transform:translate3d(35vw,70vh,0) scale(1.3)}
-
-}
-
 body{
-
+padding-bottom:90px;position:relative;overflow-x:hidden;isolation:isolate;
 background-image:
-
 linear-gradient(rgba(57,255,136,.018) 1px,transparent 1px),
-
 linear-gradient(90deg,rgba(57,255,136,.018) 1px,transparent 1px);
-
-background-size:55px 55px;animation:luxuryGrid 25s linear infinite
-
+background-size:55px 55px;
+animation:luxuryGrid 25s linear infinite
 }
-
+body::before{
+content:"";position:fixed;inset:-30%;z-index:-5;pointer-events:none;
+background:
+radial-gradient(circle at 10% 10%,rgba(57,255,136,.20),transparent 25%),
+radial-gradient(circle at 90% 15%,rgba(226,189,79,.14),transparent 26%),
+radial-gradient(circle at 75% 80%,rgba(0,214,107,.13),transparent 30%),
+radial-gradient(circle at 20% 85%,rgba(57,255,136,.09),transparent 28%),
+linear-gradient(135deg,#010302,#031009,#020604,#06140d,#010302);
+background-size:180% 180%,170% 170%,180% 180%,170% 170%,300% 300%;
+animation:luxuryBackgroundMove 20s ease-in-out infinite alternate
+}
+@keyframes luxuryBackgroundMove{
+0%{background-position:0 0,100% 0,100% 100%,0 100%,0 50%}
+50%{background-position:45% 30%,60% 40%,40% 80%,70% 20%,50% 50%}
+100%{background-position:100% 70%,0 80%,20% 0%,100% 90%,100% 50%}
+}
+body::after{
+content:"";position:fixed;width:420px;height:420px;left:-150px;top:15%;
+z-index:-4;pointer-events:none;border-radius:50%;
+background:radial-gradient(circle,rgba(57,255,136,.19) 0%,rgba(57,255,136,.08) 30%,transparent 72%);
+filter:blur(25px);animation:luxuryOrbMove 14s ease-in-out infinite alternate
+}
+@keyframes luxuryOrbMove{
+0%{transform:translate3d(0,0,0) scale(.85)}
+35%{transform:translate3d(35vw,15vh,0) scale(1.15)}
+70%{transform:translate3d(70vw,45vh,0) scale(.9)}
+100%{transform:translate3d(35vw,70vh,0) scale(1.3)}
+}
 @keyframes luxuryGrid{
-
-0%{background-position:0 0}100%{background-position:55px 55px}
-
+0%{background-position:0 0}
+100%{background-position:55px 55px}
 }
-
 button,input,select,textarea{font:inherit}
-
 button{cursor:pointer}
-
 button:disabled{opacity:.55;cursor:not-allowed}
-
 header{
-
 height:72px;padding:15px 18px;display:flex;align-items:center;
-
 justify-content:space-between;
-
 background:linear-gradient(135deg,rgba(3,12,8,.94),rgba(10,20,13,.90));
-
 backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-
 border-bottom:1px solid var(--gold-border);position:sticky;top:0;z-index:10;
-
 box-shadow:0 5px 25px #0009,0 1px 0 rgba(255,255,255,.03)
-
 }
-
-.logo{color:var(--gold2);font-size:22px;font-weight:950;letter-spacing:1px}
-
-.header-actions{display:flex;align-items:center;gap:8px}
-
+.logo{
+color:var(--gold2);font-size:22px;font-weight:950;letter-spacing:1px
+}
+.header-actions{
+display:flex;align-items:center;gap:8px
+}
 .lang{
-
 border:1px solid #806a2d;background:linear-gradient(135deg,#171307,#251e0b);
-
 color:var(--gold2);border-radius:20px;padding:8px 14px
-
 }
-
 .notify-btn{
-
 position:relative;width:42px;height:42px;border-radius:50%;
-
 border:1px solid #685522;background:#11180f;color:var(--gold2)
-
 }
-
 .notify-count{
-
 position:absolute;right:-2px;top:-2px;min-width:19px;height:19px;
-
 padding:2px 5px;border-radius:20px;background:var(--red);color:white;
-
 font-size:10px;font-weight:900;display:none
-
 }
-
 .auth-landing{
-
 min-height:calc(100vh - 72px);display:flex;align-items:center;
-
 justify-content:center;padding:18px
-
 }
-
 .auth-card{
-
 width:min(430px,100%);padding:24px;border-radius:26px;
-
 background:linear-gradient(145deg,rgba(16,27,20,.90),rgba(6,11,8,.94));
-
 border:1px solid var(--gold-border);box-shadow:0 20px 55px #000b
-
 }
-
 .auth-card h2{text-align:center;margin:0 0 18px;color:var(--gold2)}
-
-.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
-
+.auth-tabs{
+display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px
+}
 .auth-tab{
-
 border:1px solid var(--border);background:#08130e;color:#8fa99b;
-
 padding:11px;border-radius:12px;font-weight:800
-
 }
-
-.auth-tab.active{background:linear-gradient(135deg,#173b26,#2b250d);color:var(--gold2);border-color:#a3822e}
-
+.auth-tab.active{
+background:linear-gradient(135deg,#173b26,#2b250d);
+color:var(--gold2);border-color:#a3822e
+}
 .social-btn{
-
 width:100%;padding:12px;margin-bottom:10px;border-radius:12px;
-
 background:#08130e;color:white;border:1px solid var(--border);font-weight:800
-
 }
-
 .google{color:#ff625b;border-color:#ff625b55}
-
 .facebook{color:#4b9cff;border-color:#4b9cff55}
-
-.divider{display:flex;align-items:center;gap:10px;color:var(--muted);margin:17px 0}
-
-.divider:before,.divider:after{content:"";height:1px;background:var(--border);flex:1}
-
+.divider{
+display:flex;align-items:center;gap:10px;color:var(--muted);margin:17px 0
+}
+.divider:before,.divider:after{
+content:"";height:1px;background:var(--border);flex:1
+}
 .form-group{margin-bottom:13px}
-
-.form-group label{display:block;margin-bottom:6px;color:#b9d1c2;font-size:13px}
-
+.form-group label{
+display:block;margin-bottom:6px;color:#b9d1c2;font-size:13px
+}
 input,select,textarea{
-
 width:100%;padding:13px;border-radius:12px;border:1px solid var(--border);
-
 outline:none;background:rgba(5,13,8,.90);color:white
-
 }
-
 textarea{resize:vertical;min-height:110px;line-height:1.5}
-
 .primary{
-
 width:100%;padding:13px;border:0;border-radius:13px;
-
 background:linear-gradient(135deg,#ffe58a,#bd8f24);
-
 color:#080702;font-weight:950
-
 }
-
 .secondary{
-
 width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);
-
 background:#0b1d13;color:white;font-weight:800
-
 }
-
 .danger{
-
 width:100%;padding:12px;border-radius:12px;border:1px solid #ff5b6e55;
-
 background:#351018;color:#ff9da8;font-weight:800
-
 }
-
 .error-box,.success-box{
-
 display:none;margin-top:14px;padding:12px;border-radius:12px;font-size:13px;
-
 line-height:1.5;white-space:pre-wrap;word-break:break-word
-
 }
-
 .error-box{background:#3a1018;border:1px solid #ff526855;color:#ffb8c0}
-
 .success-box{background:#0c321e;border:1px solid #39ff8855;color:#baffd1}
-
-.small-note{margin-top:14px;color:#718a7c;font-size:11px;text-align:center}
-
+.small-note{
+margin-top:14px;color:#718a7c;font-size:11px;text-align:center
+}
 #mainDashboard{display:none}
-
-.container{width:min(720px,100%);margin:auto;padding:15px 10px;position:relative}
-
+.container{
+width:min(720px,100%);margin:auto;padding:15px 10px;position:relative
+}
 .banner,.card{
-
-border-radius:21px;background:linear-gradient(145deg,rgba(13,28,21,.88),rgba(8,14,10,.93));
-
-border:1px solid #293f2d;box-shadow:0 10px 30px #0007;backdrop-filter:blur(14px)
-
+border-radius:21px;
+background:linear-gradient(145deg,rgba(13,28,21,.88),rgba(8,14,10,.93));
+border:1px solid #293f2d;box-shadow:0 10px 30px #0007;
+backdrop-filter:blur(14px)
 }
-
 .banner{
-
 position:relative;overflow:hidden;padding:22px;border-radius:25px;
-
 background:linear-gradient(145deg,rgba(13,33,22,.91),rgba(6,12,8,.94));
-
 border-color:#625127;margin-bottom:14px
-
 }
-
 .banner small{color:var(--gold2);font-weight:900;letter-spacing:1px}
-
 .banner h1{margin:8px 0;font-size:26px;color:var(--gold2)}
-
 .banner p{margin:0;color:#9ab5a5;line-height:1.5}
-
 .balance-card{
-
 margin-top:16px;padding:20px;border-radius:21px;
-
 background:linear-gradient(145deg,rgba(17,29,21,.88),rgba(7,13,9,.93));
-
 border:1px solid #695728
-
 }
-
 .balance-label{color:#86a292;font-size:13px}
-
 .balance{font-size:38px;font-weight:950;margin-top:4px;color:var(--green)}
-
-.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:14px 0}
-
+.quick{
+display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:14px 0
+}
 .quick-btn{
-
 min-height:82px;border-radius:16px;border:1px solid #39452c;
-
 background:linear-gradient(145deg,rgba(16,27,20,.88),rgba(7,13,9,.93));
-
 color:white;display:flex;flex-direction:column;align-items:center;
-
 justify-content:center;gap:7px
-
 }
-
 .quick-btn i{color:var(--gold2);font-size:21px}
-
 .quick-btn span{font-size:11px}
-
 .card{padding:17px;margin-bottom:13px}
-
 .card h3{margin:0 0 13px}
-
 .task-card{
-
 display:flex;align-items:center;gap:12px;padding:13px;margin-bottom:10px;
-
 border-radius:16px;background:linear-gradient(145deg,rgba(13,27,20,.88),rgba(7,16,11,.93));
-
 border:1px solid #203b29
-
 }
-
 .task-icon{
-
-width:45px;height:45px;border-radius:13px;background:linear-gradient(145deg,#163d28,#0b2015);
-
-display:grid;place-items:center;color:var(--green);border:1px solid #3d704e;flex-shrink:0
-
+width:45px;height:45px;border-radius:13px;
+background:linear-gradient(145deg,#163d28,#0b2015);
+display:grid;place-items:center;color:var(--green);
+border:1px solid #3d704e;flex-shrink:0
 }
-
 .task-info{flex:1;min-width:0}
-
 .task-info b{display:block;margin-bottom:4px}
-
 .task-info small{color:#718c7d}
-
 .task-reward{color:var(--gold2);font-weight:950}
-
 .task-btn{
-
 margin-top:7px;padding:8px 10px;border-radius:10px;border:1px solid #75602b;
-
-background:linear-gradient(135deg,#173b24,#241f0d);color:var(--gold2);font-weight:850
-
+background:linear-gradient(135deg,#173b24,#241f0d);
+color:var(--gold2);font-weight:850
 }
-
 .nav{
-
 position:fixed;left:50%;bottom:0;transform:translateX(-50%);
-
 width:min(720px,100%);height:76px;background:rgba(4,10,7,.90);
-
 backdrop-filter:blur(22px);border:1px solid #4b4325;display:flex;
-
-justify-content:space-around;align-items:center;z-index:15;border-radius:25px 25px 0 0
-
+justify-content:space-around;align-items:center;z-index:15;
+border-radius:25px 25px 0 0
 }
-
 .nav button{border:0;background:none;color:#71887b;font-size:18px}
-
 .nav button span{display:block;font-size:10px;margin-top:4px}
-
 .nav button.active{color:var(--gold2)}
-
 .nav .go{
-
 width:58px;height:58px;border-radius:50%;
-
 background:linear-gradient(135deg,#ffe58a,#b88920);color:#031008;
-
 border:4px solid #07140d;margin-top:-28px
-
 }
-
 .modal{
-
 display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.78);
-
 backdrop-filter:blur(5px);align-items:flex-end;justify-content:center
-
 }
-
 .sheet{
-
 width:min(720px,100%);max-height:90vh;overflow:auto;padding:22px;
-
-border-radius:27px 27px 0 0;background:linear-gradient(145deg,rgba(12,23,17,.97),rgba(5,10,7,.98));
-
+border-radius:27px 27px 0 0;
+background:linear-gradient(145deg,rgba(12,23,17,.97),rgba(5,10,7,.98));
 border:1px solid #655328;box-shadow:0 -15px 50px #000c
-
 }
-
 .close{
-
 float:right;width:35px;height:35px;border-radius:50%;border:1px solid #665329;
-
 background:#171307;color:white;font-size:22px
-
 }
-
 .sheet h2{margin-top:0;color:var(--gold2)}
-
 .info-row{
-
 display:flex;justify-content:space-between;gap:15px;padding:12px 0;
-
 border-bottom:1px solid #273421
-
 }
-
 .info-row span:first-child{color:#789184}
-
 .history-item,.notification-item{
-
 padding:13px;border-radius:13px;background:rgba(7,18,13,.85);
-
 border:1px solid #173526;margin-bottom:9px
-
 }
-
-.notification-item.unread{border-color:#39ff8866;background:rgba(15,45,26,.75)}
-
+.notification-item.unread{
+border-color:#39ff8866;background:rgba(15,45,26,.75)
+}
 .notification-title{font-weight:900;color:#eafff1}
-
-.notification-message{margin-top:5px;color:#a9c2b2;line-height:1.5;font-size:13px}
-
-.notification-date{display:block;margin-top:7px;color:#718c7d;font-size:10px}
-
-.pending{color:#ffd15c}.approved{color:var(--green)}.rejected{color:#ff6878}
-
+.notification-message{
+margin-top:5px;color:#a9c2b2;line-height:1.5;font-size:13px
+}
+.notification-date{
+display:block;margin-top:7px;color:#718c7d;font-size:10px
+}
+.pending{color:#ffd15c}
+.approved{color:var(--green)}
+.rejected{color:#ff6878}
 .loading,.empty{color:#789184;text-align:center;padding:15px}
-
 .checkin-card{
-
 position:relative;overflow:hidden;padding:18px;border-radius:21px;
-
 background:linear-gradient(145deg,rgba(16,40,25,.92),rgba(7,16,11,.96));
-
 border:1px solid #326746;margin-bottom:14px
-
 }
-
-.checkin-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-
+.checkin-top{
+display:flex;align-items:center;justify-content:space-between;gap:10px
+}
 .checkin-icon{
-
 width:48px;height:48px;border-radius:15px;display:grid;place-items:center;
-
 background:#143b24;color:var(--green);font-size:22px
-
 }
-
 .checkin-title{font-weight:950;font-size:18px}
-
 .checkin-sub{font-size:11px;color:#789184;margin-top:4px}
-
 .checkin-status{
-
 padding:7px 10px;border-radius:20px;background:#173d27;
-
 border:1px solid #39ff8855;color:#7dffae;font-size:11px;font-weight:900
-
 }
-
 .checkin-btn{margin-top:14px}
-
 .referral-box{
-
 padding:18px;border-radius:21px;
-
 background:linear-gradient(145deg,rgba(29,25,8,.92),rgba(8,13,9,.96));
-
 border:1px solid #80682a;margin-bottom:14px
-
 }
-
 .referral-code{
-
 font-size:28px;font-weight:950;text-align:center;color:var(--green);
-
 letter-spacing:2px;padding:12px
-
 }
-
 .copy-btn{
-
 padding:9px 13px;border-radius:10px;border:1px solid #75602b;
-
 background:#143b24;color:var(--gold2);font-weight:800
-
 }
-
 .referral-link{
-
 font-size:11px;color:#9ab5a5;word-break:break-all;padding:10px;
-
 background:#06110a;border-radius:10px;margin-top:10px
-
 }
-
 .vip-luxury{
-
 position:relative;overflow:hidden;padding:20px;margin-bottom:15px;border-radius:25px;
-
 background:linear-gradient(145deg,rgba(23,18,7,.97),rgba(8,10,7,.98));
-
 border:1px solid #92742a
-
 }
-
 .vip-crown{text-align:center;font-size:52px}
-
 .vip-current{text-align:center;margin:4px 0;font-size:34px;font-weight:950;color:#f0d36d}
-
 .vip-sub{text-align:center;color:#a99a70;font-size:12px;letter-spacing:1px}
-
-.vip-progress{height:10px;margin:17px 0 7px;background:#292313;border-radius:20px;overflow:hidden}
-
-.vip-progress div{height:100%;background:linear-gradient(90deg,#a77b19,#ffe58a,#bd8e21)}
-
-.vip-progress-text{display:flex;justify-content:space-between;color:#a99a70;font-size:11px}
-
+.vip-progress{
+height:10px;margin:17px 0 7px;background:#292313;
+border-radius:20px;overflow:hidden
+}
+.vip-progress div{
+height:100%;background:linear-gradient(90deg,#a77b19,#ffe58a,#bd8e21)
+}
+.vip-progress-text{
+display:flex;justify-content:space-between;color:#a99a70;font-size:11px
+}
 .vip-level{
-
 position:relative;padding:17px;margin-bottom:11px;border-radius:19px;
-
 background:linear-gradient(145deg,rgba(17,25,16,.90),rgba(8,13,10,.94));
-
 border:1px solid #3c3b27
-
 }
-
 .vip-level.current{border-color:#d2ad42}
-
-.vip-level-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
-
+.vip-level-top{
+display:flex;align-items:center;justify-content:space-between;gap:10px
+}
 .vip-name{font-size:18px;font-weight:950;color:#f0d36d}
-
 .vip-price{font-size:17px;font-weight:900;color:#fff0a0}
-
 .vip-status{margin-top:7px;color:#7e917f;font-size:12px}
-
 .vip-current-badge{
-
 display:inline-block;margin-top:5px;padding:5px 9px;border-radius:20px;
-
-background:linear-gradient(135deg,#d6b344,#715416);color:#130f03;font-size:10px;font-weight:950
-
+background:linear-gradient(135deg,#d6b344,#715416);
+color:#130f03;font-size:10px;font-weight:950
 }
-
 .vip-locked{opacity:.62}
-
-.admin-stat{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
-
-.stat-box{padding:15px;border-radius:15px;background:rgba(7,21,14,.88);border:1px solid var(--border)}
-
+.admin-stat{
+display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px
+}
+.stat-box{
+padding:15px;border-radius:15px;background:rgba(7,21,14,.88);
+border:1px solid var(--border)
+}
 .stat-box small{color:var(--muted)}
-
 .stat-box b{display:block;margin-top:5px;font-size:22px;color:var(--green)}
-
-.admin-item{padding:14px;border:1px solid var(--border);background:rgba(7,20,14,.88);border-radius:15px;margin-bottom:10px}
-
-.admin-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-
-.admin-actions button{padding:9px;border-radius:10px;border:1px solid var(--border);background:#10251a;color:white}
-
-.approve{color:var(--green)!important}.reject{color:#ff7d8c!important}.gold{color:var(--gold2)!important}
-
+.admin-item{
+padding:14px;border:1px solid var(--border);
+background:rgba(7,20,14,.88);border-radius:15px;margin-bottom:10px
+}
+.admin-actions{
+display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px
+}
+.admin-actions button{
+padding:9px;border-radius:10px;border:1px solid var(--border);
+background:#10251a;color:white
+}
+.approve{color:var(--green)!important}
+.reject{color:#ff7d8c!important}
+.gold{color:var(--gold2)!important}
 .badge{
-
-display:inline-block;padding:4px 8px;border-radius:20px;background:linear-gradient(135deg,#5d4915,#201807);
-
+display:inline-block;padding:4px 8px;border-radius:20px;
+background:linear-gradient(135deg,#5d4915,#201807);
 border:1px solid #9a7928;color:#ffe58a;font-size:11px
-
 }
-
 .admin-note-box{
-
-margin-top:14px;padding:16px;border-radius:18px;background:linear-gradient(145deg,rgba(16,35,24,.96),rgba(6,14,9,.98));
-
+margin-top:14px;padding:16px;border-radius:18px;
+background:linear-gradient(145deg,rgba(16,35,24,.96),rgba(6,14,9,.98));
 border:1px solid #39ff8866
-
 }
-
-.admin-note-title{color:#39ff88;font-size:15px;font-weight:900;margin-bottom:9px}
-
-.admin-note-text{color:#eafff1;font-size:14px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
-
+.admin-note-title{
+color:#39ff88;font-size:15px;font-weight:900;margin-bottom:9px
+}
+.admin-note-text{
+color:#eafff1;font-size:14px;line-height:1.7;
+white-space:pre-wrap;word-break:break-word
+}
+/* VIP CONTROL */
+.vip-control-header{
+padding:18px;border-radius:20px;margin-bottom:14px;
+background:linear-gradient(145deg,rgba(35,28,9,.96),rgba(9,14,9,.98));
+border:1px solid #8c7029
+}
+.vip-control-title{
+font-size:22px;font-weight:950;color:var(--gold2)
+}
+.vip-control-sub{
+font-size:12px;color:#9aab9f;margin-top:5px;line-height:1.5
+}
+.vip-control-item{
+padding:17px;margin-bottom:12px;border-radius:20px;
+background:linear-gradient(145deg,rgba(13,29,20,.95),rgba(6,12,8,.98));
+border:1px solid #304a36
+}
+.vip-control-item.active{
+border-color:#b28b32
+}
+.vip-control-top{
+display:flex;align-items:center;justify-content:space-between;
+gap:10px;margin-bottom:14px
+}
+.vip-control-name{
+font-size:20px;font-weight:950;color:var(--gold2)
+}
+.vip-control-level{
+font-size:11px;color:#789184;margin-top:3px
+}
+.vip-switch{
+display:flex;align-items:center;gap:8px;
+padding:7px 10px;border-radius:20px;
+background:#102619;border:1px solid #294d36;
+font-size:11px;color:#9bb8a5
+}
+.vip-switch input{
+width:18px;height:18px;padding:0;accent-color:#39ff88
+}
+.vip-control-grid{
+display:grid;grid-template-columns:1fr 1fr;gap:10px
+}
+.vip-control-save{
+margin-top:12px
+}
+.vip-users-box{
+margin-top:8px;padding:12px;border-radius:13px;
+background:rgba(57,255,136,.05);
+border:1px solid rgba(57,255,136,.12);
+font-size:11px;color:#8da698
+}
 .task-modal{
-
 display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.84);
-
 backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px
-
 }
-
 .task-box{
-
 width:min(400px,100%);padding:25px;border-radius:24px;text-align:center;
-
 background:rgba(9,23,15,.97);border:1px solid #386b48
-
 }
-
-.countdown{font-size:58px;font-weight:950;color:var(--green);margin:15px}
-
-.progress{height:7px;border-radius:10px;background:#183022;overflow:hidden;margin-bottom:18px}
-
-.progress div{height:100%;width:0;background:linear-gradient(90deg,#00d66b,#39ff88,#ffe58a);transition:width 1s linear}
-
-@media(max-width:600px){.quick{grid-template-columns:repeat(4,1fr)}}
-
-@media(max-width:360px){.quick{grid-template-columns:repeat(2,1fr)}}
-
+.countdown{
+font-size:58px;font-weight:950;color:var(--green);margin:15px
+}
+.progress{
+height:7px;border-radius:10px;background:#183022;overflow:hidden;margin-bottom:18px
+}
+.progress div{
+height:100%;width:0;
+background:linear-gradient(90deg,#00d66b,#39ff88,#ffe58a);
+transition:width 1s linear
+}
+@media(max-width:600px){
+.quick{grid-template-columns:repeat(4,1fr)}
+.vip-control-grid{grid-template-columns:1fr}
+}
+@media(max-width:360px){
+.quick{grid-template-columns:repeat(2,1fr)}
+}
 </style>
-
 </head>
-
 <body>
-
 <header>
-
 <div class="logo">▣ TUINCOME</div>
-
 <div class="header-actions">
-
 <button class="notify-btn" id="notificationBtn" title="Notifications">
-
 <i class="fa-solid fa-bell"></i>
-
 <span class="notify-count" id="notificationCount">0</span>
-
 </button>
-
 <button class="lang" id="langBtn">🌐 EN</button>
-
 </div>
-
 </header>
-
 <!-- AUTH -->
-
 <section class="auth-landing" id="authLanding">
-
 <div class="auth-card">
-
 <h2 id="authTitle">লগইন করুন</h2>
-
 <div class="auth-tabs">
-
 <button class="auth-tab active" id="loginTab">Login</button>
-
 <button class="auth-tab" id="registerTab">Register</button>
-
 </div>
-
 <button class="social-btn google" id="googleBtn">
-
 <i class="fa-brands fa-google"></i>
-
 Continue with Google
-
 </button>
-
 <button class="social-btn facebook" id="facebookBtn">
-
 <i class="fa-brands fa-facebook"></i>
-
 Continue with Facebook
-
 </button>
-
 <div class="divider">অথবা</div>
-
 <div id="registerFields" style="display:none">
-
 <div class="form-group">
-
 <label>আপনার নাম</label>
-
 <input id="name" type="text" placeholder="পুরো নাম">
-
 </div>
-
 <div class="form-group">
-
 <label>মোবাইল নম্বর</label>
-
-<input id="phone" type="tel" inputmode="numeric" maxlength="11" placeholder="01XXXXXXXXX">
-
+<input id="phone" type="tel" inputmode="numeric"
+maxlength="11" placeholder="01XXXXXXXXX">
 </div>
-
 </div>
-
 <div class="form-group">
-
 <label>Gmail / Email</label>
-
 <input id="email" type="email" placeholder="example@gmail.com">
-
 </div>
-
 <div class="form-group">
-
 <label>Password</label>
-
 <input id="password" type="password" placeholder="কমপক্ষে ৬ অক্ষর">
-
 </div>
-
 <button class="primary" id="authBtn">Login</button>
-
 <button id="forgotBtn"
-
 style="width:100%;margin-top:12px;background:none;border:0;color:#8db39c">
-
 Password ভুলে গেছেন?
-
 </button>
-
 <div class="error-box" id="errorBox"></div>
-
 <div class="success-box" id="successBox"></div>
-
 <div class="small-note">
-
 TUINCOME Account System<br>
-
 Supabase Authentication
-
 </div>
-
 </div>
-
 </section>
-
 <!-- DASHBOARD -->
-
 <section id="mainDashboard">
-
 <div class="container">
-
 <div class="banner">
-
 <small>TUINCOME v7 • PREMIUM</small>
-
 <h1>স্বাগতম, <span id="welcomeName">User</span> 👋</h1>
-
 <p>
-
 VIP TASK ব্যবহার করলে আপনার অ্যাকাউন্টের নির্ধারিত Task ও Reward অনুযায়ী
-
 অতিরিক্ত Reward পাওয়ার সুযোগ থাকতে পারে।
-
 </p>
-
 <div class="balance-card">
-
 <div class="balance-label">বর্তমান ব্যালেন্স</div>
-
 <div class="balance">৳<span id="balance">0.00</span></div>
-
 </div>
-
 </div>
-
 <!-- DAILY CHECK-IN -->
-
 <div class="checkin-card">
-
 <div class="checkin-top">
-
 <div style="display:flex;align-items:center;gap:12px">
-
 <div class="checkin-icon">
-
 <i class="fa-solid fa-calendar-check"></i>
-
 </div>
-
 <div>
-
 <div class="checkin-title">Daily Check-in</div>
-
 <div class="checkin-sub" id="checkinSub">
-
 প্রতিদিন Check-in করে Reward পাওয়ার সুযোগ
-
 </div>
-
 </div>
-
 </div>
-
 <div class="checkin-status" id="checkinStatus">
-
 Checking...
-
 </div>
-
 </div>
-
 <button class="primary checkin-btn" id="checkinBtn">
-
 📅 আজকের Check-in
-
 </button>
-
 </div>
-
-<!-- REFERRAL QUICK CARD -->
-
+<!-- REFERRAL -->
 <div class="referral-box">
-
 <div style="color:#ffe58a;font-weight:900">
-
 <i class="fa-solid fa-users"></i>
-
 Refer & Earn
-
 </div>
-
 <div class="referral-code" id="quickReferralCode">
-
 ------
-
 </div>
-
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-
 <button class="copy-btn" id="quickCopyReferral">
-
 <i class="fa-solid fa-copy"></i> Copy
-
 </button>
-
 <button class="secondary" id="quickReferBtn">
-
 View Referral
-
 </button>
-
 </div>
-
 </div>
-
 <div class="quick">
-
 <button class="quick-btn" id="depositBtn">
-
 <i class="fa-solid fa-circle-plus"></i>
-
 <span>Deposit</span>
-
 </button>
-
 <button class="quick-btn" id="withdrawBtn">
-
 <i class="fa-solid fa-money-bill-transfer"></i>
-
 <span>Withdraw</span>
-
 </button>
-
 <button class="quick-btn" id="referBtn">
-
 <i class="fa-solid fa-user-plus"></i>
-
 <span>Refer</span>
-
 </button>
-
 <button class="quick-btn" id="historyBtn">
-
 <i class="fa-solid fa-clock-rotate-left"></i>
-
 <span>History</span>
-
 </button>
-
 </div>
-
 <div class="card">
-
 <h3>
-
 <i class="fa-solid fa-bolt" style="color:#e2bd4f"></i>
-
 Available Tasks
-
 </h3>
-
 <div id="taskGrid">
-
 <div class="loading">Task লোড হচ্ছে...</div>
-
 </div>
-
 </div>
-
 </div>
-
 <nav class="nav">
-
 <button class="active" id="homeNav">
-
 <i class="fa-solid fa-house"></i>
-
 <span>হোম</span>
-
 </button>
-
 <button id="walletNav">
-
 <i class="fa-solid fa-wallet"></i>
-
 <span>Wallet</span>
-
 </button>
-
 <button class="go" id="startNav">
-
 <i class="fa-solid fa-bolt"></i>
-
 </button>
-
 <button id="teamNav">
-
 <i class="fa-solid fa-crown"></i>
-
 <span>VIP</span>
-
 </button>
-
 <button id="profileNav">
-
 <i class="fa-solid fa-user"></i>
-
 <span>Profile</span>
-
 </button>
-
 </nav>
-
 </section>
-
 <!-- SHEET -->
-
 <div class="modal" id="modal">
-
 <div class="sheet">
-
 <button class="close" id="closeBtn">×</button>
-
 <h2 id="sheetTitle">TUINCOME</h2>
-
 <div id="sheetBody"></div>
-
 </div>
-
 </div>
-
 <!-- TASK MODAL -->
-
 <div class="task-modal" id="taskModal">
-
 <div class="task-box">
-
 <div style="font-size:34px">⚡</div>
-
 <h2 id="taskTitle">Task চলছে</h2>
-
 <p style="color:#819b8d">
-
 ৩ সেকেন্ড অপেক্ষা করুন
-
 </p>
-
 <div class="countdown" id="countdown">3</div>
-
 <div class="progress">
-
 <div id="progressBar"></div>
-
 </div>
-
 <button class="primary" id="rewardBtn" style="display:none">
-
 ৳ Reward নিন
-
 </button>
-
 </div>
-
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-
 "use strict";
-
 /* =====================================================
-
    SUPABASE
-
 ===================================================== */
-
 const SUPABASE_URL=
-
 "https://hgribbrofuqtfboaitgi.supabase.co";
-
 const SUPABASE_ANON_KEY=
-
 "sb_publishable_43NuQPUFS7dzMlo4qdLjEA_wZG45-3I";
-
-const sb=
-
-window.supabase.createClient(
-
+const sb=window.supabase.createClient(
 SUPABASE_URL,
-
 SUPABASE_ANON_KEY
-
 );
-
 let currentUser=null;
-
 let currentProfile=null;
-
 let currentTask=null;
-
 let taskTimer=null;
-
 let authMode="login";
-
 let authListenerStarted=false;
-
 /* =====================================================
-
    HELPERS
-
 ===================================================== */
-
 const $=id=>document.getElementById(id);
-
 function esc(v){
-
 return String(v??"")
-
 .replaceAll("&","&amp;")
-
 .replaceAll("<","&lt;")
-
 .replaceAll(">","&gt;")
-
 .replaceAll('"',"&quot;")
-
 .replaceAll("'","&#039;");
-
 }
-
 function money(v){
-
 return Number(v||0).toFixed(2);
-
 }
-
 function errorText(e){
-
 return e?.message||e?.error_description||String(e);
-
 }
-
 function statusClass(s){
-
 s=String(s||"").toLowerCase();
-
 if(s==="approved"||s==="completed"||s==="read")
-
 return "approved";
-
 if(s==="rejected")
-
 return "rejected";
-
 return "pending";
-
 }
-
 function showError(t){
-
 $("successBox").style.display="none";
-
 $("errorBox").style.display="block";
-
 $("errorBox").textContent=t;
-
 }
-
 function showSuccess(t){
-
 $("errorBox").style.display="none";
-
 $("successBox").style.display="block";
-
 $("successBox").textContent=t;
-
 }
-
 function clearMessages(){
-
 $("errorBox").style.display="none";
-
 $("successBox").style.display="none";
-
 }
-
 /* =====================================================
-
    AUTH MODE
-
 ===================================================== */
-
 function setAuthMode(mode){
-
 authMode=mode;
-
 clearMessages();
-
 if(mode==="login"){
-
 $("authTitle").textContent="লগইন করুন";
-
 $("loginTab").classList.add("active");
-
 $("registerTab").classList.remove("active");
-
 $("registerFields").style.display="none";
-
 $("authBtn").textContent="Login";
-
 }else{
-
 $("authTitle").textContent="নতুন Account তৈরি করুন";
-
 $("registerTab").classList.add("active");
-
 $("loginTab").classList.remove("active");
-
 $("registerFields").style.display="block";
-
 $("authBtn").textContent="Register";
-
 }
-
 }
-
 /* =====================================================
-
    PROFILE
-
 ===================================================== */
-
 async function loadProfile(){
-
 if(!currentUser)
-
 throw new Error("LOGIN_REQUIRED");
-
 const {data,error}=await sb
-
 .from("profiles")
-
 .select("*")
-
 .eq("id",currentUser.id)
-
 .maybeSingle();
-
 if(error) throw error;
-
 if(!data)
-
 throw new Error("PROFILE_NOT_FOUND");
-
 currentProfile=data;
-
 currentProfile.balance=
-
 Number(data.balance||0);
-
 currentProfile.admin_note=
-
 String(data.admin_note||"");
-
 return data;
-
 }
-
 async function refreshProfile(){
-
 if(!currentUser)
-
 return;
-
 try{
-
 await loadProfile();
-
 updateDashboard();
-
 await updateReferralQuickCard();
-
 await updateCheckinStatus();
-
 await updateNotificationCount();
-
 }catch(e){
-
 console.error(e);
-
 }
-
 }
-
 function updateDashboard(){
-
 $("balance").textContent=
-
 money(currentProfile?.balance);
-
 $("welcomeName").textContent=
-
 currentProfile?.full_name||
-
 currentUser?.user_metadata?.full_name||
-
 currentUser?.email?.split("@")[0]||
-
 "User";
-
 loadDashboardAdminNote();
-
 }
-
 /* =====================================================
-
    ADMIN NOTE
-
 ===================================================== */
-
 function loadDashboardAdminNote(){
-
 const old=document.getElementById("dashboardAdminMessage");
-
 if(old) old.remove();
-
 const note=
-
 String(currentProfile?.admin_note||"").trim();
-
 if(!note) return;
-
 const container=
-
 document.querySelector("#mainDashboard .container");
-
 if(!container) return;
-
 const box=document.createElement("div");
-
 box.id="dashboardAdminMessage";
-
 box.className="admin-note-box";
-
 box.innerHTML=`
-
 <div class="admin-note-title">
-
 <i class="fa-solid fa-bullhorn"></i>
-
 Admin Message
-
 </div>
-
 <div class="admin-note-text">
-
 ${esc(note)}
-
 </div>
-
 `;
-
 const banner=container.querySelector(".banner");
-
 if(banner)
-
 banner.after(box);
-
 else
-
 container.prepend(box);
-
 }
-
 /* =====================================================
-
    REGISTER
-
 ===================================================== */
-
 async function registerUser(){
-
 clearMessages();
-
 const name=$("name").value.trim();
-
 const phone=$("phone").value.trim();
-
 const email=$("email").value.trim();
-
 const password=$("password").value;
-
 if(!name){
-
 showError("আপনার নাম দিন।");
-
 return;
-
 }
-
 if(phone&&!/^01[0-9]{9}$/.test(phone)){
-
 showError("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।");
-
 return;
-
 }
-
 if(!email){
-
 showError("Email দিন।");
-
 return;
-
 }
-
 if(password.length<6){
-
 showError("Password কমপক্ষে ৬ অক্ষরের হতে হবে।");
-
 return;
-
 }
-
 $("authBtn").disabled=true;
-
 $("authBtn").textContent="Register হচ্ছে...";
-
 try{
-
 const {data,error}=await sb.auth.signUp({
-
 email,
-
 password,
-
 options:{
-
 data:{
-
 full_name:name,
-
 phone:phone
-
 }
-
 }
-
 });
-
 if(error) throw error;
-
 if(data.session){
-
 currentUser=data.user;
-
 await loadProfile();
-
 showDashboard();
-
 }else{
-
 showSuccess(
-
 "Registration সফল হয়েছে.\n\n"+
-
 "Gmail inbox-এ verification email এলে "+
-
 "Email Verify করে Login করুন।"
-
 );
-
 }
-
 }catch(e){
-
 showError(
-
 "Registration failed:\n\n"+
-
 errorText(e)
-
 );
-
 }finally{
-
 $("authBtn").disabled=false;
-
 $("authBtn").textContent="Register";
-
 }
-
 }
-
 /* =====================================================
-
    LOGIN
-
 ===================================================== */
-
 async function loginUser(){
-
 clearMessages();
-
 const email=$("email").value.trim();
-
 const password=$("password").value;
-
 if(!email){
-
 showError("Email দিন।");
-
 return;
-
 }
-
 if(!password){
-
 showError("Password দিন।");
-
 return;
-
 }
-
 $("authBtn").disabled=true;
-
 $("authBtn").textContent="Login হচ্ছে...";
-
 try{
-
 const {data,error}=await sb.auth.signInWithPassword({
-
 email,
-
 password
-
 });
-
 if(error) throw error;
-
 currentUser=data.user;
-
 await loadProfile();
-
 if(
-
 currentProfile.status &&
-
 currentProfile.status!=="active"
-
 ){
-
 await sb.auth.signOut();
-
 throw new Error(
-
 "আপনার Account বর্তমানে "+
-
 currentProfile.status
-
 );
-
 }
-
 showDashboard();
-
 }catch(e){
-
 showError(
-
 "Login failed:\n\n"+
-
 errorText(e)
-
 );
-
 }finally{
-
 $("authBtn").disabled=false;
-
 $("authBtn").textContent="Login";
-
 }
-
 }
-
 /* =====================================================
-
    DASHBOARD
-
 ===================================================== */
-
 function showDashboard(){
-
 $("authLanding").style.display="none";
-
 $("mainDashboard").style.display="block";
-
 updateDashboard();
-
 loadTasks();
-
 updateReferralQuickCard();
-
 updateCheckinStatus();
-
 updateNotificationCount();
-
 }
-
 /* =====================================================
-
    SESSION
-
 ===================================================== */
-
 async function checkSession(){
-
 try{
-
 const {data,error}=await sb.auth.getSession();
-
 if(error) throw error;
-
 if(!data.session){
-
 $("authLanding").style.display="flex";
-
 $("mainDashboard").style.display="none";
-
 return;
-
 }
-
 currentUser=data.session.user;
-
 await loadProfile();
-
 showDashboard();
-
 }catch(e){
-
 console.error(e);
-
 $("authLanding").style.display="flex";
-
 $("mainDashboard").style.display="none";
-
 }
-
 }
-
 /* =====================================================
-
    TASKS
-
 ===================================================== */
-
 async function loadTasks(){
-
 const grid=$("taskGrid");
-
 grid.innerHTML=
-
 '<div class="loading">Task লোড হচ্ছে...</div>';
-
 try{
-
 const {data:tasks,error:taskError}=await sb
-
 .from("tasks")
-
 .select("*")
-
 .eq("active",true)
-
 .order("id",{ascending:true});
-
 if(taskError) throw taskError;
-
 const allTasks=tasks||[];
-
 const normalTasks=
-
 allTasks.filter(task=>
-
 Number(task.vip_level||0)===0
-
 );
-
 const vipTasks=
-
 allTasks.filter(task=>
-
 Number(task.vip_level||0)>0
-
 );
-
 let currentVip=0;
-
 let dailyLimit=0;
-
 if(currentUser){
-
 const {data:deposits,error:depositError}=await sb
-
 .from("deposits")
-
 .select("amount")
-
 .eq("user_id",currentUser.id)
-
 .eq("status","approved");
-
 if(depositError) throw depositError;
-
 const approvedDeposit=
-
 (deposits||[]).reduce(
-
 (sum,row)=>sum+Number(row.amount||0),0
-
 );
-
 const {data:packages,error:vipError}=await sb
-
 .from("vip_packages")
-
 .select("level,min_deposit,daily_reward_limit,active")
-
 .eq("active",true)
-
 .gt("level",0)
-
 .order("level",{ascending:true});
-
 if(vipError) throw vipError;
-
 (packages||[]).forEach(pkg=>{
-
 if(
-
 approvedDeposit>=Number(pkg.min_deposit||0)
-
 ){
-
 if(Number(pkg.level)>currentVip)
-
 currentVip=Number(pkg.level);
-
 }
-
 });
-
 const currentPackage=
-
 (packages||[]).find(
-
 pkg=>Number(pkg.level)===currentVip
-
 );
-
 if(currentPackage){
-
 dailyLimit=
-
 Number(currentPackage.daily_reward_limit||0);
-
 }
-
 }
-
 let todayCompletions=[];
-
 if(currentUser){
-
 const {data:completions,error:completionError}=await sb
-
 .from("task_completions")
-
 .select("task_id,reward,created_at")
-
 .eq("user_id",currentUser.id)
-
 .order("created_at",{ascending:false})
-
 .limit(100);
-
 if(completionError) throw completionError;
-
 const todayBD=
-
 new Intl.DateTimeFormat(
-
 "en-CA",
-
 {
-
 timeZone:"Asia/Dhaka",
-
 year:"numeric",
-
 month:"2-digit",
-
 day:"2-digit"
-
 }
-
 ).format(new Date());
-
 todayCompletions=
-
 (completions||[]).filter(row=>{
-
 const rowDate=
-
 new Intl.DateTimeFormat(
-
 "en-CA",
-
 {
-
 timeZone:"Asia/Dhaka",
-
 year:"numeric",
-
 month:"2-digit",
-
 day:"2-digit"
-
 }
-
 ).format(new Date(row.created_at));
-
 return rowDate===todayBD;
-
 });
-
 }
-
 let vipTodayCount=0;
-
 let vipTodayReward=0;
-
 if(currentVip>0){
-
 const vipTaskIds=
-
 new Set(
-
 vipTasks
-
-.filter(task=>Number(task.vip_level)===currentVip)
-
-.map(task=>Number(task.id))
-
-);
-
-todayCompletions.forEach(row=>{
-
-if(vipTaskIds.has(Number(row.task_id))){
-
-vipTodayCount++;
-
-vipTodayReward+=Number(row.reward||0);
-
-}
-
-});
-
-}
-
-let html="";
-
-if(normalTasks.length){
-
-normalTasks.forEach(task=>{
-
-html+=`
-
-<div class="task-card">
-
-<div class="task-icon">
-
-<i class="fa-solid fa-bolt"></i>
-
-</div>
-
-<div class="task-info">
-
-<b>${esc(task.title||"Task")}</b>
-
-<small>
-
-${esc(task.description||"Task সম্পন্ন করুন")}
-
-</small>
-
-<br>
-
-<span class="task-reward">
-
-৳${money(task.reward)}
-
-</span>
-
-<br>
-
-<button
-
-class="task-btn"
-
-data-task-id="${esc(task.id)}">
-
-Start Task
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}else{
-
-html+=`
-
-<div class="empty">
-
-এখন কোনো Normal Task নেই।
-
-</div>
-
-`;
-
-}
-
-html+=`
-
-<div
-
-style="
-
-margin-top:18px;
-
-padding:16px;
-
-border-radius:18px;
-
-background:rgba(57,255,136,.07);
-
-border:1px solid rgba(57,255,136,.20);
-
-">
-
-<div
-
-style="
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-gap:10px;
-
-margin-bottom:12px;
-
-">
-
-<div>
-
-<b style="font-size:18px">👑 VIP Tasks</b>
-
-<small style="display:block;margin-top:4px;opacity:.75">
-
-VIP ${currentVip>0?currentVip:"Locked"}
-
-</small>
-
-</div>
-
-${
-
-currentVip>0
-
-?
-
-`
-
-<div style="text-align:right;font-size:12px">
-
-<div>${vipTodayCount}/6 Tasks</div>
-
-<div>৳${money(vipTodayReward)} / ৳${money(dailyLimit)}</div>
-
-</div>
-
-`
-
-:
-
-`
-
-<div style="font-size:12px;opacity:.7">
-
-🔒 Locked
-
-</div>
-
-`
-
-}
-
-</div>
-
-`;
-
-if(currentVip<=0){
-
-html+=`
-
-<div class="empty" style="margin:0;text-align:center">
-
-🔒 VIP Task ব্যবহার করতে একটি সক্রিয় VIP Level প্রয়োজন।
-
-</div>
-
-`;
-
-}else{
-
-const myVipTasks=
-
-vipTasks.filter(task=>
-
+.filter(task=>
 Number(task.vip_level)===currentVip
-
+)
+.map(task=>Number(task.id))
 );
-
-if(!myVipTasks.length){
-
+todayCompletions.forEach(row=>{
+if(vipTaskIds.has(Number(row.task_id))){
+vipTodayCount++;
+vipTodayReward+=Number(row.reward||0);
+}
+});
+}
+let html="";
+if(normalTasks.length){
+normalTasks.forEach(task=>{
 html+=`
-
-<div class="empty">
-
-VIP ${currentVip}-এর কোনো Task নেই।
-
-</div>
-
-`;
-
-}else{
-
-myVipTasks.forEach(task=>{
-
-const completedToday=
-
-todayCompletions.some(
-
-row=>Number(row.task_id)===Number(task.id)
-
-);
-
-const sixLimitReached=vipTodayCount>=6;
-
-const rewardLimitReached=
-
-dailyLimit>0 &&
-
-(vipTodayReward+Number(task.reward||0))>dailyLimit;
-
-const disabled=
-
-completedToday||
-
-sixLimitReached||
-
-rewardLimitReached;
-
-let buttonText="Start VIP Task";
-
-if(completedToday)
-
-buttonText="✓ আজ Completed";
-
-else if(sixLimitReached)
-
-buttonText="আজকের Limit শেষ";
-
-else if(rewardLimitReached)
-
-buttonText="Daily Reward Limit";
-
-html+=`
-
-<div
-
-class="task-card"
-
-style="border-color:rgba(57,255,136,.35)">
-
+<div class="task-card">
 <div class="task-icon">
-
-<i class="fa-solid fa-crown"></i>
-
+<i class="fa-solid fa-bolt"></i>
 </div>
-
 <div class="task-info">
-
-<b>${esc(task.title||"VIP Task")}</b>
-
+<b>${esc(task.title||"Task")}</b>
 <small>
-
-${esc(task.description||"VIP Task সম্পন্ন করুন")}
-
+${esc(task.description||"Task সম্পন্ন করুন")}
 </small>
-
 <br>
-
 <span class="task-reward">
-
 ৳${money(task.reward)}
-
 </span>
-
-<small style="display:block;margin-top:4px">
-
-VIP ${currentVip}
-
-</small>
-
 <br>
-
 <button
-
 class="task-btn"
-
-data-vip-task-id="${esc(task.id)}"
-
-${disabled?"disabled":""}>
-
-${buttonText}
-
+data-task-id="${esc(task.id)}">
+Start Task
 </button>
-
 </div>
-
 </div>
-
 `;
-
 });
-
-}
-
-}
-
-html+=`</div>`;
-
-grid.innerHTML=html;
-
-grid.querySelectorAll(".task-btn[data-task-id]")
-
-.forEach(btn=>{
-
-const task=
-
-allTasks.find(
-
-x=>String(x.id)===String(btn.dataset.taskId)
-
-);
-
-if(task)
-
-btn.onclick=()=>startTask(task);
-
-});
-
-grid.querySelectorAll(".task-btn[data-vip-task-id]")
-
-.forEach(btn=>{
-
-const task=
-
-allTasks.find(
-
-x=>String(x.id)===String(btn.dataset.vipTaskId)
-
-);
-
-if(task)
-
-btn.onclick=()=>startTask(task);
-
-});
-
-}catch(e){
-
-grid.innerHTML=`
-
-<div class="empty">
-
-Task load failed:<br><br>
-
-${esc(errorText(e))}
-
-</div>
-
-`;
-
-}
-
-}
-
-/* =====================================================
-
-   START TASK
-
-===================================================== */
-
-function startTask(task){
-
-if(!currentUser){
-
-alert("আগে Login করুন।");
-
-return;
-
-}
-
-if(taskTimer)
-
-clearInterval(taskTimer);
-
-currentTask=task;
-
-$("taskTitle").textContent=
-
-task.title||"Task চলছে";
-
-$("countdown").textContent="3";
-
-$("progressBar").style.width="0%";
-
-$("rewardBtn").style.display="none";
-
-$("taskModal").style.display="flex";
-
-let n=3;
-
-taskTimer=setInterval(()=>{
-
-n--;
-
-$("countdown").textContent=n;
-
-$("progressBar").style.width=
-
-((3-n)/3*100)+"%";
-
-if(n<=0){
-
-clearInterval(taskTimer);
-
-taskTimer=null;
-
-$("countdown").textContent="✓";
-
-$("rewardBtn").style.display="block";
-
-}
-
-},1000);
-
-}
-
-/* =====================================================
-
-   CLAIM REWARD
-
-===================================================== */
-
-async function claimReward(){
-
-if(!currentUser||!currentTask)
-
-return;
-
-const btn=$("rewardBtn");
-
-btn.disabled=true;
-
-btn.textContent="Saving...";
-
-try{
-
-const {data,error}=await sb.rpc(
-
-"claim_task_reward",
-
-{
-
-p_task_id:currentTask.id
-
-}
-
-);
-
-if(error) throw error;
-
-if(!data?.success)
-
-throw new Error(
-
-data?.message||
-
-"Reward নেওয়া যায়নি।"
-
-);
-
-currentProfile.balance=
-
-Number(data.balance||0);
-
-updateDashboard();
-
-closeTaskModal();
-
-alert(
-
-"Task Complete!\n\n"+
-
-"Reward: ৳"+money(data.reward)+
-
-"\nBalance: ৳"+money(data.balance)
-
-);
-
-await loadTasks();
-
-await updateNotificationCount();
-
-}catch(e){
-
-alert(
-
-"Reward নেওয়া যায়নি:\n\n"+
-
-errorText(e)
-
-);
-
-}finally{
-
-btn.disabled=false;
-
-btn.textContent="৳ Reward নিন";
-
-}
-
-}
-
-function closeTaskModal(){
-
-$("taskModal").style.display="none";
-
-if(taskTimer){
-
-clearInterval(taskTimer);
-
-taskTimer=null;
-
-}
-
-currentTask=null;
-
-}
-
-/* =====================================================
-
-   DAILY CHECK-IN
-
-===================================================== */
-
-/*
-
-IMPORTANT:
-
-Step 4-এর RPC যদি অন্য নামে তৈরি করা থাকে,
-
-এখানে CHECKIN_RPC_NAME পরিবর্তন করুন।
-
-*/
-
-const CHECKIN_RPC_NAME="daily_checkin";
-
-async function updateCheckinStatus(){
-
-if(!currentUser)
-
-return;
-
-$("checkinStatus").textContent="Checking...";
-
-$("checkinBtn").disabled=true;
-
-try{
-
-/*
-
-Database function-এর status check করার জন্য
-
-daily_checkin RPC call করা হচ্ছে।
-
-*/
-
-const {data,error}=await sb.rpc(
-
-CHECKIN_RPC_NAME,
-
-{
-
-p_action:"status"
-
-}
-
-);
-
-if(error)
-
-throw error;
-
-const done=
-
-Boolean(
-
-data?.checked_in||
-
-data?.already_checked_in||
-
-data?.completed||
-
-data?.success===true &&
-
-data?.status==="completed"
-
-);
-
-if(done){
-
-$("checkinStatus").textContent="✓ Checked";
-
-$("checkinSub").textContent="আজকের Check-in সম্পন্ন হয়েছে";
-
-$("checkinBtn").textContent="✓ আজ Completed";
-
-$("checkinBtn").disabled=true;
-
 }else{
-
-$("checkinStatus").textContent="Available";
-
-$("checkinSub").textContent="আজকের Check-in এখনো করা হয়নি";
-
-$("checkinBtn").textContent="📅 আজকের Check-in";
-
-$("checkinBtn").disabled=false;
-
-}
-
-}catch(e){
-
-/*
-
-যদি status action support না করে,
-
-button usable রাখা হচ্ছে।
-
-*/
-
-console.log("Check-in status:",errorText(e));
-
-$("checkinStatus").textContent="Available";
-
-$("checkinSub").textContent="আজকের Check-in করুন";
-
-$("checkinBtn").textContent="📅 আজকের Check-in";
-
-$("checkinBtn").disabled=false;
-
-}
-
-}
-
-async function doDailyCheckin(){
-
-if(!currentUser){
-
-alert("আগে Login করুন।");
-
-return;
-
-}
-
-const btn=$("checkinBtn");
-
-btn.disabled=true;
-
-btn.textContent="Processing...";
-
-try{
-
-const {data,error}=await sb.rpc(
-
-CHECKIN_RPC_NAME,
-
-{
-
-p_action:"checkin"
-
-}
-
-);
-
-if(error)
-
-throw error;
-
-if(data?.success===false)
-
-throw new Error(
-
-data?.message||
-
-"আজকের Check-in করা যায়নি।"
-
-);
-
-const reward=
-
-Number(
-
-data?.reward||
-
-data?.amount||
-
-data?.checkin_reward||
-
-0
-
-);
-
-if(data?.balance!==undefined){
-
-currentProfile.balance=
-
-Number(data.balance||0);
-
-}else{
-
-await loadProfile();
-
-}
-
-updateDashboard();
-
-$("checkinStatus").textContent="✓ Checked";
-
-$("checkinSub").textContent="আজকের Check-in সম্পন্ন হয়েছে";
-
-btn.textContent="✓ আজ Completed";
-
-alert(
-
-"🎉 Daily Check-in সফল!\n\n"+
-
-"Reward: ৳"+money(reward)+
-
-"\nBalance: ৳"+money(currentProfile.balance)
-
-);
-
-await updateNotificationCount();
-
-}catch(e){
-
-alert(
-
-"Daily Check-in failed:\n\n"+
-
-errorText(e)
-
-);
-
-await updateCheckinStatus();
-
-}
-
-}
-
-/* =====================================================
-
-   REFERRAL
-
-===================================================== */
-
-function getReferralLink(){
-
-const code=
-
-currentProfile?.referral_code||"";
-
-return (
-
-window.location.origin+
-
-window.location.pathname+
-
-"?ref="+
-
-encodeURIComponent(code)
-
-);
-
-}
-
-async function getReferralCount(){
-
-if(!currentUser)
-
-return 0;
-
-try{
-
-const {count,error}=await sb
-
-.from("profiles")
-
-.select("id",{count:"exact",head:true})
-
-.eq("referred_by",currentUser.id);
-
-if(error)
-
-throw error;
-
-return count||0;
-
-}catch(e){
-
-console.log("Referral count:",errorText(e));
-
-return 0;
-
-}
-
-}
-
-async function updateReferralQuickCard(){
-
-if(!currentProfile)
-
-return;
-
-$("quickReferralCode").textContent=
-
-currentProfile.referral_code||"------";
-
-}
-
-async function openRefer(){
-
-const code=
-
-currentProfile?.referral_code||"";
-
-const count=
-
-await getReferralCount();
-
-const link=
-
-getReferralLink();
-
-openSheet(
-
-"Refer & Earn",
-
-`
-
-<div class="referral-box">
-
-<div style="color:#ffe58a;font-weight:900">
-
-আপনার Referral Code
-
-</div>
-
-<div class="referral-code">
-
-${esc(code)}
-
-</div>
-
-<div style="text-align:center">
-
-<button class="copy-btn" id="copyReferral">
-
-<i class="fa-solid fa-copy"></i>
-
-Copy Code
-
-</button>
-
-</div>
-
-<div class="info-row">
-
-<span>Total Referral</span>
-
-<b>${count}</b>
-
-</div>
-
-<div style="margin-top:14px;color:#ffe58a;font-weight:800">
-
-Referral Link
-
-</div>
-
-<div class="referral-link">
-
-${esc(link)}
-
-</div>
-
-<button class="secondary" id="copyReferralLink"
-
-style="margin-top:8px">
-
-🔗 Copy Referral Link
-
-</button>
-
-</div>
-
-<div class="card">
-
-<h3>👥 Referral System</h3>
-
-<p style="color:#819b8d;line-height:1.6">
-
-এই Referral Link বা Code বন্ধুদের সাথে শেয়ার করতে পারেন।
-
-আপনার Step 4 Database rules অনুযায়ী eligible referral হলে
-
-referral reward প্রযোজ্য হবে।
-
-</p>
-
-</div>
-
-`
-
-);
-
-$("copyReferral").onclick=async()=>{
-
-try{
-
-await navigator.clipboard.writeText(code);
-
-alert("Referral Code copy হয়েছে।");
-
-}catch(e){
-
-alert("Code: "+code);
-
-}
-
-};
-
-$("copyReferralLink").onclick=async()=>{
-
-try{
-
-await navigator.clipboard.writeText(link);
-
-alert("Referral Link copy হয়েছে।");
-
-}catch(e){
-
-alert(link);
-
-}
-
-};
-
-}
-
-/* =====================================================
-
-   NOTIFICATIONS
-
-===================================================== */
-
-async function getNotifications(){
-
-if(!currentUser)
-
-return [];
-
-try{
-
-const {data,error}=await sb
-
-.from("notifications")
-
-.select("*")
-
-.eq("user_id",currentUser.id)
-
-.order("created_at",{ascending:false})
-
-.limit(50);
-
-if(error)
-
-throw error;
-
-return data||[];
-
-}catch(e){
-
-console.error("Notifications:",error);
-
-return [];
-
-}
-
-}
-
-async function updateNotificationCount(){
-
-if(!currentUser)
-
-return;
-
-try{
-
-const notifications=
-
-await getNotifications();
-
-const unread=
-
-notifications.filter(x=>
-
-!Boolean(
-
-x.is_read||
-
-String(x.status||"").toLowerCase()==="read"
-
-)
-
-).length;
-
-const badge=$("notificationCount");
-
-if(unread>0){
-
-badge.textContent=
-
-unread>99?"99+":String(unread);
-
-badge.style.display="block";
-
-}else{
-
-badge.style.display="none";
-
-}
-
-}catch(e){
-
-console.error(e);
-
-}
-
-}
-
-async function openNotifications(){
-
-openSheet(
-
-"🔔 Notifications",
-
-'<div class="loading">Notifications load হচ্ছে...</div>'
-
-);
-
-const notifications=
-
-await getNotifications();
-
-if(!notifications.length){
-
-$("sheetBody").innerHTML=
-
-`
-
-<div class="empty">
-
-🔔 এখন কোনো Notification নেই।
-
-</div>
-
-`;
-
-return;
-
-}
-
-$("sheetBody").innerHTML=
-
-notifications.map(n=>{
-
-const unread=
-
-!Boolean(
-
-n.is_read||
-
-String(n.status||"").toLowerCase()==="read"
-
-);
-
-const title=
-
-n.title||
-
-n.subject||
-
-"TUINCOME Notification";
-
-const message=
-
-n.message||
-
-n.body||
-
-n.description||
-
-"";
-
-return `
-
-<div
-
-class="notification-item ${unread?"unread":""}"
-
-data-notification-id="${esc(n.id)}">
-
-<div class="notification-title">
-
-${unread?"🔵 ":""}
-
-${esc(title)}
-
-</div>
-
-<div class="notification-message">
-
-${esc(message)}
-
-</div>
-
-<span class="notification-date">
-
-${
-
-n.created_at
-
-?
-
-esc(new Date(n.created_at).toLocaleString())
-
-:
-
-""
-
-}
-
-</span>
-
-${
-
-unread
-
-?
-
-`
-
-<button
-
-class="copy-btn"
-
-style="margin-top:9px"
-
-data-read-id="${esc(n.id)}">
-
-✓ Mark as Read
-
-</button>
-
-`
-
-:
-
-""
-
-}
-
-</div>
-
-`;
-
-}).join("");
-
-$("sheetBody")
-
-.querySelectorAll("[data-read-id]")
-
-.forEach(btn=>{
-
-btn.onclick=()=>
-
-markNotificationRead(btn.dataset.readId);
-
-});
-
-}
-
-async function markNotificationRead(id){
-
-try{
-
-/*
-
-Step 4 notification table-এর সাধারণ
-
-is_read boolean column ব্যবহার করা হচ্ছে।
-
-*/
-
-const {error}=await sb
-
-.from("notifications")
-
-.update({
-
-is_read:true
-
-})
-
-.eq("id",id)
-
-.eq("user_id",currentUser.id);
-
-if(error)
-
-throw error;
-
-await openNotifications();
-
-await updateNotificationCount();
-
-}catch(e){
-
-alert(
-
-"Notification update failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   DEPOSIT
-
-===================================================== */
-
-function openDeposit(){
-
-openSheet(
-
-"Deposit",
-
-`
-
-<div class="card">
-
-<div class="info-row">
-
-<span>bKash</span>
-
-<b style="color:#39ff88">01726270731</b>
-
-</div>
-
-<div class="info-row">
-
-<span>Nagad</span>
-
-<b style="color:#39ff88">01344875536</b>
-
-</div>
-
-<p style="color:#819b8d;font-size:12px;margin-bottom:0">
-
-উপরের নম্বরে টাকা পাঠানোর পর Transaction ID দিন।
-
-</p>
-
-</div>
-
-<div class="form-group">
-
-<label>Payment Method</label>
-
-<select id="depositMethod">
-
-<option value="bKash">bKash</option>
-
-<option value="Nagad">Nagad</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Amount</label>
-
-<input
-
-id="depositAmount"
-
-type="number"
-
-min="1"
-
-placeholder="Amount">
-
-</div>
-
-<div class="form-group">
-
-<label>Transaction ID</label>
-
-<input
-
-id="transactionId"
-
-type="text"
-
-placeholder="Transaction ID">
-
-</div>
-
-<button class="primary" id="submitDeposit">
-
-Deposit Submit
-
-</button>
-
-`
-
-);
-
-$("submitDeposit").onclick=submitDeposit;
-
-}
-
-async function submitDeposit(){
-
-const amount=
-
-Number($("depositAmount").value);
-
-const method=
-
-$("depositMethod").value;
-
-const transactionId=
-
-$("transactionId").value.trim();
-
-if(!Number.isFinite(amount)||amount<=0){
-
-alert("সঠিক Amount দিন।");
-
-return;
-
-}
-
-if(!transactionId){
-
-alert("Transaction ID দিন।");
-
-return;
-
-}
-
-const btn=$("submitDeposit");
-
-btn.disabled=true;
-
-btn.textContent="Submitting...";
-
-try{
-
-const {data,error}=await sb.rpc(
-
-"create_deposit",
-
-{
-
-p_amount:amount,
-
-p_payment_method:method,
-
-p_transaction_id:transactionId
-
-}
-
-);
-
-if(error) throw error;
-
-if(!data?.success)
-
-throw new Error(
-
-data?.message||
-
-"Deposit request তৈরি হয়নি।"
-
-);
-
-alert(
-
-"Deposit request জমা হয়েছে.\n\n"+
-
-"Amount: ৳"+money(amount)+
-
-"\nStatus: Pending"
-
-);
-
-closeModal();
-
-await updateNotificationCount();
-
-}catch(e){
-
-alert(
-
-"Deposit failed:\n\n"+
-
-errorText(e)
-
-);
-
-}finally{
-
-btn.disabled=false;
-
-btn.textContent="Deposit Submit";
-
-}
-
-}
-
-/* =====================================================
-
-   WITHDRAW
-
-===================================================== */
-
-function openWithdraw(){
-
-const balance=
-
-Number(currentProfile?.balance||0);
-
-openSheet(
-
-"Withdraw",
-
-`
-
-<div class="balance-card">
-
-<div class="balance-label">
-
-Available Balance
-
-</div>
-
-<div class="balance">
-
-৳${money(balance)}
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label>Payment Method</label>
-
-<select id="withdrawMethod">
-
-<option value="bKash">bKash</option>
-
-<option value="Nagad">Nagad</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Amount</label>
-
-<input
-
-id="withdrawAmount"
-
-type="number"
-
-min="500"
-
-placeholder="Minimum ৳500">
-
-</div>
-
-<div class="form-group">
-
-<label>Mobile Number</label>
-
-<input
-
-id="withdrawPhone"
-
-type="tel"
-
-inputmode="numeric"
-
-maxlength="11"
-
-placeholder="01XXXXXXXXX">
-
-</div>
-
-<button class="primary" id="submitWithdraw">
-
-Withdraw Request
-
-</button>
-
-`
-
-);
-
-$("submitWithdraw").onclick=submitWithdraw;
-
-}
-
-async function submitWithdraw(){
-
-const amount=
-
-Number($("withdrawAmount").value);
-
-const phone=
-
-$("withdrawPhone").value.trim();
-
-const method=
-
-$("withdrawMethod").value;
-
-if(!Number.isFinite(amount)||amount<500){
-
-alert("Minimum withdrawal ৳500।");
-
-return;
-
-}
-
-if(!/^01[0-9]{9}$/.test(phone)){
-
-alert("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।");
-
-return;
-
-}
-
-const btn=$("submitWithdraw");
-
-btn.disabled=true;
-
-btn.textContent="Submitting...";
-
-try{
-
-const {data,error}=await sb.rpc(
-
-"create_withdrawal",
-
-{
-
-p_amount:amount,
-
-p_payment_method:method,
-
-p_phone:phone
-
-}
-
-);
-
-if(error) throw error;
-
-if(!data?.success)
-
-throw new Error(
-
-data?.message||
-
-"Withdrawal request তৈরি হয়নি।"
-
-);
-
-await refreshProfile();
-
-alert(
-
-"Withdrawal request জমা হয়েছে.\n\n"+
-
-"Amount: ৳"+money(amount)+
-
-"\nStatus: Pending"
-
-);
-
-closeModal();
-
-}catch(e){
-
-alert(
-
-"Withdrawal failed:\n\n"+
-
-errorText(e)
-
-);
-
-}finally{
-
-btn.disabled=false;
-
-btn.textContent="Withdraw Request";
-
-}
-
-}
-
-/* =====================================================
-
-   PROFILE
-
-===================================================== */
-
-async function openProfile(){
-
-await refreshProfile();
-
-const p=currentProfile||{};
-
-openSheet(
-
-"My Profile",
-
-`
-
-<div class="card">
-
-<div class="info-row">
-
-<span>Name</span>
-
-<b>${esc(p.full_name||"")}</b>
-
-</div>
-
-<div class="info-row">
-
-<span>Email</span>
-
-<b>${esc(currentUser?.email||"")}</b>
-
-</div>
-
-<div class="info-row">
-
-<span>Phone</span>
-
-<b>${esc(p.phone||"Not set")}</b>
-
-</div>
-
-<div class="info-row">
-
-<span>Balance</span>
-
-<b style="color:#39ff88">
-
-৳${money(p.balance)}
-
-</b>
-
-</div>
-
-<div class="info-row">
-
-<span>Referral Code</span>
-
-<b style="color:#39ff88">
-
-${esc(p.referral_code||"")}
-
-</b>
-
-</div>
-
-<div class="info-row">
-
-<span>Role</span>
-
-<b class="badge">
-
-${esc(p.role||"user")}
-
-</b>
-
-</div>
-
-<div class="info-row">
-
-<span>Status</span>
-
-<b>${esc(p.status||"active")}</b>
-
-</div>
-
-</div>
-
-${
-
-String(p.admin_note||"").trim()
-
-?
-
-`
-
-<div class="admin-note-box">
-
-<div class="admin-note-title">
-
-<i class="fa-solid fa-bullhorn"></i>
-
-Admin Message
-
-</div>
-
-<div class="admin-note-text">
-
-${esc(p.admin_note)}
-
-</div>
-
-</div>
-
-`
-
-:
-
-""
-
-}
-
-<br>
-
-<button class="primary" id="editProfileBtn">
-
-Edit Profile
-
-</button>
-
-<br><br>
-
-<button class="secondary" id="notificationProfileBtn">
-
-🔔 My Notifications
-
-</button>
-
-<br><br>
-
-<button class="secondary" id="profileReferralBtn">
-
-👥 Refer & Earn
-
-</button>
-
-<br><br>
-
-<button class="danger" id="logoutBtn">
-
-Logout
-
-</button>
-
-`
-
-);
-
-$("editProfileBtn").onclick=openEditProfile;
-
-$("notificationProfileBtn").onclick=openNotifications;
-
-$("profileReferralBtn").onclick=openRefer;
-
-$("logoutBtn").onclick=logoutUser;
-
-if(isAdmin()){
-
-const div=document.createElement("div");
-
-div.style.marginTop="12px";
-
-div.innerHTML=`
-
-<button class="primary" id="adminPanelBtn">
-
-🛠️ Admin Panel
-
-</button>
-
-`;
-
-$("sheetBody").appendChild(div);
-
-$("adminPanelBtn").onclick=openAdmin;
-
-}
-
-}
-
-/* =====================================================
-
-   EDIT PROFILE
-
-===================================================== */
-
-function openEditProfile(){
-
-const p=currentProfile||{};
-
-openSheet(
-
-"Edit Profile",
-
-`
-
-<div class="form-group">
-
-<label>নাম</label>
-
-<input
-
-id="editName"
-
-value="${esc(p.full_name||"")}">
-
-</div>
-
-<div class="form-group">
-
-<label>Phone</label>
-
-<input
-
-id="editPhone"
-
-maxlength="11"
-
-inputmode="numeric"
-
-value="${esc(p.phone||"")}">
-
-</div>
-
-<div class="form-group">
-
-<label>Avatar URL (optional)</label>
-
-<input
-
-id="editAvatar"
-
-value="${esc(p.avatar_url||"")}"
-
-placeholder="https://...">
-
-</div>
-
-<button class="primary" id="saveProfileBtn">
-
-Save Profile
-
-</button>
-
-`
-
-);
-
-$("saveProfileBtn").onclick=saveProfile;
-
-}
-
-async function saveProfile(){
-
-const name=
-
-$("editName").value.trim();
-
-const phone=
-
-$("editPhone").value.trim();
-
-const avatar=
-
-$("editAvatar").value.trim();
-
-if(!name){
-
-alert("নাম দিন।");
-
-return;
-
-}
-
-if(phone&&!/^01[0-9]{9}$/.test(phone)){
-
-alert("সঠিক মোবাইল নম্বর দিন।");
-
-return;
-
-}
-
-const btn=$("saveProfileBtn");
-
-btn.disabled=true;
-
-btn.textContent="Saving...";
-
-try{
-
-const {data,error}=await sb.rpc(
-
-"update_my_profile",
-
-{
-
-p_full_name:name,
-
-p_phone:phone,
-
-p_avatar_url:avatar||null
-
-}
-
-);
-
-if(error) throw error;
-
-if(data?.success===false)
-
-throw new Error(
-
-data.message||"Profile update failed"
-
-);
-
-await refreshProfile();
-
-alert("Profile update হয়েছে।");
-
-openProfile();
-
-}catch(e){
-
-alert(
-
-"Profile update failed:\n\n"+
-
-errorText(e)
-
-);
-
-}finally{
-
-btn.disabled=false;
-
-btn.textContent="Save Profile";
-
-}
-
-}
-
-/* =====================================================
-
-   WALLET
-
-===================================================== */
-
-function openWallet(){
-
-const p=currentProfile||{};
-
-openSheet(
-
-"Wallet",
-
-`
-
-<div class="balance-card">
-
-<div class="balance-label">
-
-Current Balance
-
-</div>
-
-<div class="balance">
-
-৳${money(p.balance)}
-
-</div>
-
-</div>
-
-<br>
-
-<button class="primary" id="walletDeposit">
-
-Deposit
-
-</button>
-
-<br><br>
-
-<button class="secondary" id="walletWithdraw">
-
-Withdraw
-
-</button>
-
-`
-
-);
-
-$("walletDeposit").onclick=openDeposit;
-
-$("walletWithdraw").onclick=openWithdraw;
-
-}
-
-/* =====================================================
-
-   HISTORY
-
-===================================================== */
-
-async function openHistory(){
-
-openSheet(
-
-"History",
-
-'<div class="loading">History load হচ্ছে...</div>'
-
-);
-
-let items=[];
-
-try{
-
-const {data}=await sb
-
-.from("deposits")
-
-.select("*")
-
-.eq("user_id",currentUser.id)
-
-.order("created_at",{ascending:false})
-
-.limit(30);
-
-(data||[]).forEach(x=>{
-
-items.push({
-
-type:"Deposit",
-
-amount:x.amount,
-
-status:x.status,
-
-method:x.payment_method,
-
-date:x.created_at
-
-});
-
-});
-
-}catch(e){}
-
-try{
-
-const {data}=await sb
-
-.from("withdrawals")
-
-.select("*")
-
-.eq("user_id",currentUser.id)
-
-.order("created_at",{ascending:false})
-
-.limit(30);
-
-(data||[]).forEach(x=>{
-
-items.push({
-
-type:"Withdraw",
-
-amount:x.amount,
-
-status:x.status,
-
-method:x.payment_method,
-
-date:x.created_at
-
-});
-
-});
-
-}catch(e){}
-
-try{
-
-const {data}=await sb
-
-.from("task_completions")
-
-.select("*")
-
-.eq("user_id",currentUser.id)
-
-.order("created_at",{ascending:false})
-
-.limit(30);
-
-(data||[]).forEach(x=>{
-
-items.push({
-
-type:"Task Reward",
-
-amount:x.reward,
-
-status:"completed",
-
-method:"Task",
-
-date:x.created_at
-
-});
-
-});
-
-}catch(e){}
-
-items.sort(
-
-(a,b)=>
-
-String(b.date||"")
-
-.localeCompare(String(a.date||""))
-
-);
-
-if(!items.length){
-
-$("sheetBody").innerHTML=
-
-'<div class="empty">কোনো History নেই।</div>';
-
-return;
-
-}
-
-$("sheetBody").innerHTML=
-
-items.map(x=>`
-
-<div class="history-item">
-
-<b>${esc(x.type)}</b>
-
-<br>
-
-Amount:
-
-<span style="color:#39ff88">
-
-৳${money(x.amount)}
-
-</span>
-
-<br>
-
-Method:
-
-${esc(x.method||"")}
-
-<br>
-
-Status:
-
-<span class="${statusClass(x.status)}">
-
-${esc(x.status)}
-
-</span>
-
-<br>
-
-<small style="color:#718c7d">
-
-${x.date?esc(new Date(x.date).toLocaleString()):""}
-
-</small>
-
-</div>
-
-`).join("");
-
-}
-
-/* =====================================================
-
-   VIP
-
-===================================================== */
-
-async function openTeam(){
-
-openSheet(
-
-"👑 VIP Luxury",
-
-'<div class="loading">VIP load হচ্ছে...</div>'
-
-);
-
-try{
-
-const {data:packages,error}=await sb
-
-.from("vip_packages")
-
-.select("*")
-
-.order("level",{ascending:true});
-
-if(error) throw error;
-
-let approvedDeposit=0;
-
-const {data:deps,error:depError}=await sb
-
-.from("deposits")
-
-.select("amount")
-
-.eq("user_id",currentUser.id)
-
-.eq("status","approved");
-
-if(depError) throw depError;
-
-(deps||[]).forEach(x=>{
-
-approvedDeposit+=Number(x.amount||0);
-
-});
-
-let currentIndex=-1;
-
-(packages||[]).forEach((x,i)=>{
-
-if(
-
-approvedDeposit>=
-
-Number(x.min_deposit??x.price??0)
-
-){
-
-currentIndex=i;
-
-}
-
-});
-
-const currentVIP=
-
-currentIndex>=0
-
-?
-
-(
-
-packages[currentIndex].name||
-
-("VIP "+packages[currentIndex].level)
-
-)
-
-:
-
-"VIP 0";
-
-const currentPrice=
-
-currentIndex>=0
-
-?
-
-Number(
-
-packages[currentIndex].min_deposit??
-
-packages[currentIndex].price??
-
-0
-
-)
-
-:
-
-0;
-
-const currentDailyLimit=
-
-currentIndex>=0
-
-?
-
-Number(packages[currentIndex].daily_reward_limit||0)
-
-:
-
-0;
-
-const nextPackage=
-
-packages[currentIndex+1]||null;
-
-let progress=100;
-
-let remaining=0;
-
-if(nextPackage){
-
-const nextPrice=
-
-Number(
-
-nextPackage.min_deposit??
-
-nextPackage.price??
-
-0
-
-);
-
-const base=currentPrice;
-
-progress=
-
-nextPrice>base
-
-?
-
-((approvedDeposit-base)/(nextPrice-base))*100
-
-:
-
-0;
-
-progress=Math.max(0,Math.min(100,progress));
-
-remaining=
-
-Math.max(0,nextPrice-approvedDeposit);
-
-}
-
-let html=`
-
-<div class="vip-luxury">
-
-<div class="vip-crown">👑</div>
-
-<div class="vip-current">
-
-${esc(currentVIP)}
-
-</div>
-
-<div class="vip-sub">
-
-TUINCOME PREMIUM MEMBER
-
-</div>
-
-<div class="info-row">
-
-<span>Approved Deposit</span>
-
-<b class="gold">
-
-৳${money(approvedDeposit)}
-
-</b>
-
-</div>
-
-<div class="info-row">
-
-<span>Daily Reward Limit</span>
-
-<b class="gold">
-
-৳${money(currentDailyLimit)}
-
-</b>
-
-</div>
-
-${
-
-nextPackage
-
-?
-
-`
-
-<div class="vip-progress">
-
-<div style="width:${progress}%"></div>
-
-</div>
-
-<div class="vip-progress-text">
-
-<span>
-
-Next:
-
-${esc(nextPackage.name||"VIP "+nextPackage.level)}
-
-</span>
-
-<span>
-
-${Math.round(progress)}%
-
-</span>
-
-</div>
-
-<div style="
-
-text-align:center;
-
-margin-top:12px;
-
-color:#d8c05b;
-
-font-size:12px">
-
-আরও ৳${money(remaining)}
-
-deposit করলে
-
-${esc(nextPackage.name||"পরের VIP")}
-
-unlock হবে।
-
-</div>
-
-`
-
-:
-
-`
-
-<div style="
-
-text-align:center;
-
-margin-top:18px;
-
-color:#ffe58a;
-
-font-weight:900">
-
-🏆 সর্বোচ্চ VIP Level অর্জন করেছেন
-
-</div>
-
-`
-
-}
-
-</div>
-
-<h3 style="color:#e1c35b;margin:18px 0 12px">
-
-✦ VIP Levels
-
-</h3>
-
-`;
-
-(packages||[]).forEach((x,i)=>{
-
-const threshold=
-
-Number(x.min_deposit??x.price??0);
-
-const unlocked=
-
-approvedDeposit>=threshold;
-
-const isCurrent=
-
-i===currentIndex;
-
 html+=`
-
-<div class="
-
-vip-level
-
-${isCurrent?"current":""}
-
-${!unlocked?"vip-locked":""}
-
-">
-
-<div class="vip-level-top">
-
-<div>
-
-<div class="vip-name">
-
-👑
-
-${esc(x.name||("VIP "+x.level))}
-
-</div>
-
-<div class="vip-status">
-
-${unlocked?"✓ Unlocked":"🔒 Locked"}
-
-</div>
-
-</div>
-
-<div style="text-align:right">
-
-<div class="vip-price">
-
-৳${money(threshold)}
-
-</div>
-
-<div style="
-
-font-size:11px;
-
-color:#a99a70;
-
-margin-top:4px">
-
-Daily:
-
-৳${money(x.daily_reward_limit)}
-
-</div>
-
-${
-
-isCurrent
-
-?
-
-`
-
-<div class="vip-current-badge">
-
-CURRENT
-
-</div>
-
-`
-
-:
-
-""
-
-}
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-$("sheetBody").innerHTML=html;
-
-}catch(e){
-
-$("sheetBody").innerHTML=`
-
 <div class="empty">
-
-VIP load failed:<br><br>
-
-${esc(errorText(e))}
-
+এখন কোনো Normal Task নেই।
 </div>
-
 `;
-
 }
-
-}
-
-/* =====================================================
-
-   ADMIN
-
-===================================================== */
-
-function isAdmin(){
-
-return String(
-
-currentProfile?.role||""
-
-).toLowerCase()==="admin";
-
-}
-
-function adminEscape(v){
-
-return esc(v);
-
-}
-
-async function openAdmin(){
-
-if(!isAdmin()){
-
-alert("Admin access required.");
-
-return;
-
-}
-
-openSheet(
-
-"🛠️ Admin Panel",
-
-'<div class="loading">Admin data load হচ্ছে...</div>'
-
-);
-
-await loadAdminPanel();
-
-}
-
-/* =====================================================
-
-   ADMIN PANEL
-
-===================================================== */
-
-async function loadAdminPanel(){
-
-try{
-
-const [
-
-profilesRes,
-
-depositsRes,
-
-withdrawalsRes,
-
-tasksRes
-
-]=await Promise.all([
-
-sb.from("profiles")
-
-.select("*")
-
-.order("created_at",{ascending:false})
-
-.limit(200),
-
-sb.from("deposits")
-
-.select("*")
-
-.order("created_at",{ascending:false})
-
-.limit(200),
-
-sb.from("withdrawals")
-
-.select("*")
-
-.order("created_at",{ascending:false})
-
-.limit(200),
-
-sb.from("tasks")
-
-.select("*")
-
-.order("id",{ascending:true})
-
-]);
-
-if(profilesRes.error) throw profilesRes.error;
-
-if(depositsRes.error) throw depositsRes.error;
-
-if(withdrawalsRes.error) throw withdrawalsRes.error;
-
-if(tasksRes.error) throw tasksRes.error;
-
-const profiles=profilesRes.data||[];
-
-const deposits=depositsRes.data||[];
-
-const withdrawals=withdrawalsRes.data||[];
-
-const tasks=tasksRes.data||[];
-
-const pendingDeposits=
-
-deposits.filter(x=>
-
-String(x.status).toLowerCase()==="pending"
-
-);
-
-const pendingWithdrawals=
-
-withdrawals.filter(x=>
-
-String(x.status).toLowerCase()==="pending"
-
-);
-
-$("sheetBody").innerHTML=`
-
-<div class="admin-stat">
-
-<div class="stat-box">
-
-<small>Users</small>
-
-<b>${profiles.length}</b>
-
-</div>
-
-<div class="stat-box">
-
-<small>Pending Deposit</small>
-
-<b>${pendingDeposits.length}</b>
-
-</div>
-
-<div class="stat-box">
-
-<small>Pending Withdraw</small>
-
-<b>${pendingWithdrawals.length}</b>
-
-</div>
-
-<div class="stat-box">
-
-<small>Tasks</small>
-
-<b>${tasks.length}</b>
-
-</div>
-
-</div>
-
-<button
-
-class="secondary"
-
-id="adminRefreshBtn"
-
-style="margin-bottom:12px">
-
-🔄 Refresh Admin Panel
-
-</button>
-
-<!-- ADMIN MESSAGE -->
-
-<div class="card">
-
-<h3>
-
-<i class="fa-solid fa-bullhorn" style="color:#39ff88"></i>
-
-User Account Message
-
-</h3>
-
-<div style="
-
-color:#789184;
-
-font-size:12px;
-
-line-height:1.5;
-
-margin-bottom:12px">
-
-এখান থেকে User-এর Account-এ
-
-Message / Note লিখতে পারবেন।
-
-</div>
-
-<div class="form-group">
-
-<label>Select User</label>
-
-<select id="adminNoteUserSelect">
-
-<option value="">
-
-User নির্বাচন করুন
-
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Admin Message</label>
-
-<textarea
-
-id="adminUserNote"
-
-maxlength="5000"
-
-placeholder="User-এর জন্য Message লিখুন..."
-
-></textarea>
-
-</div>
-
-<button
-
-class="primary"
-
-id="saveAdminUserNoteBtn">
-
-<i class="fa-solid fa-floppy-disk"></i>
-
-Save Message
-
-</button>
-
-</div>
-
-<!-- DEPOSITS -->
-
-<div class="card">
-
-<h3>💰 Pending Deposits</h3>
-
-<div id="adminDeposits">
-
-${
-
-pendingDeposits.length
-
-?
-
-pendingDeposits.map(x=>`
-
-<div class="admin-item">
-
-<b class="gold">
-
-৳${money(x.amount)}
-
-</b>
-
-<br>
-
-Method:
-
-${adminEscape(x.payment_method||"")}
-
-<br>
-
-Transaction:
-
-<b>
-
-${adminEscape(x.transaction_id||"")}
-
-</b>
-
-<br>
-
-User ID:
-
-<small>
-
-${adminEscape(x.user_id||"")}
-
-</small>
-
-<div class="admin-actions">
-
-<button
-
-class="approve"
-
-onclick="adminDeposit('${adminEscape(x.id)}','approved')">
-
-✓ Approve
-
-</button>
-
-<button
-
-class="reject"
-
-onclick="adminDeposit('${adminEscape(x.id)}','rejected')">
-
-✕ Reject
-
-</button>
-
-</div>
-
-</div>
-
-`).join("")
-
-:
-
-'<div class="empty">Pending Deposit নেই।</div>'
-
-}
-
-</div>
-
-</div>
-
-<!-- WITHDRAWALS -->
-
-<div class="card">
-
-<h3>💸 Pending Withdrawals</h3>
-
-<div id="adminWithdrawals">
-
-${
-
-pendingWithdrawals.length
-
-?
-
-pendingWithdrawals.map(x=>`
-
-<div class="admin-item">
-
-<b class="gold">
-
-৳${money(x.amount)}
-
-</b>
-
-<br>
-
-Method:
-
-${adminEscape(x.payment_method||"")}
-
-<br>
-
-Phone:
-
-${adminEscape(x.phone||"")}
-
-<br>
-
-User ID:
-
-<small>
-
-${adminEscape(x.user_id||"")}
-
-</small>
-
-<div class="admin-actions">
-
-<button
-
-class="approve"
-
-onclick="adminWithdraw('${adminEscape(x.id)}','approved')">
-
-✓ Approve
-
-</button>
-
-<button
-
-class="reject"
-
-onclick="adminWithdraw('${adminEscape(x.id)}','rejected')">
-
-✕ Reject
-
-</button>
-
-</div>
-
-</div>
-
-`).join("")
-
-:
-
-'<div class="empty">Pending Withdraw নেই।</div>'
-
-}
-
-</div>
-
-</div>
-
-<!-- USERS -->
-
-<div class="card">
-
-<h3>👥 User Management</h3>
-
-<div id="adminUsers">
-
-${
-
-profiles.length
-
-?
-
-profiles.map(x=>{
-
-const status=
-
-String(x.status||"active").toLowerCase();
-
-const role=
-
-String(x.role||"user");
-
-const hasNote=
-
-String(x.admin_note||"").trim();
-
-return `
-
+html+=`
 <div
-
-class="admin-item"
-
-data-admin-user="${adminEscape(x.id)}">
-
-<b style="font-size:16px">
-
-${adminEscape(x.full_name||"No Name")}
-
+style="
+margin-top:18px;
+padding:16px;
+border-radius:18px;
+background:rgba(57,255,136,.07);
+border:1px solid rgba(57,255,136,.20);
+">
+<div
+style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+margin-bottom:12px;
+">
+<div>
+<b style="font-size:18px">
+👑 VIP Tasks
 </b>
-
-<br>
-
-Email:
-
-<small>
-
-Auth Email
-
+<small style="display:block;margin-top:4px;opacity:.75">
+VIP ${currentVip>0?currentVip:"Locked"}
 </small>
-
-<br>
-
-Phone:
-
-${adminEscape(x.phone||"Not set")}
-
-<br>
-
-Balance:
-
-<b class="gold">
-
-৳${money(x.balance)}
-
-</b>
-
-<br>
-
-Role:
-
-<span class="badge">
-
-${adminEscape(role)}
-
-</span>
-
-<br>
-
-Status:
-
-<span class="${
-
-status==="active"?"approved":"rejected"
-
-}">
-
-${adminEscape(status)}
-
-</span>
-
-<br>
-
+</div>
 ${
-
-hasNote
-
+currentVip>0
 ?
-
 `
-
-<span style="
-
-display:inline-block;
-
-margin-top:7px;
-
-color:#39ff88;
-
-font-size:11px">
-
-📢 Admin Message আছে
-
-</span>
-
+<div style="text-align:right;font-size:12px">
+<div>${vipTodayCount}/6 Tasks</div>
+<div>৳${money(vipTodayReward)} / ৳${money(dailyLimit)}</div>
+</div>
 `
-
 :
-
 `
-
-<span style="
-
-display:inline-block;
-
-margin-top:7px;
-
-color:#718c7d;
-
-font-size:11px">
-
-No Admin Message
-
-</span>
-
-`
-
-}
-
-<div class="admin-actions">
-
-<button onclick="adminEditUser('${adminEscape(x.id)}')">
-
-✏️ Edit
-
-</button>
-
-${
-
-status==="active"
-
-?
-
-`
-
-<button
-
-class="reject"
-
-onclick="adminUserStatus('${adminEscape(x.id)}','blocked')">
-
-🚫 Block
-
-</button>
-
-`
-
-:
-
-`
-
-<button
-
-class="approve"
-
-onclick="adminUserStatus('${adminEscape(x.id)}','active')">
-
-✓ Activate
-
-</button>
-
-`
-
-}
-
+<div style="font-size:12px;opacity:.7">
+🔒 Locked
 </div>
-
+`
+}
 </div>
-
 `;
-
-}).join("")
-
-:
-
-'<div class="empty">User নেই।</div>'
-
-}
-
+if(currentVip<=0){
+html+=`
+<div class="empty" style="margin:0;text-align:center">
+🔒 VIP Task ব্যবহার করতে একটি সক্রিয় VIP Level প্রয়োজন।
 </div>
-
-</div>
-
-<!-- TASKS -->
-
-<div class="card">
-
-<h3>⚡ Task Management</h3>
-
-<button
-
-class="primary"
-
-id="adminAddTaskBtn">
-
-+ Add New Task
-
-</button>
-
-<br><br>
-
-<div id="adminTasks">
-
-${
-
-tasks.length
-
-?
-
-tasks.map(x=>{
-
-const vipLevel=
-
-Number(x.vip_level||0);
-
-const active=
-
-Boolean(x.active);
-
-return `
-
-<div class="admin-item">
-
-<b>
-
-${adminEscape(x.title||"Task")}
-
-</b>
-
-<br>
-
-Reward:
-
-<span class="gold">
-
-৳${money(x.reward)}
-
-</span>
-
-<br>
-
-VIP:
-
-${vipLevel>0?"VIP "+vipLevel:"NORMAL"}
-
-<br>
-
-Status:
-
-<span class="${active?"approved":"rejected"}">
-
-${active?"Active":"Inactive"}
-
-</span>
-
-<div class="admin-actions">
-
-<button
-
-onclick="adminToggleTask('${adminEscape(x.id)}',${!active})">
-
-${active?"Disable":"Enable"}
-
-</button>
-
-<button
-
-class="reject"
-
-onclick="adminDeleteTask('${adminEscape(x.id)}')">
-
-🗑️ Delete
-
-</button>
-
-</div>
-
-</div>
-
 `;
-
-}).join("")
-
-:
-
-'<div class="empty">Task নেই।</div>'
-
-}
-
-</div>
-
-</div>
-
-`;
-
-await loadAdminMessageUsers();
-
-$("adminNoteUserSelect").onchange=
-
-loadSelectedAdminNote;
-
-$("saveAdminUserNoteBtn").onclick=
-
-saveAdminUserNote;
-
-$("adminRefreshBtn").onclick=
-
-loadAdminPanel;
-
-$("adminAddTaskBtn").onclick=
-
-adminAddTask;
-
-}catch(e){
-
-$("sheetBody").innerHTML=`
-
-<div class="empty">
-
-Admin load failed:<br><br>
-
-${adminEscape(errorText(e))}
-
-<br><br>
-
-<button
-
-class="secondary"
-
-onclick="loadAdminPanel()">
-
-🔄 আবার চেষ্টা করুন
-
-</button>
-
-</div>
-
-`;
-
-}
-
-}
-
-/* =====================================================
-
-   ADMIN NOTE USERS
-
-===================================================== */
-
-async function loadAdminMessageUsers(){
-
-const select=$("adminNoteUserSelect");
-
-if(!select)
-
-return;
-
-try{
-
-const {data,error}=await sb
-
-.from("profiles")
-
-.select("id,full_name,phone,admin_note")
-
-.order("created_at",{ascending:false})
-
-.limit(500);
-
-if(error) throw error;
-
-select.innerHTML=`
-
-<option value="">
-
-User নির্বাচন করুন
-
-</option>
-
-`;
-
-(data||[]).forEach(user=>{
-
-const option=
-
-document.createElement("option");
-
-option.value=user.id;
-
-option.textContent=
-
-`${user.full_name||"No Name"} — ${user.phone||"No Phone"}`;
-
-select.appendChild(option);
-
-});
-
-}catch(e){
-
-console.error(e);
-
-}
-
-}
-
-async function loadSelectedAdminNote(){
-
-const select=$("adminNoteUserSelect");
-
-const textarea=$("adminUserNote");
-
-if(!select||!textarea)
-
-return;
-
-const userId=select.value;
-
-textarea.value="";
-
-if(!userId)
-
-return;
-
-try{
-
-const {data,error}=await sb
-
-.from("profiles")
-
-.select("admin_note")
-
-.eq("id",userId)
-
-.maybeSingle();
-
-if(error) throw error;
-
-textarea.value=data?.admin_note||"";
-
-}catch(e){
-
-alert(
-
-"Message load failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   SAVE ADMIN NOTE
-
-===================================================== */
-
-async function saveAdminUserNote(){
-
-if(!isAdmin()){
-
-alert("Admin access required.");
-
-return;
-
-}
-
-const userId=$("adminNoteUserSelect").value;
-
-const note=$("adminUserNote").value.trim();
-
-const btn=$("saveAdminUserNoteBtn");
-
-if(!userId){
-
-alert("আগে একজন User নির্বাচন করুন।");
-
-return;
-
-}
-
-btn.disabled=true;
-
-btn.textContent="Saving...";
-
-try{
-
-const {data,error}=await sb.rpc(
-
-"admin_update_user_note",
-
-{
-
-p_user_id:userId,
-
-p_note:note
-
-}
-
-);
-
-if(error) throw error;
-
-if(data?.success===false)
-
-throw new Error(
-
-data.message||"Message save failed"
-
-);
-
-alert("✅ User Message successfully saved.");
-
-await loadAdminPanel();
-
-}catch(e){
-
-alert(
-
-"Message save failed:\n\n"+
-
-errorText(e)
-
-);
-
-}finally{
-
-btn.disabled=false;
-
-if(document.getElementById("saveAdminUserNoteBtn")){
-
-document.getElementById(
-
-"saveAdminUserNoteBtn"
-
-).textContent="Save Message";
-
-}
-
-}
-
-}
-
-/* =====================================================
-
-   ADMIN DEPOSIT
-
-===================================================== */
-
-async function adminDeposit(id,status){
-
-if(!isAdmin())
-
-return;
-
-if(!confirm(
-
-"Deposit status "+status+" করতে চান?"
-
-))
-
-return;
-
-try{
-
-const {data,error}=await sb.rpc(
-
-"admin_update_deposit",
-
-{
-
-p_deposit_id:id,
-
-p_status:status
-
-}
-
-);
-
-if(error) throw error;
-
-if(data?.success===false)
-
-throw new Error(
-
-data.message||"Deposit update failed"
-
-);
-
-alert("Deposit "+status+" হয়েছে।");
-
-await refreshProfile();
-
-await loadAdminPanel();
-
-}catch(e){
-
-alert(
-
-"Deposit update failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   ADMIN WITHDRAW
-
-===================================================== */
-
-async function adminWithdraw(id,status){
-
-if(!isAdmin())
-
-return;
-
-if(!confirm(
-
-"Withdrawal status "+status+" করতে চান?"
-
-))
-
-return;
-
-try{
-
-const {data,error}=await sb.rpc(
-
-"admin_update_withdrawal",
-
-{
-
-p_withdrawal_id:id,
-
-p_status:status
-
-}
-
-);
-
-if(error) throw error;
-
-if(data?.success===false)
-
-throw new Error(
-
-data.message||"Withdrawal update failed"
-
-);
-
-alert("Withdrawal "+status+" হয়েছে।");
-
-await refreshProfile();
-
-await loadAdminPanel();
-
-}catch(e){
-
-alert(
-
-"Withdrawal update failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   ADMIN USER STATUS
-
-===================================================== */
-
-async function adminUserStatus(id,status){
-
-if(!isAdmin())
-
-return;
-
-if(!id){
-
-alert("User ID পাওয়া যায়নি।");
-
-return;
-
-}
-
-if(!confirm(
-
-"User status "+status+" করতে চান?"
-
-))
-
-return;
-
-try{
-
-const {data,error}=await sb.rpc(
-
-"admin_update_user_status",
-
-{
-
-p_user_id:id,
-
-p_status:status
-
-}
-
-);
-
-if(error) throw error;
-
-if(data?.success===false)
-
-throw new Error(
-
-data.message||"Status update failed"
-
-);
-
-alert("User status update হয়েছে.");
-
-await loadAdminPanel();
-
-}catch(e){
-
-alert(
-
-"User status update failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   ADMIN EDIT USER
-
-===================================================== */
-
-async function adminEditUser(id){
-
-if(!isAdmin())
-
-return;
-
-const {data:user,error}=await sb
-
-.from("profiles")
-
-.select("*")
-
-.eq("id",id)
-
-.maybeSingle();
-
-if(error){
-
-alert(
-
-"User load failed:\n\n"+
-
-errorText(error)
-
-);
-
-return;
-
-}
-
-if(!user){
-
-alert("User পাওয়া যায়নি।");
-
-return;
-
-}
-
-openSheet(
-
-"✏️ Edit User",
-
-`
-
-<div class="form-group">
-
-<label>User ID</label>
-
-<input
-
-value="${adminEscape(user.id||"")}"
-
-readonly>
-
-</div>
-
-<div class="form-group">
-
-<label>Name</label>
-
-<input
-
-id="adminEditName"
-
-value="${adminEscape(user.full_name||"")}">
-
-</div>
-
-<div class="form-group">
-
-<label>Phone</label>
-
-<input
-
-id="adminEditPhone"
-
-type="tel"
-
-maxlength="11"
-
-value="${adminEscape(user.phone||"")}">
-
-</div>
-
-<div class="form-group">
-
-<label>Avatar URL</label>
-
-<input
-
-id="adminEditAvatar"
-
-value="${adminEscape(user.avatar_url||"")}">
-
-</div>
-
-<div class="form-group">
-
-<label>Role</label>
-
-<select id="adminEditRole">
-
-<option value="user"
-
-${user.role==="user"?"selected":""}>
-
-User
-
-</option>
-
-<option value="admin"
-
-${user.role==="admin"?"selected":""}>
-
-Admin
-
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Status</label>
-
-<select id="adminEditStatus">
-
-<option value="active"
-
-${user.status==="active"?"selected":""}>
-
-Active
-
-</option>
-
-<option value="blocked"
-
-${user.status==="blocked"?"selected":""}>
-
-Blocked
-
-</option>
-
-<option value="pending"
-
-${user.status==="pending"?"selected":""}>
-
-Pending
-
-</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>Balance</label>
-
-<input
-
-id="adminEditBalance"
-
-type="number"
-
-step="0.01"
-
-min="0"
-
-value="${Number(user.balance||0)}">
-
-</div>
-
-<div class="form-group">
-
-<label>📢 Admin Message / Note</label>
-
-<textarea
-
-id="adminEditNote"
-
-maxlength="5000"
-
-placeholder="এই User-এর Account-এ যে Message দেখাতে চান..."
-
->${adminEscape(user.admin_note||"")}</textarea>
-
-</div>
-
-<button
-
-class="primary"
-
-id="adminSaveUserBtn">
-
-💾 Save User
-
-</button>
-
-`
-
-);
-
-$("adminSaveUserBtn").onclick=
-
-()=>adminSaveUser(id);
-
-}
-
-/* =====================================================
-
-   SAVE USER
-
-===================================================== */
-
-async function adminSaveUser(id){
-
-if(!isAdmin())
-
-return;
-
-const name=$("adminEditName").value.trim();
-
-const phone=$("adminEditPhone").value.trim();
-
-const avatar=$("adminEditAvatar").value.trim();
-
-const role=$("adminEditRole").value;
-
-const status=$("adminEditStatus").value;
-
-const balance=Number($("adminEditBalance").value);
-
-const note=$("adminEditNote").value.trim();
-
-if(!name){
-
-alert("Name দিতে হবে.");
-
-return;
-
-}
-
-if(phone&&!/^01[0-9]{9}$/.test(phone)){
-
-alert("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন.");
-
-return;
-
-}
-
-if(!Number.isFinite(balance)||balance<0){
-
-alert("সঠিক Balance দিন.");
-
-return;
-
-}
-
-const btn=$("adminSaveUserBtn");
-
-btn.disabled=true;
-
-btn.textContent="Saving...";
-
-try{
-
-const {error:profileError}=await sb
-
-.from("profiles")
-
-.update({
-
-full_name:name,
-
-phone:phone||null,
-
-avatar_url:avatar||null,
-
-role:role,
-
-status:status,
-
-balance:balance
-
-})
-
-.eq("id",id);
-
-if(profileError)
-
-throw profileError;
-
-const {data:noteData,error:noteError}=await sb.rpc(
-
-"admin_update_user_note",
-
-{
-
-p_user_id:id,
-
-p_note:note
-
-}
-
-);
-
-if(noteError)
-
-throw noteError;
-
-if(noteData?.success===false)
-
-throw new Error(
-
-noteData.message||
-
-"Admin note update failed"
-
-);
-
-alert(
-
-"✅ User information এবং Admin Message update হয়েছে।"
-
-);
-
-await loadAdminPanel();
-
-}catch(e){
-
-alert(
-
-"User update failed:\n\n"+
-
-errorText(e)
-
-);
-
-}finally{
-
-if(document.getElementById("adminSaveUserBtn")){
-
-document.getElementById("adminSaveUserBtn").disabled=false;
-
-document.getElementById("adminSaveUserBtn").textContent=
-
-"💾 Save User";
-
-}
-
-}
-
-}
-
-/* =====================================================
-
-   ADD TASK
-
-===================================================== */
-
-async function adminAddTask(){
-
-if(!isAdmin())
-
-return;
-
-const title=prompt("Task Title:");
-
-if(!title||!title.trim()){
-
-alert("Task Title দিতে হবে।");
-
-return;
-
-}
-
-const description=
-
-prompt("Task Description:")||"";
-
-const reward=
-
-Number(prompt("Task Reward:"));
-
-if(!Number.isFinite(reward)||reward<0){
-
-alert("সঠিক reward দিন।");
-
-return;
-
-}
-
-const taskType=
-
-prompt(
-
-"Task Type:\n\n"+
-
-"1 = Normal Task\n"+
-
-"2 = VIP Task",
-
-"1"
-
-);
-
-if(taskType!=="1"&&taskType!=="2"){
-
-alert("শুধু 1 অথবা 2 দিন।");
-
-return;
-
-}
-
-let vipLevel=0;
-
-if(taskType==="2"){
-
-vipLevel=
-
-Number(
-
-prompt("VIP Level (1-10):","1")
-
-);
-
-if(
-
-!Number.isInteger(vipLevel)||
-
-vipLevel<1||
-
-vipLevel>10
-
-){
-
-alert(
-
-"VIP Level 1 থেকে 10 এর মধ্যে হতে হবে।"
-
-);
-
-return;
-
-}
-
-}
-
-const maxCompletions=
-
-Number(
-
-prompt("Max Completions:","1")
-
-);
-
-if(
-
-!Number.isInteger(maxCompletions)||
-
-maxCompletions<1
-
-){
-
-alert(
-
-"Max Completions কমপক্ষে 1 হতে হবে।"
-
-);
-
-return;
-
-}
-
-if(!confirm(
-
-"Task তৈরি করবেন?\n\n"+
-
-"Title: "+title.trim()+
-
-"\nReward: ৳"+money(reward)+
-
-"\nVIP: "+(vipLevel||"Normal")+
-
-"\nMax Completions: "+maxCompletions
-
-))
-
-return;
-
-try{
-
-const {error}=await sb
-
-.from("tasks")
-
-.insert({
-
-title:title.trim(),
-
-description:description.trim(),
-
-reward:reward,
-
-vip_level:vipLevel,
-
-max_completions:maxCompletions,
-
-active:true
-
-});
-
-if(error)
-
-throw error;
-
-alert("Task তৈরি হয়েছে.");
-
-await loadAdminPanel();
-
-}catch(e){
-
-alert(
-
-"Task create failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   TOGGLE TASK
-
-===================================================== */
-
-async function adminToggleTask(id,active){
-
-if(!isAdmin())
-
-return;
-
-try{
-
-const {error}=await sb
-
-.from("tasks")
-
-.update({
-
-active:Boolean(active)
-
-})
-
-.eq("id",id);
-
-if(error)
-
-throw error;
-
-await loadAdminPanel();
-
-}catch(e){
-
-alert(
-
-"Task update failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   DELETE TASK
-
-===================================================== */
-
-async function adminDeleteTask(id){
-
-if(!isAdmin())
-
-return;
-
-if(!confirm(
-
-"এই Task delete করতে চান?"
-
-))
-
-return;
-
-try{
-
-const {error}=await sb
-
-.from("tasks")
-
-.delete()
-
-.eq("id",id);
-
-if(error)
-
-throw error;
-
-alert("Task delete হয়েছে.");
-
-await loadAdminPanel();
-
-}catch(e){
-
-alert(
-
-"Task delete failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   SHEET
-
-===================================================== */
-
-function openSheet(title,body){
-
-$("sheetTitle").textContent=title;
-
-$("sheetBody").innerHTML=body;
-
-$("modal").style.display="flex";
-
-}
-
-function closeModal(){
-
-$("modal").style.display="none";
-
-}
-
-/* =====================================================
-
-   LOGOUT
-
-===================================================== */
-
-async function logoutUser(){
-
-try{
-
-await sb.auth.signOut();
-
-}catch(e){
-
-console.error(e);
-
-}
-
-currentUser=null;
-
-currentProfile=null;
-
-$("mainDashboard").style.display="none";
-
-$("authLanding").style.display="flex";
-
-closeModal();
-
-}
-
-/* =====================================================
-
-   OAUTH
-
-===================================================== */
-
-async function oauthLogin(provider){
-
-clearMessages();
-
-try{
-
-const {error}=await sb.auth.signInWithOAuth({
-
-provider,
-
-options:{
-
-redirectTo:window.location.href
-
-}
-
-});
-
-if(error)
-
-throw error;
-
-}catch(e){
-
-showError(
-
-"OAuth Login failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   RESET PASSWORD
-
-===================================================== */
-
-async function resetPassword(){
-
-clearMessages();
-
-const email=
-
-$("email").value.trim();
-
-if(!email){
-
-showError(
-
-"Password reset করার জন্য আগে Email দিন।"
-
-);
-
-return;
-
-}
-
-try{
-
-const {error}=await sb.auth
-
-.resetPasswordForEmail(
-
-email,
-
-{
-
-redirectTo:window.location.href
-
-}
-
-);
-
-if(error)
-
-throw error;
-
-showSuccess(
-
-"Password reset email পাঠানো হয়েছে.\n\n"+
-
-"আপনার Gmail inbox চেক করুন।"
-
-);
-
-}catch(e){
-
-showError(
-
-"Password reset failed:\n\n"+
-
-errorText(e)
-
-);
-
-}
-
-}
-
-/* =====================================================
-
-   AUTH LISTENER
-
-===================================================== */
-
-function setupAuthListener(){
-
-if(authListenerStarted)
-
-return;
-
-authListenerStarted=true;
-
-sb.auth.onAuthStateChange(
-
-async(event,session)=>{
-
-if(session?.user){
-
-currentUser=session.user;
-
-try{
-
-await loadProfile();
-
-showDashboard();
-
-}catch(e){
-
-console.error(e);
-
-}
-
 }else{
-
-currentUser=null;
-
-currentProfile=null;
-
-$("mainDashboard").style.display="none";
-
-$("authLanding").style.display="flex";
-
-}
-
-}
-
+const myVipTasks=
+vipTasks.filter(task=>
+Number(task.vip_level)===currentVip
 );
-
-}
-
-/* =====================================================
-
-   BUTTONS
-
-===================================================== */
-
-$("loginTab").onclick=()=>{
-
-setAuthMode("login");
-
-};
-
-$("registerTab").onclick=()=>{
-
-setAuthMode("register");
-
-};
-
-$("authBtn").onclick=()=>{
-
-if(authMode==="login")
-
-loginUser();
-
-else
-
-registerUser();
-
-};
-
-$("forgotBtn").onclick=resetPassword;
-
-$("googleBtn").onclick=
-
-()=>oauthLogin("google");
-
-$("facebookBtn").onclick=
-
-()=>oauthLogin("facebook");
-
-$("closeBtn").onclick=
-
-closeModal;
-
-$("modal").addEventListener(
-
-"click",
-
-e=>{
-
-if(e.target===$("modal"))
-
-closeModal();
-
-}
-
+if(!myVipTasks.length){
+html+=`
+<div class="empty">
+VIP ${currentVip}-এর কোনো Task নেই।
+</div>
+`;
+}else{
+myVipTasks.forEach(task=>{
+const completedToday=
+todayCompletions.some(
+row=>Number(row.task_id)===Number(task.id)
 );
-
-$("notificationBtn").onclick=
-
-openNotifications;
-
-$("checkinBtn").onclick=
-
-doDailyCheckin;
-
-$("quickCopyReferral").onclick=async()=>{
-
-const code=
-
-currentProfile?.referral_code||"";
-
-if(!code){
-
-alert("Referral Code পাওয়া যায়নি।");
-
-return;
-
-}
-
-try{
-
-await navigator.clipboard.writeText(code);
-
-alert("Referral Code copy হয়েছে।");
-
-}catch(e){
-
-alert("Code: "+code);
-
-}
-
-};
-
-$("quickReferBtn").onclick=
-
-openRefer;
-
-$("homeNav").onclick=()=>{
-
-document
-
-.querySelectorAll(".nav button")
-
-.forEach(x=>x.classList.remove("active"));
-
-$("homeNav").classList.add("active");
-
-};
-
-$("walletNav").onclick=()=>{
-
-document
-
-.querySelectorAll(".nav button")
-
-.forEach(x=>x.classList.remove("active"));
-
-$("walletNav").classList.add("active");
-
-openWallet();
-
-};
-
-$("startNav").onclick=()=>{
-
-document
-
-.querySelectorAll(".nav button")
-
-.forEach(x=>x.classList.remove("active"));
-
-$("startNav").classList.add("active");
-
-window.scrollTo({
-
-top:0,
-
-behavior:"smooth"
-
+const sixLimitReached=
+vipTodayCount>=6;
+const rewardLimitReached=
+dailyLimit>0 &&
+(vipTodayReward+Number(task.reward||0))>dailyLimit;
+const disabled=
+completedToday||
+sixLimitReached||
+rewardLimitReached;
+let buttonText="Start VIP Task";
+if(completedToday)
+buttonText="✓ আজ Completed";
+else if(sixLimitReached)
+buttonText="আজকের Limit শেষ";
+else if(rewardLimitReached)
+buttonText="Daily Reward Limit";
+html+=`
+<div class="task-card"
+style="border-color:rgba(57,255,136,.35)">
+<div class="task-icon">
+<i class="fa-solid fa-crown"></i>
+</div>
+<div class="task-info">
+<b>${esc(task.title||"VIP Task")}</b>
+<small>
+${esc(task.description||"VIP Task সম্পন্ন করুন")}
+</small>
+<br>
+<span class="task-reward">
+৳${money(task.reward)}
+</span>
+<small style="display:block;margin-top:4px">
+VIP ${currentVip}
+</small>
+<br>
+<button
+class="task-btn"
+data-vip-task-id="${esc(task.id)}"
+${disabled?"disabled":""}>
+${buttonText}
+</button>
+</div>
+</div>
+`;
 });
-
-};
-
-$("teamNav").onclick=()=>{
-
-document
-
-.querySelectorAll(".nav button")
-
-.forEach(x=>x.classList.remove("active"));
-
-$("teamNav").classList.add("active");
-
-openTeam();
-
-};
-
-$("profileNav").onclick=()=>{
-
-document
-
-.querySelectorAll(".nav button")
-
-.forEach(x=>x.classList.remove("active"));
-
-$("profileNav").classList.add("active");
-
-openProfile();
-
-};
-
-$("depositBtn").onclick=openDeposit;
-
-$("withdrawBtn").onclick=openWithdraw;
-
-$("referBtn").onclick=openRefer;
-
-$("historyBtn").onclick=openHistory;
-
-$("rewardBtn").onclick=claimReward;
-
-$("langBtn").onclick=()=>{
-
-alert(
-
-"English / বাংলা language system পরে customize করা যাবে।"
-
-);
-
-};
-
-/* =====================================================
-
-   START
-
-===================================================== */
-
-async function startApp(){
-
-setupAuthListener();
-
-await checkSession();
-
 }
-
+}
+html+=`</div>`;
+grid.innerHTML=html;
+grid.querySelectorAll(".task-btn[data-task-id]")
+.forEach(btn=>{
+const task=
+allTasks.find(
+x=>String(x.id)===String(btn.dataset.taskId)
+);
+if(task)
+btn.onclick=()=>startTask(task);
+});
+grid.querySelectorAll(".task-btn[data-vip-task-id]")
+.forEach(btn=>{
+const task=
+allTasks.find(
+x=>String(x.id)===String(btn.dataset.vipTaskId)
+);
+if(task)
+btn.onclick=()=>startTask(task);
+});
+}catch(e){
+grid.innerHTML=`
+<div class="empty">
+Task load failed:<br><br>
+${esc(errorText(e))}
+</div>
+`;
+}
+}
+/* =====================================================
+   START TASK
+===================================================== */
+function startTask(task){
+if(!currentUser){
+alert("আগে Login করুন।");
+return;
+}
+if(taskTimer)
+clearInterval(taskTimer);
+currentTask=task;
+$("taskTitle").textContent=
+task.title||"Task চলছে";
+$("countdown").textContent="3";
+$("progressBar").style.width="0%";
+$("rewardBtn").style.display="none";
+$("taskModal").style.display="flex";
+let n=3;
+taskTimer=setInterval(()=>{
+n--;
+$("countdown").textContent=n;
+$("progressBar").style.width=
+((3-n)/3*100)+"%";
+if(n<=0){
+clearInterval(taskTimer);
+taskTimer=null;
+$("countdown").textContent="✓";
+$("rewardBtn").style.display="block";
+}
+},1000);
+}
+/* =====================================================
+   CLAIM REWARD
+===================================================== */
+async function claimReward(){
+if(!currentUser||!currentTask)
+return;
+const btn=$("rewardBtn");
+btn.disabled=true;
+btn.textContent="Saving...";
+try{
+const {data,error}=await sb.rpc(
+"claim_task_reward",
+{
+p_task_id:currentTask.id
+}
+);
+if(error) throw error;
+if(!data?.success)
+throw new Error(
+data?.message||
+"Reward নেওয়া যায়নি।"
+);
+currentProfile.balance=
+Number(data.balance||0);
+updateDashboard();
+closeTaskModal();
+alert(
+"Task Complete!\n\n"+
+"Reward: ৳"+money(data.reward)+
+"\nBalance: ৳"+money(data.balance)
+);
+await loadTasks();
+await updateNotificationCount();
+}catch(e){
+alert(
+"Reward নেওয়া যায়নি:\n\n"+
+errorText(e)
+);
+}finally{
+btn.disabled=false;
+btn.textContent="৳ Reward নিন";
+}
+}
+function closeTaskModal(){
+$("taskModal").style.display="none";
+if(taskTimer){
+clearInterval(taskTimer);
+taskTimer=null;
+}
+currentTask=null;
+}
+/* =====================================================
+   DAILY CHECK-IN
+===================================================== */
+const CHECKIN_RPC_NAME="daily_checkin";
+async function updateCheckinStatus(){
+if(!currentUser)
+return;
+$("checkinStatus").textContent="Checking...";
+$("checkinBtn").disabled=true;
+try{
+const {data,error}=await sb.rpc(
+CHECKIN_RPC_NAME,
+{
+p_action:"status"
+}
+);
+if(error)
+throw error;
+const done=
+Boolean(
+data?.checked_in||
+data?.already_checked_in||
+data?.completed||
+data?.success===true &&
+data?.status==="completed"
+);
+if(done){
+$("checkinStatus").textContent="✓ Checked";
+$("checkinSub").textContent=
+"আজকের Check-in সম্পন্ন হয়েছে";
+$("checkinBtn").textContent=
+"✓ আজ Completed";
+$("checkinBtn").disabled=true;
+}else{
+$("checkinStatus").textContent="Available";
+$("checkinSub").textContent=
+"আজকের Check-in এখনো করা হয়নি";
+$("checkinBtn").textContent=
+"📅 আজকের Check-in";
+$("checkinBtn").disabled=false;
+}
+}catch(e){
+console.log("Check-in status:",errorText(e));
+$("checkinStatus").textContent="Available";
+$("checkinSub").textContent=
+"আজকের Check-in করুন";
+$("checkinBtn").textContent=
+"📅 আজকের Check-in";
+$("checkinBtn").disabled=false;
+}
+}
+async function doDailyCheckin(){
+if(!currentUser){
+alert("আগে Login করুন।");
+return;
+}
+const btn=$("checkinBtn");
+btn.disabled=true;
+btn.textContent="Processing...";
+try{
+const {data,error}=await sb.rpc(
+CHECKIN_RPC_NAME,
+{
+p_action:"checkin"
+}
+);
+if(error)
+throw error;
+if(data?.success===false)
+throw new Error(
+data?.message||
+"আজকের Check-in করা যায়নি।"
+);
+const reward=
+Number(
+data?.reward||
+data?.amount||
+data?.checkin_reward||
+0
+);
+if(data?.balance!==undefined){
+currentProfile.balance=
+Number(data.balance||0);
+}else{
+await loadProfile();
+}
+updateDashboard();
+$("checkinStatus").textContent="✓ Checked";
+$("checkinSub").textContent=
+"আজকের Check-in সম্পন্ন হয়েছে";
+btn.textContent="✓ আজ Completed";
+alert(
+"🎉 Daily Check-in সফল!\n\n"+
+"Reward: ৳"+money(reward)+
+"\nBalance: ৳"+money(currentProfile.balance)
+);
+await updateNotificationCount();
+}catch(e){
+alert(
+"Daily Check-in failed:\n\n"+
+errorText(e)
+);
+await updateCheckinStatus();
+}
+}
+/* =====================================================
+   REFERRAL
+===================================================== */
+function getReferralLink(){
+const code=
+currentProfile?.referral_code||"";
+return (
+window.location.origin+
+window.location.pathname+
+"?ref="+
+encodeURIComponent(code)
+);
+}
+async function getReferralCount(){
+if(!currentUser)
+return 0;
+try{
+const {count,error}=await sb
+.from("profiles")
+.select("id",{count:"exact",head:true})
+.eq("referred_by",currentUser.id);
+if(error)
+throw error;
+return count||0;
+}catch(e){
+console.log("Referral count:",errorText(e));
+return 0;
+}
+}
+async function updateReferralQuickCard(){
+if(!currentProfile)
+return;
+$("quickReferralCode").textContent=
+currentProfile.referral_code||"------";
+}
+async function openRefer(){
+const code=
+currentProfile?.referral_code||"";
+const count=
+await getReferralCount();
+const link=
+getReferralLink();
+openSheet(
+"Refer & Earn",
+`
+<div class="referral-box">
+<div style="color:#ffe58a;font-weight:900">
+আপনার Referral Code
+</div>
+<div class="referral-code">
+${esc(code)}
+</div>
+<div style="text-align:center">
+<button class="copy-btn" id="copyReferral">
+<i class="fa-solid fa-copy"></i>
+Copy Code
+</button>
+</div>
+<div class="info-row">
+<span>Total Referral</span>
+<b>${count}</b>
+</div>
+<div style="margin-top:14px;color:#ffe58a;font-weight:800">
+Referral Link
+</div>
+<div class="referral-link">
+${esc(link)}
+</div>
+<button class="secondary"
+id="copyReferralLink"
+style="margin-top:8px">
+🔗 Copy Referral Link
+</button>
+</div>
+<div class="card">
+<h3>👥 Referral System</h3>
+<p style="color:#819b8d;line-height:1.6">
+এই Referral Link বা Code বন্ধুদের সাথে শেয়ার করতে পারেন।
+আপনার Step 4 Database rules অনুযায়ী eligible referral হলে
+referral reward প্রযোজ্য হবে।
+</p>
+</div>
+`
+);
+$("copyReferral").onclick=async()=>{
+try{
+await navigator.clipboard.writeText(code);
+alert("Referral Code copy হয়েছে।");
+}catch(e){
+alert("Code: "+code);
+}
+};
+$("copyReferralLink").onclick=async()=>{
+try{
+await navigator.clipboard.writeText(link);
+alert("Referral Link copy হয়েছে।");
+}catch(e){
+alert(link);
+}
+};
+}
+/* =====================================================
+   NOTIFICATIONS
+===================================================== */
+async function getNotifications(){
+if(!currentUser)
+return [];
+try{
+const {data,error}=await sb
+.from("notifications")
+.select("*")
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false})
+.limit(50);
+if(error)
+throw error;
+return data||[];
+}catch(e){
+console.error("Notifications:",error);
+return [];
+}
+}
+async function updateNotificationCount(){
+if(!currentUser)
+return;
+try{
+const notifications=
+await getNotifications();
+const unread=
+notifications.filter(x=>
+!Boolean(
+x.is_read||
+String(x.status||"").toLowerCase()==="read"
+)
+).length;
+const badge=$("notificationCount");
+if(unread>0){
+badge.textContent=
+unread>99?"99+":String(unread);
+badge.style.display="block";
+}else{
+badge.style.display="none";
+}
+}catch(e){
+console.error(e);
+}
+}
+async function openNotifications(){
+openSheet(
+"🔔 Notifications",
+'<div class="loading">Notifications load হচ্ছে...</div>'
+);
+const notifications=
+await getNotifications();
+if(!notifications.length){
+$("sheetBody").innerHTML=
+`
+<div class="empty">
+🔔 এখন কোনো Notification নেই।
+</div>
+`;
+return;
+}
+$("sheetBody").innerHTML=
+notifications.map(n=>{
+const unread=
+!Boolean(
+n.is_read||
+String(n.status||"").toLowerCase()==="read"
+);
+const title=
+n.title||
+n.subject||
+"TUINCOME Notification";
+const message=
+n.message||
+n.body||
+n.description||
+"";
+return `
+<div
+class="notification-item ${unread?"unread":""}"
+data-notification-id="${esc(n.id)}">
+<div class="notification-title">
+${unread?"🔵 ":""}
+${esc(title)}
+</div>
+<div class="notification-message">
+${esc(message)}
+</div>
+<span class="notification-date">
+${n.created_at?
+esc(new Date(n.created_at).toLocaleString()):
+""}
+</span>
+${unread?`
+<button
+class="copy-btn"
+style="margin-top:9px"
+data-read-id="${esc(n.id)}">
+✓ Mark as Read
+</button>
+`:""}
+</div>
+`;
+}).join("");
+$("sheetBody")
+.querySelectorAll("[data-read-id]")
+.forEach(btn=>{
+btn.onclick=()=>
+markNotificationRead(btn.dataset.readId);
+});
+}
+async function markNotificationRead(id){
+try{
+const {error}=await sb
+.from("notifications")
+.update({
+is_read:true
+})
+.eq("id",id)
+.eq("user_id",currentUser.id);
+if(error)
+throw error;
+await openNotifications();
+await updateNotificationCount();
+}catch(e){
+alert(
+"Notification update failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   DEPOSIT
+===================================================== */
+function openDeposit(){
+openSheet(
+"Deposit",
+`
+<div class="card">
+<div class="info-row">
+<span>bKash</span>
+<b style="color:#39ff88">01726270731</b>
+</div>
+<div class="info-row">
+<span>Nagad</span>
+<b style="color:#39ff88">01344875536</b>
+</div>
+<p style="color:#819b8d;font-size:12px;margin-bottom:0">
+উপরের নম্বরে টাকা পাঠানোর পর Transaction ID দিন।
+</p>
+</div>
+<div class="form-group">
+<label>Payment Method</label>
+<select id="depositMethod">
+<option value="bKash">bKash</option>
+<option value="Nagad">Nagad</option>
+</select>
+</div>
+<div class="form-group">
+<label>Amount</label>
+<input id="depositAmount"
+type="number"
+min="1"
+placeholder="Amount">
+</div>
+<div class="form-group">
+<label>Transaction ID</label>
+<input id="transactionId"
+type="text"
+placeholder="Transaction ID">
+</div>
+<button class="primary" id="submitDeposit">
+Deposit Submit
+</button>
+`
+);
+$("submitDeposit").onclick=submitDeposit;
+}
+async function submitDeposit(){
+const amount=
+Number($("depositAmount").value);
+const method=
+$("depositMethod").value;
+const transactionId=
+$("transactionId").value.trim();
+if(!Number.isFinite(amount)||amount<=0){
+alert("সঠিক Amount দিন।");
+return;
+}
+if(!transactionId){
+alert("Transaction ID দিন।");
+return;
+}
+const btn=$("submitDeposit");
+btn.disabled=true;
+btn.textContent="Submitting...";
+try{
+const {data,error}=await sb.rpc(
+"create_deposit",
+{
+p_amount:amount,
+p_payment_method:method,
+p_transaction_id:transactionId
+}
+);
+if(error) throw error;
+if(!data?.success)
+throw new Error(
+data?.message||
+"Deposit request তৈরি হয়নি।"
+);
+alert(
+"Deposit request জমা হয়েছে.\n\n"+
+"Amount: ৳"+money(amount)+
+"\nStatus: Pending"
+);
+closeModal();
+await updateNotificationCount();
+}catch(e){
+alert(
+"Deposit failed:\n\n"+
+errorText(e)
+);
+}finally{
+btn.disabled=false;
+btn.textContent="Deposit Submit";
+}
+}
+/* =====================================================
+   WITHDRAW
+===================================================== */
+function openWithdraw(){
+const balance=
+Number(currentProfile?.balance||0);
+openSheet(
+"Withdraw",
+`
+<div class="balance-card">
+<div class="balance-label">
+Available Balance
+</div>
+<div class="balance">
+৳${money(balance)}
+</div>
+</div>
+<div class="form-group">
+<label>Payment Method</label>
+<select id="withdrawMethod">
+<option value="bKash">bKash</option>
+<option value="Nagad">Nagad</option>
+</select>
+</div>
+<div class="form-group">
+<label>Amount</label>
+<input id="withdrawAmount"
+type="number"
+min="500"
+placeholder="Minimum ৳500">
+</div>
+<div class="form-group">
+<label>Mobile Number</label>
+<input id="withdrawPhone"
+type="tel"
+inputmode="numeric"
+maxlength="11"
+placeholder="01XXXXXXXXX">
+</div>
+<button class="primary" id="submitWithdraw">
+Withdraw Request
+</button>
+`
+);
+$("submitWithdraw").onclick=submitWithdraw;
+}
+async function submitWithdraw(){
+const amount=
+Number($("withdrawAmount").value);
+const phone=
+$("withdrawPhone").value.trim();
+const method=
+$("withdrawMethod").value;
+if(!Number.isFinite(amount)||amount<500){
+alert("Minimum withdrawal ৳500।");
+return;
+}
+if(!/^01[0-9]{9}$/.test(phone)){
+alert("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন।");
+return;
+}
+const btn=$("submitWithdraw");
+btn.disabled=true;
+btn.textContent="Submitting...";
+try{
+const {data,error}=await sb.rpc(
+"create_withdrawal",
+{
+p_amount:amount,
+p_payment_method:method,
+p_phone:phone
+}
+);
+if(error) throw error;
+if(!data?.success)
+throw new Error(
+data?.message||
+"Withdrawal request তৈরি হয়নি।"
+);
+await refreshProfile();
+alert(
+"Withdrawal request জমা হয়েছে.\n\n"+
+"Amount: ৳"+money(amount)+
+"\nStatus: Pending"
+);
+closeModal();
+}catch(e){
+alert(
+"Withdrawal failed:\n\n"+
+errorText(e)
+);
+}finally{
+btn.disabled=false;
+btn.textContent="Withdraw Request";
+}
+}
+/* =====================================================
+   PROFILE
+===================================================== */
+async function openProfile(){
+await refreshProfile();
+const p=currentProfile||{};
+openSheet(
+"My Profile",
+`
+<div class="card">
+<div class="info-row">
+<span>Name</span>
+<b>${esc(p.full_name||"")}</b>
+</div>
+<div class="info-row">
+<span>Email</span>
+<b>${esc(currentUser?.email||"")}</b>
+</div>
+<div class="info-row">
+<span>Phone</span>
+<b>${esc(p.phone||"Not set")}</b>
+</div>
+<div class="info-row">
+<span>Balance</span>
+<b style="color:#39ff88">
+৳${money(p.balance)}
+</b>
+</div>
+<div class="info-row">
+<span>Referral Code</span>
+<b style="color:#39ff88">
+${esc(p.referral_code||"")}
+</b>
+</div>
+<div class="info-row">
+<span>Role</span>
+<b class="badge">
+${esc(p.role||"user")}
+</b>
+</div>
+<div class="info-row">
+<span>Status</span>
+<b>${esc(p.status||"active")}</b>
+</div>
+</div>
+${
+String(p.admin_note||"").trim()
+?
+`
+<div class="admin-note-box">
+<div class="admin-note-title">
+<i class="fa-solid fa-bullhorn"></i>
+Admin Message
+</div>
+<div class="admin-note-text">
+${esc(p.admin_note)}
+</div>
+</div>
+`
+:
+""
+}
+<br>
+<button class="primary" id="editProfileBtn">
+Edit Profile
+</button>
+<br><br>
+<button class="secondary" id="notificationProfileBtn">
+🔔 My Notifications
+</button>
+<br><br>
+<button class="secondary" id="profileReferralBtn">
+👥 Refer & Earn
+</button>
+<br><br>
+<button class="danger" id="logoutBtn">
+Logout
+</button>
+`
+);
+$("editProfileBtn").onclick=openEditProfile;
+$("notificationProfileBtn").onclick=openNotifications;
+$("profileReferralBtn").onclick=openRefer;
+$("logoutBtn").onclick=logoutUser;
+if(isAdmin()){
+const div=document.createElement("div");
+div.style.marginTop="12px";
+div.innerHTML=`
+<button class="primary" id="adminPanelBtn">
+🛠️ Admin Panel
+</button>
+`;
+$("sheetBody").appendChild(div);
+$("adminPanelBtn").onclick=openAdmin;
+}
+}
+/* =====================================================
+   EDIT PROFILE
+===================================================== */
+function openEditProfile(){
+const p=currentProfile||{};
+openSheet(
+"Edit Profile",
+`
+<div class="form-group">
+<label>নাম</label>
+<input
+id="editName"
+value="${esc(p.full_name||"")}">
+</div>
+<div class="form-group">
+<label>Phone</label>
+<input
+id="editPhone"
+maxlength="11"
+inputmode="numeric"
+value="${esc(p.phone||"")}">
+</div>
+<div class="form-group">
+<label>Avatar URL (optional)</label>
+<input
+id="editAvatar"
+value="${esc(p.avatar_url||"")}"
+placeholder="https://...">
+</div>
+<button class="primary" id="saveProfileBtn">
+Save Profile
+</button>
+`
+);
+$("saveProfileBtn").onclick=saveProfile;
+}
+async function saveProfile(){
+const name=
+$("editName").value.trim();
+const phone=
+$("editPhone").value.trim();
+const avatar=
+$("editAvatar").value.trim();
+if(!name){
+alert("নাম দিন।");
+return;
+}
+if(phone&&!/^01[0-9]{9}$/.test(phone)){
+alert("সঠিক মোবাইল নম্বর দিন।");
+return;
+}
+const btn=$("saveProfileBtn");
+btn.disabled=true;
+btn.textContent="Saving...";
+try{
+const {data,error}=await sb.rpc(
+"update_my_profile",
+{
+p_full_name:name,
+p_phone:phone,
+p_avatar_url:avatar||null
+}
+);
+if(error) throw error;
+if(data?.success===false)
+throw new Error(
+data.message||"Profile update failed"
+);
+await refreshProfile();
+alert("Profile update হয়েছে।");
+openProfile();
+}catch(e){
+alert(
+"Profile update failed:\n\n"+
+errorText(e)
+);
+}finally{
+btn.disabled=false;
+btn.textContent="Save Profile";
+}
+}
+/* =====================================================
+   WALLET
+===================================================== */
+function openWallet(){
+const p=currentProfile||{};
+openSheet(
+"Wallet",
+`
+<div class="balance-card">
+<div class="balance-label">
+Current Balance
+</div>
+<div class="balance">
+৳${money(p.balance)}
+</div>
+</div>
+<br>
+<button class="primary" id="walletDeposit">
+Deposit
+</button>
+<br><br>
+<button class="secondary" id="walletWithdraw">
+Withdraw
+</button>
+`
+);
+$("walletDeposit").onclick=openDeposit;
+$("walletWithdraw").onclick=openWithdraw;
+}
+/* =====================================================
+   HISTORY
+===================================================== */
+async function openHistory(){
+openSheet(
+"History",
+'<div class="loading">History load হচ্ছে...</div>'
+);
+let items=[];
+try{
+const {data}=await sb
+.from("deposits")
+.select("*")
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false})
+.limit(30);
+(data||[]).forEach(x=>{
+items.push({
+type:"Deposit",
+amount:x.amount,
+status:x.status,
+method:x.payment_method,
+date:x.created_at
+});
+});
+}catch(e){}
+try{
+const {data}=await sb
+.from("withdrawals")
+.select("*")
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false})
+.limit(30);
+(data||[]).forEach(x=>{
+items.push({
+type:"Withdraw",
+amount:x.amount,
+status:x.status,
+method:x.payment_method,
+date:x.created_at
+});
+});
+}catch(e){}
+try{
+const {data}=await sb
+.from("task_completions")
+.select("*")
+.eq("user_id",currentUser.id)
+.order("created_at",{ascending:false})
+.limit(30);
+(data||[]).forEach(x=>{
+items.push({
+type:"Task Reward",
+amount:x.reward,
+status:"completed",
+method:"Task",
+date:x.created_at
+});
+});
+}catch(e){}
+items.sort(
+(a,b)=>
+String(b.date||"")
+.localeCompare(String(a.date||""))
+);
+if(!items.length){
+$("sheetBody").innerHTML=
+'<div class="empty">কোনো History নেই।</div>';
+return;
+}
+$("sheetBody").innerHTML=
+items.map(x=>`
+<div class="history-item">
+<b>${esc(x.type)}</b>
+<br>
+Amount:
+<span style="color:#39ff88">
+৳${money(x.amount)}
+</span>
+<br>
+Method:
+${esc(x.method||"")}
+<br>
+Status:
+<span class="${statusClass(x.status)}">
+${esc(x.status)}
+</span>
+<br>
+<small style="color:#718c7d">
+${x.date?
+esc(new Date(x.date).toLocaleString()):
+""}
+</small>
+</div>
+`).join("");
+}
+/* =====================================================
+   USER VIP
+===================================================== */
+async function openTeam(){
+openSheet(
+"👑 VIP Luxury",
+'<div class="loading">VIP load হচ্ছে...</div>'
+);
+try{
+const {data:packages,error}=await sb
+.from("vip_packages")
+.select("*")
+.order("level",{ascending:true});
+if(error) throw error;
+let approvedDeposit=0;
+const {data:deps,error:depError}=await sb
+.from("deposits")
+.select("amount")
+.eq("user_id",currentUser.id)
+.eq("status","approved");
+if(depError) throw depError;
+(deps||[]).forEach(x=>{
+approvedDeposit+=Number(x.amount||0);
+});
+let currentIndex=-1;
+(packages||[]).forEach((x,i)=>{
+if(
+approvedDeposit>=
+Number(x.min_deposit??x.price??0)
+){
+currentIndex=i;
+}
+});
+const currentVIP=
+currentIndex>=0
+?
+(
+packages[currentIndex].name||
+("VIP "+packages[currentIndex].level)
+)
+:
+"VIP 0";
+const currentPrice=
+currentIndex>=0
+?
+Number(
+packages[currentIndex].min_deposit??
+packages[currentIndex].price??
+0
+)
+:
+0;
+const currentDailyLimit=
+currentIndex>=0
+?
+Number(
+packages[currentIndex].daily_reward_limit||0
+)
+:
+0;
+const nextPackage=
+packages[currentIndex+1]||null;
+let progress=100;
+let remaining=0;
+if(nextPackage){
+const nextPrice=
+Number(
+nextPackage.min_deposit??
+nextPackage.price??
+0
+);
+const base=currentPrice;
+progress=
+nextPrice>base
+?
+((approvedDeposit-base)/(nextPrice-base))*100
+:
+0;
+progress=Math.max(0,Math.min(100,progress));
+remaining=
+Math.max(0,nextPrice-approvedDeposit);
+}
+let html=`
+<div class="vip-luxury">
+<div class="vip-crown">👑</div>
+<div class="vip-current">
+${esc(currentVIP)}
+</div>
+<div class="vip-sub">
+TUINCOME PREMIUM MEMBER
+</div>
+<div class="info-row">
+<span>Approved Deposit</span>
+<b class="gold">
+৳${money(approvedDeposit)}
+</b>
+</div>
+<div class="info-row">
+<span>Daily Reward Limit</span>
+<b class="gold">
+৳${money(currentDailyLimit)}
+</b>
+</div>
+${
+nextPackage
+?
+`
+<div class="vip-progress">
+<div style="width:${progress}%"></div>
+</div>
+<div class="vip-progress-text">
+<span>
+Next:
+${esc(nextPackage.name||"VIP "+nextPackage.level)}
+</span>
+<span>
+${Math.round(progress)}%
+</span>
+</div>
+<div style="
+text-align:center;
+margin-top:12px;
+color:#d8c05b;
+font-size:12px">
+আরও ৳${money(remaining)}
+deposit করলে
+${esc(nextPackage.name||"পরের VIP")}
+unlock হবে।
+</div>
+`
+:
+`
+<div style="
+text-align:center;
+margin-top:18px;
+color:#ffe58a;
+font-weight:900">
+🏆 সর্বোচ্চ VIP Level অর্জন করেছেন
+</div>
+`
+}
+</div>
+<h3 style="color:#e1c35b;margin:18px 0 12px">
+✦ VIP Levels
+</h3>
+`;
+(packages||[]).forEach((x,i)=>{
+const threshold=
+Number(x.min_deposit??x.price??0);
+const unlocked=
+approvedDeposit>=threshold;
+const isCurrent=
+i===currentIndex;
+html+=`
+<div class="
+vip-level
+${isCurrent?"current":""}
+${!unlocked?"vip-locked":""}
+">
+<div class="vip-level-top">
+<div>
+<div class="vip-name">
+👑
+${esc(x.name||("VIP "+x.level))}
+</div>
+<div class="vip-status">
+${unlocked?"✓ Unlocked":"🔒 Locked"}
+</div>
+</div>
+<div style="text-align:right">
+<div class="vip-price">
+৳${money(threshold)}
+</div>
+<div style="
+font-size:11px;
+color:#a99a70;
+margin-top:4px">
+Daily:
+৳${money(x.daily_reward_limit)}
+</div>
+${
+isCurrent
+?
+`
+<div class="vip-current-badge">
+CURRENT
+</div>
+`
+:
+""
+}
+</div>
+</div>
+</div>
+`;
+});
+$("sheetBody").innerHTML=html;
+}catch(e){
+$("sheetBody").innerHTML=`
+<div class="empty">
+VIP load failed:<br><br>
+${esc(errorText(e))}
+</div>
+`;
+}
+}
+/* =====================================================
+   ADMIN
+===================================================== */
+function isAdmin(){
+return String(
+currentProfile?.role||""
+).toLowerCase()==="admin";
+}
+async function openAdmin(){
+if(!isAdmin()){
+alert("Admin access required.");
+return;
+}
+openSheet(
+"🛠️ Admin Panel",
+'<div class="loading">Admin data load হচ্ছে...</div>'
+);
+await loadAdminPanel();
+}
+/* =====================================================
+   ADMIN PANEL
+===================================================== */
+async function loadAdminPanel(){
+try{
+const [
+profilesRes,
+depositsRes,
+withdrawalsRes,
+tasksRes
+]=await Promise.all([
+sb.from("profiles")
+.select("*")
+.order("created_at",{ascending:false})
+.limit(200),
+sb.from("deposits")
+.select("*")
+.order("created_at",{ascending:false})
+.limit(200),
+sb.from("withdrawals")
+.select("*")
+.order("created_at",{ascending:false})
+.limit(200),
+sb.from("tasks")
+.select("*")
+.order("id",{ascending:true})
+]);
+if(profilesRes.error) throw profilesRes.error;
+if(depositsRes.error) throw depositsRes.error;
+if(withdrawalsRes.error) throw withdrawalsRes.error;
+if(tasksRes.error) throw tasksRes.error;
+const profiles=profilesRes.data||[];
+const deposits=depositsRes.data||[];
+const withdrawals=withdrawalsRes.data||[];
+const tasks=tasksRes.data||[];
+const pendingDeposits=
+deposits.filter(x=>
+String(x.status).toLowerCase()==="pending"
+);
+const pendingWithdrawals=
+withdrawals.filter(x=>
+String(x.status).toLowerCase()==="pending"
+);
+$("sheetBody").innerHTML=`
+<div class="admin-stat">
+<div class="stat-box">
+<small>Users</small>
+<b>${profiles.length}</b>
+</div>
+<div class="stat-box">
+<small>Pending Deposit</small>
+<b>${pendingDeposits.length}</b>
+</div>
+<div class="stat-box">
+<small>Pending Withdraw</small>
+<b>${pendingWithdrawals.length}</b>
+</div>
+<div class="stat-box">
+<small>Tasks</small>
+<b>${tasks.length}</b>
+</div>
+</div>
+<button
+class="secondary"
+id="adminRefreshBtn"
+style="margin-bottom:10px">
+🔄 Refresh Admin Panel
+</button>
+<!-- VIP CONTROL BUTTON -->
+<div class="card">
+<h3>
+👑 VIP Control
+</h3>
+<p style="
+color:#789184;
+font-size:12px;
+line-height:1.5">
+VIP 1–10-এর Deposit Limit, Daily Reward,
+Name, Description এবং Active/Inactive এখান থেকে
+নিয়ন্ত্রণ করতে পারবেন।
+</p>
+<button
+class="primary"
+id="openVipControlBtn">
+👑 Open VIP Control
+</button>
+</div>
+<!-- ADMIN MESSAGE -->
+<div class="card">
+<h3>
+<i class="fa-solid fa-bullhorn" style="color:#39ff88"></i>
+User Account Message
+</h3>
+<div style="
+color:#789184;
+font-size:12px;
+line-height:1.5;
+margin-bottom:12px">
+এখান থেকে User-এর Account-এ
+Message / Note লিখতে পারবেন।
+</div>
+<div class="form-group">
+<label>Select User</label>
+<select id="adminNoteUserSelect">
+<option value="">
+User নির্বাচন করুন
+</option>
+</select>
+</div>
+<div class="form-group">
+<label>Admin Message</label>
+<textarea
+id="adminUserNote"
+maxlength="5000"
+placeholder="User-এর জন্য Message লিখুন..."
+></textarea>
+</div>
+<button
+class="primary"
+id="saveAdminUserNoteBtn">
+<i class="fa-solid fa-floppy-disk"></i>
+Save Message
+</button>
+</div>
+<!-- DEPOSITS -->
+<div class="card">
+<h3>💰 Pending Deposits</h3>
+<div id="adminDeposits">
+${
+pendingDeposits.length
+?
+pendingDeposits.map(x=>`
+<div class="admin-item">
+<b class="gold">
+৳${money(x.amount)}
+</b>
+<br>
+Method:
+${adminEscape(x.payment_method||"")}
+<br>
+Transaction:
+<b>
+${adminEscape(x.transaction_id||"")}
+</b>
+<br>
+User ID:
+<small>
+${adminEscape(x.user_id||"")}
+</small>
+<div class="admin-actions">
+<button
+class="approve"
+onclick="adminDeposit('${adminEscape(x.id)}','approved')">
+✓ Approve
+</button>
+<button
+class="reject"
+onclick="adminDeposit('${adminEscape(x.id)}','rejected')">
+✕ Reject
+</button>
+</div>
+</div>
+`).join("")
+:
+'<div class="empty">Pending Deposit নেই।</div>'
+}
+</div>
+</div>
+<!-- WITHDRAWALS -->
+<div class="card">
+<h3>💸 Pending Withdrawals</h3>
+<div id="adminWithdrawals">
+${
+pendingWithdrawals.length
+?
+pendingWithdrawals.map(x=>`
+<div class="admin-item">
+<b class="gold">
+৳${money(x.amount)}
+</b>
+<br>
+Method:
+${adminEscape(x.payment_method||"")}
+<br>
+Phone:
+${adminEscape(x.phone||"")}
+<br>
+User ID:
+<small>
+${adminEscape(x.user_id||"")}
+</small>
+<div class="admin-actions">
+<button
+class="approve"
+onclick="adminWithdraw('${adminEscape(x.id)}','approved')">
+✓ Approve
+</button>
+<button
+class="reject"
+onclick="adminWithdraw('${adminEscape(x.id)}','rejected')">
+✕ Reject
+</button>
+</div>
+</div>
+`).join("")
+:
+'<div class="empty">Pending Withdraw নেই।</div>'
+}
+</div>
+</div>
+<!-- USERS -->
+<div class="card">
+<h3>👥 User Management</h3>
+<div id="adminUsers">
+${
+profiles.length
+?
+profiles.map(x=>{
+const status=
+String(x.status||"active").toLowerCase();
+const role=
+String(x.role||"user");
+const hasNote=
+String(x.admin_note||"").trim();
+return `
+<div
+class="admin-item"
+data-admin-user="${adminEscape(x.id)}">
+<b style="font-size:16px">
+${adminEscape(x.full_name||"No Name")}
+</b>
+<br>
+Email:
+<small>
+Auth Email
+</small>
+<br>
+Phone:
+${adminEscape(x.phone||"Not set")}
+<br>
+Balance:
+<b class="gold">
+৳${money(x.balance)}
+</b>
+<br>
+Role:
+<span class="badge">
+${adminEscape(role)}
+</span>
+<br>
+Status:
+<span class="${
+status==="active"?"approved":"rejected"
+}">
+${adminEscape(status)}
+</span>
+<br>
+${
+hasNote
+?
+`
+<span style="
+display:inline-block;
+margin-top:7px;
+color:#39ff88;
+font-size:11px">
+📢 Admin Message আছে
+</span>
+`
+:
+`
+<span style="
+display:inline-block;
+margin-top:7px;
+color:#718c7d;
+font-size:11px">
+No Admin Message
+</span>
+`
+}
+<div class="admin-actions">
+<button
+onclick="adminEditUser('${adminEscape(x.id)}')">
+✏️ Edit
+</button>
+${
+status==="active"
+?
+`
+<button
+class="reject"
+onclick="adminUserStatus('${adminEscape(x.id)}','blocked')">
+🚫 Block
+</button>
+`
+:
+`
+<button
+class="approve"
+onclick="adminUserStatus('${adminEscape(x.id)}','active')">
+✓ Activate
+</button>
+`
+}
+</div>
+</div>
+`;
+}).join("")
+:
+'<div class="empty">User নেই।</div>'
+}
+</div>
+</div>
+<!-- TASKS -->
+<div class="card">
+<h3>⚡ Task Management</h3>
+<button
+class="primary"
+id="adminAddTaskBtn">
++ Add New Task
+</button>
+<br><br>
+<div id="adminTasks">
+${
+tasks.length
+?
+tasks.map(x=>{
+const vipLevel=
+Number(x.vip_level||0);
+const active=
+Boolean(x.active);
+return `
+<div class="admin-item">
+<b>
+${adminEscape(x.title||"Task")}
+</b>
+<br>
+Reward:
+<span class="gold">
+৳${money(x.reward)}
+</span>
+<br>
+VIP:
+${vipLevel>0?"VIP "+vipLevel:"NORMAL"}
+<br>
+Status:
+<span class="${active?"approved":"rejected"}">
+${active?"Active":"Inactive"}
+</span>
+<div class="admin-actions">
+<button
+onclick="adminToggleTask('${adminEscape(x.id)}',${!active})">
+${active?"Disable":"Enable"}
+</button>
+<button
+class="reject"
+onclick="adminDeleteTask('${adminEscape(x.id)}')">
+🗑️ Delete
+</button>
+</div>
+</div>
+`;
+}).join("")
+:
+'<div class="empty">Task নেই।</div>'
+}
+</div>
+</div>
+`;
+await loadAdminMessageUsers();
+$("adminNoteUserSelect").onchange=
+loadSelectedAdminNote;
+$("saveAdminUserNoteBtn").onclick=
+saveAdminUserNote;
+$("adminRefreshBtn").onclick=
+loadAdminPanel;
+$("adminAddTaskBtn").onclick=
+adminAddTask;
+$("openVipControlBtn").onclick=
+openVipControl;
+}catch(e){
+$("sheetBody").innerHTML=`
+<div class="empty">
+Admin load failed:<br><br>
+${adminEscape(errorText(e))}
+<br><br>
+<button
+class="secondary"
+onclick="loadAdminPanel()">
+🔄 আবার চেষ্টা করুন
+</button>
+</div>
+`;
+}
+}
+/* =====================================================
+   VIP CONTROL
+===================================================== */
+async function openVipControl(){
+if(!isAdmin()){
+alert("Admin access required.");
+return;
+}
+openSheet(
+"👑 VIP Control",
+'<div class="loading">VIP settings load হচ্ছে...</div>'
+);
+try{
+const {data,error}=await sb
+.from("vip_packages")
+.select("*")
+.order("level",{ascending:true});
+if(error)
+throw error;
+if(!data||!data.length){
+$("sheetBody").innerHTML=`
+<div class="empty">
+কোনো VIP Package পাওয়া যায়নি।
+</div>
+`;
+return;
+}
+let html=`
+<div class="vip-control-header">
+<div class="vip-control-title">
+👑 VIP Management
+</div>
+<div class="vip-control-sub">
+এখান থেকে VIP 1–10-এর settings পরিবর্তন
+করতে পারবেন। Save করার পর পরিবর্তন
+সরাসরি Supabase-এ সংরক্ষিত হবে।
+</div>
+</div>
+<button
+class="secondary"
+id="vipControlBackBtn"
+style="margin-bottom:12px">
+← Admin Panel-এ ফিরে যান
+</button>
+`;
+data.forEach(vip=>{
+const level=
+Number(vip.level||0);
+const active=
+Boolean(vip.active);
+html+=`
+<div
+class="vip-control-item ${active?"active":""}"
+data-vip-control="${esc(level)}">
+<div class="vip-control-top">
+<div>
+<div class="vip-control-name">
+👑 VIP ${esc(level)}
+</div>
+<div class="vip-control-level">
+Level ${esc(level)} •
+${active?"Currently Active":"Currently Inactive"}
+</div>
+</div>
+<label class="vip-switch">
+<input
+type="checkbox"
+id="vipActive_${esc(level)}"
+${active?"checked":""}>
+<span>
+Active
+</span>
+</label>
+</div>
+<div class="vip-control-grid">
+<div class="form-group">
+<label>VIP Name</label>
+<input
+id="vipName_${esc(level)}"
+value="${esc(vip.name||("VIP "+level))}"
+maxlength="100"
+placeholder="VIP ${level}">
+</div>
+<div class="form-group">
+<label>Minimum Deposit</label>
+<input
+id="vipDeposit_${esc(level)}"
+type="number"
+min="0"
+step="0.01"
+value="${Number(vip.min_deposit||0)}">
+</div>
+</div>
+<div class="form-group">
+<label>Daily Reward Limit</label>
+<input
+id="vipDaily_${esc(level)}"
+type="number"
+min="0"
+step="0.01"
+value="${Number(vip.daily_reward_limit||0)}">
+</div>
+<div class="form-group">
+<label>Description</label>
+<textarea
+id="vipDescription_${esc(level)}"
+maxlength="1000"
+placeholder="VIP ${level} description..."
+>${esc(vip.description||"")}</textarea>
+</div>
+<div class="vip-users-box">
+👑 VIP ${esc(level)} Settings
+<br><br>
+Minimum Deposit:
+<b style="color:#ffe58a">
+৳${money(vip.min_deposit)}
+</b>
+&nbsp; • &nbsp;
+Daily Limit:
+<b style="color:#39ff88">
+৳${money(vip.daily_reward_limit)}
+</b>
+</div>
+<button
+class="primary vip-control-save"
+data-save-vip="${esc(level)}">
+💾 Save VIP ${esc(level)}
+</button>
+</div>
+`;
+});
+$("sheetBody").innerHTML=html;
+$("vipControlBackBtn").onclick=
+loadAdminPanel;
+$("sheetBody")
+.querySelectorAll("[data-save-vip]")
+.forEach(btn=>{
+btn.onclick=()=>
+saveVipControl(
+Number(btn.dataset.saveVip)
+);
+});
+}catch(e){
+$("sheetBody").innerHTML=`
+<div class="empty">
+VIP Control load failed:<br><br>
+${esc(errorText(e))}
+<br><br>
+<button
+class="secondary"
+onclick="openVipControl()">
+🔄 আবার চেষ্টা করুন
+</button>
+</div>
+`;
+}
+}
+/* =====================================================
+   SAVE VIP CONTROL
+===================================================== */
+async function saveVipControl(level){
+if(!isAdmin()){
+alert("Admin access required.");
+return;
+}
+if(!Number.isInteger(level)||level<1||level>10){
+alert("VIP Level 1 থেকে 10 হতে হবে।");
+return;
+}
+const nameEl=
+$("vipName_"+level);
+const depositEl=
+$("vipDeposit_"+level);
+const dailyEl=
+$("vipDaily_"+level);
+const descriptionEl=
+$("vipDescription_"+level);
+const activeEl=
+$("vipActive_"+level);
+if(!nameEl||
+!depositEl||
+!dailyEl||
+!descriptionEl||
+!activeEl){
+alert("VIP fields পাওয়া যায়নি।");
+return;
+}
+const name=
+nameEl.value.trim();
+const description=
+descriptionEl.value.trim();
+const minDeposit=
+Number(depositEl.value);
+const dailyLimit=
+Number(dailyEl.value);
+const active=
+Boolean(activeEl.checked);
+if(!name){
+alert("VIP Name দিতে হবে।");
+return;
+}
+if(!Number.isFinite(minDeposit)||minDeposit<0){
+alert("সঠিক Minimum Deposit দিন।");
+return;
+}
+if(!Number.isFinite(dailyLimit)||dailyLimit<0){
+alert("সঠিক Daily Reward Limit দিন।");
+return;
+}
+const btn=
+document.querySelector(
+`[data-save-vip="${level}"]`
+);
+if(!btn)
+return;
+btn.disabled=true;
+btn.textContent="Saving...";
+try{
+const {data,error}=await sb.rpc(
+"admin_update_vip",
+{
+p_level:level,
+p_name:name,
+p_description:description,
+p_min_deposit:minDeposit,
+p_daily_reward_limit:dailyLimit,
+p_active:active
+}
+);
+if(error)
+throw error;
+if(data?.success===false)
+throw new Error(
+data?.message||
+"VIP update failed"
+);
+alert(
+"✅ VIP "+level+
+" successfully updated."
+);
+await openVipControl();
+}catch(e){
+alert(
+"VIP "+level+
+" update failed:\n\n"+
+errorText(e)
+);
+}finally{
+const currentBtn=
+document.querySelector(
+`[data-save-vip="${level}"]`
+);
+if(currentBtn){
+currentBtn.disabled=false;
+currentBtn.textContent=
+"💾 Save VIP "+level;
+}
+}
+}
+/* =====================================================
+   ADMIN NOTE USERS
+===================================================== */
+async function loadAdminMessageUsers(){
+const select=$("adminNoteUserSelect");
+if(!select)
+return;
+try{
+const {data,error}=await sb
+.from("profiles")
+.select("id,full_name,phone,admin_note")
+.order("created_at",{ascending:false})
+.limit(500);
+if(error) throw error;
+select.innerHTML=`
+<option value="">
+User নির্বাচন করুন
+</option>
+`;
+(data||[]).forEach(user=>{
+const option=
+document.createElement("option");
+option.value=user.id;
+option.textContent=
+`${user.full_name||"No Name"} — ${
+user.phone||"No Phone"
+}`;
+select.appendChild(option);
+});
+}catch(e){
+console.error(e);
+}
+}
+async function loadSelectedAdminNote(){
+const select=$("adminNoteUserSelect");
+const textarea=$("adminUserNote");
+if(!select||!textarea)
+return;
+const userId=select.value;
+textarea.value="";
+if(!userId)
+return;
+try{
+const {data,error}=await sb
+.from("profiles")
+.select("admin_note")
+.eq("id",userId)
+.maybeSingle();
+if(error) throw error;
+textarea.value=
+data?.admin_note||"";
+}catch(e){
+alert(
+"Message load failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   SAVE ADMIN NOTE
+===================================================== */
+async function saveAdminUserNote(){
+if(!isAdmin()){
+alert("Admin access required.");
+return;
+}
+const userId=
+$("adminNoteUserSelect").value;
+const note=
+$("adminUserNote").value.trim();
+const btn=
+$("saveAdminUserNoteBtn");
+if(!userId){
+alert("আগে একজন User নির্বাচন করুন।");
+return;
+}
+btn.disabled=true;
+btn.textContent="Saving...";
+try{
+const {data,error}=await sb.rpc(
+"admin_update_user_note",
+{
+p_user_id:userId,
+p_note:note
+}
+);
+if(error) throw error;
+if(data?.success===false)
+throw new Error(
+data.message||
+"Message save failed"
+);
+alert(
+"✅ User Message successfully saved."
+);
+await loadAdminPanel();
+}catch(e){
+alert(
+"Message save failed:\n\n"+
+errorText(e)
+);
+}finally{
+btn.disabled=false;
+if(document.getElementById(
+"saveAdminUserNoteBtn"
+)){
+document.getElementById(
+"saveAdminUserNoteBtn"
+).textContent=
+"Save Message";
+}
+}
+}
+/* =====================================================
+   ADMIN DEPOSIT
+===================================================== */
+async function adminDeposit(id,status){
+if(!isAdmin())
+return;
+if(!confirm(
+"Deposit status "+status+
+" করতে চান?"
+))
+return;
+try{
+const {data,error}=await sb.rpc(
+"admin_update_deposit",
+{
+p_deposit_id:id,
+p_status:status
+}
+);
+if(error) throw error;
+if(data?.success===false)
+throw new Error(
+data.message||
+"Deposit update failed"
+);
+alert(
+"Deposit "+status+
+" হয়েছে।"
+);
+await refreshProfile();
+await loadAdminPanel();
+}catch(e){
+alert(
+"Deposit update failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   ADMIN WITHDRAW
+===================================================== */
+async function adminWithdraw(id,status){
+if(!isAdmin())
+return;
+if(!confirm(
+"Withdrawal status "+status+
+" করতে চান?"
+))
+return;
+try{
+const {data,error}=await sb.rpc(
+"admin_update_withdrawal",
+{
+p_withdrawal_id:id,
+p_status:status
+}
+);
+if(error) throw error;
+if(data?.success===false)
+throw new Error(
+data.message||
+"Withdrawal update failed"
+);
+alert(
+"Withdrawal "+status+
+" হয়েছে।"
+);
+await refreshProfile();
+await loadAdminPanel();
+}catch(e){
+alert(
+"Withdrawal update failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   ADMIN USER STATUS
+===================================================== */
+async function adminUserStatus(id,status){
+if(!isAdmin())
+return;
+if(!id){
+alert("User ID পাওয়া যায়নি।");
+return;
+}
+if(!confirm(
+"User status "+status+
+" করতে চান?"
+))
+return;
+try{
+const {data,error}=await sb.rpc(
+"admin_update_user_status",
+{
+p_user_id:id,
+p_status:status
+}
+);
+if(error) throw error;
+if(data?.success===false)
+throw new Error(
+data.message||
+"Status update failed"
+);
+alert(
+"User status update হয়েছে."
+);
+await loadAdminPanel();
+}catch(e){
+alert(
+"User status update failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   ADMIN EDIT USER
+===================================================== */
+async function adminEditUser(id){
+if(!isAdmin())
+return;
+const {data:user,error}=await sb
+.from("profiles")
+.select("*")
+.eq("id",id)
+.maybeSingle();
+if(error){
+alert(
+"User load failed:\n\n"+
+errorText(error)
+);
+return;
+}
+if(!user){
+alert("User পাওয়া যায়নি।");
+return;
+}
+openSheet(
+"✏️ Edit User",
+`
+<div class="form-group">
+<label>User ID</label>
+<input
+value="${adminEscape(user.id||"")}"
+readonly>
+</div>
+<div class="form-group">
+<label>Name</label>
+<input
+id="adminEditName"
+value="${adminEscape(user.full_name||"")}">
+</div>
+<div class="form-group">
+<label>Phone</label>
+<input
+id="adminEditPhone"
+type="tel"
+maxlength="11"
+value="${adminEscape(user.phone||"")}">
+</div>
+<div class="form-group">
+<label>Avatar URL</label>
+<input
+id="adminEditAvatar"
+value="${adminEscape(user.avatar_url||"")}">
+</div>
+<div class="form-group">
+<label>Role</label>
+<select id="adminEditRole">
+<option value="user"
+${user.role==="user"?"selected":""}>
+User
+</option>
+<option value="admin"
+${user.role==="admin"?"selected":""}>
+Admin
+</option>
+</select>
+</div>
+<div class="form-group">
+<label>Status</label>
+<select id="adminEditStatus">
+<option value="active"
+${user.status==="active"?"selected":""}>
+Active
+</option>
+<option value="blocked"
+${user.status==="blocked"?"selected":""}>
+Blocked
+</option>
+<option value="pending"
+${user.status==="pending"?"selected":""}>
+Pending
+</option>
+</select>
+</div>
+<div class="form-group">
+<label>Balance</label>
+<input
+id="adminEditBalance"
+type="number"
+step="0.01"
+min="0"
+value="${Number(user.balance||0)}">
+</div>
+<div class="form-group">
+<label>
+📢 Admin Message / Note
+</label>
+<textarea
+id="adminEditNote"
+maxlength="5000"
+placeholder="এই User-এর Account-এ যে Message দেখাতে চান..."
+>${adminEscape(user.admin_note||"")}</textarea>
+</div>
+<button
+class="primary"
+id="adminSaveUserBtn">
+💾 Save User
+</button>
+`
+);
+$("adminSaveUserBtn").onclick=
+()=>adminSaveUser(id);
+}
+/* =====================================================
+   SAVE USER
+===================================================== */
+async function adminSaveUser(id){
+if(!isAdmin())
+return;
+const name=
+$("adminEditName").value.trim();
+const phone=
+$("adminEditPhone").value.trim();
+const avatar=
+$("adminEditAvatar").value.trim();
+const role=
+$("adminEditRole").value;
+const status=
+$("adminEditStatus").value;
+const balance=
+Number($("adminEditBalance").value);
+const note=
+$("adminEditNote").value.trim();
+if(!name){
+alert("Name দিতে হবে.");
+return;
+}
+if(phone&&!/^01[0-9]{9}$/.test(phone)){
+alert("সঠিক ১১ সংখ্যার মোবাইল নম্বর দিন.");
+return;
+}
+if(!Number.isFinite(balance)||balance<0){
+alert("সঠিক Balance দিন.");
+return;
+}
+const btn=
+$("adminSaveUserBtn");
+btn.disabled=true;
+btn.textContent="Saving...";
+try{
+const {error:profileError}=await sb
+.from("profiles")
+.update({
+full_name:name,
+phone:phone||null,
+avatar_url:avatar||null,
+role:role,
+status:status,
+balance:balance
+})
+.eq("id",id);
+if(profileError)
+throw profileError;
+const {data:noteData,error:noteError}=await sb.rpc(
+"admin_update_user_note",
+{
+p_user_id:id,
+p_note:note
+}
+);
+if(noteError)
+throw noteError;
+if(noteData?.success===false)
+throw new Error(
+noteData.message||
+"Admin note update failed"
+);
+alert(
+"✅ User information এবং Admin Message update হয়েছে।"
+);
+await loadAdminPanel();
+}catch(e){
+alert(
+"User update failed:\n\n"+
+errorText(e)
+);
+}finally{
+if(document.getElementById("adminSaveUserBtn")){
+document.getElementById(
+"adminSaveUserBtn"
+).disabled=false;
+document.getElementById(
+"adminSaveUserBtn"
+).textContent=
+"💾 Save User";
+}
+}
+}
+/* =====================================================
+   ADD TASK
+===================================================== */
+async function adminAddTask(){
+if(!isAdmin())
+return;
+const title=
+prompt("Task Title:");
+if(!title||!title.trim()){
+alert("Task Title দিতে হবে।");
+return;
+}
+const description=
+prompt("Task Description:")||"";
+const reward=
+Number(prompt("Task Reward:"));
+if(!Number.isFinite(reward)||reward<0){
+alert("সঠিক reward দিন।");
+return;
+}
+const taskType=
+prompt(
+"Task Type:\n\n"+
+"1 = Normal Task\n"+
+"2 = VIP Task",
+"1"
+);
+if(taskType!=="1"&&taskType!=="2"){
+alert("শুধু 1 অথবা 2 দিন।");
+return;
+}
+let vipLevel=0;
+if(taskType==="2"){
+vipLevel=
+Number(
+prompt("VIP Level (1-10):","1")
+);
+if(
+!Number.isInteger(vipLevel)||
+vipLevel<1||
+vipLevel>10
+){
+alert(
+"VIP Level 1 থেকে 10 এর মধ্যে হতে হবে।"
+);
+return;
+}
+}
+const maxCompletions=
+Number(
+prompt("Max Completions:","1")
+);
+if(
+!Number.isInteger(maxCompletions)||
+maxCompletions<1
+){
+alert(
+"Max Completions কমপক্ষে 1 হতে হবে।"
+);
+return;
+}
+if(!confirm(
+"Task তৈরি করবেন?\n\n"+
+"Title: "+title.trim()+
+"\nReward: ৳"+money(reward)+
+"\nVIP: "+(vipLevel||"Normal")+
+"\nMax Completions: "+maxCompletions
+))
+return;
+try{
+const {error}=await sb
+.from("tasks")
+.insert({
+title:title.trim(),
+description:description.trim(),
+reward:reward,
+vip_level:vipLevel,
+max_completions:maxCompletions,
+active:true
+});
+if(error)
+throw error;
+alert("Task তৈরি হয়েছে.");
+await loadAdminPanel();
+}catch(e){
+alert(
+"Task create failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   TOGGLE TASK
+===================================================== */
+async function adminToggleTask(id,active){
+if(!isAdmin())
+return;
+try{
+const {error}=await sb
+.from("tasks")
+.update({
+active:Boolean(active)
+})
+.eq("id",id);
+if(error)
+throw error;
+await loadAdminPanel();
+}catch(e){
+alert(
+"Task update failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   DELETE TASK
+===================================================== */
+async function adminDeleteTask(id){
+if(!isAdmin())
+return;
+if(!confirm(
+"এই Task delete করতে চান?"
+))
+return;
+try{
+const {error}=await sb
+.from("tasks")
+.delete()
+.eq("id",id);
+if(error)
+throw error;
+alert("Task delete হয়েছে.");
+await loadAdminPanel();
+}catch(e){
+alert(
+"Task delete failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   SHEET
+===================================================== */
+function openSheet(title,body){
+$("sheetTitle").textContent=title;
+$("sheetBody").innerHTML=body;
+$("modal").style.display="flex";
+}
+function closeModal(){
+$("modal").style.display="none";
+}
+/* =====================================================
+   LOGOUT
+===================================================== */
+async function logoutUser(){
+try{
+await sb.auth.signOut();
+}catch(e){
+console.error(e);
+}
+currentUser=null;
+currentProfile=null;
+$("mainDashboard").style.display="none";
+$("authLanding").style.display="flex";
+closeModal();
+}
+/* =====================================================
+   OAUTH
+===================================================== */
+async function oauthLogin(provider){
+clearMessages();
+try{
+const {error}=await sb.auth.signInWithOAuth({
+provider,
+options:{
+redirectTo:window.location.href
+}
+});
+if(error)
+throw error;
+}catch(e){
+showError(
+"OAuth Login failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   RESET PASSWORD
+===================================================== */
+async function resetPassword(){
+clearMessages();
+const email=
+$("email").value.trim();
+if(!email){
+showError(
+"Password reset করার জন্য আগে Email দিন।"
+);
+return;
+}
+try{
+const {error}=await sb.auth
+.resetPasswordForEmail(
+email,
+{
+redirectTo:window.location.href
+}
+);
+if(error)
+throw error;
+showSuccess(
+"Password reset email পাঠানো হয়েছে.\n\n"+
+"আপনার Gmail inbox চেক করুন।"
+);
+}catch(e){
+showError(
+"Password reset failed:\n\n"+
+errorText(e)
+);
+}
+}
+/* =====================================================
+   AUTH LISTENER
+===================================================== */
+function setupAuthListener(){
+if(authListenerStarted)
+return;
+authListenerStarted=true;
+sb.auth.onAuthStateChange(
+async(event,session)=>{
+if(session?.user){
+currentUser=session.user;
+try{
+await loadProfile();
+showDashboard();
+}catch(e){
+console.error(e);
+}
+}else{
+currentUser=null;
+currentProfile=null;
+$("mainDashboard").style.display="none";
+$("authLanding").style.display="flex";
+}
+}
+);
+}
+/* =====================================================
+   BUTTONS
+===================================================== */
+$("loginTab").onclick=()=>{
+setAuthMode("login");
+};
+$("registerTab").onclick=()=>{
+setAuthMode("register");
+};
+$("authBtn").onclick=()=>{
+if(authMode==="login")
+loginUser();
+else
+registerUser();
+};
+$("forgotBtn").onclick=
+resetPassword;
+$("googleBtn").onclick=
+()=>oauthLogin("google");
+$("facebookBtn").onclick=
+()=>oauthLogin("facebook");
+$("closeBtn").onclick=
+closeModal;
+$("modal").addEventListener(
+"click",
+e=>{
+if(e.target===$("modal"))
+closeModal();
+}
+);
+$("notificationBtn").onclick=
+openNotifications;
+$("checkinBtn").onclick=
+doDailyCheckin;
+$("quickCopyReferral").onclick=
+async()=>{
+const code=
+currentProfile?.referral_code||"";
+if(!code){
+alert("Referral Code পাওয়া যায়নি।");
+return;
+}
+try{
+await navigator.clipboard.writeText(code);
+alert("Referral Code copy হয়েছে।");
+}catch(e){
+alert("Code: "+code);
+}
+};
+$("quickReferBtn").onclick=
+openRefer;
+$("homeNav").onclick=()=>{
+document
+.querySelectorAll(".nav button")
+.forEach(x=>x.classList.remove("active"));
+$("homeNav").classList.add("active");
+};
+$("walletNav").onclick=()=>{
+document
+.querySelectorAll(".nav button")
+.forEach(x=>x.classList.remove("active"));
+$("walletNav").classList.add("active");
+openWallet();
+};
+$("startNav").onclick=()=>{
+document
+.querySelectorAll(".nav button")
+.forEach(x=>x.classList.remove("active"));
+$("startNav").classList.add("active");
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+};
+$("teamNav").onclick=()=>{
+document
+.querySelectorAll(".nav button")
+.forEach(x=>x.classList.remove("active"));
+$("teamNav").classList.add("active");
+openTeam();
+};
+$("profileNav").onclick=()=>{
+document
+.querySelectorAll(".nav button")
+.forEach(x=>x.classList.remove("active"));
+$("profileNav").classList.add("active");
+openProfile();
+};
+$("depositBtn").onclick=
+openDeposit;
+$("withdrawBtn").onclick=
+openWithdraw;
+$("referBtn").onclick=
+openRefer;
+$("historyBtn").onclick=
+openHistory;
+$("rewardBtn").onclick=
+claimReward;
+$("langBtn").onclick=()=>{
+alert(
+"English / বাংলা language system পরে customize করা যাবে."
+);
+};
+/* =====================================================
+   START
+===================================================== */
+async function startApp(){
+setupAuthListener();
+await checkSession();
+}
 startApp();
-
 </script>
-
 </body>
-
 </html>
