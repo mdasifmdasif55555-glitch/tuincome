@@ -2346,24 +2346,26 @@ ${esc(errorText(e))}
 `;
 }
 }
-/* =====================================================
+/* =========================
    ADMIN
-===================================================== */
-function isAdmin(){
-return String(
-currentProfile?.role||""
-).toLowerCase()==="admin";
+========================= */
+
+function isAdmin() {
+  return String(currentProfile?.role || "").toLowerCase() === "admin";
 }
-async function openAdmin(){
-if(!isAdmin()){
-alert("Admin access required.");
-return;
-}
-openSheet(
-"🛠️ Admin Panel",
-'<div class="loading">Admin data load হচ্ছে...</div>'
-);
-await loadAdminPanel();
+
+async function openAdmin() {
+  if (!isAdmin()) {
+    alert("Admin access required.");
+    return;
+  }
+
+  openSheet(
+    "Admin Panel",
+    '<div class="loading">Admin data loading...</div>'
+  );
+
+  await loadAdminPanel();
 }
 /* =====================================================
    ADMIN PANEL
